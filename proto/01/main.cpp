@@ -16,6 +16,29 @@
  *  # Calculate New Position
  */
 
+// Prototypes
+// Resolve Vectors
+double resolveX(double force, double angle);
+double resolveY(double force, double angle);
+// Newtons Second Law (Flexible Function)
+double nsl(double force = NULL; double mass = NULL, double accel = NULL);
+
+// Functions
 int main() {
 
+}
+
+
+
+double nsl(double force = NULL; double mass = NULL, double accel = NULL) {
+  double result = 0;
+  // Check for NULL parameter
+  if(force == NULL & mass != NULL & accel != NULL)
+    result = mass * accel;
+  if(force != NULL & mass == NULL & accel != NULL)
+    result = force / accel;
+  if(force != NULL & mass != NULL & accel == NULL)
+    result = force / mass;
+  // If more than one parameter is NULL 0 is returned.
+  return result;
 }
