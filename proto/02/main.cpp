@@ -40,8 +40,8 @@ int main() {
   // M1
   currentBodies[1].mass = 1;
   currentBodies[1].position[0] = 0.0;
-  currentBodies[1].position[1] = 40;
-  currentBodies[1].velocity[0] = 2.5;
+  currentBodies[1].position[1] = 10.0;
+  currentBodies[1].velocity[0] = 3;
   currentBodies[1].velocity[1] = 0.0;
   
   // Simulation
@@ -55,18 +55,14 @@ int main() {
     forceCalc = -((GRAVCONST * currentBodies[0].mass * currentBodies[1].mass) / pow(distance,2));
     
     // Find Angle Relative to X and resolve forces.
-    if (diffX == 0) {
-      forceX = 0;
-      forceY = forceCalc;
-    } else 
-    if (diffY == 0) {
-      forceX = forceCalc;
-      forceY = 0;
-    } else {
       currentAngle = atan(diffY/diffX);
       forceX = forceCalc * cos(currentAngle);
       forceY = forceCalc * sin(currentAngle);
-    }
+      if(currentBodies[1].position[0] <= 0) {
+        forceX = -forceX;
+        forceY = -forceY;
+      }
+    //}
     
     // Put forces into body data.
     currentBodies[1].force[0] = forceX;
@@ -92,10 +88,8 @@ int main() {
     currentBodies[1].position[0] += deltaPosX;
     currentBodies[1].position[1] += deltaPosY;
     
-    cout << currentBodies[1].position[0] << endl;
-    cout << currentBodies[1].position[1] << endl;
-    
-    sleep(1000);
+    cout << currentBodies[1].position[0] << " " << currentBodies[1].position[1] << " " << currentBodies[1].force[0] << " " << currentBodies[1].force[1] << " " << currentAngle << endl;
+    usleep(10000);
   }
 }
 
