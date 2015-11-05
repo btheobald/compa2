@@ -3,7 +3,7 @@
 #include <unistd.h>
 
 #define GRAVCONST 6.67E-11
-#define TIMESTEP 60
+#define TIMESTEP 1
 
 using namespace std;
 
@@ -49,19 +49,19 @@ double nsl(double force, double mass, double accel);
 // Functions
 int main() {
   bodyPair currentBodies;
-  int i, xy, tracker = 0;
+  int i, xy;
   double currentForce, currentAngle;
   
   // Sol
-  currentBodies[0].mass = 1.989E30;
+  currentBodies[0].mass = 1.989e30;
   currentBodies[0].position[0] = 0.0;
   currentBodies[0].position[1] = 0.0;
   // Mercury
-  currentBodies[1].mass = 3.285E23;
-  currentBodies[1].position[0] = 50E8;
-  currentBodies[1].position[1] = 0.0;
-  currentBodies[1].velocity[0] = 0.0;
-  currentBodies[1].velocity[1] = 47E3;
+  currentBodies[1].mass = 3.285e23;
+  currentBodies[1].position[0] = 0.0;
+  currentBodies[1].position[1] = 5.0e7;
+  currentBodies[1].velocity[0] = 50.0;
+  currentBodies[1].velocity[1] = 0.0;
   
   while (1) {
     // Calculate Force
@@ -109,8 +109,8 @@ double calcDistance(bodyPair calcBodyPair) {
   double b1posX = calcBodyPair[1].position[0];
   double b1posY = calcBodyPair[1].position[1]; 
   
-  x = abs(b0posX - b1posX);
-  y = abs(b0posY - b1posY);
+  x = b1posX - b0posX;
+  y = b1posY - b0posY;
 
   double stage1 = pow(x, 2.0) + pow(y, 2.0);
   distance = sqrt(stage1);
@@ -164,11 +164,11 @@ double resolveY(double force, double angle) {
 double nsl(double force, double mass, double accel) {
   double result = 0;
   // Check for NULL parameter
-  if(force == NULL & mass != NULL & accel != NULL)
+  if((force == NULL) & (mass != NULL) & (accel != NULL))
     result = mass * accel;
-  if(force != NULL & mass == NULL & accel != NULL)
+  if((force != NULL) & (mass == NULL) & (accel != NULL))
     result = force / accel;
-  if(force != NULL & mass != NULL & accel == NULL)
+  if((force != NULL) & (mass != NULL) & (accel == NULL))
     result = force / mass;
   // If more than one parameter is NULL 0 is returned.
   return result;
