@@ -1,5 +1,5 @@
 CC=g++
-CFLAGS=-g -Wall
+CFLAGS=-g -Wall -std=c++11
 LIBS=-pthread
 
 all: main.cpp

@@ -2,7 +2,7 @@
 #include <cmath>
 #include <unistd.h>
 
-#define GRAVCONST 6.67E-11
+#define GRAVCONST 1
 #define TIMESTEP 1
 
 using namespace std;
@@ -19,7 +19,6 @@ typedef struct {
 } sBody; // Single Body;
 
 typedef sBody bodyPair[2];
-typedef sBody scenario[8];
 
 // Prototypes
 
@@ -27,8 +26,11 @@ typedef sBody scenario[8];
 int main() {
   bodyPair currentBodies;
   int i, xy;
-  double currentForce, currentAngle;
+  double currentAngle;
+  double force_calc, distance, xdiff, ydiff;
+  double xforce, yforce;
   
+  // Setup
   // M0
   currentBodies[0].mass = 100;
   currentBodies[0].position[0] = 0.0;
@@ -40,6 +42,46 @@ int main() {
   currentBodies[1].velocity[0] = 2.5;
   currentBodies[1].velocity[1] = 0.0;
   
-  while (1) {
+  // Simulation
+  //while (1) {
+    // Calculate Distance bettween Bodies
+    xdiff = currentBodies[0].position[0] - currentBodies[1].position[0];
+    ydiff = currentBodies[0].position[1] - currentBodies[1].position[1];
+    distance = sqrt(pow(xdiff,2)+pow(ydiff,2));
+    
+    // Calculate Gravitational Force
+    force_calc = -((GRAVCONST * currentBodies[0].mass * currentBodies[1].mass) / distance);
+    
+    // Find Angle Relative to X and resolve forces.
+    if (xdiff == 0) {
+      yforce = force_calc;
+      xforce = 0;
+    } else 
+    if (ydiff == 0) {
+      xforce = force_calc;
+      yforce = 0;
+    } else {
+      currentAngle = atan(ydiff/xdiff);
+      xforce = force_calc * cos(currentAngle);
+      yforce = force_calc * sin(currentAngle);
+    }
+    
+    cout << xforce << endl;
+    cout << yforce << endl;
+  //}
+}
 
-  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
