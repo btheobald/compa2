@@ -50,7 +50,7 @@ int main() {
     distance = sqrt(pow(xdiff,2)+pow(ydiff,2));
     
     // Calculate Gravitational Force
-    force_calc = -((GRAVCONST * currentBodies[0].mass * currentBodies[1].mass) / distance);
+    force_calc = -((GRAVCONST * currentBodies[0].mass * currentBodies[1].mass) / pow(distance,2));
     
     // Find Angle Relative to X and resolve forces.
     if (xdiff == 0) {
@@ -66,8 +66,22 @@ int main() {
       yforce = force_calc * sin(currentAngle);
     }
     
+    // Put forces into body data.
+    currentBodies[1].force[0] = xforce;
+    currentBodies[1].force[1] = yforce;
+    
+    // Calculate Acceleration
+    currentBodies[1].acceleration[0] = currentBodies[1].force[0] / currentBodies[1].mass;
+    currentBodies[1].acceleration[1] = currentBodies[1].force[1] / currentBodies[1].mass;
+    
+    // Calculate change in Velocity and add to body data velocity
+    currentBodies[1].velocity[0] += currentBodies[1].acceleration[0] / TIMESTEP;
+    currentBodies[1].velocity[1] += currentBodies[1].acceleration[1] / TIMESTEP;
+
     cout << xforce << endl;
     cout << yforce << endl;
+    cout << currentBodies[1].velocity[0] << endl;
+    cout << currentBodies[1].velocity[1] << endl;
   //}
 }
 
