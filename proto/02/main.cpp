@@ -55,15 +55,13 @@ int main() {
     forceCalc = -((GRAVCONST * currentBodies[0].mass * currentBodies[1].mass) / pow(distance,2));
     
     // Find Angle Relative to X and resolve forces.
-      currentAngle = atan(diffY/diffX);
-      forceX = forceCalc * cos(currentAngle);
-      forceY = forceCalc * sin(currentAngle);
-      if(currentBodies[1].position[0] <= 0) {
-        //
-        forceX = -forceX;
-        forceY = -forceY;
-      }
-    //}
+    currentAngle = atan(diffY/diffX);
+    forceX = forceCalc * cos(currentAngle);
+    forceY = forceCalc * sin(currentAngle);
+    if(currentBodies[1].position[0] <= 0) {
+      forceX = -forceX;
+      forceY = -forceY;
+    }
     
     // Put forces into body data.
     currentBodies[1].force[0] = forceX;
@@ -89,7 +87,7 @@ int main() {
     currentBodies[1].position[0] += deltaPosX;
     currentBodies[1].position[1] += deltaPosY;
     
-    cout << currentBodies[1].position[0] << " " << currentBodies[1].position[1] << " " << currentBodies[1].force[0] << " " << currentBodies[1].force[1] << " " << currentAngle << endl;
+    cout << currentBodies[1].position[0] << " " << currentBodies[1].position[1] << " " << currentBodies[1].force[0] << " " << currentBodies[1].force[1] << " " << currentAngle << " " << forceCalc << " " << i << endl;
     //usleep(10000);
     i++;
   }
