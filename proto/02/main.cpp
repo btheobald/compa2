@@ -25,7 +25,7 @@ typedef sBody bodyPair[2];
 // Functions
 int main() {
   bodyPair currentBodies;
-  int i, xy;
+  int i = 0, xy;
   double currentAngle;
   double forceCalc, distance, diffX, diffY;
   double forceX, forceY;
@@ -40,12 +40,12 @@ int main() {
   // M1
   currentBodies[1].mass = 1;
   currentBodies[1].position[0] = 0.0;
-  currentBodies[1].position[1] = 10.0;
-  currentBodies[1].velocity[0] = 3;
+  currentBodies[1].position[1] = 40.0;
+  currentBodies[1].velocity[0] = 1.55;
   currentBodies[1].velocity[1] = 0.0;
   
   // Simulation
-  while (1) {
+  while (i < 1000) {
     // Calculate Distance bettween Bodies
     diffX = currentBodies[0].position[0] - currentBodies[1].position[0];
     diffY = currentBodies[0].position[1] - currentBodies[1].position[1];
@@ -59,6 +59,7 @@ int main() {
       forceX = forceCalc * cos(currentAngle);
       forceY = forceCalc * sin(currentAngle);
       if(currentBodies[1].position[0] <= 0) {
+        //
         forceX = -forceX;
         forceY = -forceY;
       }
@@ -77,8 +78,8 @@ int main() {
     deltaVelY = currentBodies[1].acceleration[1] / TIMESTEP;
     
     // Calculate position delta (S = ut + 0.5 * at^2)
-    deltaPosX = (currentBodies[1].velocity[0] * TIMESTEP + 0.5 * currentBodies[1].acceleration[0] * pow(TIMESTEP,2));
-    deltaPosY = (currentBodies[1].velocity[1] * TIMESTEP + 0.5 * currentBodies[1].acceleration[1] * pow(TIMESTEP,2));
+    deltaPosX = (currentBodies[1].velocity[0] * TIMESTEP + (0.5 * (currentBodies[1].acceleration[0] * pow(TIMESTEP,2))));
+    deltaPosY = (currentBodies[1].velocity[1] * TIMESTEP + (0.5 * (currentBodies[1].acceleration[1] * pow(TIMESTEP,2))));
     
     // Update Velocity
     currentBodies[1].velocity[0] += deltaVelX;
@@ -89,7 +90,8 @@ int main() {
     currentBodies[1].position[1] += deltaPosY;
     
     cout << currentBodies[1].position[0] << " " << currentBodies[1].position[1] << " " << currentBodies[1].force[0] << " " << currentBodies[1].force[1] << " " << currentAngle << endl;
-    usleep(10000);
+    //usleep(10000);
+    i++;
   }
 }
 
