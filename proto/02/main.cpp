@@ -44,7 +44,7 @@ int main() {
   currentBodies[1].mass = 1;
   currentBodies[1].position[0] = 0.0;
   currentBodies[1].position[1] = 40;
-  currentBodies[1].velocity[0] = 1.5;
+  currentBodies[1].velocity[0] = 1.58;
   currentBodies[1].velocity[1] = 0.0;
   
   //cout << "1x, 1y" << endl;
