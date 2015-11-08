@@ -9,8 +9,9 @@ gdb: main
 gdbt: main
 	gdb -tui -x "gdb.conf"
 run: main
-	./main | xclip -i -selection clipboard
-
+	./main >> broke.out
+	gnuplot -p plot
+	rm broke.out -f
 
 clean:
 	rm main
