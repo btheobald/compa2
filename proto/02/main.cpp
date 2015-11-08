@@ -37,20 +37,20 @@ int main() {
   
   // Setup
   // M0
-  currentBodies[0].mass = 100;
+  currentBodies[0].mass = 1;
   currentBodies[0].position[0] = 0.0;
   currentBodies[0].position[1] = 0.0;
   // M1
   currentBodies[1].mass = 1;
   currentBodies[1].position[0] = 0.0;
-  currentBodies[1].position[1] = 100;
-  currentBodies[1].velocity[0] = 3.5;
+  currentBodies[1].position[1] = 10;
+  currentBodies[1].velocity[0] = 1;
   currentBodies[1].velocity[1] = 0.0;
   
   //cout << "1x, 1y" << endl;
   
   // Simulation
-  while (i < 10) {
+  while (i < 100) {
     // Calculate Distance bettween Bodies
     diffX = currentBodies[0].position[0] - currentBodies[1].position[0];
     diffY = currentBodies[0].position[1] - currentBodies[1].position[1];
