@@ -4,7 +4,7 @@ using namespace std;
 
 int main() {
   double r[2], v[2], a[2];
-  double dt = 0.001;
+  double dt = 0.00001;
   
   r[0] = 1;
   r[1] = 0;
@@ -12,7 +12,7 @@ int main() {
   v[0] = 0;
   v[1] = 0.5;
 
-  for (int ns = 0; ns < 100000; ns++) {
+  for (int ns = 0; ns < 10000000; ns++) {
     double r2 = r[0]*r[0] + r[1]*r[1];
     
     for (int k = 0; k < 2; k++) {
