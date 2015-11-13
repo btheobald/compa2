@@ -22,7 +22,7 @@ int main() {
   position_r[1] = 0;
   // Velocity XY
   velocity[0] = 0;
-  velocity[1] = 1;
+  velocity[1] = 0.5;
   
   // Calculate Initial System Total Energy
   double e_k = 0.5 * (pow(velocity[0],2) + pow(velocity[1],2)); // Kinetic Energy
@@ -37,7 +37,7 @@ int main() {
     
     // Calculate Acceleration
     for (int c = 0; c < 2; c++) {
-      acceleration[c] = - position_r[c] / (r2 * sqrt(r2));
+      acceleration[c] = - position_r[c] / (pow(sqrt(r2), 3));
     }
     
     // Calculate New Position and New Velocity
