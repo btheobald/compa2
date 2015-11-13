@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-  // Body Data  const double outputTime = 0.1;
+  // Body Data
   double position_r[2], velocity[2], acceleration[2];
   // Time Variables
   double deltaT, simTime;
@@ -18,8 +18,8 @@ int main() {
   cin >> simTime;
   
   // Relative Position XY
-  position_r[0] = 1;
-  position_r[1] = 0;
+  position_r[0] = 1.0;
+  position_r[1] = 0.0;
   // Velocity XY
   velocity[0] = 0.0;
   velocity[1] = 0.5;
