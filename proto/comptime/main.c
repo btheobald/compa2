@@ -20,6 +20,9 @@ int main(void) {
   clock_t begin, end;
   double t_Time, v_Time;
   
+  double t_Angle = 0, t_Force = 0, t_Fx = 0, t_Fy = 0; 
+  double v_Fx = 0, v_Fy = 0; 
+
   bodyData body1, body2;
   // B1, Pos = (1,1)
   body1.bodyMass = 1;
@@ -30,51 +33,67 @@ int main(void) {
   body2.bodyPosition[0] = 4;
   body2.bodyPosition[1] = 6;
 
-  printf("Traditional:\n");
+  // Average Time Variables
+  double timeStore[10][2];
+  double avgTimeTrad = 0, avgTimeVect = 0;
   
-  // Begin Timer
-  begin = clock();
+  for(int id = 0; id < 10; id++) {
+    t_Angle = 0; t_Force = 0; t_Fx = 0; t_Fy = 0;
+    v_Fx = 0; v_Fy = 0;
+    
+    // Begin Timer
+    begin = clock();
+    
+    // Traditional
+    // Get Force
+    t_Force = grav_t(body1, body2);
+    // Find Angle
+    t_Angle = findAngle(body1, body2);
+    // Break into Components
+    t_Fx = getComp(t_Force, t_Angle, 0);
+    t_Fy = getComp(t_Force, t_Angle, 1);
+    
+    // End Timer
+    end = clock();
+    t_Time = (double)(end - begin) / CLOCKS_PER_SEC;
+    
+    // Print Results
+    //printf("Fx: %G\n", t_Fx);
+    //printf("Fy: %G\n", t_Fy);
+    printf("TT: %g | ", t_Time);
+    
+    timeStore[id][0] = t_Time;
+    
+    // Begin Timer
+    begin = clock();
+    
+    // Vector
+    // Get Force Components
+    v_Fx = grav_v(body1, body2, 0);
+    v_Fy = grav_v(body1, body2, 1);
+    
+    // End Timer
+    end = clock();
+    v_Time = (double)(end - begin) / CLOCKS_PER_SEC;
+    
+    // Print Results
+    //printf("Fx: %G\n", v_Fx);
+    //printf("Fy: %G\n", v_Fy);
+    printf("VT: %g\n", v_Time);
+    
+    timeStore[id][1] = v_Time;
+  }
   
-  // Traditional
-  double t_Angle, t_Force, t_Fx, t_Fy;
-  // Get Force
-  t_Force = grav_t(body1, body2);
-  // Find Angle
-  t_Angle = findAngle(body1, body2);
-  // Break into Components
-  t_Fx = getComp(t_Force, t_Angle, 0);
-  t_Fy = getComp(t_Force, t_Angle, 1);
+  for(int id = 0; id < 10; id++) {
+    avgTimeTrad += timeStore[id][0];
+    avgTimeVect += timeStore[id][1];
+    
+    avgTimeTrad /= 10;
+    avgTimeVect /= 10;
+  }
   
-  // End Timer
-  end = clock();
-  t_Time = (double)(end - begin) / CLOCKS_PER_SEC;
-  
-  // Print Results
-  printf("Fx: %G\n", t_Fx);
-  printf("Fy: %G\n", t_Fy);
-  printf("CT: %G\n", t_Time);
-  
-  
-  printf("\nVector:\n");
-  
-  // Begin Timer
-  begin = clock();
-  
-  // Vector
-  double v_Fx, v_Fy;
-  // Get Force Components
-  v_Fx = grav_v(body1, body2, 0);
-  v_Fy = grav_v(body1, body2, 1);
-  
-  // End Timer
-  end = clock();
-  v_Time = (double)(end - begin) / CLOCKS_PER_SEC;
-  
-  // Print Results
-  printf("Fx: %G\n", v_Fx);
-  printf("Fy: %G\n", v_Fy);
-  printf("CT: %G\n", v_Time);
-  
+  printf("\nTT: %g\n", avgTimeTrad);
+  printf("VT: %g\n", avgTimeVect);
   return 0;
 }
 
