@@ -1,5 +1,5 @@
 CC=gcc
-CFLAGS=-g -Wall -std=c++11
+CFLAGS=-g -Wall -O0
 LIBS=-lm
 
 all: main.c

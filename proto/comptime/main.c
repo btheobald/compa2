@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
+#include <unistd.h>
 
 #define GRAVCONST 1
+#define ATIMES  100
 
 typedef int bodyMatrix[2]; // 0:x 1:y
 typedef struct {
@@ -20,9 +22,8 @@ double trad(bodyData body1, bodyData body2);
 double vect(bodyData body1, bodyData body2);
 
 int main(void) {
-  
-  double t_Angle = 0, t_Force = 0, t_Fx = 0, t_Fy = 0; 
-  double v_Fx = 0, v_Fy = 0; 
+  double timeAverage_Trad = 0;
+  double timeAverage_Vect = 0;
 
   bodyData body1, body2;
   // B1, Pos = (1,1)
@@ -34,14 +35,20 @@ int main(void) {
   body2.bodyPosition[0] = 4;
   body2.bodyPosition[1] = 6;
   
-  for(int id = 0; id < 10; id++) {
+  for(int id = 0; id < ATIMES; id++) {
+    timeAverage_Trad += trad(body1, body2);
+    timeAverage_Vect += vect(body1, body2);
     
-    
+    ++body1.bodyMass;
+    ++body1.bodyPosition[0];
+    ++body1.bodyPosition[1];
   }
   
-  for(int id = 0; id < 10; id++) {
+  timeAverage_Trad /= ATIMES;
+  timeAverage_Vect /= ATIMES;
   
-  }
+  printf("TT: %G\n", timeAverage_Trad);
+  printf("TV: %G\n", timeAverage_Vect);
   
   return 0;
 }
@@ -60,6 +67,8 @@ double calc_d(bodyData body1, bodyData body2, int dir) {
     case 1 : return y; break;
     case 2 : return vector; break;
   }
+  
+  return 0;
 }
 
 // Traditional Gravitational Law
@@ -113,8 +122,12 @@ double grav_v(bodyData body1, bodyData body2, int dir) {
 }
 
 double trad(bodyData body1, bodyData body2) {
+  // Timer Variables
   clock_t begin, end;
   double t_Time;
+  
+  // Calculation Variables
+  double t_Angle, t_Force, t_Fx, t_Fy; 
   
   // Begin Timer
   begin = clock();
@@ -131,14 +144,17 @@ double trad(bodyData body1, bodyData body2) {
   
   // Print Results
   printf("TT: %g | ", t_Time);
-  timeStore[id][0] = t_Time;
   
   return t_Time;
 }
 
 double vect(bodyData body1, bodyData body2) {
+  // Timer Variables
   clock_t begin, end;
   double v_Time;
+  
+  // Calculation Variables
+  double v_Fx, v_Fy;
   
   // Begin Timer
   begin = clock();
@@ -154,8 +170,6 @@ double vect(bodyData body1, bodyData body2) {
   
   // Print Results
   printf("VT: %g\n", v_Time);
-  
-  timeStore[id][1] = v_Time;
   
   return v_Time;
 }
