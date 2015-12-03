@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <math.h>
 #include <time.h>
+#include <unistd.h>
 
 #define GRAVCONST 1
+#define ATIMES  100
 
 typedef int bodyMatrix[2]; // 0:x 1:y
 typedef struct {
@@ -16,10 +18,13 @@ double findAngle(bodyData body1, bodyData body2); // Find Angle
 double getComp(double force, double angle, int dir); // Find Components
 double grav_v(bodyData body1, bodyData body2, int dir); // Vector Gravitational Law
 
+double trad(bodyData body1, bodyData body2);
+double vect(bodyData body1, bodyData body2);
+
 int main(void) {
-  clock_t begin, end;
-  double t_Time, v_Time;
-  
+  double timeAverage_Trad = 0;
+  double timeAverage_Vect = 0;
+
   bodyData body1, body2;
   // B1, Pos = (1,1)
   body1.bodyMass = 1;
@@ -29,51 +34,21 @@ int main(void) {
   body2.bodyMass = 1;
   body2.bodyPosition[0] = 4;
   body2.bodyPosition[1] = 6;
-
-  printf("Traditional:\n");
   
-  // Begin Timer
-  begin = clock();
+  for(int id = 0; id < ATIMES; id++) {
+    timeAverage_Trad += trad(body1, body2);
+    timeAverage_Vect += vect(body1, body2);
+    
+    ++body1.bodyMass;
+    ++body1.bodyPosition[0];
+    ++body1.bodyPosition[1];
+  }
   
-  // Traditional
-  double t_Angle, t_Force, t_Fx, t_Fy;
-  // Get Force
-  t_Force = grav_t(body1, body2);
-  // Find Angle
-  t_Angle = findAngle(body1, body2);
-  // Break into Components
-  t_Fx = getComp(t_Force, t_Angle, 0);
-  t_Fy = getComp(t_Force, t_Angle, 1);
+  timeAverage_Trad /= ATIMES;
+  timeAverage_Vect /= ATIMES;
   
-  // End Timer
-  end = clock();
-  t_Time = (double)(end - begin) / CLOCKS_PER_SEC;
-  
-  // Print Results
-  printf("Fx: %G\n", t_Fx);
-  printf("Fy: %G\n", t_Fy);
-  printf("CT: %G\n", t_Time);
-  
-  
-  printf("\nVector:\n");
-  
-  // Begin Timer
-  begin = clock();
-  
-  // Vector
-  double v_Fx, v_Fy;
-  // Get Force Components
-  v_Fx = grav_v(body1, body2, 0);
-  v_Fy = grav_v(body1, body2, 1);
-  
-  // End Timer
-  end = clock();
-  v_Time = (double)(end - begin) / CLOCKS_PER_SEC;
-  
-  // Print Results
-  printf("Fx: %G\n", v_Fx);
-  printf("Fy: %G\n", v_Fy);
-  printf("CT: %G\n", v_Time);
+  printf("TT: %G\n", timeAverage_Trad);
+  printf("TV: %G\n", timeAverage_Vect);
   
   return 0;
 }
@@ -92,6 +67,8 @@ double calc_d(bodyData body1, bodyData body2, int dir) {
     case 1 : return y; break;
     case 2 : return vector; break;
   }
+  
+  return 0;
 }
 
 // Traditional Gravitational Law
@@ -142,4 +119,57 @@ double grav_v(bodyData body1, bodyData body2, int dir) {
   }
   
   return result;
+}
+
+double trad(bodyData body1, bodyData body2) {
+  // Timer Variables
+  clock_t begin, end;
+  double t_Time;
+  
+  // Calculation Variables
+  double t_Angle, t_Force, t_Fx, t_Fy; 
+  
+  // Begin Timer
+  begin = clock();
+  
+  // Traditional
+  t_Force = grav_t(body1, body2);
+  t_Angle = findAngle(body1, body2);
+  t_Fx = getComp(t_Force, t_Angle, 0);
+  t_Fy = getComp(t_Force, t_Angle, 1);
+  
+  // End Timer
+  end = clock();
+  t_Time = (double)(end - begin);
+  
+  // Print Results
+  printf("TT: %g | ", t_Time);
+  
+  return t_Time;
+}
+
+double vect(bodyData body1, bodyData body2) {
+  // Timer Variables
+  clock_t begin, end;
+  double v_Time;
+  
+  // Calculation Variables
+  double v_Fx, v_Fy;
+  
+  // Begin Timer
+  begin = clock();
+  
+  // Vector
+  // Get Force Components
+  v_Fx = grav_v(body1, body2, 0);
+  v_Fy = grav_v(body1, body2, 1);
+  
+  // End Timer
+  end = clock();
+  v_Time = (double)(end - begin);
+  
+  // Print Results
+  printf("VT: %g\n", v_Time);
+  
+  return v_Time;
 }
