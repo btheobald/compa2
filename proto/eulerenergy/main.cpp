@@ -37,7 +37,7 @@ int main() {
     
     // Calculate Acceleration
     for (int c = 0; c < 2; c++) {
-      acceleration[c] = - position_r[c] / (pow(sqrt(r2), 3));
+      acceleration[c] = - position_r[c] / (pow(sqrt(r2), 3)); // a = p/r^3
     }
     
     // Calculate New Position and New Velocity
