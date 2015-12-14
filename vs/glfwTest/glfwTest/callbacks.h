@@ -11,5 +11,8 @@ void mouseScrollCallback(GLFWwindow* window, double xoffset, double yoffset);
 void keyboardKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 void keyboardCharCallback(GLFWwindow* window, unsigned int codepoint);
 
+// Window
+void windowResizeCallback(GLFWwindow* window, int width, int height);
+
 // Callback Setup
 void setCallbacks(GLFWwindow* window);
