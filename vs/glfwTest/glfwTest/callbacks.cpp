@@ -1,4 +1,6 @@
 #include "callbacks.h"
+#include <iostream>
+using namespace std;
 
 static void cursorPosCallback(GLFWwindow* window, double cursorX, double cursorY) {
   if(!TwEventMousePosGLFW(cursorX, cursorY)) {
@@ -20,13 +22,13 @@ void mouseScrollCallback(GLFWwindow * window, double xoffset, double yoffset) {
 
 void keyboardKeyCallback(GLFWwindow * window, int key, int scancode, int action, int mods) {
   if(!TwEventKeyGLFW(key, action)) {
-    // Event has not been handled by ATB.
+    cout << key << " : " << action << endl;
   }
 }
 
 void keyboardCharCallback(GLFWwindow * window, unsigned int codepoint) {
-  if(!TwEventCharGLFW(codepoint, NULL)) {
-    // Event has not been handled by ATB.
+  if(!TwEventCharGLFW(codepoint, GLFW_PRESS)) {
+    cout << codepoint << endl;
   }
 }
 

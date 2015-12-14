@@ -5,18 +5,6 @@
 #include <thread>
 using namespace std;
 
-typedef struct {
-// Body
-	// Body Position
-	float positionX = 0;
-	float positionY = 0;
-	// Body Size
-	float width = 0;
-	float height = 0;
-// Matrix
-	// TODO: Implement Matrix Control Variables for Testing
-} controlVar;
-
 // Custom
 #include "callbacks.h"
 
@@ -24,35 +12,54 @@ void TW_CALL print(void *clientData) {
   cout << "Button Pressed" << endl;
 }
 
-static void setupTweakbar() {
-
-
-}
-
 int main() {
+  int windowX = 960;
+  int windowY = 480;
+
+  // Body
+  float positionX = 300;
+  float positionY = 100;
+  float width = 100;
+  float height = 100;
+  // Ortho Matrix
+  float left = 0.0f;
+  float right = (float)windowX;
+  float bottom = (float)windowY; 
+  float top = 0.0f;
+  float near = 1.0f;
+  float far = -1.0f;
+
   GLFWwindow* window;
 
   // Init GLFW
   glfwInit();
-  window = glfwCreateWindow(640, 480, "Test Window", NULL, NULL);
+  window = glfwCreateWindow(windowX, windowY, "Test Window", NULL, NULL);
   glfwMakeContextCurrent(window);
 
   setCallbacks(window);
 
   // Init AntTweakBar
   TwInit(TW_OPENGL, NULL);
-  TwWindowSize(640, 480);
+  TwWindowSize(windowX, windowY);
 
   // Create Tweak Bar
   TwBar *functionBar;
   functionBar = TwNewBar("Control");
 
-  controlVar variables;
   // Add Variables
-  TwAddVarRW(functionBar, "Position X", TW_TYPE_FLOAT, &variables.positionX, NULL);
-  TwAddVarRW(functionBar, "Position Y", TW_TYPE_FLOAT, &variables.positionY, NULL);
-  TwAddVarRW(functionBar, "Width", TW_TYPE_FLOAT, &variables.width, NULL);
-  TwAddVarRW(functionBar, "Height", TW_TYPE_FLOAT, &variables.height, NULL);
+  TwAddSeparator(functionBar, "Body", NULL);
+  TwAddVarRW(functionBar, "Position X", TW_TYPE_FLOAT, &positionX, NULL);
+  TwAddVarRW(functionBar, "Position Y", TW_TYPE_FLOAT, &positionY, NULL);
+  TwAddVarRW(functionBar, "Width", TW_TYPE_FLOAT, &width, NULL);
+  TwAddVarRW(functionBar, "Height", TW_TYPE_FLOAT, &height, NULL);
+
+  TwAddSeparator(functionBar, "Ortho Matrix", NULL);
+  TwAddVarRW(functionBar, "Left", TW_TYPE_FLOAT, &left, NULL);
+  TwAddVarRW(functionBar, "Right", TW_TYPE_FLOAT, &right, NULL);
+  TwAddVarRW(functionBar, "Bottom", TW_TYPE_FLOAT, &bottom, NULL);
+  TwAddVarRW(functionBar, "Top", TW_TYPE_FLOAT, &top, NULL);
+  TwAddVarRW(functionBar, "Near", TW_TYPE_FLOAT, &near, NULL);
+  TwAddVarRW(functionBar, "Far", TW_TYPE_FLOAT, &far, NULL);
 
   while(!glfwWindowShouldClose(window)) {
 	glClearColor(0.1f, 0.1f, 0.1f, 1);
@@ -61,7 +68,8 @@ int main() {
 	// Initialize Projection Matrix
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0.0, 640, 480, 0.0, 1.0, -1.0);
+	//glOrtho(0.0, windowX, windowY, 0.0, 1.0, -1.0);
+  glOrtho(left, right, bottom, top, near, far);
 
 	// Initialize Modelview Matrix
 	glMatrixMode(GL_MODELVIEW);
@@ -70,10 +78,10 @@ int main() {
 	// Render
 	glBegin(GL_QUADS);
 		glColor3f(0.f, 1.f, 1.f);
-		glVertex2f((-(variables.width / 2) + variables.positionX), (-(variables.height / 2) + variables.positionY));
-		glVertex2f(( (variables.width / 2) + variables.positionX), (-(variables.height / 2) + variables.positionY));
-		glVertex2f(( (variables.width / 2) + variables.positionX), ( (variables.height / 2) + variables.positionY));
-		glVertex2f((-(variables.width / 2) + variables.positionX), ( (variables.height / 2) + variables.positionY));
+		glVertex2f((-(width / 2) + positionX), (-(height / 2) + positionY));
+		glVertex2f(( (width / 2) + positionX), (-(height / 2) + positionY));
+		glVertex2f(( (width / 2) + positionX), ( (height / 2) + positionY));
+		glVertex2f((-(width / 2) + positionX), ( (height / 2) + positionY));
 	glEnd();
 
     TwDraw();

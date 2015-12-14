@@ -1,17 +1,7 @@
-﻿Build started 14/12/2015 12:50:37.
-     1>Project "C:\Repo\compa2\vs\glfwTest\glfwTest\glfwTest.vcxproj" on node 2 (Build target(s)).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\CL.exe /c /IC:\Repo\compa2\vs\glfwTest\\libs\glfw\include /IC:\Repo\compa2\vs\glfwTest\\libs\imgui\ /IC:\Repo\compa2\vs\glfwTest\\libs\atb\include /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Zc:inline /Fo"Debug\\" /Fd"Debug\vc140.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
-         main.cpp
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Repo\compa2\vs\glfwTest\Debug\glfwTest.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Repo\compa2\vs\glfwTest\\libs\glfw\lib-vc2015" /LIBPATH:C:\Repo\compa2\vs\glfwTest\\libs\atb\lib opengl32.lib glfw3.lib AntTweakBar.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /NODEFAULTLIB:msvcrt.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG:FASTLINK /PDB:"C:\Repo\compa2\vs\glfwTest\Debug\glfwTest.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Repo\compa2\vs\glfwTest\Debug\glfwTest.lib" /MACHINE:X86 Debug\imgui.obj
-         Debug\imgui_demo.obj
-         Debug\imgui_draw.obj
-         Debug\callbacks.obj
-         Debug\main.obj
-         glfwTest.vcxproj -> C:\Repo\compa2\vs\glfwTest\Debug\glfwTest.exe
-     1>Done Building Project "C:\Repo\compa2\vs\glfwTest\glfwTest\glfwTest.vcxproj" (Build target(s)).
-
-Build succeeded.
-
-Time Elapsed 00:00:01.06
+﻿  main.cpp
+  callbacks.cpp
+d:\repository\compa2\vs\glfwtest\glfwtest\callbacks.cpp(6): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+d:\repository\compa2\vs\glfwtest\glfwtest\callbacks.cpp(18): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+  Generating Code...
+  glfwTest.vcxproj -> D:\Repository\compa2\vs\glfwTest\Debug\glfwTest.exe
+  glfwTest.vcxproj -> D:\Repository\compa2\vs\glfwTest\Debug\glfwTest.pdb (Partial PDB)
