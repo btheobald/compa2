@@ -5,11 +5,28 @@
 #include <thread>
 using namespace std;
 
+typedef struct {
+// Body
+	// Body Position
+	float positionX = 0;
+	float positionY = 0;
+	// Body Size
+	float width = 0;
+	float height = 0;
+// Matrix
+	// TODO: Implement Matrix Control Variables for Testing
+} controlVar;
+
 // Custom
 #include "callbacks.h"
 
 void TW_CALL print(void *clientData) {
   cout << "Button Pressed" << endl;
+}
+
+static void setupTweakbar() {
+
+
 }
 
 int main() {
@@ -27,9 +44,15 @@ int main() {
   TwWindowSize(640, 480);
 
   // Create Tweak Bar
-  TwBar *testBar;
-  testBar = TwNewBar("Test Tweak Bar");
-  TwAddButton(testBar, "Output", print, NULL, NULL);
+  TwBar *functionBar;
+  functionBar = TwNewBar("Control");
+
+  controlVar variables;
+  // Add Variables
+  TwAddVarRW(functionBar, "Position X", TW_TYPE_FLOAT, &variables.positionX, NULL);
+  TwAddVarRW(functionBar, "Position Y", TW_TYPE_FLOAT, &variables.positionY, NULL);
+  TwAddVarRW(functionBar, "Width", TW_TYPE_FLOAT, &variables.width, NULL);
+  TwAddVarRW(functionBar, "Height", TW_TYPE_FLOAT, &variables.height, NULL);
 
   while(!glfwWindowShouldClose(window)) {
 	glClearColor(0.1f, 0.1f, 0.1f, 1);
@@ -47,10 +70,10 @@ int main() {
 	// Render
 	glBegin(GL_QUADS);
 		glColor3f(0.f, 1.f, 1.f);
-		glVertex2f(-50.f, -50.f);
-		glVertex2f(50.f, -50.f);
-		glVertex2f(50.f, 50.f);
-		glVertex2f(-50.f, 50.f);
+		glVertex2f((-(variables.width / 2) + variables.positionX), (-(variables.height / 2) + variables.positionY));
+		glVertex2f(( (variables.width / 2) + variables.positionX), (-(variables.height / 2) + variables.positionY));
+		glVertex2f(( (variables.width / 2) + variables.positionX), ( (variables.height / 2) + variables.positionY));
+		glVertex2f((-(variables.width / 2) + variables.positionX), ( (variables.height / 2) + variables.positionY));
 	glEnd();
 
     TwDraw();
