@@ -17,10 +17,10 @@ int main() {
   int windowY = 480;
 
   // Body
-  float positionX = 300;
-  float positionY = 100;
-  float width = 100;
-  float height = 100;
+  float positionX = windowX/2;
+  float positionY = windowY/2;
+  float width = 200;
+  float height = 200;
   // Ortho Matrix
   float left = 0.0f;
   float right = (float)windowX;
@@ -62,27 +62,30 @@ int main() {
   TwAddVarRW(functionBar, "Far", TW_TYPE_FLOAT, &far, NULL);
 
   while(!glfwWindowShouldClose(window)) {
-	glClearColor(0.1f, 0.1f, 0.1f, 1);
-	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	  glClearColor(0.1f, 0.1f, 0.1f, 1);
+	  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	// Initialize Projection Matrix
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	//glOrtho(0.0, windowX, windowY, 0.0, 1.0, -1.0);
-  glOrtho(left, right, bottom, top, near, far);
+	  // Initialize Projection Matrix
+	  glMatrixMode(GL_PROJECTION);
+	  glLoadIdentity();
+	  //glOrtho(0.0, windowX, windowY, 0.0, 1.0, -1.0);
+    glOrtho(left, right, bottom, top, near, far);
 
-	// Initialize Modelview Matrix
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
+	  // Initialize Modelview Matrix
+	  glMatrixMode(GL_MODELVIEW);
+	  glLoadIdentity();
 
-	// Render
-	glBegin(GL_QUADS);
-		glColor3f(0.f, 1.f, 1.f);
-		glVertex2f((-(width / 2) + positionX), (-(height / 2) + positionY));
-		glVertex2f(( (width / 2) + positionX), (-(height / 2) + positionY));
-		glVertex2f(( (width / 2) + positionX), ( (height / 2) + positionY));
-		glVertex2f((-(width / 2) + positionX), ( (height / 2) + positionY));
-	glEnd();
+	  // Render
+	  glBegin(GL_QUADS);
+		  glColor3f(0.0f, 0.0f, 1.0f);
+		  glVertex2f((-(width / 2) + positionX), (-(height / 2) + positionY));
+      glColor3f(0.0f, 1.0f, 0.0f);
+      glVertex2f(( (width / 2) + positionX), (-(height / 2) + positionY));
+      glColor3f(1.0f, 1.0f, 0.0f);
+      glVertex2f(( (width / 2) + positionX), ( (height / 2) + positionY));
+      glColor3f(1.0f, 0.0f, 0.0f);
+		  glVertex2f((-(width / 2) + positionX), ( (height / 2) + positionY));
+	  glEnd();
 
     TwDraw();
     glfwSwapBuffers(window);
