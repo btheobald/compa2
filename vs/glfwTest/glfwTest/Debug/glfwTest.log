@@ -1,10 +1,5 @@
 ﻿  main.cpp
-  callbacks.cpp
-d:\repository\compa2\vs\glfwtest\glfwtest\callbacks.cpp(6): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-d:\repository\compa2\vs\glfwtest\glfwtest\callbacks.cpp(18): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  imgui_draw.cpp
-  imgui_demo.cpp
-  imgui.cpp
-  Generating Code...
-  glfwTest.vcxproj -> D:\Repository\compa2\vs\glfwTest\Debug\glfwTest.exe
-  glfwTest.vcxproj -> D:\Repository\compa2\vs\glfwTest\Debug\glfwTest.pdb (Partial PDB)
+c:\repo\compa2\vs\glfwtest\glfwtest\main.cpp(20): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+c:\repo\compa2\vs\glfwtest\glfwtest\main.cpp(21): warning C4244: 'initializing': conversion from 'int' to 'float', possible loss of data
+  glfwTest.vcxproj -> C:\Repo\compa2\vs\glfwTest\Debug\glfwTest.exe
+  glfwTest.vcxproj -> C:\Repo\compa2\vs\glfwTest\Debug\glfwTest.pdb (Partial PDB)
