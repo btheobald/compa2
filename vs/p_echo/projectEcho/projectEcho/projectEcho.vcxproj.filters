@@ -30,5 +30,13 @@
     <ClCompile Include="simEntry.cpp">
       <Filter>Source Files\sim</Filter>
     </ClCompile>
+    <ClCompile Include="body.cpp">
+      <Filter>Source Files\sim</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="body.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

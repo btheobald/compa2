@@ -110,8 +110,12 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="body.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="simEntry.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="body.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
