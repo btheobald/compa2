@@ -40,10 +40,10 @@ public:
   bool setRadius(double p_Radius);
   bool setFixed(bool p_Fixed);
   bool setColor(float p_Color[3]);
-  bool setForce(double Force, int xyIndex);
-  bool setAcceleration(double acceleration, int xyIndex);
-  bool setVelocity(double velocity, int xyIndex);
-  bool setPosition(double position, int xyIndex);
+  bool setForce(double p_Force, int xyIndex);
+  bool setAcceleration(double p_Acceleration, int xyIndex);
+  bool setVelocity(double p_Velocity, int xyIndex);
+  bool setPosition(double p_Position, int xyIndex);
 
   // Calculate and Set (Returns OK/FAIL [0/1])
   bool calcAcceleration();
