@@ -1,5 +1,6 @@
-﻿  main.cpp
-d:\repository\compa2\vs\p_echo\projectecho\projectecho\main.cpp(7): warning C4305: 'initializing': truncation from 'double' to 'float'
-d:\repository\compa2\vs\p_echo\projectecho\projectecho\main.cpp(22): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+﻿  simEntry.cpp
+  main.cpp
+  body.cpp
+  Generating Code...
   projectEcho.vcxproj -> D:\Repository\compa2\vs\p_echo\projectEcho\Debug\projectEcho.exe
   projectEcho.vcxproj -> D:\Repository\compa2\vs\p_echo\projectEcho\Debug\projectEcho.pdb (Partial PDB)

@@ -16,12 +16,6 @@
     <Filter Include="Source Files\sim">
       <UniqueIdentifier>{99afb99f-01cc-4a73-81ac-c6ecefd2a35b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\graphics">
-      <UniqueIdentifier>{2896ec80-3848-4bac-97a1-47c12e67e72c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\interface">
-      <UniqueIdentifier>{39a74e11-a59e-4538-953b-8751c8f4ccbc}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -38,5 +32,11 @@
     <ClInclude Include="body.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="simEntry.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
