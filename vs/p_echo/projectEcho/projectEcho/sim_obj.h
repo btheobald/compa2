@@ -9,7 +9,8 @@ private:
   double calcCompDistance(int bodyID_A, int bodyID_B, int xy);
   double calcVectDistance(double distX, double distY);
   double* calcForceBodyPair(int bodyID_A, int bodyID_B);
-  int calculateForceMatrix();
+  int calcForceMatrix();
+  int calcForceSum();
 
 public:
   sim_obj();

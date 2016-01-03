@@ -39,7 +39,7 @@ public:
   int setRadius(double p_Radius);
   int setFixed(bool p_Fixed);
   int setColor(float p_Color[3]);
-  int setForce(double p_Force, int xyIndex);
+  int addForce(double p_Force, int xyIndex);
   int setAcceleration(double p_Acceleration, int xyIndex);
   int setVelocity(double p_Velocity, int xyIndex);
   int setPosition(double p_Position, int xyIndex);

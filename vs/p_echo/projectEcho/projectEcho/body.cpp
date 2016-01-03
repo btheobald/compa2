@@ -72,8 +72,8 @@ int body::setPosition(double p_position, int xyIndex) {
 }
 
 // Used In Simulation
-int body::setForce(double p_Force, int xyIndex) {
-  force[xyIndex] = p_Force;
+int body::addForce(double p_Force, int xyIndex) {
+  force[xyIndex] += p_Force;
   return 0;
 }
 int body::setTimestep(double p_Timestep) {

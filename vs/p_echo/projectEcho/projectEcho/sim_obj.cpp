@@ -37,16 +37,15 @@ double* sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B) {
   return forceReturn; // REVIEW THIS CODE
 }
 
-int sim_obj::calculateForceMatrix() {
+int sim_obj::calcForceMatrix() {
   // Check if Body Count has Changed
-  int cBodyCount = bodyStore.size();
-  if (cBodyCount != prevBodyCount) {
-    resizeMatrix(forceMatrix, cBodyCount);
+  if (bodyStore.size() != prevBodyCount) {
+    resizeMatrix(forceMatrix, bodyStore.size());
   }
   
   // Loop Half Matrix
-  for (int xAccess = 0; xAccess < cBodyCount; xAccess) {
-    for (int yAccess = 0; xAccess < cBodyCount; yAccess) {
+  for (int xAccess = 0; xAccess < bodyStore.size(); xAccess) {
+    for (int yAccess = 0; xAccess < bodyStore.size(); yAccess) {
       double *xyForce = calcForceBodyPair(xAccess, yAccess);
       forceMatrix.at(xAccess).at(yAccess) = xyForce[0];
       forceMatrix.at(yAccess).at(xAccess) = xyForce[1];
@@ -55,6 +54,25 @@ int sim_obj::calculateForceMatrix() {
 
   // Return Success
   return 0;
+}
+
+int sim_obj::calcForceSum() {
+  for (int xAccess = 0; xAccess < bodyStore.size(); xAccess++) {
+    for (int yAccess = 0; yAccess < bodyStore.size(); yAccess++) {
+      // Ignore Middle Diagonal
+      if (yAccess != xAccess) {
+        // If yAccess is smaller than xAccess, flip coordinates to stay within half matrix.
+        if (yAccess < xAccess) {
+          // Add Component force to get total component forces for x and y.
+          bodyStore.at(xAccess).addForce( -forceMatrix.at(yAccess).at(xAccess), 0);
+          bodyStore.at(yAccess).addForce(  forceMatrix.at(xAccess).at(yAccess), 1);
+        } else {
+          bodyStore.at(xAccess).addForce(  forceMatrix.at(xAccess).at(yAccess), 0);
+          bodyStore.at(yAccess).addForce( -forceMatrix.at(yAccess).at(xAccess), 1);
+        }
+      }
+    }
+  }
 }
 
 sim_obj::sim_obj() {
