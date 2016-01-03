@@ -1,22 +1,26 @@
 #pragma once
-#include <list>
+#include <vector>
 #include "body.h"
 using namespace std;
 
 class scenario {
-private:
+protected:
   // Body Storage
-  list<body> bodyStore; // List, C++ Std library double linked list, initally empty. (body class type)
+  vector<body> bodyStore; // List, C++ Std library vector, dynamic array.
   
-  // Simulation Physical Constants (Can be modified by main thread)
+  // Simulation Physical Constants (Can be modified)
   double timestep;
   int itterationsPerFrame;
   double gravitationalConstant;
 
-  // Status Register
-  char statusReg;  
+public:
+  scenario();
+  ~scenario();
+
+  // Status Register (8 Bit)
+  uint8_t statusReg;
+  // G2 G1 G0 WR RD WT ND PS
   /*
-  Bit Mapping
   - 0 Paused
   - 1 New Data
   - 2 Waiting
@@ -26,10 +30,5 @@ private:
   - 6 General 2
   - 7 General 3
   */
-
-public:
-  scenario();
-  ~scenario();
-
 };
 

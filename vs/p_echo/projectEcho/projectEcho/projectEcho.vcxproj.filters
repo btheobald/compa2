@@ -27,6 +27,12 @@
     <ClCompile Include="body.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="sim_obj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="rdr_obj.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="body.h">
@@ -36,6 +42,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="scenario.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="sim_obj.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="rdr_obj.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

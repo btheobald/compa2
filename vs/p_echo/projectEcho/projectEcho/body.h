@@ -7,13 +7,14 @@ private:
   double mass = 0.0;
   double radius = 0.0;
   bool fixed = false;
-  float colour[3] = { 0.0f, 0.0f, 0.0f };
+  float color[3] = { 0.0f, 0.0f, 0.0f };
   
   // Simulation Properties     X    Y
   double force[2]         = { 0.0, 0.0 };
   double acceleration[2]  = { 0.0, 0.0 };
   double velocity[2]      = { 0.0, 0.0 };
   double position[2]      = { 0.0, 0.0 };
+  static double timestep;
 
 public:
   // Constructors
@@ -35,19 +36,20 @@ public:
   double getPosition(int xyIndex);
 
   // Set Variables (Returns OK/FAIL [0/1])
-  bool setBodyID(int p_BodyID);
-  bool setMass(double p_Mass);
-  bool setRadius(double p_Radius);
-  bool setFixed(bool p_Fixed);
-  bool setColor(float p_Color[3]);
-  bool setForce(double p_Force, int xyIndex);
-  bool setAcceleration(double p_Acceleration, int xyIndex);
-  bool setVelocity(double p_Velocity, int xyIndex);
-  bool setPosition(double p_Position, int xyIndex);
+  int setBodyID(int p_BodyID);
+  int setMass(double p_Mass);
+  int setRadius(double p_Radius);
+  int setFixed(bool p_Fixed);
+  int setColor(float p_Color[3]);
+  int setForce(double p_Force, int xyIndex);
+  int setAcceleration(double p_Acceleration, int xyIndex);
+  int setVelocity(double p_Velocity, int xyIndex);
+  int setPosition(double p_Position, int xyIndex);
+  int setTimestep(double p_Timestep);
 
   // Calculate and Set (Returns OK/FAIL [0/1])
-  bool calcAcceleration();
-  bool calcVelocity();
-  bool calcPosition();
+  int calcAcceleration();
+  int calcHalfVelocity();
+  int calcPosition();
 };
 

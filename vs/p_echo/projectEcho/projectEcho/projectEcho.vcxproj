@@ -112,13 +112,17 @@
   <ItemGroup>
     <ClCompile Include="body.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="rdr_obj.cpp" />
     <ClCompile Include="scenario.cpp" />
     <ClCompile Include="simEntry.cpp" />
+    <ClCompile Include="sim_obj.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="body.h" />
+    <ClInclude Include="rdr_obj.h" />
     <ClInclude Include="scenario.h" />
     <ClInclude Include="simEntry.h" />
+    <ClInclude Include="sim_obj.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram.cd" />

@@ -17,80 +17,88 @@ body::body(int p_BodyID, double p_Mass, double p_Radius, float p_Color[3], doubl
 body::~body() {
 }
 
-// Variable Access
-// Return Variables
+// Used in Interface
 double body::getMass(void) {
-  return 0.0;
+  return mass;
 }
-
 double body::getRadius(void) {
-  return 0.0;
+  return radius;
 }
-
 bool body::getFixedStatus(void) {
-  return false;
+  return fixed;
 }
-
 float body::getColor(int cIndex) {
-  return 0.0f;
+  return colour[cIndex];
 }
-
 double body::getAcceleration(int xyIndex) {
-  return 0.0;
+  return acceleration[xyIndex];
 }
-
 double body::getVelocity(int xyIndex) {
-  return 0.0;
+  return velocity[xyIndex];
 }
-
 double body::getPosition(int xyIndex) {
-  return 0.0;
+  return position[xyIndex];
+}
+// Used in Setup and Interface
+int body::setBodyID(int p_BodyID) {
+  bodyID = p_BodyID;
+  return 0;
+}
+int body::setMass(double p_Mass) {
+  mass = p_Mass;
+  return 0;
+}
+int body::setRadius(double p_Radius) {
+  radius = p_Radius;
+  return 0;
+}
+int body::setFixed(bool p_Fixed) {
+  fixed = p_Fixed;
+  return 0;
+}
+int body::setColor(float p_Color[3]) {
+  color[0] = p_Color[0];
+  color[1] = p_Color[1];
+  color[2] = p_Color[2];
+  return 0;
+}
+int body::setAcceleration(double p_acceleration, int xyIndex) {
+  acceleration[xyIndex] = p_acceleration;
+  return 0;
+}
+int body::setVelocity(double p_velocity, int xyIndex) {
+  velocity[xyIndex] = p_velocity;
+  return 0;
+}
+int body::setPosition(double p_position, int xyIndex) {
+  position[xyIndex] = p_position;
+  return 0;
 }
 
-bool body::setBodyID(int p_BodyID) {
-  return false;
+// Used In Simulation
+int body::setForce(double p_Force, int xyIndex) {
+  force[xyIndex] = p_Force;
+  return 0;
 }
-
-bool body::setMass(double p_Mass) {
-  return false;
+int body::setTimestep(double p_Timestep) {
+  timestep = p_Timestep;
+  return 0;
 }
-
-bool body::setRadius(double p_Radius) {
-  return false;
+int body::calcAcceleration() {
+  for (int xy = 0; xy <= 1; xy++) {
+    acceleration[xy] = force[xy] / mass;
+  }
+  return 0;
 }
-
-bool body::setFixed(bool p_Fixed) {
-  return false;
+int body::calcHalfVelocity() {
+  for (int xy = 0; xy <= 1; xy++) {
+    velocity[xy] += acceleration[xy] * timestep * 0.5;
+  }
+  return 0;
 }
-
-bool body::setColor(float p_Color[3]) {
-  return false;
-}
-
-bool body::setForce(double Force, int xyIndex) {
-  return false;
-}
-
-bool body::setAcceleration(double acceleration, int xyIndex) {
-  return false;
-}
-
-bool body::setVelocity(double velocity, int xyIndex) {
-  return false;
-}
-
-bool body::setPosition(double position, int xyIndex) {
-  return false;
-}
-
-bool body::calcAcceleration() {
-  return false;
-}
-
-bool body::calcVelocity() {
-  return false;
-}
-
-bool body::calcPosition() {
-  return false;
+int body::calcPosition() {
+  for (int xy = 0; xy <= 1; xy++) {
+    position[xy] += velocity[xy] * timestep;
+  }
+  return 0;
 }
