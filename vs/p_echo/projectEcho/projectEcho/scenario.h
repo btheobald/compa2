@@ -30,5 +30,10 @@ public:
   - 6 General 2
   - 7 General 3
   */
+
+  int newBody(body tempBody);
+  int delBody(int index);
+  int delAllBodies(int index);
+  // Get Body Pointer - For GUI?
 };
 

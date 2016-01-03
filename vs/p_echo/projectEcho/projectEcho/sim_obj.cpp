@@ -80,3 +80,12 @@ sim_obj::sim_obj() {
 
 sim_obj::~sim_obj() {
 }
+
+int sim_obj::itteration() {
+
+  return 0;
+}
+
+void sim_obj::outputTest() {
+
+}
