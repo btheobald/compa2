@@ -20,23 +20,25 @@ double sim_obj::calcVectDistance(double distX, double distY) {
   return sqrt(pow(distX,2) + pow(distY, 2));
 }
 
-// TODO: REVIEW THIS CODE
-double* sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B) {
+double sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B, int xy) {
   double distX, distY, distV;
   // Component Distance
   distX = calcCompDistance(bodyID_A, bodyID_B, 0);
   distY = calcCompDistance(bodyID_B, bodyID_B, 1);
   // Vector Distance
   distV = calcVectDistance(distX, distY);
-  
+
   // GMm/(r^3)
-  double forceResult, forceReturn[2];
+  double forceResult;
   forceResult = gravitationalConstant * bodyStore.at(bodyID_A).getMass() * bodyStore.at(bodyID_B).getMass();
   forceResult /= pow(distV, 3);
-  
-  forceReturn[0] = forceResult * distX;
-  forceReturn[1] = forceResult * distY;
-  return forceReturn; // REVIEW THIS CODE
+
+  if (xy) {
+    forceResult *= distY;
+  } else {
+    forceResult *= distX;
+  }
+  return forceResult;
 }
 
 
@@ -48,11 +50,10 @@ int sim_obj::calcForceMatrix() {
   }
   
   // Loop Half Matrix
-  for (int xAccess = 0; xAccess < bodyStore.size(); xAccess) {
-    for (int yAccess = 0; xAccess < bodyStore.size(); yAccess) {
-      double *xyForce = calcForceBodyPair(xAccess, yAccess);
-      forceMatrix.at(xAccess).at(yAccess) = xyForce[0];
-      forceMatrix.at(yAccess).at(xAccess) = xyForce[1];
+  for (int xAccess = 0; xAccess < bodyStore.size(); xAccess++) {
+    for (int yAccess = 0; yAccess < bodyStore.size(); yAccess++) {
+      forceMatrix[xAccess][yAccess] = calcForceBodyPair(xAccess, yAccess, 0);;
+      forceMatrix[yAccess][xAccess] = calcForceBodyPair(xAccess, yAccess, 1);
     }
   }
 
@@ -68,34 +69,38 @@ int sim_obj::calcForceSumAB() {
         // If yAccess is smaller than xAccess, flip coordinates to stay within half matrix.
         if (yAccess < xAccess) {
           // Add Component force to get total component forces for x and y.
-          bodyStore.at(xAccess).addForce( -forceMatrix.at(yAccess).at(xAccess), 0);
-          bodyStore.at(yAccess).addForce(  forceMatrix.at(xAccess).at(yAccess), 1);
+          bodyStore[xAccess].addForce( forceMatrix[yAccess][xAccess], 0);
+          bodyStore[yAccess].addForce(-forceMatrix[xAccess][yAccess], 1);
         } else {
-          bodyStore.at(xAccess).addForce(  forceMatrix.at(xAccess).at(yAccess), 0);
-          bodyStore.at(yAccess).addForce( -forceMatrix.at(yAccess).at(xAccess), 1);
+          bodyStore[xAccess].addForce( forceMatrix[xAccess][yAccess], 0);
+          bodyStore[yAccess].addForce(-forceMatrix[yAccess][xAccess], 1);
         }
       }
     }
   }
+  return 0;
 }
 
 int sim_obj::calcAcceleraitonAB() {
   // Update Forces before Acceleration Update
-  for (int bodyIDC; bodyIDC < bodyStore.size(); bodyIDC++) {
-    bodyStore.at(bodyIDC).calcAcceleration();
+  for (int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
+    bodyStore[bodyIDC].calcAcceleration();
   }
+  return 0;
 }
 
 int sim_obj::calcHalfVelocityAB() {
-  for (int bodyIDC; bodyIDC < bodyStore.size(); bodyIDC++) {
-    bodyStore.at(bodyIDC).calcHalfVelocity();
+  for (int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
+    bodyStore[bodyIDC].calcHalfVelocity();
   }
+  return 0;
 }
 
 int sim_obj::calcPositionAB() {
-  for (int bodyIDC; bodyIDC < bodyStore.size(); bodyIDC++) {
-    bodyStore.at(bodyIDC).calcPosition();
+  for (int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
+    bodyStore[bodyIDC].calcPosition();
   }
+  return 0;
 }
 
 sim_obj::sim_obj() {
@@ -110,6 +115,7 @@ int sim_obj::itteration() {
     calcForceMatrix();
     calcForceSumAB();
     calcAcceleraitonAB();
+    scenarioChanged = false;
   }
 
   // Move Half for Half Time
@@ -121,11 +127,12 @@ int sim_obj::itteration() {
   calcForceSumAB();
   calcAcceleraitonAB();
 
-  calcPositionAB;
+  // Calculate Positions
+  calcPositionAB();
 
   return 0;
 }
 
 void sim_obj::outputTest() {
-  cout << bodyStore.at(1).getPosition(0) << " " << bodyStore.at(1).getPosition(1) << endl;
+  cout << bodyStore[0].getPosition(0) << " " << bodyStore[0].getPosition(1) << endl;
 }

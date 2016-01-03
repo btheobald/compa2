@@ -1,21 +1,70 @@
 #include "body.h"
+#include <iostream>
+using namespace std;
 
 // Constructors
 body::body() {
+  cout << "body constructed" << endl;
 }
 
 body::body(double p_Mass, double p_Radius, float p_Color[3]) {
+  mass = p_Mass;
+  radius = p_Radius;
+  // Set Color
+  color[0] = p_Color[0];
+  color[1] = p_Color[1];
+  color[2] = p_Color[2];
 }
 
 body::body(double p_Mass, double p_Radius, float p_Color[3], bool p_Fixed, double p_Position[2]) {
+  mass = p_Mass;
+  radius = p_Radius;
+  // Set Color
+  color[0] = p_Color[0];
+  color[1] = p_Color[1];
+  color[2] = p_Color[2];
+
+  fixed = p_Fixed;
+  // Set Position
+  position[0] = p_Position[0];
+  position[1] = p_Position[1];
 }
 
-body::body(double p_Mass, double p_Radius, float p_Color[3], double p_Position, double p_Velocity[2]) {
+body::body(double p_Mass, double p_Radius, float p_Color[3], double p_Position[2], double p_Velocity[2]) {
+  mass = p_Mass;
+  radius = p_Radius;
+  // Set Color
+  color[0] = p_Color[0];
+  color[1] = p_Color[1];
+  color[2] = p_Color[2];
+  // Set Position
+  position[0] = p_Position[0];
+  position[1] = p_Position[1];
+  // Set Velocity
+  velocity[0] = p_Velocity[0];
+  velocity[1] = p_Velocity[1];
+}
+
+body::body(double p_Mass, double p_Radius, double p_Position[2], double p_Velocity[2]) {
+  cout << "body populated" << endl;
+  mass = p_Mass;
+  radius = p_Radius;
+  // Set Position
+  position[0] = p_Position[0];
+  position[1] = p_Position[1];
+  // Set Velocity
+  velocity[0] = p_Velocity[0];
+  velocity[1] = p_Velocity[1];
 }
 
 // Destructor
 body::~body() {
+  cout << "body destroyed" << endl;
+  cout << position[0] << " " << position[1] << endl;
 }
+
+// Same for all objects
+double body::timestep;
 
 // Used in Interface
 double body::getMass(void) {
@@ -28,7 +77,7 @@ bool body::getFixedStatus(void) {
   return fixed;
 }
 float body::getColor(int cIndex) {
-  return colour[cIndex];
+  return color[cIndex];
 }
 double body::getAcceleration(int xyIndex) {
   return acceleration[xyIndex];

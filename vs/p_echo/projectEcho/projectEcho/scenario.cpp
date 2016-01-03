@@ -10,9 +10,8 @@ scenario::~scenario() {
 }
 
 
-int scenario::newBody(body tempBody) {
-  bodyStore.push_back(tempBody);
-  bodyStore.front().setTimestep(timestep);
+int scenario::newBody(double p_Mass, double p_Radius, double p_Position[2], double p_Velocity[2]) {
+  bodyStore.push_back(body(p_Mass, p_Radius, p_Position, p_Velocity));
   return 0;
 }
 int scenario::delBody(int index) {

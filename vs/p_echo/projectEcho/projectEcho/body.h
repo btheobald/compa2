@@ -3,8 +3,8 @@ class body
 {
 private:
   // Body Attributes
-  double mass = 0.0;
-  double radius = 0.0;
+  double mass = 1;
+  double radius = 1;
   bool fixed = false;
   float color[3] = { 0.0f, 0.0f, 0.0f };
   
@@ -20,7 +20,8 @@ public:
   body();
   body(double p_Mass, double p_Radius, float p_Color[3]);                                           // ID, Mass, Radius, Color 
   body(double p_Mass, double p_Radius, float p_Color[3], bool p_Fixed, double p_Position[2]);       // ID, Mass, Radius, Colour, Fixed, Position
-  body(double p_Mass, double p_Radius, float p_Color[3], double p_Position, double p_Velocity[2]);  // ID, Mass, Radius, Colour, Position, Velocity
+  body(double p_Mass, double p_Radius, float p_Color[3], double p_Position[2], double p_Velocity[2]);  // ID, Mass, Radius, Colour, Position, Velocity
+  body(double p_Mass, double p_Radius, double p_Position[2], double p_Velocity[2]);
   // Destructor
   ~body();
 

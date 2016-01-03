@@ -1,6 +1,2 @@
-﻿  simEntry.cpp
-  main.cpp
-  body.cpp
-  Generating Code...
-  projectEcho.vcxproj -> D:\Repository\compa2\vs\p_echo\projectEcho\Debug\projectEcho.exe
-  projectEcho.vcxproj -> D:\Repository\compa2\vs\p_echo\projectEcho\Debug\projectEcho.pdb (Partial PDB)
+﻿  body.cpp
+LINK : fatal error LNK1168: cannot open D:\Repository\compa2\vs\p_echo\projectEcho\Debug\projectEcho.exe for writing
