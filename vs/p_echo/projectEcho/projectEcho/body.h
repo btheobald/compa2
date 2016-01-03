@@ -3,7 +3,6 @@ class body
 {
 private:
   // Body Attributes
-  int bodyID;
   double mass = 0.0;
   double radius = 0.0;
   bool fixed = false;
@@ -19,9 +18,9 @@ private:
 public:
   // Constructors
   body();
-  body(int p_BodyID, double p_Mass, double p_Radius, float p_Color[3]);                                           // ID, Mass, Radius, Color 
-  body(int p_BodyID, double p_Mass, double p_Radius, float p_Color[3], bool p_Fixed, double p_Position[2]);       // ID, Mass, Radius, Colour, Fixed, Position
-  body(int p_BodyID, double p_Mass, double p_Radius, float p_Color[3], double p_Position, double p_Velocity[2]);  // ID, Mass, Radius, Colour, Position, Velocity
+  body(double p_Mass, double p_Radius, float p_Color[3]);                                           // ID, Mass, Radius, Color 
+  body(double p_Mass, double p_Radius, float p_Color[3], bool p_Fixed, double p_Position[2]);       // ID, Mass, Radius, Colour, Fixed, Position
+  body(double p_Mass, double p_Radius, float p_Color[3], double p_Position, double p_Velocity[2]);  // ID, Mass, Radius, Colour, Position, Velocity
   // Destructor
   ~body();
 
@@ -36,7 +35,6 @@ public:
   double getPosition(int xyIndex);
 
   // Set Variables (Returns OK/FAIL [0/1])
-  int setBodyID(int p_BodyID);
   int setMass(double p_Mass);
   int setRadius(double p_Radius);
   int setFixed(bool p_Fixed);

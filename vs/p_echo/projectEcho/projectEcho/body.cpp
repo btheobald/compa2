@@ -4,13 +4,13 @@
 body::body() {
 }
 
-body::body(int p_BodyID, double p_Mass, double p_Radius, float p_Color[3]) {
+body::body(double p_Mass, double p_Radius, float p_Color[3]) {
 }
 
-body::body(int p_BodyID, double p_Mass, double p_Radius, float p_Color[3], bool p_Fixed, double p_Position[2]) {
+body::body(double p_Mass, double p_Radius, float p_Color[3], bool p_Fixed, double p_Position[2]) {
 }
 
-body::body(int p_BodyID, double p_Mass, double p_Radius, float p_Color[3], double p_Position, double p_Velocity[2]) {
+body::body(double p_Mass, double p_Radius, float p_Color[3], double p_Position, double p_Velocity[2]) {
 }
 
 // Destructor
@@ -40,10 +40,6 @@ double body::getPosition(int xyIndex) {
   return position[xyIndex];
 }
 // Used in Setup and Interface
-int body::setBodyID(int p_BodyID) {
-  bodyID = p_BodyID;
-  return 0;
-}
 int body::setMass(double p_Mass) {
   mass = p_Mass;
   return 0;
