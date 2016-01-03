@@ -12,6 +12,7 @@ scenario::~scenario() {
 
 int scenario::newBody(body tempBody) {
   bodyStore.push_back(tempBody);
+  bodyStore.front().setTimestep(timestep);
   return 0;
 }
 int scenario::delBody(int index) {

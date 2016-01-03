@@ -10,11 +10,15 @@ private:
   double calcVectDistance(double distX, double distY);
   double* calcForceBodyPair(int bodyID_A, int bodyID_B);
   int calcForceMatrix();
-  int calcForceSum();
+  int calcForceSumAB();
+  int calcAcceleraitonAB();
+  int calcHalfVelocityAB();
+  int calcPositionAB();
 
 public:
   sim_obj();
   ~sim_obj();
   int itteration();
+  void outputTest();
 };
 

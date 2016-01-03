@@ -17,6 +17,6 @@ void simInit() {
 
   while (1) {
     simTest.itteration();
-    simTest.OutputTest();
+    simTest.outputTest();
   }
 }

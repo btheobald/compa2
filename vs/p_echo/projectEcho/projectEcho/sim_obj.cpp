@@ -1,6 +1,8 @@
 #include "sim_obj.h"
 #include <vector>
 #include <cmath>
+#include <iostream>
+using namespace std;
 
 void sim_obj::resizeMatrix(vector<vector<double>>& p_Matrix, int newSize) {
   p_Matrix.clear();
@@ -37,10 +39,12 @@ double* sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B) {
   return forceReturn; // REVIEW THIS CODE
 }
 
+
 int sim_obj::calcForceMatrix() {
   // Check if Body Count has Changed
   if (bodyStore.size() != prevBodyCount) {
     resizeMatrix(forceMatrix, bodyStore.size());
+    prevBodyCount = bodyStore.size();
   }
   
   // Loop Half Matrix
@@ -55,8 +59,8 @@ int sim_obj::calcForceMatrix() {
   // Return Success
   return 0;
 }
-
-int sim_obj::calcForceSum() {
+// Applies to All Bodies, sets in body vector.
+int sim_obj::calcForceSumAB() {
   for (int xAccess = 0; xAccess < bodyStore.size(); xAccess++) {
     for (int yAccess = 0; yAccess < bodyStore.size(); yAccess++) {
       // Ignore Middle Diagonal
@@ -75,6 +79,25 @@ int sim_obj::calcForceSum() {
   }
 }
 
+int sim_obj::calcAcceleraitonAB() {
+  // Update Forces before Acceleration Update
+  for (int bodyIDC; bodyIDC < bodyStore.size(); bodyIDC++) {
+    bodyStore.at(bodyIDC).calcAcceleration();
+  }
+}
+
+int sim_obj::calcHalfVelocityAB() {
+  for (int bodyIDC; bodyIDC < bodyStore.size(); bodyIDC++) {
+    bodyStore.at(bodyIDC).calcHalfVelocity();
+  }
+}
+
+int sim_obj::calcPositionAB() {
+  for (int bodyIDC; bodyIDC < bodyStore.size(); bodyIDC++) {
+    bodyStore.at(bodyIDC).calcPosition();
+  }
+}
+
 sim_obj::sim_obj() {
 }
 
@@ -82,10 +105,27 @@ sim_obj::~sim_obj() {
 }
 
 int sim_obj::itteration() {
+  if (scenarioChanged) {
+    // Calculate Initial Forces and Accelerations
+    calcForceMatrix();
+    calcForceSumAB();
+    calcAcceleraitonAB();
+  }
+
+  // Move Half for Half Time
+  calcHalfVelocityAB();
+  calcPositionAB();
+
+  // Update Forces and Accelerations
+  calcForceMatrix();
+  calcForceSumAB();
+  calcAcceleraitonAB();
+
+  calcPositionAB;
 
   return 0;
 }
 
 void sim_obj::outputTest() {
-
+  cout << bodyStore.at(1).getPosition(0) << " " << bodyStore.at(1).getPosition(1) << endl;
 }

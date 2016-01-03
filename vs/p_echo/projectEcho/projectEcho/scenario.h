@@ -13,6 +13,8 @@ protected:
   int itterationsPerFrame;
   double gravitationalConstant;
 
+  bool scenarioChanged = true;
+
 public:
   scenario();
   ~scenario();
