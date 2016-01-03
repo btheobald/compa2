@@ -112,10 +112,12 @@
   <ItemGroup>
     <ClCompile Include="body.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="scenario.cpp" />
     <ClCompile Include="simEntry.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="body.h" />
+    <ClInclude Include="scenario.h" />
     <ClInclude Include="simEntry.h" />
   </ItemGroup>
   <ItemGroup>

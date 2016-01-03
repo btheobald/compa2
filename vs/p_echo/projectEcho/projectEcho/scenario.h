@@ -31,6 +31,5 @@ public:
   scenario();
   ~scenario();
 
-  addBody();
 };
 
