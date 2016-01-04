@@ -3,9 +3,7 @@
 using namespace std;
 
 // Constructors
-body::body() {
-  cout << "body constructed" << endl;
-}
+body::body() {}
 
 body::body(double p_Mass, double p_Radius, float p_Color[3]) {
   mass = p_Mass;
@@ -46,7 +44,6 @@ body::body(double p_Mass, double p_Radius, float p_Color[3], double p_Position[2
 }
 
 body::body(double p_Mass, double p_Radius, double p_Position[2], double p_Velocity[2]) {
-  cout << "body populated" << endl;
   mass = p_Mass;
   radius = p_Radius;
   // Set Position
@@ -58,10 +55,7 @@ body::body(double p_Mass, double p_Radius, double p_Position[2], double p_Veloci
 }
 
 // Destructor
-body::~body() {
-  cout << "body destroyed" << endl;
-  cout << position[0] << " " << position[1] << endl;
-}
+body::~body() {}
 
 // Same for all objects
 double body::timestep;

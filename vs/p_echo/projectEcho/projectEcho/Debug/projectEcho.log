@@ -1,11 +1,2 @@
-﻿  sim_obj.cpp
-d:\repository\compa2\vs\p_echo\projectecho\projectecho\sim_obj.cpp(53): warning C4018: '<': signed/unsigned mismatch
-d:\repository\compa2\vs\p_echo\projectecho\projectecho\sim_obj.cpp(54): warning C4018: '<': signed/unsigned mismatch
-d:\repository\compa2\vs\p_echo\projectecho\projectecho\sim_obj.cpp(68): warning C4018: '<': signed/unsigned mismatch
-d:\repository\compa2\vs\p_echo\projectecho\projectecho\sim_obj.cpp(71): warning C4018: '<': signed/unsigned mismatch
-d:\repository\compa2\vs\p_echo\projectecho\projectecho\sim_obj.cpp(72): warning C4018: '<': signed/unsigned mismatch
-d:\repository\compa2\vs\p_echo\projectecho\projectecho\sim_obj.cpp(92): warning C4018: '<': signed/unsigned mismatch
-d:\repository\compa2\vs\p_echo\projectecho\projectecho\sim_obj.cpp(100): warning C4018: '<': signed/unsigned mismatch
-d:\repository\compa2\vs\p_echo\projectecho\projectecho\sim_obj.cpp(108): warning C4018: '<': signed/unsigned mismatch
-  projectEcho.vcxproj -> D:\Repository\compa2\vs\p_echo\projectEcho\Debug\projectEcho.exe
-  projectEcho.vcxproj -> D:\Repository\compa2\vs\p_echo\projectEcho\Debug\projectEcho.pdb (Partial PDB)
+﻿  simEntry.cpp
+LINK : fatal error LNK1168: cannot open D:\Repository\compa2\vs\p_echo\projectEcho\Debug\projectEcho.exe for writing
