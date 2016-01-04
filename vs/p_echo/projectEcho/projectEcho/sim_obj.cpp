@@ -10,14 +10,14 @@ void sim_obj::resizeMatrix(vector<vector<double>>& p_Matrix, int newSize) {
 }
 
 double sim_obj::calcCompDistance(int bodyID_A, int bodyID_B, int xy) {
-  double posA = bodyStore.at(bodyID_A).getPosition(xy);
-  double posB = bodyStore.at(bodyID_B).getPosition(xy);
-  // Return absolute distance
-  return abs(posA - posB);
+  double posA = bodyStore[bodyID_A].getPosition(xy);
+  double posB = bodyStore[bodyID_B].getPosition(xy);
+  // Return component distance
+  return posA - posB;
 }
 
 double sim_obj::calcVectDistance(double distX, double distY) {
-  return sqrt(pow(distX,2) + pow(distY, 2));
+  return sqrt(pow(abs(distX),2) + pow(abs(distY), 2));
 }
 
 double sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B, int xy) {
@@ -30,30 +30,33 @@ double sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B, int xy) {
 
   // GMm/(r^3)
   double forceResult;
-  forceResult = gravitationalConstant * bodyStore.at(bodyID_A).getMass() * bodyStore.at(bodyID_B).getMass();
+  forceResult = gravitationalConstant * bodyStore[bodyID_A].getMass() * bodyStore[bodyID_B].getMass();
   forceResult /= pow(distV, 3);
 
   if (xy) {
     forceResult *= distY;
+    if (distY < 0) return -forceResult; 
+    else return forceResult;
   } else {
     forceResult *= distX;
+    if (distX < 0) return -forceResult;
+    else return forceResult;
   }
-  return forceResult;
 }
 
 
 int sim_obj::calcForceMatrix() {
-  // Check if Body Count has Changed
-  if (bodyStore.size() != prevBodyCount) {
-    resizeMatrix(forceMatrix, bodyStore.size());
-    prevBodyCount = bodyStore.size();
-  }
+  resizeMatrix(forceMatrix, bodyStore.size());
+  prevBodyCount = bodyStore.size();
   
   // Loop Half Matrix
   for (int xAccess = 0; xAccess < bodyStore.size(); xAccess++) {
     for (int yAccess = 0; yAccess < bodyStore.size(); yAccess++) {
-      forceMatrix[xAccess][yAccess] = calcForceBodyPair(xAccess, yAccess, 0);;
-      forceMatrix[yAccess][xAccess] = calcForceBodyPair(xAccess, yAccess, 1);
+      // Skip if checking same body
+      if (xAccess != yAccess) {
+        forceMatrix[xAccess][yAccess] = calcForceBodyPair(xAccess, yAccess, 0);;
+        forceMatrix[yAccess][xAccess] = calcForceBodyPair(yAccess, xAccess, 1);
+      }
     }
   }
 
@@ -62,6 +65,9 @@ int sim_obj::calcForceMatrix() {
 }
 // Applies to All Bodies, sets in body vector.
 int sim_obj::calcForceSumAB() {
+  for (int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
+    bodyStore[bodyIDC].resetForce();
+  }
   for (int xAccess = 0; xAccess < bodyStore.size(); xAccess++) {
     for (int yAccess = 0; yAccess < bodyStore.size(); yAccess++) {
       // Ignore Middle Diagonal
@@ -69,11 +75,11 @@ int sim_obj::calcForceSumAB() {
         // If yAccess is smaller than xAccess, flip coordinates to stay within half matrix.
         if (yAccess < xAccess) {
           // Add Component force to get total component forces for x and y.
-          bodyStore[xAccess].addForce( forceMatrix[yAccess][xAccess], 0);
-          bodyStore[yAccess].addForce(-forceMatrix[xAccess][yAccess], 1);
+          bodyStore[xAccess].addForce(-forceMatrix[yAccess][xAccess], 1);
+          bodyStore[yAccess].addForce( forceMatrix[xAccess][yAccess], 0);
         } else {
-          bodyStore[xAccess].addForce( forceMatrix[xAccess][yAccess], 0);
-          bodyStore[yAccess].addForce(-forceMatrix[yAccess][xAccess], 1);
+          bodyStore[xAccess].addForce( forceMatrix[xAccess][yAccess], 1);
+          bodyStore[yAccess].addForce(-forceMatrix[yAccess][xAccess], 0);
         }
       }
     }
@@ -85,6 +91,7 @@ int sim_obj::calcAcceleraitonAB() {
   // Update Forces before Acceleration Update
   for (int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
     bodyStore[bodyIDC].calcAcceleration();
+    //cout << bodyIDC << " : " << bodyStore[bodyIDC].getAcceleration(0) << ", " << bodyStore[bodyIDC].getAcceleration(1) << endl;
   }
   return 0;
 }
@@ -92,6 +99,7 @@ int sim_obj::calcAcceleraitonAB() {
 int sim_obj::calcHalfVelocityAB() {
   for (int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
     bodyStore[bodyIDC].calcHalfVelocity();
+    //cout << bodyIDC << " : " << bodyStore[bodyIDC].getVelocity(0) << ", " << bodyStore[bodyIDC].getVelocity(1) << endl;
   }
   return 0;
 }
@@ -134,5 +142,5 @@ int sim_obj::itteration() {
 }
 
 void sim_obj::outputTest() {
-  cout << bodyStore[0].getPosition(0) << " " << bodyStore[0].getPosition(1) << endl;
+  cout << bodyStore[1].getPosition(0) << " " << bodyStore[1].getPosition(1) << endl;
 }

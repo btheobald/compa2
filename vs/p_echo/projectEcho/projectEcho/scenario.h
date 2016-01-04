@@ -9,7 +9,7 @@ protected:
   vector<body> bodyStore; // List, C++ Std library vector, dynamic array.
   
   // Simulation Physical Constants (Can be modified)
-  double timestep = 0.01;
+  double timestep;
   int itterationsPerFrame;
   double gravitationalConstant;
 
@@ -33,9 +33,12 @@ public:
   - 7 General 3
   */
 
-  int newBody(double p_Mass, double p_Radius, double p_Position[2], double p_Velocity[2]);
+  int newBody(body *tempptr);
   int delBody(int index);
   int delAllBodies(int index);
   // Get Body Pointer - For GUI?
+
+  int setTimestep(double p_Timestep);
+  int setGravConst(double p_GravConst);
 };
 

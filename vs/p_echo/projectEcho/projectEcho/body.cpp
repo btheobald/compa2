@@ -125,24 +125,29 @@ int body::addForce(double p_Force, int xyIndex) {
   force[xyIndex] += p_Force;
   return 0;
 }
+int body::resetForce() {
+  force[0] = 0;
+  force[1] = 0;
+  return 0;
+}
 int body::setTimestep(double p_Timestep) {
   timestep = p_Timestep;
   return 0;
 }
 int body::calcAcceleration() {
-  for (int xy = 0; xy <= 1; xy++) {
+  for (int xy = 0; xy < 2; xy++) {
     acceleration[xy] = force[xy] / mass;
   }
   return 0;
 }
 int body::calcHalfVelocity() {
-  for (int xy = 0; xy <= 1; xy++) {
+  for (int xy = 0; xy < 2; xy++) {
     velocity[xy] += acceleration[xy] * timestep * 0.5;
   }
   return 0;
 }
 int body::calcPosition() {
-  for (int xy = 0; xy <= 1; xy++) {
+  for (int xy = 0; xy < 2; xy++) {
     position[xy] += velocity[xy] * timestep;
   }
   return 0;
