@@ -131,12 +131,12 @@ int sim_obj::itteration() {
   calcForceSumAB();
   calcAcceleraitonAB();
 
-  // Calculate Positions
-  calcPositionAB();
+  // Calculate New Velocity
+  calcHalfVelocityAB();
 
   return 0;
 }
 
 void sim_obj::outputTest() {
-  cout << bodyStore[0].getPosition(0) << " " << bodyStore[0].getPosition(1) << " " << bodyStore[1].getPosition(0) << " " << bodyStore[1].getPosition(1) << " " << bodyStore[2].getPosition(0) << " " << bodyStore[2].getPosition(1) << endl;
+  cout << bodyStore[0].getPosition(0) << " " << bodyStore[0].getPosition(1) << " " << bodyStore[1].getPosition(0) << " " << bodyStore[1].getPosition(1) << endl; //" " << bodyStore[2].getPosition(0) << " " << bodyStore[2].getPosition(1) << endl;
 }

@@ -136,7 +136,7 @@ int body::calcAcceleration() {
 }
 int body::calcHalfVelocity() {
   for (int xy = 0; xy < 2; xy++) {
-    velocity[xy] += acceleration[xy] * timestep * 0.5;
+    velocity[xy] += acceleration[xy] * (timestep * 0.5);
   }
   return 0;
 }
