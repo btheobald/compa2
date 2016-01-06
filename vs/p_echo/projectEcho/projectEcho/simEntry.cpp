@@ -17,19 +17,19 @@ void simInit() {
 
   double b0Pos[2] = { 0.0, 0.0 };
   double b1Pos[2] = { 100.0, 0.0 };
-  //double b2Pos[2] = { -1.0, -1.0 };
+  double b2Pos[2] = { 95.0, 0.0 };
 
   double b0Vel[2] = { 0.0, 0.0 };
   double b1Vel[2] = { 0.0, 0.3 };
-  //double b2Vel[2] = { 0.1, 0.1 };
+  double b2Vel[2] = { 0.0, 0.9 };
   // Create Local Bodies - Better Solution Needed
   body bl0(1000, 0.1, b0Pos, b0Vel);
   body bl1(1, 0.1, b1Pos, b1Vel);
-  //body bl2(1, 0.1, b2Pos, b2Vel);
+  body bl2(10, 0.1, b2Pos, b2Vel);
   // Pass Pointer - This relies on the sim initialising all bodies prior to loop.
   simTest.newBody(&bl0);
   simTest.newBody(&bl1);
-  //simTest.newBody(&bl2);
+  simTest.newBody(&bl2);
 
   //while (1) {
   for (int i = 0; i < 10000; i++) {
