@@ -5,4 +5,4 @@ This project is a basic n-body simulator programmed from scratch in C++ using fe
 
 This repository also contains various test programs and prototypes for proving that the simulation method is correct and that the various systems operate as intended.
 
-Byron Theobald
+Byron Theobald.
