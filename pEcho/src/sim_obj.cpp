@@ -46,8 +46,8 @@ int sim_obj::calcForceMatrix() {
   prevBodyCount = bodyStore.size();
   
   // Loop Half Matrix
-  for (int xAccess = 0; xAccess < bodyStore.size(); xAccess++) {
-    for (int yAccess = xAccess + 1; yAccess < bodyStore.size(); yAccess++) {
+  for (unsigned int xAccess = 0; xAccess < bodyStore.size(); xAccess++) {
+    for (unsigned int yAccess = xAccess + 1; yAccess < bodyStore.size(); yAccess++) {
       // Skip if checking same body
       if (xAccess != yAccess) {
         forceMatrix[xAccess][yAccess] = calcForceBodyPair(xAccess, yAccess, 0);
@@ -61,11 +61,11 @@ int sim_obj::calcForceMatrix() {
 }
 // Applies to All Bodies, sets in body vector.
 int sim_obj::calcForceSumAB() {
-  for (int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
+  for (unsigned int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
     bodyStore[bodyIDC].resetForce();
   }
-  for (int xAccess = 0; xAccess < bodyStore.size(); xAccess++) {
-    for (int yAccess = 0; yAccess < bodyStore.size(); yAccess++) {
+  for (unsigned int xAccess = 0; xAccess < bodyStore.size(); xAccess++) {
+    for (unsigned int yAccess = 0; yAccess < bodyStore.size(); yAccess++) {
       // Ignore Middle Diagonal
       if (yAccess != xAccess) {
         // If yAccess is smaller than xAccess, flip coordinates to stay within half matrix.
@@ -85,7 +85,7 @@ int sim_obj::calcForceSumAB() {
 
 int sim_obj::calcAcceleraitonAB() {
   // Update Forces before Acceleration Update
-  for (int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
+  for (unsigned int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
     bodyStore[bodyIDC].calcAcceleration();
     //cout << bodyIDC << " : " << bodyStore[bodyIDC].getAcceleration(0) << ", " << bodyStore[bodyIDC].getAcceleration(1) << endl;
   }
@@ -93,7 +93,7 @@ int sim_obj::calcAcceleraitonAB() {
 }
 
 int sim_obj::calcHalfVelocityAB() {
-  for (int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
+  for (unsigned int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
     bodyStore[bodyIDC].calcHalfVelocity();
     //cout << bodyIDC << " : " << bodyStore[bodyIDC].getVelocity(0) << ", " << bodyStore[bodyIDC].getVelocity(1) << endl;
   }
@@ -101,7 +101,7 @@ int sim_obj::calcHalfVelocityAB() {
 }
 
 int sim_obj::calcPositionAB() {
-  for (int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
+  for (unsigned int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
     bodyStore[bodyIDC].calcPosition();
   }
   return 0;
