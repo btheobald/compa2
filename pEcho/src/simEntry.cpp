@@ -34,7 +34,8 @@ void simInit() {
   //while (1) {
   for (int i = 0; i < 1000000; i++) {
     simTest.itteration();
-    simTest.outputTest(i);
+    simTest.outputStore(i);
     //cerr << i << '\r';
   }
+  simTest.outputToTerm();
 }

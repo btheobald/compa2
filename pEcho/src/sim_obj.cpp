@@ -137,9 +137,26 @@ int sim_obj::itteration() {
   return 0;
 }
 
-void sim_obj::outputTest(int itteration) {
-  if (itteration % 100000 == 0) {
-    cerr << itteration << '\r';
-    //cout << bodyStore[0].getPosition(0) << " " << bodyStore[0].getPosition(1) << " " << bodyStore[1].getPosition(0) << " " << bodyStore[1].getPosition(1) << " " << bodyStore[2].getPosition(0) << " " << bodyStore[2].getPosition(1) << endl;
+void sim_obj::outputStore(int itteration) {
+  if (itteration % 1000 == 0) {
+    //cerr << itteration;
+    // Store Body Position Data in Array.
+    for(unsigned int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
+      for(unsigned int bodyXY = 0; bodyXY < 2; bodyXY++) {
+        outputData[itteration/1000][bodyIDC][bodyXY] = bodyStore[bodyIDC].getPosition(bodyXY);
+      }
+    }
+  }
+}
+
+// Output Position Array to Output Stream.
+void sim_obj::outputToTerm() {
+  for (int i = 0; i < 1000; i++) {
+    for (int bodyIDC = 0; bodyIDC < 3; bodyIDC++) {
+      for (int bodyXY = 0; bodyXY < 2; bodyXY++) {
+        cout << outputData[i][bodyIDC][bodyXY] << " ";
+      }
+    }
+    cout << endl;
   }
 }
