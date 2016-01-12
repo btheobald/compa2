@@ -25,9 +25,6 @@ CPPFLAGS = -std=c++11 -g -Wall -I$(INCLUDE_DIR) -O3 -static-libstdc++
 # Linker Flags
 LFLAGS = -Wall -static-libgcc -static-libstdc++
 
-setup:
-	@mkdir bin
-
 # Link
 $(TARGET): $(OBJECTS)
 	@$(LINKER) $@ $(CPPFLAGS) $(OBJECTS)
@@ -37,6 +34,12 @@ $(TARGET): $(OBJECTS)
 $(OBJECTS): $(BINARY_DIR)/%.o: $(SOURCE_DIR)/%.cpp
 	@$(CC) $(CPPFLAGS) -c $< -o $@
 	@echo "Compiled "$<" Successfully"
+
+.PHONEY: setup
+setup:
+	@mkdir bin -p
+	@mkdir src -p
+	@mkdir include -p
 
 .PHONEY: clean
 clean:
