@@ -11,11 +11,14 @@ endif
 ifeq ($(ARCH), win64)
 CXX = x86_64-w64-mingw32-g++
 endif
+ifeq ($(ARCH), MINGW64_NT-10.0)
+CXX = g++
+endif
 
 ifeq ($(ARCH), Linux)
 TARGET = $(NAME)
 endif
-ifeq ($(ARCH), $(filter $(ARCH), win32 win64))
+ifeq ($(ARCH), $(filter $(ARCH), win32 win64 MINGW64_NT-10.0))
 TARGET = $(NAME).exe
 endif
 
@@ -36,10 +39,10 @@ LIBS  =
 DB    = gdb
 DBOPT =
 # Compiler Flags
-CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) -O3
+CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) -D__NO_INLINE__ -O3 -g
 # Linker Flags
 LFLAGS = -Wall
-ifeq ($(ARCH), $(filter $(ARCH), win32 win64))
+ifeq ($(ARCH), $(filter $(ARCH), win32 win64 MINGW64_NT-10.0))
 LFLAGS = -Wall -static-libgcc -static-libstdc++
 endif
 
