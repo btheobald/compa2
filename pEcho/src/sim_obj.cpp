@@ -137,6 +137,8 @@ int sim_obj::itteration() {
   return 0;
 }
 
-void sim_obj::outputTest() {
-  cout << bodyStore[0].getPosition(0) << " " << bodyStore[0].getPosition(1) << " " << bodyStore[1].getPosition(0) << " " << bodyStore[1].getPosition(1) << " " << bodyStore[2].getPosition(0) << " " << bodyStore[2].getPosition(1) << endl;
+void sim_obj::outputTest(int itteration) {
+  if (itteration % 1000 == 0) {
+    //cout << bodyStore[0].getPosition(0) << " " << bodyStore[0].getPosition(1) << " " << bodyStore[1].getPosition(0) << " " << bodyStore[1].getPosition(1) << " " << bodyStore[2].getPosition(0) << " " << bodyStore[2].getPosition(1) << endl;
+  }
 }

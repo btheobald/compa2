@@ -19,6 +19,6 @@ public:
   sim_obj();
   ~sim_obj();
   int itteration();
-  void outputTest();
+  void outputTest(int itteration);
 };
 
