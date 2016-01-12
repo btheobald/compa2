@@ -21,9 +21,12 @@ LIBS  =
 DB    = gdb
 DBOPT =
 # Compiler Flags
-CPPFLAGS = -std=c++11 -g -Wall -I$(INCLUDE_DIR) -O3
+CPPFLAGS = -std=c++11 -g -Wall -I$(INCLUDE_DIR) -O3 -static-libstdc++
 # Linker Flags
 LFLAGS = -Wall -static-libgcc -static-libstdc++
+
+setup:
+	@mkdir bin
 
 # Link
 $(TARGET): $(OBJECTS)
