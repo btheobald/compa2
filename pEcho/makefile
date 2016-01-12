@@ -65,5 +65,6 @@ setup:
 .PHONEY: clean
 clean:
 	@rm -f $(BINARY_DIR)/*.o
-	@rm -f $(TARGET)
+	@rm -f *.out
+	@rm -f *.exe
 	@echo "Cleanup Complete"
