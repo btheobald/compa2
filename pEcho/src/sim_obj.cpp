@@ -44,7 +44,7 @@ double sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B, int xy) {
 int sim_obj::calcForceMatrix() {
   resizeMatrix(forceMatrix, bodyStore.size());
   prevBodyCount = bodyStore.size();
-  
+
   // Loop Half Matrix
   for (unsigned int xAccess = 0; xAccess < bodyStore.size(); xAccess++) {
     for (unsigned int yAccess = xAccess + 1; yAccess < bodyStore.size(); yAccess++) {
@@ -138,7 +138,8 @@ int sim_obj::itteration() {
 }
 
 void sim_obj::outputTest(int itteration) {
-  if (itteration % 1000 == 0) {
+  if (itteration % 100000 == 0) {
+    cerr << itteration << '\r';
     //cout << bodyStore[0].getPosition(0) << " " << bodyStore[0].getPosition(1) << " " << bodyStore[1].getPosition(0) << " " << bodyStore[1].getPosition(1) << " " << bodyStore[2].getPosition(0) << " " << bodyStore[2].getPosition(1) << endl;
   }
 }

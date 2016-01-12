@@ -16,7 +16,7 @@ CXX = g++
 endif
 
 ifeq ($(ARCH), Linux)
-TARGET = $(NAME)
+TARGET = $(NAME).out
 endif
 ifeq ($(ARCH), $(filter $(ARCH), win32 win64 MINGW64_NT-10.0))
 TARGET = $(NAME).exe
