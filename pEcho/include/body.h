@@ -3,24 +3,25 @@ class body
 {
 private:
   // Body Attributes
-  int bodyID;
-  double mass = 0.0;
-  double radius = 0.0;
+  double mass = 1;
+  double radius = 1;
   bool fixed = false;
-  float colour[3] = { 0.0f, 0.0f, 0.0f };
+  float color[3] = { 0.0f, 0.0f, 0.0f };
   
   // Simulation Properties     X    Y
   double force[2]         = { 0.0, 0.0 };
   double acceleration[2]  = { 0.0, 0.0 };
   double velocity[2]      = { 0.0, 0.0 };
   double position[2]      = { 0.0, 0.0 };
+  static double timestep;
 
 public:
   // Constructors
   body();
-  body(int p_BodyID, double p_Mass, double p_Radius, float p_Color[3]);                                           // ID, Mass, Radius, Color 
-  body(int p_BodyID, double p_Mass, double p_Radius, float p_Color[3], bool p_Fixed, double p_Position[2]);       // ID, Mass, Radius, Colour, Fixed, Position
-  body(int p_BodyID, double p_Mass, double p_Radius, float p_Color[3], double p_Position, double p_Velocity[2]);  // ID, Mass, Radius, Colour, Position, Velocity
+  body(double p_Mass, double p_Radius, float p_Color[3]);                                           // ID, Mass, Radius, Color 
+  body(double p_Mass, double p_Radius, float p_Color[3], bool p_Fixed, double p_Position[2]);       // ID, Mass, Radius, Colour, Fixed, Position
+  body(double p_Mass, double p_Radius, float p_Color[3], double p_Position[2], double p_Velocity[2]);  // ID, Mass, Radius, Colour, Position, Velocity
+  body(double p_Mass, double p_Radius, double p_Position[2], double p_Velocity[2]);
   // Destructor
   ~body();
 
@@ -35,19 +36,20 @@ public:
   double getPosition(int xyIndex);
 
   // Set Variables (Returns OK/FAIL [0/1])
-  bool setBodyID(int p_BodyID);
-  bool setMass(double p_Mass);
-  bool setRadius(double p_Radius);
-  bool setFixed(bool p_Fixed);
-  bool setColor(float p_Color[3]);
-  bool setForce(double p_Force, int xyIndex);
-  bool setAcceleration(double p_Acceleration, int xyIndex);
-  bool setVelocity(double p_Velocity, int xyIndex);
-  bool setPosition(double p_Position, int xyIndex);
+  int setMass(double p_Mass);
+  int setRadius(double p_Radius);
+  int setFixed(bool p_Fixed);
+  int setColor(float p_Color[3]);
+  int addForce(double p_Force, int xyIndex);
+  int resetForce();
+  int setAcceleration(double p_Acceleration, int xyIndex);
+  int setVelocity(double p_Velocity, int xyIndex);
+  int setPosition(double p_Position, int xyIndex);
+  int setTimestep(double p_Timestep);
 
   // Calculate and Set (Returns OK/FAIL [0/1])
-  bool calcAcceleration();
-  bool calcVelocity();
-  bool calcPosition();
+  int calcAcceleration();
+  int calcHalfVelocity();
+  int calcPosition();
 };
 

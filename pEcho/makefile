@@ -1,29 +1,41 @@
+# Project Name
+TARGET = pEcho
+
 # Compiler
-CC=g++
-# Include Directory
-INCLUDE=-Iinclude
-# Librarys
-LIBS=
-# Source Directory
-SRC_DIR=src
+CC = g++
+# Directories
+INCLUDE_DIR = include
+SOURCE_DIR  = src
+BINARY_DIR  = bin
+
+SOURCES    := $(wildcard $(SOURCE_DIR)/*.c)
+INCLUDES   := $(wildcard $(INCLUDE_DIR)/*.h)
+OBJECTS   := $(SOURCES:$(SOURCE_DIR)/%.c=$(BINARY_DIR)/%.o)
+
+# Libraries
+LIBS  =
 # Debugger
-DB=gdb
-DBOPT=
-# Bin Dir
-BIN_DIR=bin
+DB    = gdb
+DBOPT =
 # Compiler Flags
-CPPFLAGS=-std=c++11 -g -Wall $(INCLUDE) -O3
+CPPFLAGS = -std=c++11 -g -Wall -I$(INCLUDE_DIR) -O3
 
-# Compile Objects
-OBJS = main.o body.o scenario.o sim_obj.o simEntry.o 
+# Link
+$(TARGET): $(OBJECTS)
+	@echo "Linking Objects"
+	@$(CC) $@ $(CPPFLAGS) $(OBJECTS)
+	@echo "Linking Complete"
 
-all: out
+# Compile
+$(OBJECTS): $(BINARY_DIR)/%.o : $(SRCDIR)/%.c
+	@$(CC) $@ $(CPPFLAGS) -c $< -o $@
+	@echo "Compiled "$<" Successfully"
 
-out: $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $^ -o $@
-
-%.cpp.o:
-	$(CC) $(CFLAGS) $^ -o $@
-
+.PHONEY: clean
 clean:
-	rm *.o
+	@rm -f $(OBJECTS)
+	@echo "Cleanup Complete"
+.PHONEY: remove
+remove:
+	@rm -f $(TARGET)
+	@echo "Executable Removed"
