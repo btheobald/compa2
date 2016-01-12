@@ -11,7 +11,7 @@ using namespace std;
 
 void simInit() {
   sim_obj simTest;
-  
+
   simTest.setTimestep(0.1);
   simTest.setGravConst(0.1);
 

@@ -2,7 +2,7 @@
 TARGET = pEcho.exe
 
 # Compiler
-CC = i586-mingw32msvc-g++
+CC = i686-w64-mingw32-g++
 # Linker
 LINKER = $(CC) -o
 
@@ -22,6 +22,8 @@ DB    = gdb
 DBOPT =
 # Compiler Flags
 CPPFLAGS = -std=c++11 -g -Wall -I$(INCLUDE_DIR) -O3
+# Linker Flags
+LFLAGS = -Wall -static-libstdc++
 
 # Link
 $(TARGET): $(OBJECTS)
@@ -35,9 +37,6 @@ $(OBJECTS): $(BINARY_DIR)/%.o: $(SOURCE_DIR)/%.cpp
 
 .PHONEY: clean
 clean:
-	@rm -f $(OBJECTS)
-	@echo "Cleanup Complete"
-.PHONEY: remove
-remove:
+	@rm -f $(BINARY_DIR)/*.o
 	@rm -f $(TARGET)
-	@echo "Executable Removed"
+	@echo "Cleanup Complete"
