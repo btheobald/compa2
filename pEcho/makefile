@@ -1,8 +1,8 @@
 # Project Name
-TARGET = pEcho
+TARGET = pEcho.exe
 
 # Compiler
-CC = g++
+CC = i586-mingw32msvc-g++
 # Linker
 LINKER = $(CC) -o
 
