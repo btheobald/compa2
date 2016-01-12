@@ -1,0 +1,8 @@
+﻿  simEntry.cpp
+  Generating code
+  1 of 273 functions ( 0.4%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    1 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  projectEcho.vcxproj -> D:\Repository\compa2\vs\p_echo\projectEcho\Release\projectEcho.exe
+  projectEcho.vcxproj -> D:\Repository\compa2\vs\p_echo\projectEcho\Release\projectEcho.pdb (Full PDB)
