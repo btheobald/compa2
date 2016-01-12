@@ -1,11 +1,26 @@
+ARCH = $(shell uname)
 # Project Name
-TARGET = pEcho.exe
+NAME = pEcho
+# Compiler (Dependant on ARCH)
+ifeq ($(ARCH), Linux)
+CCX = g++
+endif
+ifeq ($(ARCH), win32)
+CXX = i686-w64-mingw32-g++
+endif
+ifeq ($(ARCH), win64)
+CXX = x86_64-w64-mingw32-g++
+endif
 
-# Compiler
-CC = i686-w64-mingw32-g++
+ifeq ($(ARCH), Linux)
+TARGET = $(NAME)
+endif
+ifeq ($(ARCH), $(filter $(ARCH), win32 win64))
+TARGET = $(NAME).exe
+endif
+
 # Linker
-LINKER = $(CC) -o
-
+LINKER = $(CXX) -o
 # Directories
 INCLUDE_DIR = include
 SOURCE_DIR  = src
@@ -21,18 +36,21 @@ LIBS  =
 DB    = gdb
 DBOPT =
 # Compiler Flags
-CPPFLAGS = -std=c++11 -g -Wall -I$(INCLUDE_DIR) -O3 -static-libstdc++
+CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) -O3
 # Linker Flags
+LFLAGS = -Wall
+ifeq ($(ARCH), $(filter $(ARCH), win32 win64))
 LFLAGS = -Wall -static-libgcc -static-libstdc++
+endif
 
 # Link
 $(TARGET): $(OBJECTS)
-	@$(LINKER) $@ $(CPPFLAGS) $(OBJECTS)
+	@$(LINKER) $@ $(LFLAGS) $(OBJECTS)
 	@echo "Linking Complete"
 
 # Compile
 $(OBJECTS): $(BINARY_DIR)/%.o: $(SOURCE_DIR)/%.cpp
-	@$(CC) $(CPPFLAGS) -c $< -o $@
+	@$(CXX) $(CPPFLAGS) -c $< -o $@
 	@echo "Compiled "$<" Successfully"
 
 .PHONEY: setup
