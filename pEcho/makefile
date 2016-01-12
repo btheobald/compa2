@@ -23,7 +23,7 @@ DBOPT =
 # Compiler Flags
 CPPFLAGS = -std=c++11 -g -Wall -I$(INCLUDE_DIR) -O3
 # Linker Flags
-LFLAGS = -Wall -static-libstdc++
+LFLAGS = -Wall -static-libgcc -static-libstdc++
 
 # Link
 $(TARGET): $(OBJECTS)
