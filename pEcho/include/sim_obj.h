@@ -15,9 +15,12 @@ private:
   int calcHalfVelocityAB();
   int calcPositionAB();
 
+  double outputData[1000][3][2];
+
 public:
   sim_obj();
   ~sim_obj();
   int itteration();
-  void outputTest(int itteration);
+  void outputStore(int itteration);
+  void outputToTerm();
 };

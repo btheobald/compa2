@@ -39,7 +39,7 @@ LIBS  =
 DB    = gdb
 DBOPT =
 # Compiler Flags
-CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) -D__NO_INLINE__ -O3 -g
+CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) -D__NO_INLINE__ -g
 # Linker Flags
 LFLAGS = -Wall
 ifeq ($(ARCH), $(filter $(ARCH), win32 win64 MINGW64_NT-10.0))
