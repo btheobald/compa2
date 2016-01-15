@@ -21,4 +21,3 @@ public:
   int itteration();
   void outputTest(int itteration);
 };
-

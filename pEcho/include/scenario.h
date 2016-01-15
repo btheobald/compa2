@@ -8,7 +8,7 @@ class scenario {
 protected:
   // Body Storage
   vector<body> bodyStore; // List, C++ Std library vector, dynamic array.
-  
+
   // Simulation Physical Constants (Can be modified)
   double timestep;
   int itterationsPerFrame;
@@ -42,4 +42,3 @@ public:
   int setTimestep(double p_Timestep);
   int setGravConst(double p_GravConst);
 };
-

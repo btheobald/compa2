@@ -5,7 +5,6 @@
 */
 
 #include "simEntry.h"
-#include "body.h"
 #include <iostream>
 using namespace std;
 
