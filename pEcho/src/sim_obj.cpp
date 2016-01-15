@@ -138,15 +138,15 @@ int sim_obj::itteration() {
 }
 
 void sim_obj::outputStore(int itteration) {
-  if (itteration % 1000 == 0) {
+  //if (itteration % 1000 == 0) {
     //cerr << itteration;
     // Store Body Position Data in Array.
     for(unsigned int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
       for(unsigned int bodyXY = 0; bodyXY < 2; bodyXY++) {
-        outputData[itteration/1000][bodyIDC][bodyXY] = bodyStore[bodyIDC].getPosition(bodyXY);
+        outputData[itteration][bodyIDC][bodyXY] = bodyStore[bodyIDC].getPosition(bodyXY);
       }
     }
-  }
+  //}
 }
 
 // Output Position Array to Output Stream.

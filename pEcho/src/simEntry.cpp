@@ -31,7 +31,7 @@ void simInit() {
   simTest.newBody(&bl2);
 
   //while (1) {
-  for (int i = 0; i < 1000000; i++) {
+  for (int i = 0; i < 1000; i++) {
     simTest.itteration();
     simTest.outputStore(i);
     //cerr << i << '\r';
