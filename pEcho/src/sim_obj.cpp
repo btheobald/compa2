@@ -151,6 +151,7 @@ void sim_obj::outputStore(int itteration) {
 
 // Output Position Array to Output Stream.
 void sim_obj::outputToTerm() {
+  cout << "1x 1y  2x 2y" << endl;
   for (int i = 0; i < 1000; i++) {
     for (int bodyIDC = 0; bodyIDC < 3; bodyIDC++) {
       for (int bodyXY = 0; bodyXY < 2; bodyXY++) {
