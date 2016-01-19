@@ -1,26 +1,8 @@
-ARCH = $(shell uname)
 # Project Name
 NAME = pEcho
-# Compiler (Dependant on ARCH)
-ifeq ($(ARCH), Linux)
+# Compiler
 CCX = g++
-endif
-ifeq ($(ARCH), win32)
-CXX = i686-w64-mingw32-g++
-endif
-ifeq ($(ARCH), win64)
-CXX = x86_64-w64-mingw32-g++
-endif
-ifeq ($(ARCH), MINGW64_NT-10.0)
-CXX = g++
-endif
-
-ifeq ($(ARCH), Linux)
 TARGET = $(NAME).out
-endif
-ifeq ($(ARCH), $(filter $(ARCH), win32 win64 MINGW64_NT-10.0))
-TARGET = $(NAME).exe
-endif
 
 # Linker
 LINKER = $(CXX) -o
@@ -34,17 +16,14 @@ INCLUDES   := $(wildcard $(INCLUDE_DIR)/*.h)
 OBJECTS    := $(SOURCES:$(SOURCE_DIR)/%.cpp=$(BINARY_DIR)/%.o)
 
 # Libraries
-LIBS  =
+LIBS  = `pkg-config --static --libs glfw3`
 # Debugger
 DB    = gdb
 DBOPT =
 # Compiler Flags
-CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) -D__NO_INLINE__ -g
+CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) -D__NO_INLINE__ -g `pkg-config --cflags glfw3`
 # Linker Flags
-LFLAGS = -Wall
-ifeq ($(ARCH), $(filter $(ARCH), win32 win64 MINGW64_NT-10.0))
-LFLAGS = -Wall -static-libgcc -static-libstdc++
-endif
+LFLAGS = -Wall $(LIBS)
 
 # Link
 $(TARGET): $(OBJECTS)
@@ -75,5 +54,4 @@ setup:
 clean:
 	@rm -f $(BINARY_DIR)/*.o
 	@rm -f *.out
-	@rm -f *.exe
 	@echo "Cleanup Complete"
