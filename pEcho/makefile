@@ -56,6 +56,15 @@ $(OBJECTS): $(BINARY_DIR)/%.o: $(SOURCE_DIR)/%.cpp
 	@$(CXX) $(CPPFLAGS) -c $< -o $@
 	@echo "Compiled "$<" Successfully"
 
+output.txt:$(TARGET)
+	./$(TARGET) > plot/output.txt
+
+anim:output.txt
+	gnuplot plot/anim
+
+still:output.txt
+	gnuplot plot/still
+
 .PHONEY: setup
 setup:
 	@mkdir bin -p

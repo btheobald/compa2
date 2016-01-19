@@ -1,0 +1,12 @@
+set key off
+set size square
+set term pngcairo size 2100,2000
+set output "plot/still.png"
+
+set tics font ", 30"
+set xrange [-120:120]
+set yrange [-120:120]
+
+plot "plot/output.txt" using 1:2 with lines lw 5 lt rgb "green", \
+     "plot/output.txt" using 3:4 with lines lw 5 lt rgb "red", \
+     "plot/output.txt" using 5:6 with lines lw 5 lt rgb "blue"
