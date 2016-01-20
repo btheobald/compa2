@@ -13,6 +13,10 @@ int main() {
   int wYRes = 480;
   GLFWwindow* echoWindow;
 
+  // Framerate Variables
+  double fcStartTime;
+  int frameCounter = 0;
+
   // Init GLFW
   glfwInit();
   echoWindow = glfwCreateWindow(wXRes, wYRes, "Test Window", NULL, NULL);
@@ -25,9 +29,12 @@ int main() {
   thread simThread(simInit);
   // TODO: Thread Sync
 
+  // Initial Framerate Timer Set
+  fcStartTime = glfwGetTime();
+
   while(!glfwWindowShouldClose(echoWindow)) {
     // Set Clear Color for Window
-    glClearColor(0.1f, 0.1f, 0.1f, 1);
+    glClearColor(0.05f, 0.05f, 0.1f, 1);
     // Clear Display for Rendering
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -49,6 +56,15 @@ int main() {
     // TODO: Poll Input Events
     glfwPollEvents();
     // TODO: Update Local Scenario with Changes
+
+    // Increment Frame Counter
+    frameCounter++;
+    // Check if 1 Second has Passed
+    if(glfwGetTime() - fcStartTime >= 1.0) {
+      cerr << frameCounter << "FPS, "<< 1000.0/(double)frameCounter << "ms" << endl;
+      frameCounter = 0;
+      fcStartTime = glfwGetTime();
+    }
   }
 
   // Pause until simInit Exits.
