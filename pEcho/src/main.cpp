@@ -27,7 +27,7 @@ int main() {
 
   // Start Sim Thread
   thread simThread(simInit);
-  // TODO: Thread Sync
+  // TODO: Thread Syncup
 
   // Initial Framerate Timer Set
   fcStartTime = glfwGetTime();
