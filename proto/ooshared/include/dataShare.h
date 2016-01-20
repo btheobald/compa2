@@ -1,9 +1,11 @@
+#pragma once
 #include <mutex>
+using namespace std;
 
 class dataShare {
 private:
   int testData;
-  std::mutex testData_lock;
+  mutex testData_lock;
 
 public:
   dataShare(int p_testData);
@@ -12,4 +14,4 @@ public:
   // Interfaces
   void setTestData(int p_testData);
   int getTestData();
-}
+};

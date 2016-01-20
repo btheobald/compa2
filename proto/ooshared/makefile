@@ -16,14 +16,14 @@ INCLUDES   := $(wildcard $(INCLUDE_DIR)/*.h)
 OBJECTS    := $(SOURCES:$(SOURCE_DIR)/%.cpp=$(BINARY_DIR)/%.o)
 
 # Libraries
-LIBS  =
+LIBS  = -lpthread
 # Debugger
 DB    = gdb
 DBOPT =
 # Compiler Flags
-CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) -g
+CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) -g -D__NO_INLINE__
 # Linker Flags
-LFLAGS = -Wall $(LIBS)
+LFLAGS = -Wall $(LIBS) -Wl,--no-as-needed
 
 # Link
 $(TARGET): $(OBJECTS)

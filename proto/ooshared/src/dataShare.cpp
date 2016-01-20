@@ -14,7 +14,7 @@ void dataShare::setTestData(int p_testData) {
   testData_lock.unlock();
 }
 
-int dataShare::setTestData() {
+int dataShare::getTestData() {
   testData_lock.lock();
   int testDataCpy = testData;
   testData_lock.unlock();
