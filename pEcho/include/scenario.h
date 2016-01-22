@@ -23,7 +23,8 @@ public:
   int newBody(body *tempptr);
   int delBody(int index);
   int delAllBodies(int index);
-  // Get Body Pointer - For GUI?
+  void populateBodyStore(vector<body> tempStore);
+  vector<body> returnBodyStore();
 
   int setTimestep(double p_Timestep);
   int setGravConst(double p_GravConst);

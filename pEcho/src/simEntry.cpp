@@ -5,15 +5,17 @@
 */
 
 #include "simEntry.h"
+#include "sharedStage.h"
 #include <iostream>
 #include <vector>
 using namespace std;
 
 void simInit() {
-  sim_obj simTest;
+  sim_obj simMain;
+  sharedStage shareTest;
   // Set Initial Simulation Constants
-  simTest.setTimestep(0.01);
-  simTest.setGravConst(0.1);
+  simMain.setTimestep(0.01);
+  simMain.setGravConst(0.1);
 
   vector<body> ifcBodyStore; // Simulation Interface Body Store (Scope)
 
@@ -33,17 +35,25 @@ void simInit() {
   ifcBodyStore.push_back(body(0.01, 0.01, b2Pos, b2Vel));
   // Pass Pointer - This relies on the sim initialising all bodies prior to loop.
   for(int c = 0; c < 3; c++)
-    simTest.newBody(&ifcBodyStore[c]);
+    simMain.newBody(&ifcBodyStore[c]);
 
   //while (1) {
   for (int i = 0; i < ITTERATIONS; i++) {
+    shareTest.populateBodyStore_R(simMain.returnBodyStore());
     // TODO: Check for interface updates
     // TODO: Check if new sim frame required
     // TODO: Mass Update Body Store
-    simTest.itteration();
-    simTest.outputStore(i);
+
+    simMain.itteration();
+    simMain.populateBodyStore(shareTest.returnBodyStore_R());
+
+    #ifdef OUTPUT
+    simMain.outputStore(i);
+    #endif
     //cerr << i << '\r';
   }
-  simTest.outputToTerm();
+  #ifdef OUTPUT
+  simMain.outputToTerm();
+  #endif
   cerr << "Complete, Exit Now" << endl;
 }

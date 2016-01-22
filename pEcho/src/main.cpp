@@ -2,7 +2,7 @@
 //#include "callbacks.h"
 #include <iostream>
 #include <thread>
-
+#include "sharedStage.h"
 #include "simEntry.h"
 
 using namespace std;

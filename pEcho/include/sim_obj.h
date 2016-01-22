@@ -1,6 +1,6 @@
 #pragma once
 #include "scenario.h"
-#define ITTERATIONS 60000
+#define ITTERATIONS 1000000
 
 class sim_obj : public scenario {
 private:
@@ -16,12 +16,16 @@ private:
   int calcHalfVelocityAB();
   int calcPositionAB();
 
+  #ifdef OUTPUT
   double outputData[ITTERATIONS][3][2];
+  #endif
 
 public:
   sim_obj();
   ~sim_obj();
   int itteration();
+  #ifdef OUTPUT
   void outputStore(int itteration);
   void outputToTerm();
+  #endif
 };

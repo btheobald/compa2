@@ -1,7 +1,5 @@
 #include "scenario.h"
 
-
-
 scenario::scenario() {
 }
 
@@ -23,6 +21,13 @@ int scenario::delAllBodies(int index) {
   bodyStore.clear();
   return 0;
 }
+void scenario::populateBodyStore(vector<body> tempStore) {
+  bodyStore = tempStore;
+}
+vector<body> scenario::returnBodyStore() {
+  return bodyStore;
+}
+
 
 int scenario::setTimestep(double p_Timestep) {
   timestep = p_Timestep;

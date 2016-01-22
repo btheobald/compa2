@@ -137,6 +137,7 @@ int sim_obj::itteration() {
   return 0;
 }
 
+#ifdef OUTPUT
 void sim_obj::outputStore(int itteration) {
   //if (itteration % 1000 == 0) {
     //cerr << itteration;
@@ -160,3 +161,4 @@ void sim_obj::outputToTerm() {
     cout << endl;
   }
 }
+#endif
