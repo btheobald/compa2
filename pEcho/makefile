@@ -12,7 +12,7 @@ SOURCE_DIR  = src
 BINARY_DIR  = bin
 
 SOURCES    := $(wildcard $(SOURCE_DIR)/*.cpp)
-INCLUDES   := $(wildcard $(INCLUDE_DIR)/*.h)
+INCLUDES   := $(wildcard $(INCLUDE_DIR)/*.hpp)
 OBJECTS    := $(SOURCES:$(SOURCE_DIR)/%.cpp=$(BINARY_DIR)/%.o)
 
 # Libraries
