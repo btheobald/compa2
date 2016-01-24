@@ -8,6 +8,9 @@
 using namespace std;
 
 int main() {
+  // Init Shared Stage
+  sharedStage sharedData;
+
   // Init GLFW
   int wXRes = 960;
   int wYRes = 480;
@@ -19,14 +22,14 @@ int main() {
 
   // Init GLFW
   glfwInit();
-  echoWindow = glfwCreateWindow(wXRes, wYRes, "Test Window", NULL, NULL);
+  echoWindow = glfwCreateWindow(wXRes, wYRes, "Echo", NULL, NULL);
   glfwMakeContextCurrent(echoWindow);
 
   // TODO: Init AntTweakBar
   // TODO: Create Tweakbar and Add Variables?
 
-  // Start Sim Thread
-  thread simThread(simInit);
+  // Start Sim Thread, Pass SharedData Address
+  thread simThread(simInit, &sharedData);
   // TODO: Thread Syncup
 
   // Initial Framerate Timer Set

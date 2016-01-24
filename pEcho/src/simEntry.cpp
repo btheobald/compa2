@@ -4,15 +4,14 @@
 *| Author: Byron Theobald
 */
 
-#include "simEntry.hpp"
-#include "sharedStage.hpp"
 #include <iostream>
 #include <vector>
+#include "simEntry.hpp"
 using namespace std;
 
-void simInit() {
+void simInit(sharedStage* sharedDataAccess) {
   sim_obj simMain;
-  sharedStage shareTest;
+
   // Set Initial Simulation Constants
   simMain.setTimestep(0.01);
   simMain.setGravConst(0.1);
@@ -39,13 +38,13 @@ void simInit() {
 
   //while (1) {
   for (int i = 0; i < ITTERATIONS; i++) {
-    shareTest.populateBodyStore_R(simMain.returnBodyStore());
+    sharedDataAccess -> populateBodyStore_R(simMain.returnBodyStore());
     // TODO: Check for interface updates
     // TODO: Check if new sim frame required
     // TODO: Mass Update Body Store
 
     simMain.itteration();
-    simMain.populateBodyStore(shareTest.returnBodyStore_R());
+    simMain.populateBodyStore(sharedDataAccess -> returnBodyStore_R());
 
     #ifdef OUTPUT
     simMain.outputStore(i);
