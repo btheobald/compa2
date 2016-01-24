@@ -4,8 +4,8 @@
 *| Author: Byron Theobald
 */
 
-#include "simEntry.h"
-#include "sharedStage.h"
+#include "simEntry.hpp"
+#include "sharedStage.hpp"
 #include <iostream>
 #include <vector>
 using namespace std;

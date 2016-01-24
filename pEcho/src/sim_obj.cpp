@@ -1,4 +1,4 @@
-#include "sim_obj.h"
+#include "sim_obj.hpp"
 #include <vector>
 #include <cmath>
 #include <iostream>

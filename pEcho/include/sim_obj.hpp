@@ -1,5 +1,5 @@
 #pragma once
-#include "scenario.h"
+#include "scenario.hpp"
 #define ITTERATIONS 1000000
 
 class sim_obj : public scenario {

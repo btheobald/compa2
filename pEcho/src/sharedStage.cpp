@@ -1,4 +1,4 @@
-#include "sharedStage.h"
+#include "sharedStage.hpp"
 
 sharedStage::sharedStage() {
 

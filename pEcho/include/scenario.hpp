@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <cstdint>
-#include "body.h"
+#include "body.hpp"
 using namespace std;
 
 class scenario {

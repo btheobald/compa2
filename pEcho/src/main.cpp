@@ -2,8 +2,8 @@
 //#include "callbacks.h"
 #include <iostream>
 #include <thread>
-#include "sharedStage.h"
-#include "simEntry.h"
+#include "sharedStage.hpp"
+#include "simEntry.hpp"
 
 using namespace std;
 

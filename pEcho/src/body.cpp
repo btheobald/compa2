@@ -1,4 +1,4 @@
-#include "body.h"
+#include "body.hpp"
 #include <iostream>
 using namespace std;
 
@@ -132,6 +132,7 @@ int body::calcAcceleration() {
   for (int xy = 0; xy < 2; xy++) {
     acceleration[xy] = force[xy] / mass;
   }
+  return 0;
   return 0;
 }
 int body::calcHalfVelocity() {

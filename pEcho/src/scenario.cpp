@@ -1,4 +1,4 @@
-#include "scenario.h"
+#include "scenario.hpp"
 
 scenario::scenario() {
 }

@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include <mutex>
-#include "body.h"
+#include "body.hpp"
 using namespace std;
 
 class sharedStage {
