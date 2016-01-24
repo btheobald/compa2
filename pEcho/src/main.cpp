@@ -69,7 +69,7 @@ int main() {
       fcStartTime = glfwGetTime();
     }
   }
-
+  sharedData.setStatus(1, true);
   // Pause until simInit Exits.
   simThread.join();
   // Keep window open until simThread exits.

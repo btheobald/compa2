@@ -28,6 +28,7 @@ private:
   mutex simIPF_Lock;
   mutex pause_Lock;
   mutex exit_Lock;
+  mutex exitAck_Lock;
 
 public:
   sharedStage();
@@ -37,4 +38,8 @@ public:
   void populateBodyStore_S(vector<body> p_BodyStore);
   vector<body> returnBodyStore_R();
   vector<body> returnBodyStore_S();
+
+  // 0 :: Pause, 1 :: Exit, 2 :: ExitAck
+  void setStatus(bool set, int var);
+  bool getStatus(int var);
 };

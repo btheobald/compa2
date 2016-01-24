@@ -36,8 +36,8 @@ void simInit(sharedStage* sharedDataAccess) {
   for(int c = 0; c < 3; c++)
     simMain.newBody(&ifcBodyStore[c]);
 
-  //while (1) {
-  for (int i = 0; i < ITTERATIONS; i++) {
+  //for (int i = 0; i < ITTERATIONS; i++) {
+  while (!(sharedDataAccess -> getStatus(1))) {
     sharedDataAccess -> populateBodyStore_R(simMain.returnBodyStore());
     // TODO: Check for interface updates
     // TODO: Check if new sim frame required
@@ -54,5 +54,7 @@ void simInit(sharedStage* sharedDataAccess) {
   #ifdef OUTPUT
   simMain.outputToTerm();
   #endif
-  cerr << "Complete, Exit Now" << endl;
+
+  //sharedDataAccess -> setStatus(TRUE, 2);
+  cerr << "Sim Exit" << endl;
 }

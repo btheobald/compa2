@@ -1,7 +1,9 @@
 #include "sharedStage.hpp"
 
 sharedStage::sharedStage() {
-
+  pause = true;
+  exit = false;
+  exitAck = false;
 }
 sharedStage::~sharedStage(){
 
@@ -27,4 +29,35 @@ vector<body> sharedStage::returnBodyStore_R() {
 
 vector<body> sharedStage::returnBodyStore_S() {
   return bodyStore_S;
+}
+
+void sharedStage::setStatus(bool set, int var) {
+  switch(var) {
+    case 0:
+      pause_Lock.lock();
+      pause = set;
+      pause_Lock.unlock();
+      break;
+    case 1:
+      exit_Lock.lock();
+      exit = set;
+      exit_Lock.unlock();
+      break;
+  }
+}
+bool sharedStage::getStatus(int var) {
+  bool localTemp;
+  switch(var) {
+    case 0:
+      pause_Lock.lock();
+      localTemp = pause;
+      pause_Lock.unlock();
+      break;
+    case 1:
+      exit_Lock.lock();
+      localTemp = exit;
+      exit_Lock.unlock();
+      break;
+  }
+  return localTemp;
 }
