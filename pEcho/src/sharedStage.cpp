@@ -37,23 +37,23 @@ vector<body> sharedStage::returnBodyStore_S() {
   return bodyStore_S;
 }
 
-void setSimUGC(double var) {
+void sharedStage::setSimUGC(double var) {
   simUGC_Lock.lock();
   simUGC = var;
   simUGC_Lock.unlock();
 }
-void setSimIDT(double var) {
+void sharedStage::setSimIDT(double var) {
   simIDT_Lock.lock();
   simIDT = var;
   simIDT_Lock.unlock();
 }
-void setSimIPF(int var) {
+void sharedStage::setSimIPF(int var) {
   simIPF_Lock.lock();
   simIPF = var;
   simIPF_Lock.lock();
 }
 
-double getSimUGC() {
+double sharedStage::getSimUGC() {
   double tempStore;
   simUGC_Lock.lock();
   tempStore = simUGC;
@@ -61,7 +61,7 @@ double getSimUGC() {
 
   return tempStore;
 }
-double getSimIDT() {
+double sharedStage::getSimIDT() {
   double tempStore;
   simIDT_Lock.lock();
   tempStore = simIDT;
@@ -69,7 +69,7 @@ double getSimIDT() {
 
   return tempStore;
 }
-int getSimIPF() {
+int sharedStage::getSimIPF() {
   int tempStore;
   simIPF_Lock.lock();
   tempStore = simIPF;

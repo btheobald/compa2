@@ -20,12 +20,13 @@ public:
   scenario();
   ~scenario();
 
-  int newBody(body *tempptr);
-  int delBody(int index);
-  int delAllBodies(int index);
+  void newBody(body *tempptr);
+  void delBody(int index);
+  void delAllBodies(int index);
   void populateBodyStore(vector<body> tempStore);
   vector<body> returnBodyStore();
 
-  int setTimestep(double p_Timestep);
-  int setGravConst(double p_GravConst);
+  void setUGC(double p_GravConst);
+  void setIDT(double p_Timestep);
+  void setIPF(double p_Timestep);
 };

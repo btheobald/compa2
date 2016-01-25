@@ -7,6 +7,8 @@
 
 using namespace std;
 
+void initMatrix(int lXRes, int lYRes);
+
 int main() {
   // Init Shared Stage
   sharedStage sharedData;
@@ -40,15 +42,8 @@ int main() {
     glClearColor(0.05f, 0.05f, 0.1f, 1);
     // Clear Display for Rendering
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-    // Init Projection Matrix
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    glOrtho(0.0f, wXRes, wYRes, 0.0f, 1.0f, -1.0f);
-
-    // Init Modelview Matrix
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    // Configure Projection Matrix, adapt to current resolution.
+    initMatrix(wXRes, wYRes);
 
     // TODO: Get New Sim Data
     // TODO: Calculate Display Based on Camera Position and Size.
@@ -69,10 +64,22 @@ int main() {
       fcStartTime = glfwGetTime();
     }
   }
+  // Set Exit Flag
   sharedData.setStatus(1, true);
   // Pause until simInit Exits.
   simThread.join();
   // Keep window open until simThread exits.
   glfwTerminate();
   return 0;
+}
+
+void initMatrix(int lXRes, int lYRes) {
+  // Init Projection Matrix
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  glOrtho(0.0f, lXRes, lYRes, 0.0f, 1.0f, -1.0f);
+
+  // Init Modelview Matrix
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
 }
