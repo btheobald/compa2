@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
+#include <iostream>
 #include <cstdint>
+
 #include "body.hpp"
 using namespace std;
 
@@ -10,9 +12,9 @@ protected:
   vector<body> bodyStore; // List, C++ Std library vector, dynamic array.
 
   // Simulation Physical Constants (Can be modified)
-  double timestep;
-  int itterationsPerFrame;
-  double gravitationalConstant;
+  double UGC;
+  double IDT;
+  int IPF;
 
   bool scenarioChanged = true;
 
@@ -20,13 +22,13 @@ public:
   scenario();
   ~scenario();
 
-  void newBody(body *tempptr);
+  void newBody(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double p_VelX, double p_VelY);
   void delBody(int index);
   void delAllBodies(int index);
   void populateBodyStore(vector<body> tempStore);
   vector<body> returnBodyStore();
 
-  void setUGC(double p_GravConst);
-  void setIDT(double p_Timestep);
-  void setIPF(double p_Timestep);
+  void setUGC(double p_UGC);
+  void setIDT(double p_IDT);
+  void setIPF(int p_IPF);
 };

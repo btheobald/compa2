@@ -7,7 +7,7 @@ private:
   double radius = 1;
   bool fixed = false;
   float color[3] = { 0.0f, 0.0f, 0.0f };
-  
+
   // Simulation Properties     X    Y
   double force[2]         = { 0.0, 0.0 };
   double acceleration[2]  = { 0.0, 0.0 };
@@ -18,10 +18,7 @@ private:
 public:
   // Constructors
   body();
-  body(double p_Mass, double p_Radius, float p_Color[3]);                                           // ID, Mass, Radius, Color 
-  body(double p_Mass, double p_Radius, float p_Color[3], bool p_Fixed, double p_Position[2]);       // ID, Mass, Radius, Colour, Fixed, Position
-  body(double p_Mass, double p_Radius, float p_Color[3], double p_Position[2], double p_Velocity[2]);  // ID, Mass, Radius, Colour, Position, Velocity
-  body(double p_Mass, double p_Radius, double p_Position[2], double p_Velocity[2]);
+  body(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double p_VelX, double p_VelY);
   // Destructor
   ~body();
 
@@ -52,4 +49,3 @@ public:
   int calcHalfVelocity();
   int calcPosition();
 };
-

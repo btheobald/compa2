@@ -1,17 +1,24 @@
 #include <GLFW/glfw3.h>
-//#include "callbacks.h"
 #include <iostream>
 #include <thread>
+
 #include "sharedStage.hpp"
 #include "simEntry.hpp"
+#include "rdr_obj.cpp"
 
 using namespace std;
 
 void initMatrix(int lXRes, int lYRes);
+void setupDefaultScenario(rdr_obj* l_RenderMain);
 
 int main() {
-  // Init Shared Stage
+  // Init Render Scenario and Access Pointer
+  rdr_obj renderMain;
+  rdr_obj* renderMainAccess = &renderMain;
+  // Init Shared Stage and Access Pointer
   sharedStage sharedData;
+  sharedStage* sharedDataAccess = &sharedData;
+  setupDefaultScenario(renderMainAccess);
 
   // Init GLFW
   int wXRes = 960;
@@ -23,6 +30,7 @@ int main() {
   int frameCounter = 0;
 
   // Init GLFW
+  // TODO: Catch Exceptions
   glfwInit();
   echoWindow = glfwCreateWindow(wXRes, wYRes, "Echo", NULL, NULL);
   glfwMakeContextCurrent(echoWindow);
@@ -31,7 +39,7 @@ int main() {
   // TODO: Create Tweakbar and Add Variables?
 
   // Start Sim Thread, Pass SharedData Address
-  thread simThread(simInit, &sharedData);
+  thread simThread(simInit, sharedDataAccess);
   // TODO: Thread Syncup
 
   // Initial Framerate Timer Set
@@ -82,4 +90,13 @@ void initMatrix(int lXRes, int lYRes) {
   // Init Modelview Matrix
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+}
+
+void setupDefaultScenario(rdr_obj* l_RenderMain) {
+  l_RenderMain -> newBody(1000.0, 0.0, 0.0, 0.0, 0.0, 0.0);
+  l_RenderMain -> newBody(1.0, 0.0, 100.0, 0.0, 0.0, 1.001);
+}
+
+void updateSharedArea(rdr_obj* l_RenderMain, sharedStage* l_sharedDataAccess) {
+
 }

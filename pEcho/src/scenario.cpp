@@ -1,25 +1,21 @@
 #include "scenario.hpp"
 
 scenario::scenario() {
-}
 
+}
 
 scenario::~scenario() {
+
 }
 
-
-int scenario::newBody(body *tempptr) {
-  bodyStore.push_back(*tempptr);
-  bodyStore[0].setTimestep(timestep);
-  return 0;
+void scenario::newBody(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double p_VelX, double p_VelY) {
+  bodyStore.push_back(move(body(p_Mass, p_Radius, p_PosX, p_PosY, p_VelX, p_VelY)));
 }
-int scenario::delBody(int index) {
+void scenario::delBody(int index) {
   bodyStore.erase(bodyStore.begin() + index);
-  return 0;
 }
-int scenario::delAllBodies(int index) {
+void scenario::delAllBodies(int index) {
   bodyStore.clear();
-  return 0;
 }
 void scenario::populateBodyStore(vector<body> tempStore) {
   bodyStore = tempStore;
@@ -28,13 +24,12 @@ vector<body> scenario::returnBodyStore() {
   return bodyStore;
 }
 
-
-int scenario::setTimestep(double p_Timestep) {
-  timestep = p_Timestep;
-  return 0;
+void scenario::setUGC(double p_UGC) {
+  UGC = p_UGC;
 }
-
-int scenario::setGravConst(double p_GravConst) {
-  gravitationalConstant = p_GravConst;
-  return 0;
+void scenario::setIDT(double p_IDT) {
+  IDT = p_IDT;
+}
+void scenario::setIPF(int p_IPF) {
+  IPF = p_IPF;
 }

@@ -30,7 +30,7 @@ double sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B, int xy) {
 
   // GMm/(r^3)
   double forceResult;
-  forceResult = gravitationalConstant * bodyStore[bodyID_A].getMass() * bodyStore[bodyID_B].getMass();
+  forceResult = UGC * bodyStore[bodyID_A].getMass() * bodyStore[bodyID_B].getMass();
   forceResult /= pow(distV, 3);
 
   if (xy)
