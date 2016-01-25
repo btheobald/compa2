@@ -39,6 +39,14 @@ public:
   vector<body> returnBodyStore_R();
   vector<body> returnBodyStore_S();
 
+  void setSimUGC(double var);
+  void setSimIDT(double var);
+  void setSimIPF(int var);
+
+  double getSimUGC();
+  double getSimIDT();
+  int getSimIPF();
+
   // 0 :: Pause, 1 :: Exit, 2 :: ExitAck
   void setStatus(bool set, int var);
   bool getStatus(int var);

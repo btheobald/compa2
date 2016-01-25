@@ -13,8 +13,8 @@ void simInit(sharedStage* sharedDataAccess) {
   sim_obj simMain;
 
   // Set Initial Simulation Constants
-  simMain.setTimestep(0.01);
-  simMain.setGravConst(0.1);
+  simMain.setTimestep(sharedDataAccess -> getSimIDT());
+  simMain.setGravConst(sharedDataAccess -> getSimUGC());
 
   vector<body> ifcBodyStore; // Simulation Interface Body Store (Scope)
 
