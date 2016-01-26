@@ -5,11 +5,13 @@
 #include "sharedStage.hpp"
 #include "simEntry.hpp"
 #include "rdr_obj.cpp"
+#include <AntTweakBar.h>
 
 using namespace std;
 
 void initMatrix(int lXRes, int lYRes);
 void setupDefaultScenario(rdr_obj* l_RenderMain);
+void updateSharedArea(rdr_obj* l_RenderMain, sharedStage* l_sharedDataAccess);
 
 int main() {
   // Init Render Scenario and Access Pointer
@@ -19,6 +21,7 @@ int main() {
   sharedStage sharedData;
   sharedStage* sharedDataAccess = &sharedData;
   setupDefaultScenario(renderMainAccess);
+  updateSharedArea(renderMainAccess, sharedDataAccess);
 
   // Init GLFW
   int wXRes = 960;
@@ -30,13 +33,16 @@ int main() {
   int frameCounter = 0;
 
   // Init GLFW
-  // TODO: Catch Exceptions
   glfwInit();
   echoWindow = glfwCreateWindow(wXRes, wYRes, "Echo", NULL, NULL);
   glfwMakeContextCurrent(echoWindow);
 
-  // TODO: Init AntTweakBar
-  // TODO: Create Tweakbar and Add Variables?
+  // Init AntTweakBar
+  TwBar *test;
+  TwInit(TW_OPENGL, NULL);
+  TwWindowSize(wXRes, wYRes);
+  test = TwNewBar("Test");
+
 
   // Start Sim Thread, Pass SharedData Address
   thread simThread(simInit, sharedDataAccess);
@@ -57,6 +63,9 @@ int main() {
     // TODO: Calculate Display Based on Camera Position and Size.
     // TODO: Render Here
 
+
+    // Draw Tweak Bars
+    TwDraw();
     // Swap Render / Draw Buffers
     glfwSwapBuffers(echoWindow);
     // TODO: Poll Input Events
@@ -98,5 +107,5 @@ void setupDefaultScenario(rdr_obj* l_RenderMain) {
 }
 
 void updateSharedArea(rdr_obj* l_RenderMain, sharedStage* l_sharedDataAccess) {
-
+  l_sharedDataAccess -> populateBodyStore_R(l_RenderMain -> returnBodyStore());
 }

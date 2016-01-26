@@ -10,18 +10,19 @@ LINKER = $(CXX) -o
 INCLUDE_DIR = include
 SOURCE_DIR  = src
 BINARY_DIR  = bin
+LIB_DIR     = lib
 
 SOURCES    := $(wildcard $(SOURCE_DIR)/*.cpp)
 INCLUDES   := $(wildcard $(INCLUDE_DIR)/*.hpp)
 OBJECTS    := $(SOURCES:$(SOURCE_DIR)/%.cpp=$(BINARY_DIR)/%.o)
 
 # Libraries
-LIBS  = `pkg-config --static --libs glfw3`
+LIBS  = `pkg-config --static --libs glfw3` -lAntTweakBar
 # Debugger
 DB    = gdb
 DBOPT =
 # Compiler Flags
-CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) -D__NO_INLINE__ -g `pkg-config --cflags glfw3`
+CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) -D__NO_INLINE__ `pkg-config --cflags glfw3` -g
 # Linker Flags
 LFLAGS = -Wall $(LIBS)
 
