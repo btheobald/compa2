@@ -20,6 +20,10 @@ private:
   bool exit; // Exit Signal
   bool exitAck; // Simulation Acknowleges Exit
 
+  // Flow Control
+  bool newRenderData
+  bool newSimData
+
   // Mutex Lock Objects
   mutex bStoreR_Lock;
   mutex bStoreS_Lock;

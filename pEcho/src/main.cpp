@@ -12,6 +12,7 @@ using namespace std;
 void initMatrix(int lXRes, int lYRes);
 void setupDefaultScenario(rdr_obj* l_RenderMain);
 void updateSharedArea(rdr_obj* l_RenderMain, sharedStage* l_sharedDataAccess);
+void updateLocalStore(sharedStage* l_sharedDataAccess, rdr_obj* l_RenderMain);
 
 int main() {
   // Init Render Scenario and Access Pointer
@@ -45,8 +46,6 @@ int main() {
 
   // Start Sim Thread, Pass SharedData Address
   thread simThread(simInit, sharedDataAccess);
-  // TODO: Thread Syncup
-
 
   // Initial Framerate Timer Set
   fcStartTime = glfwGetTime();
@@ -79,6 +78,8 @@ int main() {
       frameCounter = 0;
       fcStartTime = glfwGetTime();
     }
+
+    updateLocalStore(sharedDataAccess, renderMainAccess);
   }
   // Set Exit Flag
   sharedData.setStatus(1, true);
@@ -119,4 +120,11 @@ void updateSharedArea(rdr_obj* l_RenderMain, sharedStage* l_sharedDataAccess) {
   l_sharedDataAccess -> setIPF(l_RenderMain -> getIPF());
   // Unpause Sim
   l_sharedDataAccess -> setStatus(0, false);
+  cout << "Push New : Main" << endl;
+}
+
+void updateLocalStore(sharedStage* l_sharedDataAccess, rdr_obj* l_RenderMain) {
+  // Push Body Data To Shared
+  l_RenderMain -> populateBodyStore(l_sharedDataAccess -> returnBodyStore_S());
+  cout << "Get New : Main" << endl;
 }

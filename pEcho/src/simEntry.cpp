@@ -16,6 +16,7 @@ void simInit(sharedStage* sharedDataAccess) {
 
   // Get Body Data from shared
   simMain.populateBodyStore(sharedDataAccess -> returnBodyStore_R());
+  cout << "Get New : Sim" << endl;
 
   while (!(sharedDataAccess -> getStatus(1))) {
     // Update Simulation Control
@@ -31,6 +32,7 @@ void simInit(sharedStage* sharedDataAccess) {
     }
 
     sharedDataAccess -> populateBodyStore_S(simMainAccess -> returnBodyStore());
+    cout << "Push New : Sim" << endl;
   }
 
   cerr << "Sim Exit" << endl;
