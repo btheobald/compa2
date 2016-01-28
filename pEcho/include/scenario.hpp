@@ -27,8 +27,13 @@ public:
   void delAllBodies(int index);
   void populateBodyStore(vector<body> tempStore);
   vector<body> returnBodyStore();
+  void printNumberBodies();
 
   void setUGC(double p_UGC);
   void setIDT(double p_IDT);
   void setIPF(int p_IPF);
+
+  double getUGC();
+  double getIDT();
+  int getIPF();
 };

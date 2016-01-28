@@ -11,9 +11,9 @@ private:
   vector<body> bodyStore_S;
 
   // Simulation Control
-  double simUGC; // Simulation Universal Gravitational Constant
-  double simIDT; // Simulation Itteration Delta Time
-  int simIPF;    // Simulation Itterations per Render Frame
+  double UGC; // Simulation Universal Gravitational Constant
+  double IDT; // Simulation Itteration Delta Time
+  int IPF;    // Simulation Itterations per Render Frame
 
   // Runtime Control
   bool pause; // Pause Signal
@@ -23,9 +23,9 @@ private:
   // Mutex Lock Objects
   mutex bStoreR_Lock;
   mutex bStoreS_Lock;
-  mutex simUGC_Lock;
-  mutex simIDT_Lock;
-  mutex simIPF_Lock;
+  mutex UGC_Lock;
+  mutex IDT_Lock;
+  mutex IPF_Lock;
   mutex pause_Lock;
   mutex exit_Lock;
   mutex exitAck_Lock;
@@ -39,13 +39,13 @@ public:
   vector<body> returnBodyStore_R();
   vector<body> returnBodyStore_S();
 
-  void setSimUGC(double var);
-  void setSimIDT(double var);
-  void setSimIPF(int var);
+  void setUGC(double var);
+  void setIDT(double var);
+  void setIPF(int var);
 
-  double getSimUGC();
-  double getSimIDT();
-  int getSimIPF();
+  double getUGC();
+  double getIDT();
+  int getIPF();
 
   // 0 :: Pause, 1 :: Exit, 2 :: ExitAck
   void setStatus(bool set, int var);

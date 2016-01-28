@@ -23,6 +23,9 @@ void scenario::populateBodyStore(vector<body> tempStore) {
 vector<body> scenario::returnBodyStore() {
   return bodyStore;
 }
+void scenario::printNumberBodies() {
+  cout << bodyStore.size() << endl;
+}
 
 void scenario::setUGC(double p_UGC) {
   UGC = p_UGC;
@@ -32,4 +35,14 @@ void scenario::setIDT(double p_IDT) {
 }
 void scenario::setIPF(int p_IPF) {
   IPF = p_IPF;
+}
+
+double scenario::getUGC() {
+  return UGC;
+}
+double scenario::getIDT() {
+  return IDT;
+}
+int scenario::getIPF() {
+  return IPF;
 }

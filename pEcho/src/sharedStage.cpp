@@ -37,43 +37,43 @@ vector<body> sharedStage::returnBodyStore_S() {
   return bodyStore_S;
 }
 
-void sharedStage::setSimUGC(double var) {
-  simUGC_Lock.lock();
-  simUGC = var;
-  simUGC_Lock.unlock();
+void sharedStage::setUGC(double var) {
+  UGC_Lock.lock();
+  UGC = var;
+  UGC_Lock.unlock();
 }
-void sharedStage::setSimIDT(double var) {
-  simIDT_Lock.lock();
-  simIDT = var;
-  simIDT_Lock.unlock();
+void sharedStage::setIDT(double var) {
+  IDT_Lock.lock();
+  IDT = var;
+  IDT_Lock.unlock();
 }
-void sharedStage::setSimIPF(int var) {
-  simIPF_Lock.lock();
-  simIPF = var;
-  simIPF_Lock.lock();
+void sharedStage::setIPF(int var) {
+  IPF_Lock.lock();
+  IPF = var;
+  IPF_Lock.unlock();
 }
 
-double sharedStage::getSimUGC() {
+double sharedStage::getUGC() {
   double tempStore;
-  simUGC_Lock.lock();
-  tempStore = simUGC;
-  simUGC_Lock.unlock();
+  UGC_Lock.lock();
+  tempStore = UGC;
+  UGC_Lock.unlock();
 
   return tempStore;
 }
-double sharedStage::getSimIDT() {
+double sharedStage::getIDT() {
   double tempStore;
-  simIDT_Lock.lock();
-  tempStore = simIDT;
-  simIDT_Lock.unlock();
+  IDT_Lock.lock();
+  tempStore = IDT;
+  IDT_Lock.unlock();
 
   return tempStore;
 }
-int sharedStage::getSimIPF() {
+int sharedStage::getIPF() {
   int tempStore;
-  simIPF_Lock.lock();
-  tempStore = simIPF;
-  simIPF_Lock.unlock();
+  IPF_Lock.lock();
+  tempStore = IPF;
+  IPF_Lock.unlock();
 
   return tempStore;
 }

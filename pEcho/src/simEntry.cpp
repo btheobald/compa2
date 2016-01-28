@@ -10,22 +10,27 @@
 using namespace std;
 
 void simInit(sharedStage* sharedDataAccess) {
-  // Init Scenario
+  // Init Scenario and Access Pointer
   sim_obj simMain;
+  sim_obj* simMainAccess = &simMain;
 
   // Get Body Data from shared
   simMain.populateBodyStore(sharedDataAccess -> returnBodyStore_R());
 
   while (!(sharedDataAccess -> getStatus(1))) {
-    // Update Simulation Constants
-    simMain.setIDT(sharedDataAccess -> getSimIDT());
-    simMain.setUGC(sharedDataAccess -> getSimUGC());
+    // Update Simulation Control
+    simMainAccess -> setUGC(sharedDataAccess -> getUGC());
+    simMainAccess -> setIDT(sharedDataAccess -> getIDT());
+    simMainAccess -> setIPF(sharedDataAccess -> getIPF());
 
-    // TODO: Check for interface updates
-    // TODO: Check if new sim frame required
-    // TODO: Mass Update Body Store
+    // Check If Paused
+    if(!(sharedDataAccess -> getStatus(0))) {
+      for(int icnt = 0; icnt < (simMainAccess -> getIPF()); icnt++) {
+        simMain.itteration();
+      }
+    }
 
-    simMain.itteration();
+    sharedDataAccess -> populateBodyStore_S(simMainAccess -> returnBodyStore());
   }
 
   cerr << "Sim Exit" << endl;

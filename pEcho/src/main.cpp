@@ -43,10 +43,10 @@ int main() {
   TwWindowSize(wXRes, wYRes);
   test = TwNewBar("Test");
 
-
   // Start Sim Thread, Pass SharedData Address
   thread simThread(simInit, sharedDataAccess);
   // TODO: Thread Syncup
+
 
   // Initial Framerate Timer Set
   fcStartTime = glfwGetTime();
@@ -62,7 +62,6 @@ int main() {
     // TODO: Get New Sim Data
     // TODO: Calculate Display Based on Camera Position and Size.
     // TODO: Render Here
-
 
     // Draw Tweak Bars
     TwDraw();
@@ -102,10 +101,22 @@ void initMatrix(int lXRes, int lYRes) {
 }
 
 void setupDefaultScenario(rdr_obj* l_RenderMain) {
+  // Bodies
   l_RenderMain -> newBody(1000.0, 0.0, 0.0, 0.0, 0.0, 0.0);
   l_RenderMain -> newBody(1.0, 0.0, 100.0, 0.0, 0.0, 1.001);
+  // Simulation Control
+  l_RenderMain -> setUGC(0.1);
+  l_RenderMain -> setIDT(0.001);
+  l_RenderMain -> setIPF(100);
 }
 
 void updateSharedArea(rdr_obj* l_RenderMain, sharedStage* l_sharedDataAccess) {
+  // Push Body Data To Shared
   l_sharedDataAccess -> populateBodyStore_R(l_RenderMain -> returnBodyStore());
+  // Push Simulation Control To Shared
+  l_sharedDataAccess -> setUGC(l_RenderMain -> getUGC());
+  l_sharedDataAccess -> setIDT(l_RenderMain -> getIDT());
+  l_sharedDataAccess -> setIPF(l_RenderMain -> getIPF());
+  // Unpause Sim
+  l_sharedDataAccess -> setStatus(0, false);
 }
