@@ -10,31 +10,61 @@ sharedStage::~sharedStage(){
 }
 
 void sharedStage::populateBodyStore_R(vector<body> p_BodyStore) {
-  bStoreR_Lock.lock();
-  bodyStore_R = p_BodyStore;
-  bStoreR_Lock.unlock();
+  newRS_Lock.lock();
+  if(newRScenario == false) {
+    bStoreR_Lock.lock();
+    bodyStore_R = p_BodyStore;
+    bStoreR_Lock.unlock();
+
+    newRScenario = true;
+
+    cerr << "Render > Share" << endl;
+  }
+  newRS_Lock.unlock();
 }
 
 void sharedStage::populateBodyStore_S(vector<body> p_BodyStore) {
-  bStoreS_Lock.lock();
-  bodyStore_S = p_BodyStore;
-  bStoreS_Lock.unlock();
+  newSS_Lock.lock();
+  if(newSScenario == false) {
+    bStoreS_Lock.lock();
+    bodyStore_S = p_BodyStore;
+    bStoreS_Lock.unlock();
+
+    newSScenario = true;
+
+    cerr << "Sim > Share" << endl;
+  }
+  newSS_Lock.unlock();
 }
 
 vector<body> sharedStage::returnBodyStore_R() {
+  vector<body> tempStore;
+  newRS_Lock.lock();
   bStoreR_Lock.lock();
-  vector<body> tempStore = bodyStore_R;
+  tempStore = bodyStore_R;
   bStoreR_Lock.unlock();
 
+  newRScenario = false;
+
+  cerr << "Share > Sim" << endl;
+
+  newRS_Lock.unlock();
   return tempStore;
 }
 
 vector<body> sharedStage::returnBodyStore_S() {
+  vector<body> tempStore;
+  newSS_Lock.lock();
   bStoreS_Lock.lock();
-  vector<body> tempStore = bodyStore_S;
+  tempStore = bodyStore_S;
   bStoreS_Lock.unlock();
 
-  return bodyStore_S;
+  newSScenario = false;
+
+  cerr << "Share > Render" << endl;
+
+  newSS_Lock.unlock();
+  return tempStore;
 }
 
 void sharedStage::setUGC(double var) {
@@ -75,6 +105,22 @@ int sharedStage::getIPF() {
   tempStore = IPF;
   IPF_Lock.unlock();
 
+  return tempStore;
+}
+
+bool sharedStage::newRScenarioCheck() {
+  bool tempStore;
+  newRS_Lock.lock();
+  tempStore = newRScenario;
+  newRS_Lock.unlock();
+  return tempStore;
+}
+
+bool sharedStage::newSScenarioCheck() {
+  bool tempStore;
+  newSS_Lock.lock();
+  tempStore = newSScenario;
+  newSS_Lock.unlock();
   return tempStore;
 }
 

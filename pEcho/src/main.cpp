@@ -108,7 +108,7 @@ void setupDefaultScenario(rdr_obj* l_RenderMain) {
   // Simulation Control
   l_RenderMain -> setUGC(0.1);
   l_RenderMain -> setIDT(0.001);
-  l_RenderMain -> setIPF(100);
+  l_RenderMain -> setIPF(1000);
 }
 
 void updateSharedArea(rdr_obj* l_RenderMain, sharedStage* l_sharedDataAccess) {
@@ -120,11 +120,12 @@ void updateSharedArea(rdr_obj* l_RenderMain, sharedStage* l_sharedDataAccess) {
   l_sharedDataAccess -> setIPF(l_RenderMain -> getIPF());
   // Unpause Sim
   l_sharedDataAccess -> setStatus(0, false);
-  cout << "Push New : Main" << endl;
 }
 
 void updateLocalStore(sharedStage* l_sharedDataAccess, rdr_obj* l_RenderMain) {
   // Push Body Data To Shared
-  l_RenderMain -> populateBodyStore(l_sharedDataAccess -> returnBodyStore_S());
-  cout << "Get New : Main" << endl;
+  if(l_sharedDataAccess -> newSScenarioCheck()) {
+    l_RenderMain -> populateBodyStore(l_sharedDataAccess -> returnBodyStore_S());
+    l_sharedDataAccess -> simWait.notify_all();
+  }
 }

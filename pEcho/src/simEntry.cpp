@@ -4,8 +4,6 @@
 *| Author: Byron Theobald
 */
 
-#include <iostream>
-#include <vector>
 #include "simEntry.hpp"
 using namespace std;
 
@@ -31,8 +29,11 @@ void simInit(sharedStage* sharedDataAccess) {
       }
     }
 
+    if(sharedDataAccess -> newSScenarioCheck()) {
+      unique_lock<mutex> uniqueSimWaitMTX(simWaitMTX); // Unique Lock ensures that mutex will be unlocked on destruction.
+      sharedDataAccess -> simWait.wait(uniqueSimWaitMTX); // Wait for data to be taken.
+    }
     sharedDataAccess -> populateBodyStore_S(simMainAccess -> returnBodyStore());
-    cout << "Push New : Sim" << endl;
   }
 
   cerr << "Sim Exit" << endl;

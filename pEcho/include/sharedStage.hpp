@@ -1,6 +1,8 @@
 #pragma once
 #include <vector>
+#include <iostream>
 #include <mutex>
+#include <condition_variable>
 #include "body.hpp"
 using namespace std;
 
@@ -21,8 +23,8 @@ private:
   bool exitAck;   // Simulation Acknowleges Exit
 
   // Flow Control
-  bool newRDSet;  // New Render Data Set
-  bool newSDSet;  // New Sim Data Set
+  bool newRScenario;  // New Render Data Set
+  bool newSScenario;  // New Sim Data Set
 
   // Mutex Lock Objects
   mutex bStoreR_Lock;
@@ -33,8 +35,11 @@ private:
   mutex pause_Lock;
   mutex exit_Lock;
   mutex exitAck_Lock;
+  mutex newRS_Lock;
+  mutex newSS_Lock;
 
 public:
+
   sharedStage();
   ~sharedStage();
 
@@ -50,6 +55,11 @@ public:
   double getUGC();
   double getIDT();
   int getIPF();
+
+  bool newRScenarioCheck();
+  bool newSScenarioCheck();
+
+  condition_variable simWait;
 
   // 0 :: Pause, 1 :: Exit, 2 :: ExitAck
   void setStatus(bool set, int var);
