@@ -11,18 +11,18 @@ private:
   vector<body> bodyStore_S;
 
   // Simulation Control
-  double UGC; // Simulation Universal Gravitational Constant
-  double IDT; // Simulation Itteration Delta Time
-  int IPF;    // Simulation Itterations per Render Frame
+  double UGC;     // Simulation Universal Gravitational Constant
+  double IDT;     // Simulation Itteration Delta Time
+  int IPF;        // Simulation Itterations per Render Frame
 
   // Runtime Control
-  bool pause; // Pause Signal
-  bool exit; // Exit Signal
-  bool exitAck; // Simulation Acknowleges Exit
+  bool pause;     // Pause Signal
+  bool exit;      // Exit Signal
+  bool exitAck;   // Simulation Acknowleges Exit
 
   // Flow Control
-  bool newRenderData
-  bool newSimData
+  bool newRDSet;  // New Render Data Set
+  bool newSDSet;  // New Sim Data Set
 
   // Mutex Lock Objects
   mutex bStoreR_Lock;
