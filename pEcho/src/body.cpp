@@ -29,9 +29,6 @@ body::body(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double 
 body::~body() {
 }
 
-// Same for all objects
-double body::timestep;
-
 // Used in Interface
 double body::getMass(void) {
   return mass;
@@ -96,10 +93,7 @@ int body::resetForce() {
   force[1] = 0;
   return 0;
 }
-int body::setTimestep(double p_Timestep) {
-  timestep = p_Timestep;
-  return 0;
-}
+
 int body::calcAcceleration() {
   for (int xy = 0; xy < 2; xy++) {
     acceleration[xy] = force[xy] / mass;
@@ -107,13 +101,13 @@ int body::calcAcceleration() {
   return 0;
   return 0;
 }
-int body::calcHalfVelocity() {
+int body::calcHalfVelocity(double timestep) {
   for (int xy = 0; xy < 2; xy++) {
     velocity[xy] += acceleration[xy] * (timestep * 0.5);
   }
   return 0;
 }
-int body::calcPosition() {
+int body::calcPosition(double timestep) {
   for (int xy = 0; xy < 2; xy++) {
     position[xy] += velocity[xy] * timestep;
   }

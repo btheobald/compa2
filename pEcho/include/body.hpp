@@ -13,7 +13,6 @@ private:
   double acceleration[2]  = { 0.0, 0.0 };
   double velocity[2]      = { 0.0, 0.0 };
   double position[2]      = { 0.0, 0.0 };
-  static double timestep;
 
 public:
   // Constructors
@@ -42,10 +41,9 @@ public:
   int setAcceleration(double p_Acceleration, int xyIndex);
   int setVelocity(double p_Velocity, int xyIndex);
   int setPosition(double p_Position, int xyIndex);
-  int setTimestep(double p_Timestep);
 
   // Calculate and Set (Returns OK/FAIL [0/1])
   int calcAcceleration();
-  int calcHalfVelocity();
-  int calcPosition();
+  int calcHalfVelocity(double timestep);
+  int calcPosition(double timestep);
 };

@@ -8,7 +8,5 @@
 #include <condition_variable>
 #include <mutex>
 
-mutex simWaitMTX;
-
 // Initial Simulation Thread Call
 void simInit(sharedStage* sharedDataAccess);

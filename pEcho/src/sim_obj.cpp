@@ -94,7 +94,7 @@ int sim_obj::calcAcceleraitonAB() {
 
 int sim_obj::calcHalfVelocityAB() {
   for (unsigned int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
-    bodyStore[bodyIDC].calcHalfVelocity();
+    bodyStore[bodyIDC].calcHalfVelocity(IDT);
     //cout << bodyIDC << " : " << bodyStore[bodyIDC].getVelocity(0) << ", " << bodyStore[bodyIDC].getVelocity(1) << endl;
   }
   return 0;
@@ -102,7 +102,7 @@ int sim_obj::calcHalfVelocityAB() {
 
 int sim_obj::calcPositionAB() {
   for (unsigned int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
-    bodyStore[bodyIDC].calcPosition();
+    bodyStore[bodyIDC].calcPosition(IDT);
   }
   return 0;
 }
@@ -134,31 +134,7 @@ int sim_obj::itteration() {
   // Calculate New Velocity
   calcHalfVelocityAB();
 
+  //cout << bodyStore[1].getPosition(0) << " " << bodyStore[1].getPosition(1) << endl;
+
   return 0;
 }
-
-#ifdef OUTPUT
-void sim_obj::outputStore(int itteration) {
-  //if (itteration % 1000 == 0) {
-    //cerr << itteration;
-    // Store Body Position Data in Array.
-    for(unsigned int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
-      for(unsigned int bodyXY = 0; bodyXY < 2; bodyXY++) {
-        outputData[itteration][bodyIDC][bodyXY] = bodyStore[bodyIDC].getPosition(bodyXY);
-      }
-    }
-  //}
-}
-
-// Output Position Array to Output Stream.
-void sim_obj::outputToTerm() {
-  for (int i = 0; i < ITTERATIONS; i++) {
-    for (int bodyIDC = 0; bodyIDC < 3; bodyIDC++) {
-      for (int bodyXY = 0; bodyXY < 2; bodyXY++) {
-        cout << outputData[i][bodyIDC][bodyXY] << " ";
-      }
-    }
-    cout << endl;
-  }
-}
-#endif

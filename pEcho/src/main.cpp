@@ -4,7 +4,7 @@
 
 #include "sharedStage.hpp"
 #include "simEntry.hpp"
-#include "rdr_obj.cpp"
+#include "rdr_obj.hpp"
 #include <AntTweakBar.h>
 
 using namespace std;
@@ -61,6 +61,14 @@ int main() {
     // TODO: Get New Sim Data
     // TODO: Calculate Display Based on Camera Position and Size.
     // TODO: Render Here
+    renderMainAccess -> drawBody(0);
+    renderMainAccess -> drawBody(1);
+    renderMainAccess -> drawBody(2);
+    renderMainAccess -> drawBody(3);
+    renderMainAccess -> drawBody(4);
+    renderMainAccess -> drawBody(5);
+    renderMainAccess -> drawBody(6);
+    renderMainAccess -> drawBody(7);
 
     // Draw Tweak Bars
     TwDraw();
@@ -94,7 +102,7 @@ void initMatrix(int lXRes, int lYRes) {
   // Init Projection Matrix
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
-  glOrtho(0.0f, lXRes, lYRes, 0.0f, 1.0f, -1.0f);
+  glOrtho(-lXRes/2, lXRes/2, -lYRes/2, lYRes/2, 1.0f, -1.0f);
 
   // Init Modelview Matrix
   glMatrixMode(GL_MODELVIEW);
@@ -103,8 +111,14 @@ void initMatrix(int lXRes, int lYRes) {
 
 void setupDefaultScenario(rdr_obj* l_RenderMain) {
   // Bodies
-  l_RenderMain -> newBody(1000.0, 0.0, 0.0, 0.0, 0.0, 0.0);
-  l_RenderMain -> newBody(1.0, 0.0, 100.0, 0.0, 0.0, 1.001);
+  l_RenderMain -> newBody(1000.0, 5.0, 0.0, 0.0, 0.0, 0.0);
+  l_RenderMain -> newBody(1.0, 3.0, 80.0, 0.0, 0.0, 1.00);
+  l_RenderMain -> newBody(1.0, 3.0, 62.0, 20.0, 0.0, 1.00);
+  l_RenderMain -> newBody(1.0, 3.0, -42.0, 56.0, 0.0, -1.00);
+  l_RenderMain -> newBody(1.0, 3.0, -23.0, -30.0, 0.0, 2.00);
+  l_RenderMain -> newBody(1.0, 3.0, 23.0, -10.0, 0.0, 2.00);
+  l_RenderMain -> newBody(1.0, 3.0, 13.0, -55.0, 0.0, 1.00);
+  l_RenderMain -> newBody(1.0, 3.0, 50.0, -20.0, 0.0, 1.00);
   // Simulation Control
   l_RenderMain -> setUGC(0.1);
   l_RenderMain -> setIDT(0.001);

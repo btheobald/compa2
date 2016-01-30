@@ -18,7 +18,7 @@ void sharedStage::populateBodyStore_R(vector<body> p_BodyStore) {
 
     newRScenario = true;
 
-    cerr << "Render > Share" << endl;
+    //cerr << "Render > Share" << endl;
   }
   newRS_Lock.unlock();
 }
@@ -32,7 +32,7 @@ void sharedStage::populateBodyStore_S(vector<body> p_BodyStore) {
 
     newSScenario = true;
 
-    cerr << "Sim > Share" << endl;
+    //cerr << "Sim > Share" << endl;
   }
   newSS_Lock.unlock();
 }
@@ -46,7 +46,7 @@ vector<body> sharedStage::returnBodyStore_R() {
 
   newRScenario = false;
 
-  cerr << "Share > Sim" << endl;
+  //cerr << "Share > Sim" << endl;
 
   newRS_Lock.unlock();
   return tempStore;
@@ -61,7 +61,7 @@ vector<body> sharedStage::returnBodyStore_S() {
 
   newSScenario = false;
 
-  cerr << "Share > Render" << endl;
+  //cerr << "Share > Render" << endl;
 
   newSS_Lock.unlock();
   return tempStore;

@@ -8,6 +8,8 @@
 using namespace std;
 
 void simInit(sharedStage* sharedDataAccess) {
+  // Sim Wait Control Mutex
+  mutex simWaitMTX;
   // Init Scenario and Access Pointer
   sim_obj simMain;
   sim_obj* simMainAccess = &simMain;
