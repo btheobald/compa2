@@ -25,6 +25,17 @@ body::body(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double 
   velocity[1] = p_VelY;
 }
 
+body::body(double p_PosX, double p_PosY) {
+  mass = 100;
+  radius = 1;
+  // Set Position
+  position[0] = p_PosX;
+  position[1] = p_PosY;
+  // Set Velocity
+  velocity[0] = 0;
+  velocity[1] = 0;
+}
+
 // Destructor
 body::~body() {
 }

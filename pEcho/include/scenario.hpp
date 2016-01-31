@@ -23,6 +23,7 @@ public:
   ~scenario();
 
   void newBody(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double p_VelX, double p_VelY);
+  void newBody(double p_PosX, double p_PosY);
   void delBody(int index);
   void delAllBodies(int index);
   void populateBodyStore(vector<body> tempStore);

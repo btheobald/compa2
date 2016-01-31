@@ -1,6 +1,7 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <thread>
+#include <stdlib.h>
 
 #include "sharedStage.hpp"
 #include "simEntry.hpp"
@@ -15,6 +16,8 @@ void updateSharedArea(rdr_obj* l_RenderMain, sharedStage* l_sharedDataAccess);
 void updateLocalStore(sharedStage* l_sharedDataAccess, rdr_obj* l_RenderMain);
 
 int main() {
+  srand(1325126247);
+
   // Init Render Scenario and Access Pointer
   rdr_obj renderMain;
   rdr_obj* renderMainAccess = &renderMain;
@@ -60,15 +63,9 @@ int main() {
 
     // TODO: Get New Sim Data
     // TODO: Calculate Display Based on Camera Position and Size.
-    // TODO: Render Here
-    renderMainAccess -> drawBody(0);
-    renderMainAccess -> drawBody(1);
-    renderMainAccess -> drawBody(2);
-    renderMainAccess -> drawBody(3);
-    renderMainAccess -> drawBody(4);
-    renderMainAccess -> drawBody(5);
-    renderMainAccess -> drawBody(6);
-    renderMainAccess -> drawBody(7);
+    for(int bIDC = 0; bIDC < 700; bIDC++) {
+      renderMainAccess->drawBody(bIDC);
+    }
 
     // Draw Tweak Bars
     TwDraw();
@@ -111,18 +108,18 @@ void initMatrix(int lXRes, int lYRes) {
 
 void setupDefaultScenario(rdr_obj* l_RenderMain) {
   // Bodies
-  l_RenderMain -> newBody(1000.0, 5.0, 0.0, 0.0, 0.0, 0.0);
-  l_RenderMain -> newBody(1.0, 3.0, 80.0, 0.0, 0.0, 1.00);
-  l_RenderMain -> newBody(1.0, 3.0, 62.0, 20.0, 0.0, 1.00);
-  l_RenderMain -> newBody(1.0, 3.0, -42.0, 56.0, 0.0, -1.00);
-  l_RenderMain -> newBody(1.0, 3.0, -23.0, -30.0, 0.0, 2.00);
-  l_RenderMain -> newBody(1.0, 3.0, 23.0, -10.0, 0.0, 2.00);
-  l_RenderMain -> newBody(1.0, 3.0, 13.0, -55.0, 0.0, 1.00);
-  l_RenderMain -> newBody(1.0, 3.0, 50.0, -20.0, 0.0, 1.00);
+  double tempPosX, tempPosY;
+  for(int bIDC = 0; bIDC < 700; bIDC++) {
+    tempPosX = ((double)(rand() % 900)-450)+(((double)(rand() % 200)-100)/100);
+    tempPosY = ((double)(rand() % 900)-450)+(((double)(rand() % 200)-100)/100);
+
+    l_RenderMain -> newBody(10, 1, tempPosX, tempPosY, -tempPosX/100, -tempPosY/100);
+  }
+
   // Simulation Control
-  l_RenderMain -> setUGC(0.1);
-  l_RenderMain -> setIDT(0.001);
-  l_RenderMain -> setIPF(1000);
+  l_RenderMain -> setUGC(1);
+  l_RenderMain -> setIDT(0.1);
+  l_RenderMain -> setIPF(1);
 }
 
 void updateSharedArea(rdr_obj* l_RenderMain, sharedStage* l_sharedDataAccess) {

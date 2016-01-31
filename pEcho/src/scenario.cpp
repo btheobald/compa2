@@ -11,6 +11,9 @@ scenario::~scenario() {
 void scenario::newBody(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double p_VelX, double p_VelY) {
   bodyStore.push_back(move(body(p_Mass, p_Radius, p_PosX, p_PosY, p_VelX, p_VelY)));
 }
+void scenario::newBody(double p_PosX, double p_PosY) {
+  bodyStore.push_back(move(body(p_PosX, p_PosY)));
+}
 void scenario::delBody(int index) {
   bodyStore.erase(bodyStore.begin() + index);
 }
