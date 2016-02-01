@@ -1,8 +1,9 @@
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <thread>
-#include <stdlib.h>
+#include <cstdlib>
 #include <cmath>
+#include <ctime>
 
 #include "sharedStage.hpp"
 #include "simEntry.hpp"
@@ -17,7 +18,7 @@ void updateSharedArea(rdr_obj* l_RenderMain, sharedStage* l_sharedDataAccess);
 void updateLocalStore(sharedStage* l_sharedDataAccess, rdr_obj* l_RenderMain);
 
 int main() {
-  srand(1325126247);
+  srand(time(NULL));
 
   // Init Render Scenario and Access Pointer
   rdr_obj renderMain;
@@ -65,7 +66,7 @@ int main() {
 
     // TODO: Get New Sim Data
     // TODO: Calculate Display Based on Camera Position and Size.
-    for(int bIDC = 0; bIDC < 2; bIDC++) {
+    for(int bIDC = 0; bIDC < 801; bIDC++) {
       renderMainAccess->drawBody(bIDC);
     }
 
@@ -109,27 +110,22 @@ void initMatrix(int lXRes, int lYRes) {
 }
 
 void setupDefaultScenario(rdr_obj* l_RenderMain) {
-  // Bodies
-  //double tempPosX, tempPosY;
-  l_RenderMain -> newBody(100000, 5, 0, 0, 0, 0);
-  /*for(int bIDC = 0; bIDC < 700; bIDC++) {
-    tempPosX = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
-    tempPosY = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
-    //sqrt(101/tempPosY)/100
-    l_RenderMain -> newBody(0.1, 1, tempPosX, tempPosY, copysign(sqrt(3000/fabs(tempPosY)), -tempPosY), copysign(sqrt(3000/fabs(tempPosX)), tempPosX));
-  }*/
-  
-  double posX = 50;
-  double posY = 50;
-  double velX = sqrt((0.1*100000) / (70*70*70)) * -posX;
-  double velY = sqrt((0.1*100000) / (70*70*70)) * posY;
-
-  l_RenderMain -> newBody(0.1, 1, posX, posY, velX, velY);
-
   // Simulation Control
   l_RenderMain -> setUGC(0.1);
   l_RenderMain -> setIDT(0.1);
   l_RenderMain -> setIPF(1);
+
+  // Bodies
+  double tempPosX, tempPosY, tempDist, tempVelX, tempVelY;
+  l_RenderMain -> newBody(100000, 5, 0, 0, 0, 0);
+  for(int bIDC = 0; bIDC < 800; bIDC++) {
+    tempPosX = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
+    tempPosY = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
+    tempDist = sqrt(pow(tempPosX,2) + pow(tempPosY,2));
+    tempVelY = copysign(sqrt((l_RenderMain->getUGC()*100000) / pow(tempDist,3)) * tempPosY, tempPosX);
+    tempVelX = copysign(sqrt((l_RenderMain->getUGC()*100000) / pow(tempDist,3)) * tempPosX, -tempPosY);
+    l_RenderMain -> newBody(0.1, 1, tempPosX, tempPosY, tempVelX, tempVelY);
+  }
 }
 
 void updateSharedArea(rdr_obj* l_RenderMain, sharedStage* l_sharedDataAccess) {
