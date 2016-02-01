@@ -39,9 +39,10 @@ int main() {
 
   // Init GLFW
   glfwInit();
+  glfwWindowHint(GLFW_SAMPLES, 4);
+  glfwWindowHint(GLFW_REFRESH_RATE, 60);
   echoWindow = glfwCreateWindow(wXRes, wYRes, "Echo", glfwGetPrimaryMonitor(), NULL);
   glfwMakeContextCurrent(echoWindow);
-
   // Init AntTweakBar
   TwBar *test;
   TwInit(TW_OPENGL, NULL);
@@ -64,7 +65,7 @@ int main() {
 
     // TODO: Get New Sim Data
     // TODO: Calculate Display Based on Camera Position and Size.
-    for(int bIDC = 0; bIDC < 2001; bIDC++) {
+    for(int bIDC = 0; bIDC < 701; bIDC++) {
       renderMainAccess->drawBody(bIDC);
     }
 
@@ -80,7 +81,7 @@ int main() {
     frameCounter++;
     // Check if 1 Second has Passed
     if(glfwGetTime() - fcStartTime >= 1.0) {
-      cerr << frameCounter << "FPS, "<< 1000.0/(double)frameCounter << "ms" << endl;
+      //cerr << frameCounter << "FPS, "<< 1000.0/(double)frameCounter << "ms" << endl;
       frameCounter = 0;
       fcStartTime = glfwGetTime();
     }
@@ -111,16 +112,16 @@ void setupDefaultScenario(rdr_obj* l_RenderMain) {
   // Bodies
   double tempPosX, tempPosY;
   l_RenderMain -> newBody(100000, 5, 0, 0, 0, 0);
-  for(int bIDC = 0; bIDC < 2000; bIDC++) {
+  for(int bIDC = 0; bIDC < 700; bIDC++) {
     tempPosX = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
     tempPosY = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
     //sqrt(101/tempPosY)/100
-    l_RenderMain -> newBody(0.1, 1, tempPosX, tempPosY, copysign(sqrt(1001/fabs(tempPosY)), -tempPosY), copysign(sqrt(1001/fabs(tempPosX)), tempPosX));
+    l_RenderMain -> newBody(0.1, 1, tempPosX, tempPosY, copysign(sqrt(3000/fabs(tempPosY)), -tempPosY), copysign(sqrt(3000/fabs(tempPosX)), tempPosX));
   }
 
   // Simulation Control
   l_RenderMain -> setUGC(0.1);
-  l_RenderMain -> setIDT(0.01);
+  l_RenderMain -> setIDT(0.1);
   l_RenderMain -> setIPF(1);
 }
 

@@ -8,7 +8,7 @@ private:
   void resizeMatrix(vector<vector<double>> &p_Matrix, int newSize);
   double calcCompDistance(int bodyID_A, int bodyID_B, int xy);
   double calcVectDistance(double distX, double distY);
-  double calcForceBodyPair(int bodyID_A, int bodyID_B, int xy);
+  double calcForceBodyPair(int bodyID_A, int bodyID_B, double distV);
   int calcForceMatrix();
   int calcForceSumAB();
   int calcAcceleraitonAB();

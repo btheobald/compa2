@@ -96,7 +96,7 @@ int body::setPosition(double p_position, int xyIndex) {
 
 // Used In Simulation
 int body::addForce(double p_Force, int xyIndex) {
-  force[xyIndex] += p_Force;
+  force[xyIndex] = force[xyIndex] + p_Force;
   return 0;
 }
 int body::resetForce() {
@@ -114,13 +114,13 @@ int body::calcAcceleration() {
 }
 int body::calcHalfVelocity(double timestep) {
   for (int xy = 0; xy < 2; xy++) {
-    velocity[xy] += acceleration[xy] * (timestep * 0.5);
+    velocity[xy] = velocity[xy] + ( acceleration[xy] * (timestep * 0.5) );
   }
   return 0;
 }
 int body::calcPosition(double timestep) {
   for (int xy = 0; xy < 2; xy++) {
-    position[xy] += velocity[xy] * timestep;
+    position[xy] = position[xy] + ( velocity[xy] * timestep );
   }
   return 0;
 }

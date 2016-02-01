@@ -20,28 +20,17 @@ double sim_obj::calcVectDistance(double distX, double distY) {
   return sqrt(pow(abs(distX),2) + pow(abs(distY), 2));
 }
 
-double sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B, int xy) {
-  double distX, distY, distV;
-  // Component Distance
-  distX = calcCompDistance(bodyID_A, bodyID_B, 0);
-  distY = calcCompDistance(bodyID_A, bodyID_B, 1);
-  // Vector Distance
-  distV = calcVectDistance(distX, distY);
-
+double sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B, double distV) {
   // GMm/(r^3)
   double forceResult;
   forceResult = UGC * bodyStore[bodyID_A].getMass() * bodyStore[bodyID_B].getMass();
-  forceResult /= pow(distV, 3);
+  forceResult = forceResult / pow(distV, 3);
 
-  if (xy)
-    forceResult *= distY;
-  else
-    forceResult *= distX;
-  return -forceResult;
+  return forceResult;
 }
 
-
 int sim_obj::calcForceMatrix() {
+  double tempPreForce, distX, distY, distV;
   resizeMatrix(forceMatrix, bodyStore.size());
   prevBodyCount = bodyStore.size();
 
@@ -50,8 +39,14 @@ int sim_obj::calcForceMatrix() {
     for (unsigned int yAccess = xAccess + 1; yAccess < bodyStore.size(); yAccess++) {
       // Skip if checking same body
       if (xAccess != yAccess) {
-        forceMatrix[xAccess][yAccess] = calcForceBodyPair(xAccess, yAccess, 0);
-        forceMatrix[yAccess][xAccess] = calcForceBodyPair(xAccess, yAccess, 1);
+        // Calculate Distances
+        distX = calcCompDistance(xAccess, yAccess, 0);
+        distY = calcCompDistance(xAccess, yAccess, 1);
+        distV = calcVectDistance(distX, distY);
+
+        tempPreForce = calcForceBodyPair(xAccess, yAccess, distV);
+        forceMatrix[xAccess][yAccess] = -tempPreForce * distX;
+        forceMatrix[yAccess][xAccess] = -tempPreForce * distY;
       }
     }
   }

@@ -16,7 +16,6 @@ void simInit(sharedStage* sharedDataAccess) {
 
   // Get Body Data from shared
   simMain.populateBodyStore(sharedDataAccess -> returnBodyStore_R());
-  cout << "Get New : Sim" << endl;
 
   while (!(sharedDataAccess -> getStatus(1))) {
     // Update Simulation Control
@@ -26,7 +25,7 @@ void simInit(sharedStage* sharedDataAccess) {
 
     // Check If Paused
     if(!(sharedDataAccess -> getStatus(0))) {
-      for(int icnt = 0; icnt < (simMainAccess -> getIPF()); icnt++) {
+      for(int icnt = simMainAccess -> getIPF(); icnt--;) {
         simMain.itteration();
       }
     }

@@ -22,7 +22,7 @@ LIBS  = `pkg-config --static --libs glfw3` -lAntTweakBar
 DB    = gdb
 DBOPT =
 # Compiler Flags
-CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) `pkg-config --cflags glfw3` -O3
+CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) `pkg-config --cflags glfw3` -Ofast
 # Linker Flags
 LFLAGS = -Wall $(LIBS)
 
