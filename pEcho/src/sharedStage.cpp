@@ -1,3 +1,4 @@
+// Header Include
 #include "sharedStage.hpp"
 
 sharedStage::sharedStage() {
@@ -151,6 +152,8 @@ bool sharedStage::getStatus(int var) {
       localTemp = exit;
       exit_Lock.unlock();
       break;
+    default:
+      localTemp = false;
   }
   return localTemp;
 }

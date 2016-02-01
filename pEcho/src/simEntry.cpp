@@ -1,3 +1,4 @@
+// Header Include
 #include "simEntry.hpp"
 
 void simInit(sharedStage* sharedDataAccess) {
@@ -5,29 +6,29 @@ void simInit(sharedStage* sharedDataAccess) {
   std::mutex simWaitMTX;
   // Init Scenario and Access Pointer
   sim_obj simMain;
-  sim_obj* simMainAccess = &simMain;
 
   // Get Body Data from shared
-  simMain.populateBodyStore(sharedDataAccess -> returnBodyStore_R());
+  simMain.populateBodyStore(sharedDataAccess->returnBodyStore_R());
 
-  while (!(sharedDataAccess -> getStatus(1))) {
+  while (!(sharedDataAccess->getStatus(1))) {
     // Update Simulation Control
-    simMainAccess -> setUGC(sharedDataAccess -> getUGC());
-    simMainAccess -> setIDT(sharedDataAccess -> getIDT());
-    simMainAccess -> setIPF(sharedDataAccess -> getIPF());
+    simMain.setUGC(sharedDataAccess->getUGC());
+    simMain.setIDT(sharedDataAccess->getIDT());
+    simMain.setIPF(sharedDataAccess->getIPF());
 
     // Check If Paused
-    if(!(sharedDataAccess -> getStatus(0))) {
-      for(int icnt = simMainAccess -> getIPF(); icnt--;) {
+    if(!(sharedDataAccess->getStatus(0))) {
+      for(int icnt = simMain.getIPF(); icnt--;) {
         simMain.itteration();
       }
     }
 
-    if(sharedDataAccess -> newSScenarioCheck()) {
+    // Simulation will wait if faster than Render
+    if(sharedDataAccess->newSScenarioCheck()) {
       std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX); // Unique Lock ensures that mutex will be unlocked on destruction.
-      sharedDataAccess -> simWait.wait(uniqueSimWaitMTX); // Wait for data to be taken.
+      sharedDataAccess->simWait.wait(uniqueSimWaitMTX); // Wait for data to be taken.
     }
-    sharedDataAccess -> populateBodyStore_S(simMainAccess -> returnBodyStore());
+    sharedDataAccess->populateBodyStore_S(simMain.returnBodyStore());
   }
   // Sim Now Exits
 }
