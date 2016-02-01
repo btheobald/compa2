@@ -2,6 +2,7 @@
 #include <iostream>
 #include <thread>
 #include <stdlib.h>
+#include <cmath>
 
 #include "sharedStage.hpp"
 #include "simEntry.hpp"
@@ -28,8 +29,8 @@ int main() {
   updateSharedArea(renderMainAccess, sharedDataAccess);
 
   // Init GLFW
-  int wXRes = 960;
-  int wYRes = 480;
+  int wXRes = 1366;
+  int wYRes = 768;
   GLFWwindow* echoWindow;
 
   // Framerate Variables
@@ -38,7 +39,7 @@ int main() {
 
   // Init GLFW
   glfwInit();
-  echoWindow = glfwCreateWindow(wXRes, wYRes, "Echo", NULL, NULL);
+  echoWindow = glfwCreateWindow(wXRes, wYRes, "Echo", glfwGetPrimaryMonitor(), NULL);
   glfwMakeContextCurrent(echoWindow);
 
   // Init AntTweakBar
@@ -63,7 +64,7 @@ int main() {
 
     // TODO: Get New Sim Data
     // TODO: Calculate Display Based on Camera Position and Size.
-    for(int bIDC = 0; bIDC < 700; bIDC++) {
+    for(int bIDC = 0; bIDC < 2001; bIDC++) {
       renderMainAccess->drawBody(bIDC);
     }
 
@@ -109,16 +110,17 @@ void initMatrix(int lXRes, int lYRes) {
 void setupDefaultScenario(rdr_obj* l_RenderMain) {
   // Bodies
   double tempPosX, tempPosY;
-  for(int bIDC = 0; bIDC < 700; bIDC++) {
-    tempPosX = ((double)(rand() % 900)-450)+(((double)(rand() % 200)-100)/100);
-    tempPosY = ((double)(rand() % 900)-450)+(((double)(rand() % 200)-100)/100);
-
-    l_RenderMain -> newBody(10, 1, tempPosX, tempPosY, -tempPosX/100, -tempPosY/100);
+  l_RenderMain -> newBody(100000, 5, 0, 0, 0, 0);
+  for(int bIDC = 0; bIDC < 2000; bIDC++) {
+    tempPosX = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
+    tempPosY = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
+    //sqrt(101/tempPosY)/100
+    l_RenderMain -> newBody(0.1, 1, tempPosX, tempPosY, copysign(sqrt(1001/fabs(tempPosY)), -tempPosY), copysign(sqrt(1001/fabs(tempPosX)), tempPosX));
   }
 
   // Simulation Control
-  l_RenderMain -> setUGC(1);
-  l_RenderMain -> setIDT(0.1);
+  l_RenderMain -> setUGC(0.1);
+  l_RenderMain -> setIDT(0.01);
   l_RenderMain -> setIPF(1);
 }
 
