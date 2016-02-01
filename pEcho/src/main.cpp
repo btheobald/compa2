@@ -65,7 +65,7 @@ int main() {
 
     // TODO: Get New Sim Data
     // TODO: Calculate Display Based on Camera Position and Size.
-    for(int bIDC = 0; bIDC < 701; bIDC++) {
+    for(int bIDC = 0; bIDC < 2; bIDC++) {
       renderMainAccess->drawBody(bIDC);
     }
 
@@ -110,14 +110,21 @@ void initMatrix(int lXRes, int lYRes) {
 
 void setupDefaultScenario(rdr_obj* l_RenderMain) {
   // Bodies
-  double tempPosX, tempPosY;
+  //double tempPosX, tempPosY;
   l_RenderMain -> newBody(100000, 5, 0, 0, 0, 0);
-  for(int bIDC = 0; bIDC < 700; bIDC++) {
+  /*for(int bIDC = 0; bIDC < 700; bIDC++) {
     tempPosX = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
     tempPosY = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
     //sqrt(101/tempPosY)/100
     l_RenderMain -> newBody(0.1, 1, tempPosX, tempPosY, copysign(sqrt(3000/fabs(tempPosY)), -tempPosY), copysign(sqrt(3000/fabs(tempPosX)), tempPosX));
-  }
+  }*/
+  
+  double posX = 50;
+  double posY = 50;
+  double velX = sqrt((0.1*100000) / (70*70*70)) * -posX;
+  double velY = sqrt((0.1*100000) / (70*70*70)) * posY;
+
+  l_RenderMain -> newBody(0.1, 1, posX, posY, velX, velY);
 
   // Simulation Control
   l_RenderMain -> setUGC(0.1);
