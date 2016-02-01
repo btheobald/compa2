@@ -30,8 +30,10 @@ int main() {
   updateSharedArea(renderMainAccess, sharedDataAccess);
 
   // Init GLFW
-  int wXRes = 1366;
-  int wYRes = 768;
+  //int wXRes = 1366;
+  //int wYRes = 768;
+  int wXRes = 1920;
+  int wYRes = 1080;
   GLFWwindow* echoWindow;
 
   // Framerate Variables
@@ -66,7 +68,7 @@ int main() {
 
     // TODO: Get New Sim Data
     // TODO: Calculate Display Based on Camera Position and Size.
-    for(int bIDC = 0; bIDC < 801; bIDC++) {
+    for(int bIDC = 0; bIDC < 1201; bIDC++) {
       renderMainAccess->drawBody(bIDC);
     }
 
@@ -118,7 +120,7 @@ void setupDefaultScenario(rdr_obj* l_RenderMain) {
   // Bodies
   double tempPosX, tempPosY, tempDist, tempVelX, tempVelY;
   l_RenderMain -> newBody(100000, 5, 0, 0, 0, 0);
-  for(int bIDC = 0; bIDC < 800; bIDC++) {
+  for(int bIDC = 0; bIDC < 1200; bIDC++) {
     tempPosX = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
     tempPosY = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
     tempDist = sqrt(pow(tempPosX,2) + pow(tempPosY,2));
