@@ -1,15 +1,12 @@
 #pragma once
-#include <vector>
-#include <iostream>
-#include <cstdint>
-
+// Custom Includes
 #include "body.hpp"
-using namespace std;
+#include "com.hpp"
 
 class scenario {
 protected:
   // Body Storage
-  vector<body> bodyStore; // List, C++ Std library vector, dynamic array.
+  com::bodyVector bodyStore; // List, C++ Std library vector, dynamic array.
 
   // Simulation Physical Constants (Can be modified)
   double UGC;
@@ -26,9 +23,8 @@ public:
   void newBody(double p_PosX, double p_PosY);
   void delBody(int index);
   void delAllBodies(int index);
-  void populateBodyStore(vector<body> tempStore);
-  vector<body> returnBodyStore();
-  void printNumberBodies();
+  void populateBodyStore(com::bodyVector tempStore);
+  com::bodyVector returnBodyStore();
 
   void setUGC(double p_UGC);
   void setIDT(double p_IDT);

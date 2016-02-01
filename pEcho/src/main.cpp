@@ -1,16 +1,15 @@
-#include <GLFW/glfw3.h>
-#include <iostream>
+// Standard Library Includes
 #include <thread>
 #include <cstdlib>
 #include <cmath>
 #include <ctime>
-
+// External Library Includes
+#include <GLFW/glfw3.h>
+#include <AntTweakBar.h>
+// Custom Includes
+#include "rdr_obj.hpp"
 #include "sharedStage.hpp"
 #include "simEntry.hpp"
-#include "rdr_obj.hpp"
-#include <AntTweakBar.h>
-
-using namespace std;
 
 void initMatrix(int lXRes, int lYRes);
 void setupDefaultScenario(rdr_obj* l_RenderMain);
@@ -18,6 +17,7 @@ void updateSharedArea(rdr_obj* l_RenderMain, sharedStage* l_sharedDataAccess);
 void updateLocalStore(sharedStage* l_sharedDataAccess, rdr_obj* l_RenderMain);
 
 int main() {
+  // Set Random Seed Using Current Time
   srand(time(NULL));
 
   // Init Render Scenario and Access Pointer
@@ -51,7 +51,7 @@ int main() {
   test = TwNewBar("Test");
 
   // Start Sim Thread, Pass SharedData Address
-  thread simThread(simInit, sharedDataAccess);
+  std::thread simThread(simInit, sharedDataAccess);
 
   // Initial Framerate Timer Set
   fcStartTime = glfwGetTime();
@@ -82,7 +82,6 @@ int main() {
     frameCounter++;
     // Check if 1 Second has Passed
     if(glfwGetTime() - fcStartTime >= 1.0) {
-      //cerr << frameCounter << "FPS, "<< 1000.0/(double)frameCounter << "ms" << endl;
       frameCounter = 0;
       fcStartTime = glfwGetTime();
     }

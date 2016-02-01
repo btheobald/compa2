@@ -1,16 +1,16 @@
 #pragma once
-#include <vector>
-#include <iostream>
+// Standard Library Includes
 #include <mutex>
 #include <condition_variable>
+// Custom Includes
 #include "body.hpp"
-using namespace std;
+#include "com.hpp"
 
 class sharedStage {
 private:
   // Body Storage
-  vector<body> bodyStore_R;
-  vector<body> bodyStore_S;
+  com::bodyVector bodyStore_R;
+  com::bodyVector bodyStore_S;
 
   // Simulation Control
   double UGC;     // Simulation Universal Gravitational Constant
@@ -27,26 +27,26 @@ private:
   bool newSScenario;  // New Sim Data Set
 
   // Mutex Lock Objects
-  mutex bStoreR_Lock;
-  mutex bStoreS_Lock;
-  mutex UGC_Lock;
-  mutex IDT_Lock;
-  mutex IPF_Lock;
-  mutex pause_Lock;
-  mutex exit_Lock;
-  mutex exitAck_Lock;
-  mutex newRS_Lock;
-  mutex newSS_Lock;
+  std::mutex bStoreR_Lock;
+  std::mutex bStoreS_Lock;
+  std::mutex UGC_Lock;
+  std::mutex IDT_Lock;
+  std::mutex IPF_Lock;
+  std::mutex pause_Lock;
+  std::mutex exit_Lock;
+  std::mutex exitAck_Lock;
+  std::mutex newRS_Lock;
+  std::mutex newSS_Lock;
 
 public:
 
   sharedStage();
   ~sharedStage();
 
-  void populateBodyStore_R(vector<body> p_BodyStore);
-  void populateBodyStore_S(vector<body> p_BodyStore);
-  vector<body> returnBodyStore_R();
-  vector<body> returnBodyStore_S();
+  void populateBodyStore_R(com::bodyVector p_BodyStore);
+  void populateBodyStore_S(com::bodyVector p_BodyStore);
+  com::bodyVector returnBodyStore_R();
+  com::bodyVector returnBodyStore_S();
 
   void setUGC(double var);
   void setIDT(double var);
@@ -59,7 +59,7 @@ public:
   bool newRScenarioCheck();
   bool newSScenarioCheck();
 
-  condition_variable simWait;
+  std::condition_variable simWait;
 
   // 0 :: Pause, 1 :: Exit, 2 :: ExitAck
   void setStatus(bool set, int var);

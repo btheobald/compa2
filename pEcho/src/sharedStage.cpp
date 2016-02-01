@@ -9,7 +9,7 @@ sharedStage::~sharedStage(){
 
 }
 
-void sharedStage::populateBodyStore_R(vector<body> p_BodyStore) {
+void sharedStage::populateBodyStore_R(com::bodyVector p_BodyStore) {
   newRS_Lock.lock();
   if(newRScenario == false) {
     bStoreR_Lock.lock();
@@ -23,7 +23,7 @@ void sharedStage::populateBodyStore_R(vector<body> p_BodyStore) {
   newRS_Lock.unlock();
 }
 
-void sharedStage::populateBodyStore_S(vector<body> p_BodyStore) {
+void sharedStage::populateBodyStore_S(com::bodyVector p_BodyStore) {
   newSS_Lock.lock();
   if(newSScenario == false) {
     bStoreS_Lock.lock();
@@ -37,8 +37,8 @@ void sharedStage::populateBodyStore_S(vector<body> p_BodyStore) {
   newSS_Lock.unlock();
 }
 
-vector<body> sharedStage::returnBodyStore_R() {
-  vector<body> tempStore;
+com::bodyVector sharedStage::returnBodyStore_R() {
+  com::bodyVector tempStore;
   newRS_Lock.lock();
   bStoreR_Lock.lock();
   tempStore = bodyStore_R;
@@ -52,8 +52,8 @@ vector<body> sharedStage::returnBodyStore_R() {
   return tempStore;
 }
 
-vector<body> sharedStage::returnBodyStore_S() {
-  vector<body> tempStore;
+com::bodyVector sharedStage::returnBodyStore_S() {
+  com::bodyVector tempStore;
   newSS_Lock.lock();
   bStoreS_Lock.lock();
   tempStore = bodyStore_S;

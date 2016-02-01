@@ -1,15 +1,8 @@
-/*
-*| Project Echo Simulation
-*| Revision: 0.01
-*| Author: Byron Theobald
-*/
-
 #include "simEntry.hpp"
-using namespace std;
 
 void simInit(sharedStage* sharedDataAccess) {
   // Sim Wait Control Mutex
-  mutex simWaitMTX;
+  std::mutex simWaitMTX;
   // Init Scenario and Access Pointer
   sim_obj simMain;
   sim_obj* simMainAccess = &simMain;
@@ -31,11 +24,10 @@ void simInit(sharedStage* sharedDataAccess) {
     }
 
     if(sharedDataAccess -> newSScenarioCheck()) {
-      unique_lock<mutex> uniqueSimWaitMTX(simWaitMTX); // Unique Lock ensures that mutex will be unlocked on destruction.
+      std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX); // Unique Lock ensures that mutex will be unlocked on destruction.
       sharedDataAccess -> simWait.wait(uniqueSimWaitMTX); // Wait for data to be taken.
     }
     sharedDataAccess -> populateBodyStore_S(simMainAccess -> returnBodyStore());
   }
-
-  cerr << "Sim Exit" << endl;
+  // Sim Now Exits
 }

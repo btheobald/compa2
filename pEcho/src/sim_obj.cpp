@@ -1,12 +1,8 @@
 #include "sim_obj.hpp"
-#include <vector>
-#include <cmath>
-#include <iostream>
-using namespace std;
 
-void sim_obj::resizeMatrix(vector<vector<double>>& p_Matrix, int newSize) {
+void sim_obj::resizeMatrix(com::double2DVector& p_Matrix, int newSize) {
   p_Matrix.clear();
-  p_Matrix.resize(newSize, vector<double>(newSize, 0));
+  p_Matrix.resize(newSize, std::vector<double>(newSize, 0));
 }
 
 double sim_obj::calcCompDistance(int bodyID_A, int bodyID_B, int xy) {
@@ -17,7 +13,7 @@ double sim_obj::calcCompDistance(int bodyID_A, int bodyID_B, int xy) {
 }
 
 double sim_obj::calcVectDistance(double distX, double distY) {
-  return sqrt(pow(abs(distX),2) + pow(abs(distY), 2));
+  return sqrt(pow(fabs(distX),2) + pow(fabs(distY), 2));
 }
 
 double sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B, double distV) {

@@ -1,6 +1,4 @@
 #include "body.hpp"
-#include <iostream>
-using namespace std;
 
 // Constructors
 body::body() {
