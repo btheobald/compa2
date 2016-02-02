@@ -1,4 +1,6 @@
 #pragma once
+// Standard Library Includes
+#include <random>
 // External Library Includes
 #include <GLFW/glfw3.h> // GLFW
 // Custom Includes
@@ -8,13 +10,12 @@
 #include "com.hpp"
 
 class rdr_obj : public scenario {
-  
-  public:
-  	// Management Functions
-  	void setupDefaultScenario();
-	void updateSharedArea(sharedStage* l_sharedDataAccess);
-	void updateLocalStore(sharedStage* l_sharedDataAccess);
-    // Render-Specific Functions Here
-    void drawBody(int bodyID);
-    void drawScene(void);
+public:
+	// Management Functions
+	void setupDefaultScenario();
+  void updateSharedArea(sharedStage* l_sharedDataAccess);
+  void updateLocalStore(sharedStage* l_sharedDataAccess);
+  // Render-Specific Functions Here
+  void drawBody(int bodyID);
+  void drawScene(void);
 };

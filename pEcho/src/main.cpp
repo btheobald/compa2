@@ -27,10 +27,9 @@ int main() {
   // Init GLFW
   glfwInit();
   // MSSA 8X
-  glfwWindowHint(GLFW_SAMPLES, 8);
-  // Create Window (Fullscreen)
+  glfwWindowHint(GLFW_SAMPLES, 16);
+  // Create Window
   GLFWwindow* echoWindow;
-
   // Get User Resolution
   const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
   int wXRes = mode->width/1.2;
@@ -74,7 +73,7 @@ int main() {
   // Pause until simInit Exits.
   simThread.join();
   std::cerr << "Sim Exit" << std::endl;
-  
+
   // Keep window open until simThread exits.
   glfwTerminate();
   return 0;
@@ -87,7 +86,7 @@ void initMatrix(int lXRes, int lYRes) {
 
   // Center View on 0, 0 and Make Pixel Perfect
   glOrtho(-lXRes/2, lXRes/2, -lYRes/2, lYRes/2, 1.0f, -1.0f);
-  
+
   // Init Modelview Matrix
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();

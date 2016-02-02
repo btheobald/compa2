@@ -11,149 +11,108 @@ sharedStage::~sharedStage(){
 }
 
 void sharedStage::populateBodyStore_R(com::bodyVector p_BodyStore) {
-  newRS_Lock.lock();
+  com::lockGuard lockNewStatus(newRS_Lock);
   if(newRScenario == false) {
-    bStoreR_Lock.lock();
+    com::lockGuard lockAccess(bStoreR_Lock);
     bodyStore_R = p_BodyStore;
-    bStoreR_Lock.unlock();
 
     newRScenario = true;
-
     //cerr << "Render > Share" << endl;
   }
-  newRS_Lock.unlock();
 }
 
 void sharedStage::populateBodyStore_S(com::bodyVector p_BodyStore) {
-  newSS_Lock.lock();
+  com::lockGuard lockNewStatus(newSS_Lock);
   if(newSScenario == false) {
-    bStoreS_Lock.lock();
+    com::lockGuard lockAccess(bStoreS_Lock);
     bodyStore_S = p_BodyStore;
-    bStoreS_Lock.unlock();
 
     newSScenario = true;
-
     //cerr << "Sim > Share" << endl;
   }
-  newSS_Lock.unlock();
 }
 
 com::bodyVector sharedStage::returnBodyStore_R() {
-  com::bodyVector tempStore;
-  newRS_Lock.lock();
-  bStoreR_Lock.lock();
-  tempStore = bodyStore_R;
-  bStoreR_Lock.unlock();
+  com::lockGuard lockNewStatus(newRS_Lock);
+  com::lockGuard lockAccess(bStoreR_Lock);
 
   newRScenario = false;
-
   //cerr << "Share > Sim" << endl;
 
-  newRS_Lock.unlock();
-  return tempStore;
+  return bodyStore_R;
 }
 
 com::bodyVector sharedStage::returnBodyStore_S() {
-  com::bodyVector tempStore;
-  newSS_Lock.lock();
-  bStoreS_Lock.lock();
-  tempStore = bodyStore_S;
-  bStoreS_Lock.unlock();
+  com::lockGuard lockNewStatus(newSS_Lock);
+  com::lockGuard lockAccess(bStoreS_Lock);
 
   newSScenario = false;
-
   //cerr << "Share > Render" << endl;
 
-  newSS_Lock.unlock();
-  return tempStore;
+  return bodyStore_S;
 }
 
 void sharedStage::setUGC(double var) {
-  UGC_Lock.lock();
+  com::lockGuard lockAccess(UGC_Lock);
   UGC = var;
-  UGC_Lock.unlock();
 }
 void sharedStage::setIDT(double var) {
-  IDT_Lock.lock();
+  com::lockGuard lockAccess(IDT_Lock);
   IDT = var;
-  IDT_Lock.unlock();
 }
 void sharedStage::setIPF(int var) {
-  IPF_Lock.lock();
+  com::lockGuard lockAccess(IPF_Lock);
   IPF = var;
-  IPF_Lock.unlock();
 }
 
 double sharedStage::getUGC() {
-  double tempStore;
-  UGC_Lock.lock();
-  tempStore = UGC;
-  UGC_Lock.unlock();
-
-  return tempStore;
+  com::lockGuard lockAccess(UGC_Lock);
+  return UGC;
 }
 double sharedStage::getIDT() {
-  double tempStore;
-  IDT_Lock.lock();
-  tempStore = IDT;
-  IDT_Lock.unlock();
-
-  return tempStore;
+  com::lockGuard lockAccess(IDT_Lock);
+  return IDT;
 }
 int sharedStage::getIPF() {
-  int tempStore;
-  IPF_Lock.lock();
-  tempStore = IPF;
-  IPF_Lock.unlock();
-
-  return tempStore;
+  com::lockGuard lockAccess(IPF_Lock);
+  return IPF;
 }
 
 bool sharedStage::newRScenarioCheck() {
-  bool tempStore;
-  newRS_Lock.lock();
-  tempStore = newRScenario;
-  newRS_Lock.unlock();
-  return tempStore;
+  com::lockGuard lockNewStatus(newRS_Lock);
+  return newRScenario;
 }
 
 bool sharedStage::newSScenarioCheck() {
-  bool tempStore;
-  newSS_Lock.lock();
-  tempStore = newSScenario;
-  newSS_Lock.unlock();
-  return tempStore;
+  com::lockGuard lockNewStatus(newSS_Lock);
+  return newSScenario;
 }
 
 void sharedStage::setStatus(bool set, int var) {
   switch(var) {
-    case 0:
-      pause_Lock.lock();
+    case 0: {
+      com::lockGuard lockAccess(pause_Lock);
       pause = set;
-      pause_Lock.unlock();
       break;
-    case 1:
-      exit_Lock.lock();
+    }
+    case 1: {
+      com::lockGuard lockAccess(exit_Lock);
       exit = set;
-      exit_Lock.unlock();
       break;
+    }
   }
 }
+
 bool sharedStage::getStatus(int var) {
-  bool localTemp;
   switch(var) {
-    case 0:
-      pause_Lock.lock();
-      localTemp = pause;
-      pause_Lock.unlock();
-      break;
-    case 1:
-      exit_Lock.lock();
-      localTemp = exit;
-      exit_Lock.unlock();
-      break;
-    default:
-      localTemp = false;
+    case 0: {
+      com::lockGuard lockAccess(pause_Lock);
+      return pause;
+    }
+    case 1: {
+      com::lockGuard lockAccess(exit_Lock);
+      return exit;
+    }
+    default: return true;
   }
-  return localTemp;
 }

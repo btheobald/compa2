@@ -1,7 +1,7 @@
 // Header Include
 #include "rdr_obj.hpp"
 
-#define TEST_BODIES 1000
+#define TEST_BODIES 1500
 
 void rdr_obj::setupDefaultScenario() {
   // Simulation Control
@@ -10,27 +10,26 @@ void rdr_obj::setupDefaultScenario() {
   IPF = 1;
 
   // Bodies
-  double tempPosX, tempPosY, tempCirX, tempCirY, tempDist, tempVelX, tempVelY, tempPosSwap, tfact;
+  double tempPos, tempPosY, tempCirX, tempCirY, tempDist, tempVelX, tempVelY, tempPosSwap;
   newBody(100000, 5, 0, 0, 0, 0);
+
+  std::uniform_real_distribution<> pos(0, 800);
+  std::random_device r;
+  std::mt19937 gen(r());
+
   for(int bIDC = 0; bIDC < TEST_BODIES; bIDC++) {
-    // Calc Position
+    // Ensure that bodies are not too close to center.
+    do tempPos = pos(gen) - 400; while((tempPos < 20) & (tempPos > -20));
 
-    do {
-      tempPosX = ((double)(rand() % 500)-250)+(((double)(rand() % 200)-100)/100);
-    } while ((tempPosX > -100) & (tempPosX < 100));
-    
-    do {
-      tempPosY = ((double)(rand() % 500)-250)+(((double)(rand() % 200)-100)/100);
-    } while ((tempPosY > -100) & (tempPosY < 100));
-
-    tempCirX = (tempPosX * cos(2 * M_PI * tempPosX/tempPosY)) * 1.0;
-    tempCirY = (tempPosY * sin(2 * M_PI * tempPosY/tempPosX)) * 1.0;
-
+    // Map to Circle
+    tempCirX = (tempPos * cos(2 * M_PI * tempPos));
+    tempCirY = (tempPos * sin(2 * M_PI * tempPos));
+    // Calculate Distance to 0,0
     tempDist = sqrt(pow(tempCirX,2) + pow(tempCirY,2));
     // Calc Velocity
     tempVelY = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * tempCirX, tempCirX);
     tempVelX = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * tempCirY, -tempCirY);
-    
+
     newBody(0.1, 1, tempCirX, tempCirY, tempVelX, tempVelY);
   }
 }
