@@ -1,7 +1,7 @@
 // Header Include
 #include "rdr_obj.hpp"
 
-#define TEST_BODIES 1500
+#define TEST_BODIES 10
 
 void rdr_obj::setupDefaultScenario() {
   // Simulation Control
@@ -11,15 +11,16 @@ void rdr_obj::setupDefaultScenario() {
 
   // Bodies
   double tempPos, tempPosY, tempCirX, tempCirY, tempDist, tempVelX, tempVelY, tempPosSwap;
-  newBody(100000, 5, 0, 0, 0, 0);
 
   std::uniform_real_distribution<> pos(0, 800);
   std::random_device r;
   std::mt19937 gen(r());
 
+  newBody(100000, 5, 0, 0, 0, 0);
+
   for(int bIDC = 0; bIDC < TEST_BODIES; bIDC++) {
     // Ensure that bodies are not too close to center.
-    do tempPos = pos(gen) - 400; while((tempPos < 20) & (tempPos > -20));
+    do tempPos = pos(gen) - 400; while((tempPos < 50) & (tempPos > -50));
 
     // Map to Circle
     tempCirX = (tempPos * cos(2 * M_PI * tempPos));
