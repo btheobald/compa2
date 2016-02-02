@@ -7,6 +7,8 @@
 #include "sharedStage.hpp"
 #include "com.hpp"
 
+#define TEST_BODIES 1000
+
 class rdr_obj : public scenario {
   
   public:

@@ -58,6 +58,9 @@ int main() {
   // Initial Framerate Timer Set
   fcStartTime = glfwGetTime();
 
+  // Configure Projection Matrix, adapt to current resolution.
+  initMatrix(wXRes, wYRes);
+
   while(!glfwWindowShouldClose(echoWindow)) {
     // Pull Changes from Shared
     renderMain.updateLocalStore(sharedDataAccess);
@@ -66,11 +69,9 @@ int main() {
     glClearColor(0.05f, 0.05f, 0.1f, 1);
     // Clear Display for Rendering
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    // Configure Projection Matrix, adapt to current resolution.
-    initMatrix(wXRes, wYRes);
 
     // Draw Bodies
-    for(int bIDC = 0; bIDC < 1201; bIDC++) {
+    for(int bIDC = 0; bIDC < TEST_BODIES+1; bIDC++) {
       renderMain.drawBody(bIDC);
     }
 

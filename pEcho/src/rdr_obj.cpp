@@ -10,12 +10,12 @@ void rdr_obj::setupDefaultScenario() {
   // Bodies
   double tempPosX, tempPosY, tempDist, tempVelX, tempVelY;
   newBody(100000, 5, 0, 0, 0, 0);
-  for(int bIDC = 0; bIDC < 1200; bIDC++) {
+  for(int bIDC = 0; bIDC < TEST_BODIES; bIDC++) {
     // Calc Position
     tempPosX = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
     tempPosY = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
     tempDist = sqrt(pow(tempPosX,2) + pow(tempPosY,2));
-    // Calc Velocity
+    // Calc Velocity - Doesn't create perfectly circular orbits.
     tempVelY = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * tempPosY, tempPosX);
     tempVelX = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * tempPosX, -tempPosY);
     
