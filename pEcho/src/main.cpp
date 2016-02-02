@@ -1,49 +1,42 @@
 // Standard Library Includes
 #include <thread>
-#include <cstdlib>
-#include <cmath>
-#include <ctime>
 // External Library Includes
-#include <GLFW/glfw3.h>
-#include <AntTweakBar.h>
+#include <GLFW/glfw3.h>   // GLFWW
+#include <AntTweakBar.h>  // AntTweakBar
 // Custom Includes
 #include "rdr_obj.hpp"
 #include "sharedStage.hpp"
 #include "simEntry.hpp"
 
 void initMatrix(int lXRes, int lYRes);
+void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess);
 
 int main() {
   // Set Random Seed Using Current Time
   srand(time(NULL));
 
-  // Init Render Scenario and Access Pointer
+  // Init Render Scenario
   rdr_obj renderMain;
-  // Init Shared Stage and Access Pointer
+  // Init Shared Stage
   sharedStage sharedData;
-  sharedStage* sharedDataAccess = &sharedData;
 
   // Setup Scenario and Commit
   renderMain.setupDefaultScenario();
-  renderMain.updateSharedArea(sharedDataAccess);
-
-  // Init GLFW
-  int wXRes = 1366;
-  int wYRes = 768;
-  //int wXRes = 1920;
-  //int wYRes = 1080;
-  GLFWwindow* echoWindow;
-
-  // Framerate Variables
-  double fcStartTime;
-  int frameCounter = 0;
+  renderMain.updateSharedArea(&sharedData);
 
   // Init GLFW
   glfwInit();
   // MSSA 8X
   glfwWindowHint(GLFW_SAMPLES, 8);
-  // Create Window
-  echoWindow = glfwCreateWindow(wXRes, wYRes, "Echo", glfwGetPrimaryMonitor(), NULL);
+  // Create Window (Fullscreen)
+  GLFWwindow* echoWindow;
+
+  // Get User Resolution
+  const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+  int wXRes = mode->width/1.2;
+  int wYRes = mode->height/1.2;
+
+  echoWindow = glfwCreateWindow(wXRes, wYRes, "Echo", NULL, NULL);
   glfwMakeContextCurrent(echoWindow);
 
   // Init AntTweakBar
@@ -53,49 +46,34 @@ int main() {
   test = TwNewBar("Test");
 
   // Start Sim Thread, Pass SharedData Address
-  std::thread simThread(simInit, sharedDataAccess);
-
-  // Initial Framerate Timer Set
-  fcStartTime = glfwGetTime();
+  std::thread simThread(simInit, &sharedData);
 
   // Configure Projection Matrix, adapt to current resolution.
   initMatrix(wXRes, wYRes);
+  // Set Clear Color for Window
+  glClearColor(0.05f, 0.05f, 0.1f, 1);
+
 
   while(!glfwWindowShouldClose(echoWindow)) {
     // Pull Changes from Shared
-    renderMain.updateLocalStore(sharedDataAccess);
+    renderMain.updateLocalStore(&sharedData);
 
-    // Set Clear Color for Window
-    glClearColor(0.05f, 0.05f, 0.1f, 1);
-    // Clear Display for Rendering
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+    // Draw and Display
+    displayLoopCall(echoWindow, &renderMain);
 
-    // Draw Bodies
-    for(int bIDC = 0; bIDC < TEST_BODIES+1; bIDC++) {
-      renderMain.drawBody(bIDC);
-    }
-
-    // Draw Tweak Bars
-    TwDraw();
-    // Swap Render / Draw Buffers
-    glfwSwapBuffers(echoWindow);
-    // TODO: Poll Input Events
-    glfwPollEvents();
     // TODO: Update Local Scenario with Changes
-
-    // Increment Frame Counter
-    frameCounter++;
-    // Check if 1 Second has Passed
-    if(glfwGetTime() - fcStartTime >= 1.0) {
-      frameCounter = 0;
-      fcStartTime = glfwGetTime();
-    }
   }
 
-  // Set Exit Flag
+  // Exit Procedure
+  // TODO: Save Data to startup file here
+  // Unset Paused and Set Exit Flag
+  sharedData.setStatus(0, false);
   sharedData.setStatus(1, true);
+  // Resume Thread if Waiting
+  sharedData.simWait.notify_all();
   // Pause until simInit Exits.
   simThread.join();
+  std::cerr << "Sim Exit" << std::endl;
   
   // Keep window open until simThread exits.
   glfwTerminate();
@@ -113,4 +91,20 @@ void initMatrix(int lXRes, int lYRes) {
   // Init Modelview Matrix
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+}
+
+void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess) {
+  // Clear Display for Rendering
+  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+  // Draw Scene
+  renderAccess->drawScene();
+
+  // Draw Tweak Bars
+  TwDraw();
+
+  // Swap Render / Draw Buffers
+  glfwSwapBuffers(localWindow);
+  // Check For Input Events
+  glfwPollEvents();
 }

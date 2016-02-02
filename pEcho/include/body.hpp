@@ -1,7 +1,6 @@
 #pragma once
 
-class body
-{
+class body {
 private:
   // Body Attributes
   double mass = 1;

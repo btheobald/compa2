@@ -1,6 +1,8 @@
 // Header Include
 #include "rdr_obj.hpp"
 
+#define TEST_BODIES 1000
+
 void rdr_obj::setupDefaultScenario() {
   // Simulation Control
   UGC = 0.1;
@@ -8,18 +10,28 @@ void rdr_obj::setupDefaultScenario() {
   IPF = 1;
 
   // Bodies
-  double tempPosX, tempPosY, tempDist, tempVelX, tempVelY;
+  double tempPosX, tempPosY, tempCirX, tempCirY, tempDist, tempVelX, tempVelY, tempPosSwap, tfact;
   newBody(100000, 5, 0, 0, 0, 0);
   for(int bIDC = 0; bIDC < TEST_BODIES; bIDC++) {
     // Calc Position
-    tempPosX = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
-    tempPosY = ((double)(rand() % 300)-150)+(((double)(rand() % 200)-100)/100);
-    tempDist = sqrt(pow(tempPosX,2) + pow(tempPosY,2));
-    // Calc Velocity - Doesn't create perfectly circular orbits.
-    tempVelY = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * tempPosY, tempPosX);
-    tempVelX = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * tempPosX, -tempPosY);
+
+    do {
+      tempPosX = ((double)(rand() % 500)-250)+(((double)(rand() % 200)-100)/100);
+    } while ((tempPosX > -100) & (tempPosX < 100));
     
-    newBody(0.1, 1, tempPosX, tempPosY, tempVelX, tempVelY);
+    do {
+      tempPosY = ((double)(rand() % 500)-250)+(((double)(rand() % 200)-100)/100);
+    } while ((tempPosY > -100) & (tempPosY < 100));
+
+    tempCirX = (tempPosX * cos(2 * M_PI * tempPosX/tempPosY)) * 1.0;
+    tempCirY = (tempPosY * sin(2 * M_PI * tempPosY/tempPosX)) * 1.0;
+
+    tempDist = sqrt(pow(tempCirX,2) + pow(tempCirY,2));
+    // Calc Velocity
+    tempVelY = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * tempCirX, tempCirX);
+    tempVelX = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * tempCirY, -tempCirY);
+    
+    newBody(0.1, 1, tempCirX, tempCirY, tempVelX, tempVelY);
   }
 }
 
@@ -76,4 +88,11 @@ void rdr_obj::drawBody(int bodyID) {
     y *= radFact;
   }
   glEnd();
+}
+
+void rdr_obj::drawScene() {
+  // Draw Bodies
+  for(unsigned int bIDC = 0; bIDC < bodyStore.size(); bIDC++) {
+    drawBody(bIDC);
+  }
 }

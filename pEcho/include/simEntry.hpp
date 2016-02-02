@@ -2,9 +2,8 @@
 #include "sim_obj.hpp"
 #include "body.hpp"
 #include "sharedStage.hpp"
+#include "com.hpp"
 
-#include <iostream>
-#include <vector>
 #include <condition_variable>
 #include <mutex>
 

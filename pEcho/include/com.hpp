@@ -2,6 +2,7 @@
 // Standard Library Includes
 #include <vector>
 #include <cmath>
+#include <iostream>
 
 namespace com {
 	typedef std::vector<body> bodyVector;
