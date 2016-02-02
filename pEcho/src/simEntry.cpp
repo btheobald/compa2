@@ -12,12 +12,15 @@ void simInit(sharedStage* sharedDataAccess) {
 
   // Check Exit Request
   while (!(sharedDataAccess->getStatus(1))) {
-    // Stage Data to Shared Area
-    // Simulation will wait if faster than Render
+    
+    // Simulation Old Data Has Not Been Taken
     if(sharedDataAccess->newSScenarioCheck()) {
-      std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX); // Unique Lock ensures that mutex will be unlocked on destruction.
-      sharedDataAccess->simWait.wait(uniqueSimWaitMTX); // Wait for data to be taken.
+      // Unique Lock ensures that mutex will be unlocked on destruction.
+      std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
+      // Wait for data to be taken. 
+      sharedDataAccess->simWait.wait(uniqueSimWaitMTX);
     }
+    // Stage Data to Shared Area
     sharedDataAccess->populateBodyStore_S(simMain.returnBodyStore());
 
     // Update Simulation Control
