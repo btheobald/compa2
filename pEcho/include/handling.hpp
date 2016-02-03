@@ -5,7 +5,7 @@
 
 // Custom Inputs
 bool getMouseHeld(GLFWwindow* window, int button);
-void handleInputs(GLFWwindow* window);
+void moveCamera(GLFWwindow* window, double cursorX, double cursorY);
 
 // Mouse Callback
 void cursorPosCallback(GLFWwindow* window, double cursorX, double cursorY);

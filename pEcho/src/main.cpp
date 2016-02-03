@@ -8,7 +8,7 @@
 #include "rdr_obj.hpp"
 #include "sharedStage.hpp"
 #include "simEntry.hpp"
-#include "callbacks.hpp"
+#include "handling.hpp"
 
 void initDisplay(int lXRes, int lYRes);
 void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess);
@@ -114,5 +114,5 @@ void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess) {
   // Swap Render / Draw Buffers
   glfwSwapBuffers(localWindow);
   // Check For Input Events
-  handleInputs(localWindow);
+  glfwPollEvents();
 }
