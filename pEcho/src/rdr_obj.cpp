@@ -1,7 +1,7 @@
 // Header Include
 #include "rdr_obj.hpp"
 
-#define TEST_BODIES 1000
+#define TEST_BODIES 1200
 #define RADIUS 3000
 
 void rdr_obj::setupDefaultScenario() {
