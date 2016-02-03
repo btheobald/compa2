@@ -9,7 +9,7 @@
 #include "sharedStage.hpp"
 #include "simEntry.hpp"
 
-#define SCALEMULTIPLIER 4
+#define SCALEMULTIPLIER 3
 
 void initMatrix(int lXRes, int lYRes);
 void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess);

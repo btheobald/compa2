@@ -1,13 +1,13 @@
 // Header Include
 #include "rdr_obj.hpp"
 
-#define TEST_BODIES 1200
-#define RADIUS 3000
+#define TEST_BODIES 2000
+#define RADIUS 2000
 
 void rdr_obj::setupDefaultScenario() {
   // Simulation Control
   UGC = 0.1;
-  IDT = 1;
+  IDT = 0.2;
   IPF = 1;
 
   // Create a Pseudo-random circular distribution of bodies around 0,0
@@ -20,7 +20,7 @@ void rdr_obj::setupDefaultScenario() {
   double tempRand, tempCirX, tempCirY, tempDist, tempVelX, tempVelY;
   for(int bIDC = 0; bIDC < TEST_BODIES; bIDC++) {
     // Ensure that bodies are not too close to center.
-    do tempRand = pos(gen) - RADIUS/2; while((tempRand < 500) & (tempRand > -500));
+    do tempRand = pos(gen) - RADIUS/2; while((tempRand < 200) & (tempRand > -200));
 
     // Map to Circle
     tempCirX = (tempRand * cos(2 * M_PI * tempRand));
