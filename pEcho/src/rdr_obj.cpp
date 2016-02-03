@@ -1,13 +1,13 @@
 // Header Include
 #include "rdr_obj.hpp"
 
-#define TEST_BODIES 2000
-#define RADIUS 2000
+#define TEST_BODIES 100
+#define RADIUS 500
 
 void rdr_obj::setupDefaultScenario() {
   // Simulation Control
   UGC = 0.1;
-  IDT = 0.2;
+  IDT = 0.01;
   IPF = 1;
 
   // Create a Pseudo-random circular distribution of bodies around 0,0
@@ -20,7 +20,7 @@ void rdr_obj::setupDefaultScenario() {
   double tempRand, tempCirX, tempCirY, tempDist, tempVelX, tempVelY;
   for(int bIDC = 0; bIDC < TEST_BODIES; bIDC++) {
     // Ensure that bodies are not too close to center.
-    do tempRand = pos(gen) - RADIUS/2; while((tempRand < 200) & (tempRand > -200));
+    do tempRand = pos(gen) - RADIUS/2; while((tempRand < 40) & (tempRand > -40));
 
     // Map to Circle
     tempCirX = (tempRand * cos(2 * M_PI * tempRand));
@@ -31,10 +31,10 @@ void rdr_obj::setupDefaultScenario() {
     tempVelY = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * tempCirX, tempCirX);
     tempVelX = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * tempCirY, -tempCirY);
 
-    newBody(0.01, 2, tempCirX, tempCirY, tempVelX, tempVelY);
+    newBody(0.01, 1, tempCirX, tempCirY, tempVelX, tempVelY);
   }
   // Add Massive Central Body
-  newBody(100000, 100, 0, 0, 0, 0);
+  newBody(100000, 10, 0, 0, 0, 0);
 }
 
 void rdr_obj::updateSharedArea(sharedStage* l_sharedDataAccess) {
@@ -72,8 +72,6 @@ void rdr_obj::drawBody(int bodyID) {
 
   float x = radius;
   float y = 0;
-
-
 
   glBegin(GL_POLYGON);
   for(int i = 0; i < segments; i++) {

@@ -2,16 +2,15 @@
 #include <thread>
 #include <iostream>
 // External Library Includes
-#include <GLFW/glfw3.h>   // GLFWW
+#include <GLFW/glfw3.h>   // GLFW
 #include <AntTweakBar.h>  // AntTweakBar
 // Custom Includes
 #include "rdr_obj.hpp"
 #include "sharedStage.hpp"
 #include "simEntry.hpp"
+#include "callbacks.hpp"
 
-#define SCALEMULTIPLIER 3
-
-void initMatrix(int lXRes, int lYRes);
+void initDisplay(int lXRes, int lYRes);
 void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess);
 
 int main() {
@@ -41,6 +40,9 @@ int main() {
   echoWindow = glfwCreateWindow(wXRes, wYRes, "Echo", NULL, NULL);
   glfwMakeContextCurrent(echoWindow);
 
+  // Set Callbacks
+  setCallbacks(echoWindow);
+
   // Init AntTweakBar
   TwBar* test;
   TwInit(TW_OPENGL, NULL);
@@ -51,10 +53,7 @@ int main() {
   std::thread simThread(simInit, &sharedData);
 
   // Configure Projection Matrix, adapt to current resolution.
-  initMatrix(wXRes, wYRes);
-  // Set Clear Color for Window
-  glClearColor(0.05f, 0.05f, 0.1f, 1);
-
+  initDisplay(wXRes, wYRes);
 
   while(!glfwWindowShouldClose(echoWindow)) {
     // Pull Changes from Shared
@@ -82,17 +81,24 @@ int main() {
   return 0;
 }
 
-void initMatrix(int lXRes, int lYRes) {
-  // Init Projection Matrix
+void initDisplay(int lXRes, int lYRes) {
+  // Set Viewport Extents
+  glViewport(lXRes, lYRes, -lXRes, -lYRes);
+
+  // Init Projection
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
+  glOrtho(-lXRes, lXRes, -lYRes, lYRes, 1.0f, -1.0f);
 
-  // Center View on 0, 0 and Make Pixel Perfect
-  glOrtho((-lXRes/2)*SCALEMULTIPLIER, (lXRes/2)*SCALEMULTIPLIER, (-lYRes/2)*SCALEMULTIPLIER, (lYRes/2)*SCALEMULTIPLIER, 1.0f, -1.0f);
-
-  // Init Modelview Matrix
+  // Init Modelview
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+
+  // Save Default Matrix
+  glPushMatrix();
+
+  // Set Clear Color for Window
+  glClearColor(0.05f, 0.05f, 0.1f, 1);
 }
 
 void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess) {
@@ -108,5 +114,5 @@ void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess) {
   // Swap Render / Draw Buffers
   glfwSwapBuffers(localWindow);
   // Check For Input Events
-  glfwPollEvents();
+  handleInputs(localWindow);
 }

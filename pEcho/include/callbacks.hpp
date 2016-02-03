@@ -1,6 +1,11 @@
 #pragma once
-#include <GLFW\glfw3.h>
+#include <GLFW/glfw3.h>   // GLFW
+#include <iostream>
 #include "AntTweakBar.h"
+
+// Custom Inputs
+bool getMouseHeld(GLFWwindow* window, int button);
+void handleInputs(GLFWwindow* window);
 
 // Mouse Callback
 void cursorPosCallback(GLFWwindow* window, double cursorX, double cursorY);
