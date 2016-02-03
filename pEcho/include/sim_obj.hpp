@@ -1,6 +1,10 @@
 #pragma once
+// Standard Library Includes
+#include <iostream>
+#include <cmath>
 // Custom Includes
 #include "scenario.hpp"
+#include "sharedStage.hpp"
 #include "com.hpp"
 
 class sim_obj : public scenario {
@@ -16,9 +20,12 @@ private:
   int calcAcceleraitonAB();
   int calcHalfVelocityAB();
   int calcPositionAB();
+  void calcCollision();
 
 public:
   sim_obj();
   ~sim_obj();
   int itteration();
+  void updateSharedArea(sharedStage* l_sharedDataAccess);
+  void updateLocalStore(sharedStage* l_sharedDataAccess);
 };

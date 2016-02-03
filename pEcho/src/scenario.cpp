@@ -12,9 +12,6 @@ scenario::~scenario() {
 void scenario::newBody(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double p_VelX, double p_VelY) {
   bodyStore.push_back(std::move(body(p_Mass, p_Radius, p_PosX, p_PosY, p_VelX, p_VelY)));
 }
-void scenario::newBody(double p_PosX, double p_PosY) {
-  bodyStore.push_back(std::move(body(p_PosX, p_PosY)));
-}
 void scenario::delBody(int index) {
   bodyStore.erase(bodyStore.begin() + index);
 }
@@ -28,14 +25,10 @@ com::bodyVector scenario::returnBodyStore() {
   return bodyStore;
 }
 
-void scenario::setUGC(double p_UGC) {
-  UGC = p_UGC;
-}
-void scenario::setIDT(double p_IDT) {
-  IDT = p_IDT;
-}
-void scenario::setIPF(int p_IPF) {
-  IPF = p_IPF;
+void scenario::updateControl(sharedStage* l_sharedDataAccess) {
+  UGC = l_sharedDataAccess->getUGC();
+  IDT = l_sharedDataAccess->getIDT();
+  IPF = l_sharedDataAccess->getIPF();
 }
 
 double scenario::getUGC() {

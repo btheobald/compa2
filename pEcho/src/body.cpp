@@ -21,6 +21,10 @@ body::body(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double 
   // Set Velocity
   velocity[0] = p_VelX;
   velocity[1] = p_VelY;
+  // Set Colour
+  color[0] = 1.0f;
+  color[1] = 1.0f;
+  color[2] = 1.0f;
 }
 
 body::body(double p_PosX, double p_PosY) {
@@ -73,7 +77,7 @@ int body::setFixed(bool p_Fixed) {
   fixed = p_Fixed;
   return 0;
 }
-int body::setColor(float p_Color[3]) {
+int body::setColor(const float p_Color[3]) {
   color[0] = p_Color[0];
   color[1] = p_Color[1];
   color[2] = p_Color[2];

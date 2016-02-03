@@ -1,5 +1,6 @@
 // Standard Library Includes
 #include <thread>
+#include <iostream>
 // External Library Includes
 #include <GLFW/glfw3.h>   // GLFWW
 #include <AntTweakBar.h>  // AntTweakBar
@@ -7,6 +8,8 @@
 #include "rdr_obj.hpp"
 #include "sharedStage.hpp"
 #include "simEntry.hpp"
+
+#define SCALEMULTIPLIER 4
 
 void initMatrix(int lXRes, int lYRes);
 void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess);
@@ -27,7 +30,7 @@ int main() {
   // Init GLFW
   glfwInit();
   // MSSA 8X
-  glfwWindowHint(GLFW_SAMPLES, 16);
+  glfwWindowHint(GLFW_SAMPLES,8);
   // Create Window
   GLFWwindow* echoWindow;
   // Get User Resolution
@@ -85,7 +88,7 @@ void initMatrix(int lXRes, int lYRes) {
   glLoadIdentity();
 
   // Center View on 0, 0 and Make Pixel Perfect
-  glOrtho(-lXRes/2, lXRes/2, -lYRes/2, lYRes/2, 1.0f, -1.0f);
+  glOrtho((-lXRes/2)*SCALEMULTIPLIER, (lXRes/2)*SCALEMULTIPLIER, (-lYRes/2)*SCALEMULTIPLIER, (lYRes/2)*SCALEMULTIPLIER, 1.0f, -1.0f);
 
   // Init Modelview Matrix
   glMatrixMode(GL_MODELVIEW);

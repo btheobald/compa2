@@ -8,26 +8,18 @@ void simInit(sharedStage* sharedDataAccess) {
   sim_obj simMain;
 
   // Get Body Data from shared
-  simMain.populateBodyStore(sharedDataAccess->returnBodyStore_R());
+  simMain.updateLocalStore(sharedDataAccess);
 
   // Check Exit Request
   while (!(sharedDataAccess->getStatus(1))) {
-    
-    // Simulation Old Data Has Not Been Taken
+    // Wait for old data to be taken.
     if(sharedDataAccess->newSScenarioCheck()) {
-      // Unique Lock ensures that mutex will be unlocked on destruction.
       std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
-      // Wait for data to be taken. 
       sharedDataAccess->simWait.wait(uniqueSimWaitMTX);
     }
     // Stage Data to Shared Area
-    sharedDataAccess->populateBodyStore_S(simMain.returnBodyStore());
-
-    // Update Simulation Control
-    simMain.setUGC(sharedDataAccess->getUGC());
-    simMain.setIDT(sharedDataAccess->getIDT());
-    simMain.setIPF(sharedDataAccess->getIPF());
-
+    simMain.updateSharedArea(sharedDataAccess);
+    simMain.updateControl(sharedDataAccess);
     // Check If Paused or Exit Request
     if(!(sharedDataAccess->getStatus(0) | sharedDataAccess->getStatus(1))) {
       for(int icnt = 0; icnt < simMain.getIPF(); icnt++) {

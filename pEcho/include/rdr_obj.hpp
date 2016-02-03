@@ -1,6 +1,7 @@
 #pragma once
 // Standard Library Includes
 #include <random>
+#include <iostream>
 // External Library Includes
 #include <GLFW/glfw3.h> // GLFW
 // Custom Includes

@@ -14,7 +14,7 @@ double sim_obj::calcCompDistance(int bodyID_A, int bodyID_B, int xy) {
 }
 
 double sim_obj::calcVectDistance(double distX, double distY) {
-  return sqrt(pow(fabs(distX),2) + pow(fabs(distY), 2));
+  return sqrt(pow(std::abs(distX),2) + pow(std::abs(distY), 2));
 }
 
 double sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B, double distV) {
@@ -99,6 +99,35 @@ int sim_obj::calcPositionAB() {
   return 0;
 }
 
+void sim_obj::calcCollision() {
+  for (unsigned int bodyIDC_A = 0; bodyIDC_A < bodyStore.size(); bodyIDC_A++) {
+    for (unsigned int bodyIDC_B = 0; bodyIDC_B < bodyStore.size(); bodyIDC_B++) {
+      if (bodyIDC_A != bodyIDC_B) {
+        double xDist = calcCompDistance(bodyIDC_A, bodyIDC_B, 0);
+        double yDist = calcCompDistance(bodyIDC_A, bodyIDC_B, 1);
+        double vDist = calcVectDistance(xDist, yDist);
+
+        if((bodyStore[bodyIDC_A].getRadius()+bodyStore[bodyIDC_B].getRadius()) > vDist) {
+          double combinedMass = bodyStore[bodyIDC_A].getMass()+bodyStore[bodyIDC_B].getMass();
+          bodyStore[bodyIDC_A].setRadius(sqrt((bodyStore[bodyIDC_A].getRadius()*bodyStore[bodyIDC_A].getRadius())+(bodyStore[bodyIDC_B].getRadius()*bodyStore[bodyIDC_B].getRadius())));
+          bodyStore[bodyIDC_A].setPosition(((bodyStore[bodyIDC_A].getPosition(0)*bodyStore[bodyIDC_A].getMass())+(bodyStore[bodyIDC_B].getPosition(0)*bodyStore[bodyIDC_B].getMass()))/combinedMass, 0);
+          bodyStore[bodyIDC_A].setPosition(((bodyStore[bodyIDC_A].getPosition(1)*bodyStore[bodyIDC_A].getMass())+(bodyStore[bodyIDC_B].getPosition(1)*bodyStore[bodyIDC_B].getMass()))/combinedMass, 1);
+          bodyStore[bodyIDC_A].setVelocity(((bodyStore[bodyIDC_A].getMass()*bodyStore[bodyIDC_A].getVelocity(0))+(bodyStore[bodyIDC_B].getMass()*bodyStore[bodyIDC_B].getVelocity(0)))/combinedMass, 0);
+          bodyStore[bodyIDC_A].setVelocity(((bodyStore[bodyIDC_A].getMass()*bodyStore[bodyIDC_A].getVelocity(1))+(bodyStore[bodyIDC_B].getMass()*bodyStore[bodyIDC_B].getVelocity(1)))/combinedMass, 1);
+          bodyStore[bodyIDC_A].setMass(combinedMass);
+          delBody(bodyIDC_B);
+          //std::cerr << "Collision Detected " << bodyIDC_A << ":" << bodyIDC_B << std::endl;
+          //bodyStore[bodyIDC_A].setColor(red);
+          //bodyStore[bodyIDC_B].setColor(red);
+        } else {
+          //bodyStore[bodyIDC_A].setColor(white);
+          //bodyStore[bodyIDC_B].setColor(white);
+        }
+      }
+    }
+  }
+}
+
 sim_obj::sim_obj() {
 }
 
@@ -126,7 +155,21 @@ int sim_obj::itteration() {
   // Calculate New Velocity
   calcHalfVelocityAB();
 
+  calcCollision();
   //cout << bodyStore[1].getPosition(0) << " " << bodyStore[1].getPosition(1) << endl;
 
   return 0;
+}
+
+void sim_obj::updateSharedArea(sharedStage* l_sharedDataAccess) {
+  // Push Body Data To Shared
+  l_sharedDataAccess->populateBodyStore_S(returnBodyStore());
+}
+
+void sim_obj::updateLocalStore(sharedStage* l_sharedDataAccess) {
+  // Get New Data from Render
+  if(l_sharedDataAccess->newRScenarioCheck()) {
+    populateBodyStore(l_sharedDataAccess->returnBodyStore_R());
+  }
+  // Skip if No New Data Avaliable
 }
