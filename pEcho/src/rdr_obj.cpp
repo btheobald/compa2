@@ -1,7 +1,7 @@
 // Header Include
 #include "rdr_obj.hpp"
 
-#define TEST_BODIES 1500
+#define TEST_BODIES 2000
 
 void rdr_obj::setupDefaultScenario() {
   // Simulation Control
