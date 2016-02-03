@@ -1,7 +1,7 @@
 // Header Include
 #include "rdr_obj.hpp"
 
-#define TEST_BODIES 100
+#define TEST_BODIES 1000
 #define RADIUS 500
 
 void rdr_obj::setupDefaultScenario() {
@@ -58,7 +58,7 @@ void rdr_obj::updateLocalStore(sharedStage* l_sharedDataAccess) {
 }
 
 void rdr_obj::drawBody(int bodyID) {
-  const int segments = 16;
+  const int segments = 32;
 
   double posX = bodyStore[bodyID].getPosition(0);
   double posY = bodyStore[bodyID].getPosition(1);

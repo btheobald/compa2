@@ -82,9 +82,6 @@ int main() {
 }
 
 void initDisplay(int lXRes, int lYRes) {
-  // Set Viewport Extents
-  glViewport(lXRes, lYRes, -lXRes, -lYRes);
-
   // Init Projection
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
@@ -93,6 +90,9 @@ void initDisplay(int lXRes, int lYRes) {
   // Init Modelview
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
+
+  // Set Viewport Extents
+  glViewport(0, 0, lXRes, lYRes);
 
   // Save Default Matrix
   glPushMatrix();
@@ -113,6 +113,7 @@ void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess) {
 
   // Swap Render / Draw Buffers
   glfwSwapBuffers(localWindow);
+
   // Check For Input Events
   glfwPollEvents();
 }
