@@ -1,7 +1,7 @@
 // Header Include
 #include "sim_obj.hpp"
 
-void sim_obj::resizeMatrix(com::double2DVector& p_Matrix, int newSize) {
+void sim_obj::resizeMatrix(com::double2DVector &p_Matrix, int newSize) {
   p_Matrix.clear();
   p_Matrix.resize(newSize, std::vector<double>(newSize, 0));
   prevBodyCount = bodyStore.size();
@@ -31,18 +31,20 @@ int sim_obj::calcForceMatrix(int range_L, int range_H) {
   double tempPreForce, distX, distY, distV;
 
   // Loop Half Matrix
-  for (unsigned int xAccess = range_L; xAccess < range_H; xAccess++) {
+  for (int xAccess = 0; xAccess < bodyStore.size(); xAccess++) {
     for (unsigned int yAccess = xAccess + 1; yAccess < bodyStore.size(); yAccess++) {
       // Skip if checking same body
       if (xAccess != yAccess) {
-        // Calculate Distances
-        distX = calcCompDistance(xAccess, yAccess, 0);
-        distY = calcCompDistance(xAccess, yAccess, 1);
-        distV = calcVectDistance(distX, distY);
+        if (((xAccess >= range_L) & (xAccess <= range_H)) | ((yAccess >= range_L) & (yAccess <= range_H))) {
+          // Calculate Distances
+          distX = calcCompDistance(xAccess, yAccess, 0);
+          distY = calcCompDistance(xAccess, yAccess, 1);
+          distV = calcVectDistance(distX, distY);
 
-        tempPreForce = calcForceBodyPair(xAccess, yAccess, distV);
-        forceMatrix[xAccess][yAccess] = -tempPreForce * distX;
-        forceMatrix[yAccess][xAccess] = -tempPreForce * distY;
+          tempPreForce = calcForceBodyPair(xAccess, yAccess, distV);
+          forceMatrix[xAccess][yAccess] = -tempPreForce * distX;
+          forceMatrix[yAccess][xAccess] = -tempPreForce * distY;
+        }
       }
     }
   }
@@ -50,13 +52,17 @@ int sim_obj::calcForceMatrix(int range_L, int range_H) {
   // Return Success
   return 0;
 }
-// Applies to All Bodies, sets in body vector.
-int sim_obj::calcForceSumAB(int range_L, int range_H) {
-  for (unsigned int bodyIDC = range_L; bodyIDC < range_H; bodyIDC++) {
+
+void sim_obj::clearForces() {
+  for (int bodyIDC = 0; bodyIDC < bodyStore.size(); bodyIDC++) {
     bodyStore[bodyIDC].resetForce();
   }
-  for (unsigned int xAccess = range_L; xAccess < range_H; xAccess++) {
-    for (unsigned int yAccess = xAccess; yAccess < bodyStore.size(); yAccess++) {
+}
+
+// Applies to All Bodies, sets in body vector.
+int sim_obj::calcForceSumAB(int range_L, int range_H) {
+  for (int xAccess = range_L; xAccess < range_H; xAccess++) {
+    for (unsigned int yAccess = 0; yAccess < bodyStore.size(); yAccess++) {
       // Ignore Middle Diagonal
       if (yAccess != xAccess) {
         // If yAccess is smaller than xAccess, flip coordinates to stay within half matrix.
@@ -76,7 +82,7 @@ int sim_obj::calcForceSumAB(int range_L, int range_H) {
 
 int sim_obj::calcAcceleraitonAB(int range_L, int range_H) {
   // Update Forces before Acceleration Update
-  for (unsigned int bodyIDC = range_L; bodyIDC < range_H; bodyIDC++) {
+  for (int bodyIDC = range_L; bodyIDC < range_H; bodyIDC++) {
     bodyStore[bodyIDC].calcAcceleration();
     //cout << bodyIDC << " : " << bodyStore[bodyIDC].getAcceleration(0) << ", " << bodyStore[bodyIDC].getAcceleration(1) << endl;
   }
@@ -84,7 +90,7 @@ int sim_obj::calcAcceleraitonAB(int range_L, int range_H) {
 }
 
 int sim_obj::calcHalfVelocityAB(int range_L, int range_H) {
-  for (unsigned int bodyIDC = range_L; bodyIDC < range_H; bodyIDC++) {
+  for (int bodyIDC = range_L; bodyIDC < range_H; bodyIDC++) {
     bodyStore[bodyIDC].calcHalfVelocity(IDT);
     //cout << bodyIDC << " : " << bodyStore[bodyIDC].getVelocity(0) << ", " << bodyStore[bodyIDC].getVelocity(1) << endl;
   }
@@ -92,7 +98,7 @@ int sim_obj::calcHalfVelocityAB(int range_L, int range_H) {
 }
 
 int sim_obj::calcPositionAB(int range_L, int range_H) {
-  for (unsigned int bodyIDC = range_L; bodyIDC < range_H; bodyIDC++) {
+  for (int bodyIDC = range_L; bodyIDC < range_H; bodyIDC++) {
     bodyStore[bodyIDC].calcPosition(IDT);
   }
   return 0;
@@ -138,15 +144,29 @@ int sim_obj::getRange(int usingThreads, int threadID, bool lowerHigher) {
   unsigned int excess = bodyCount % usingThreads;
   unsigned int toSplit = (bodyCount - excess) / usingThreads;
 
+  if(usingThreads == 1) {
+    if(lowerHigher) {
+      // Higher Range
+      return bodyCount;
+    } else {
+      // Lower Range
+      return 0;
+    }
+  }
+
   if(lowerHigher) {
     // Higher Range
-    return toSplit * (threadID+1);;
+    return toSplit * (threadID+1) + excess;;
   } else {
     // Lower Range
-    return toSplit * (threadID);
+    if(threadID != 0)
+      return toSplit * (threadID) + excess;
+    else
+      return toSplit * (threadID);
   }
 }
 
 void sim_obj::preItteration() {
   resizeMatrix(forceMatrix, bodyStore.size());
+  clearForces();
 }

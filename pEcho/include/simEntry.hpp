@@ -10,4 +10,5 @@
 #include "com.hpp"
 
 // Initial Simulation Thread Call
+void workerThread(sim_obj* simAccess, int threadsUsed, int threadID, int stage);
 void simInit(sharedStage* sharedDataAccess);

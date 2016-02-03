@@ -33,19 +33,42 @@ void simInit(sharedStage* sharedDataAccess) {
       for(int icnt = 0; icnt < simMain.getIPF(); icnt++) {
         simMain.preItteration();
 
-        for(int threads = 0; threads < simMain.getThreadCount(); threads++) {
-          simMain.itteration_vp(simMain.getRange(simMain.getThreadCount(), threads, false), simMain.getRange(simMain.getThreadCount(), threads, true));
-        }
+        std::thread threadStore[16]; // Hard Limit of 16 Threads
 
-        for(int threads = 0; threads < simMain.getThreadCount(); threads++) {
-          simMain.itteration_f(simMain.getRange(simMain.getThreadCount(), threads, false), simMain.getRange(simMain.getThreadCount(), threads, true));
-        }
+        int threadUsed = simMain.getThreadCount();
 
-        for(int threads = 0; threads < simMain.getThreadCount(); threads++) {
-          simMain.itteration_av(simMain.getRange(simMain.getThreadCount(), threads, false), simMain.getRange(simMain.getThreadCount(), threads, true));
+        for(int currentStage = 0; currentStage < 3; currentStage++) {
+          for(int threadCounter = 0; threadCounter < threadUsed; threadCounter++) {
+            threadStore[threadCounter] = std::thread(workerThread, &simMain, threadUsed, threadCounter, currentStage);
+            //std::cerr << "Worker " << threadCounter << " Dispatched To Stage " << currentStage << std::endl;
+          }
+          for(int threadCounter = 0; threadCounter < threadUsed; threadCounter++) {
+            threadStore[threadCounter].join();
+            //std::cerr << "Worker " << threadCounter << " Joined." << std::endl;
+          }
         }
       }
     }
   }
   // Sim Now Exits
+}
+
+void workerThread(sim_obj* simAccess, int threadsUsed, int threadID, int stage) {
+  int upperRange = simAccess->getRange(threadsUsed, threadID, true);
+  int lowerRange = simAccess->getRange(threadsUsed, threadID, false);
+
+  switch(stage) {
+    case 0: {
+      simAccess->itteration_vp(lowerRange, upperRange);
+      break;
+    }
+    case 1: {
+      simAccess->itteration_f(lowerRange, upperRange);
+      break;
+    }
+    case 2: {
+      simAccess->itteration_av(lowerRange, upperRange);
+      break;
+    }
+  }
 }
