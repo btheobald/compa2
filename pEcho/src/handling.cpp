@@ -64,7 +64,7 @@ void matrixCamera() {
   glPopMatrix();
   glLoadIdentity();
 
-  glTranslated(((-vectX)*responsiveness), ((vectY)*responsiveness), 0);
+  glTranslated((-vectX*responsiveness), (vectY*responsiveness), 0);
   glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 0);
 
   glPushMatrix();
@@ -105,8 +105,10 @@ void windowResizeCallback(GLFWwindow* window, int width, int height) {
   glPopMatrix();
   glLoadIdentity();
 
-  glTranslated((-vectX*scaleFactor)*responsiveness, (vectY*scaleFactor)*responsiveness, 0);
-  glScaled(-scaleFactor, -scaleFactor, 0);
+  glTranslated(-vectX*responsiveness, vectY*responsiveness, 0);
+  glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 0);
+
+  TwWindowSize(width, height);
 
   glViewport(0, 0, width, height);
 
