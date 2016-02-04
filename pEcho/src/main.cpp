@@ -111,6 +111,16 @@ void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess) {
   // Draw Tweak Bars
   TwDraw();
 
+/*  glMatrixMode(GL_MODELVIEW);
+  glPopMatrix();
+  glLoadIdentity();
+
+  glTranslated( -vectX*RESPONSIVENESS, vectY*RESPONSIVENESS, 0);
+  glScaled(-scaleFactor, -scaleFactor, 0);
+
+  glPushMatrix(); */
+  matrixCamera();
+
   // Swap Render / Draw Buffers
   glfwSwapBuffers(localWindow);
 

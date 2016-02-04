@@ -2,7 +2,7 @@
 #include "rdr_obj.hpp"
 
 #define TEST_BODIES 1000
-#define RADIUS 500
+#define RADIUS 5000
 
 void rdr_obj::setupDefaultScenario() {
   // Simulation Control

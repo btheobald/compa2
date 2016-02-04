@@ -3,10 +3,13 @@
 #include <iostream>
 #include "AntTweakBar.h"
 
+#define RESPONSIVENESS 2.0f
+
 // Custom Inputs
 bool getMouseHeld(GLFWwindow* window, int button);
 void moveCamera(GLFWwindow* window, double cursorX, double cursorY);
 void zoomCamera(double change);
+void matrixCamera();
 
 // Mouse Callback
 void cursorPosCallback(GLFWwindow* window, double cursorX, double cursorY);
