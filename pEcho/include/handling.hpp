@@ -1,9 +1,8 @@
 #pragma once
 #include <GLFW/glfw3.h>   // GLFW
 #include <iostream>
+#include <cmath>
 #include "AntTweakBar.h"
-
-#define RESPONSIVENESS 2.0f
 
 // Custom Inputs
 bool getMouseHeld(GLFWwindow* window, int button);

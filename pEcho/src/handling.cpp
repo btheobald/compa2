@@ -1,8 +1,9 @@
 #include "handling.hpp"
 using namespace std;
 
-double vectX, vectY;
-double scaleFactor;
+double vectX = 0, vectY = 0;
+double scaleFactor = 1;
+double responsiveness = 2;
 
 // Custom Inputs
 // Returns true if mouse button held.
@@ -17,7 +18,7 @@ bool getMouseHeld(GLFWwindow* window, int button){
       startTime = glfwGetTime();
     }
     checking = true;
-    if(checking & (glfwGetTime() - startTime > 0.2)) {
+    if(checking & (glfwGetTime() - startTime > 0.15)) {
       held = true;
     }
   }
@@ -63,7 +64,7 @@ void matrixCamera() {
   glPopMatrix();
   glLoadIdentity();
 
-  glTranslated( -vectX*RESPONSIVENESS*scaleFactor, vectY*RESPONSIVENESS*scaleFactor, 0);
+  glTranslated((-vectX*scaleFactor*(1/(scaleFactor)))*responsiveness, (vectY*scaleFactor*(1/(scaleFactor))*responsiveness), 0);
   glScaled(-scaleFactor, -scaleFactor, 0);
 
   glPushMatrix();
@@ -104,7 +105,7 @@ void windowResizeCallback(GLFWwindow* window, int width, int height) {
   glPopMatrix();
   glLoadIdentity();
 
-  glTranslated( -vectX*RESPONSIVENESS, vectY*RESPONSIVENESS, 0);
+  glTranslated(-vectX*scaleFactor-1/scaleFactor, vectY*scaleFactor+1/scaleFactor, 0);
   glScaled(-scaleFactor, -scaleFactor, 0);
 
   glViewport(0, 0, width, height);

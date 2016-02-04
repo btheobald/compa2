@@ -2,12 +2,12 @@
 #include "rdr_obj.hpp"
 
 #define TEST_BODIES 1000
-#define RADIUS 5000
+#define RADIUS 1000
 
 void rdr_obj::setupDefaultScenario() {
   // Simulation Control
   UGC = 0.1;
-  IDT = 0.01;
+  IDT = 0.1;
   IPF = 1;
 
   // Create a Pseudo-random circular distribution of bodies around 0,0
