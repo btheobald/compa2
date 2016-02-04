@@ -51,8 +51,8 @@ void zoomCamera(double change){
   //static double scaleFactor;
 
   scaleFactor += change/10;
-  if(scaleFactor < 0.1) {
-    scaleFactor = 0.1;
+  if(scaleFactor < 0.3) {
+    scaleFactor = 0.3;
   }
   if(scaleFactor > 10) {
     scaleFactor = 10;
@@ -64,8 +64,8 @@ void matrixCamera() {
   glPopMatrix();
   glLoadIdentity();
 
-  glTranslated((-vectX*scaleFactor)*responsiveness, (vectY*scaleFactor)*responsiveness, 0);
-  glScaled(-scaleFactor, -scaleFactor, 0);
+  glTranslated(((-vectX)*responsiveness), ((vectY)*responsiveness), 0);
+  glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 0);
 
   glPushMatrix();
 }

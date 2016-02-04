@@ -1,12 +1,12 @@
 // Header Include
 #include "rdr_obj.hpp"
 
-#define TEST_BODIES 1200
+#define TEST_BODIES 1000
 #define RADIUS 1000
 
 void rdr_obj::setupDefaultScenario() {
   // Simulation Control
-  UGC = 0.1;
+  UGC = 1;
   IDT = 0.1;
   IPF = 1;
 
@@ -17,7 +17,7 @@ void rdr_obj::setupDefaultScenario() {
   std::uniform_real_distribution<> pos(0, RADIUS);
   std::random_device r;
   std::mt19937 gen(r());
-  double tempRand, tempCirX, tempCirY, tempDist, tempVelX, tempVelY;
+  /*double tempRand, tempCirX, tempCirY, tempDist, tempVelX, tempVelY;
   for(int bIDC = 0; bIDC < TEST_BODIES; bIDC++) {
     // Ensure that bodies are not too close to center.
     do tempRand = pos(gen) - RADIUS/2; while((tempRand < 40) & (tempRand > -40));
@@ -32,9 +32,10 @@ void rdr_obj::setupDefaultScenario() {
     tempVelX = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * tempCirY, -tempCirY);
 
     newBody(0.01, 1, tempCirX, tempCirY, tempVelX, tempVelY);
-  }
+  }*/
   // Add Massive Central Body
-  newBody(100000, 10, 0, 0, 0, 0);
+  newBody(100000, 10, 0, 100, 0, 0);
+  newBody(100000, 10, 0, -100, 0, 0);
 }
 
 void rdr_obj::updateSharedArea(sharedStage* l_sharedDataAccess) {

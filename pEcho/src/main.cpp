@@ -44,10 +44,14 @@ int main() {
   setCallbacks(echoWindow);
 
   // Init AntTweakBar
-  TwBar* test;
+  TwBar* controls;
   TwInit(TW_OPENGL, NULL);
   TwWindowSize(wXRes, wYRes);
-  test = TwNewBar("Test");
+  controls = TwNewBar("Test");
+  //double UGC, IDT, IPF;
+  //TwAddVarRW(controls, "UGC", TW_TYPE_DOUBLE, &IDT, " min=0 max=10 step=0.01 group=Engine label='Gravi' ");
+  //TwAddVarRW(controls, "IDT", TW_TYPE_DOUBLE, &IDT, " min=0 max=10 step=0.01 group=Engine label='Delta Time' ");
+  //TwAddVarRW(controls, "IPF", TW_TYPE_DOUBLE, &IDT, " min=0 max=10 step=0.01 group=Engine label='Delta Time' ");
 
   // Start Sim Thread, Pass SharedData Address
   std::thread simThread(simInit, &sharedData);
@@ -56,6 +60,7 @@ int main() {
   initDisplay(wXRes, wYRes);
 
   while(!glfwWindowShouldClose(echoWindow)) {
+    //renderMain.sets
     // Pull Changes from Shared
     renderMain.updateLocalStore(&sharedData);
 
