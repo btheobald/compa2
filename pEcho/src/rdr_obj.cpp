@@ -1,7 +1,7 @@
 // Header Include
 #include "rdr_obj.hpp"
 
-#define TEST_BODIES 1000
+#define TEST_BODIES 1200
 #define RADIUS 1000
 
 void rdr_obj::setupDefaultScenario() {
@@ -24,7 +24,7 @@ void rdr_obj::setupDefaultScenario() {
 
     // Map to Circle
     tempCirX = (tempRand * cos(2 * M_PI * tempRand));
-    tempCirY = (tempRand * sin(2 * M_PI * tempRand)); // Squash in Y
+    tempCirY = (tempRand * sin(2 * M_PI * tempRand));
     // Calculate Distance to 0,0
     tempDist = sqrt(pow(tempCirX,2) + pow(tempCirY,2));
     // Calc Velocity
