@@ -154,7 +154,7 @@ int sim_obj::itteration() {
   calcPositionAB();
 
   // Check for Collisions
-  calcCollision();
+  //calcCollision();
 
   // Update Forces and Accelerations
   calcForceMatrix();

@@ -4,13 +4,14 @@
 void rdr_obj::setupDefaultScenario() {
   // Simulation Control
   UGC = 1;
-  IDT = 0.01;
+  IDT = 0.1;
   IPF = 1;
 
-  createSuperstructure(500, 10000, 0.1, 5, 0.7, 1000, 200, 0, 0, 50, 250);
+  createSuperstructure(400, 10000, 0.1, 5, 0.7, 500, 200, -3, -2, 50, 250, com::red);
+  createSuperstructure(400, 10000, 0.1, 5, 0.7, -500, -200, 0, 0, 50, 250, com::green);
 }
 
-void rdr_obj::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass, double p_cRadius, double p_oRadius, double p_cPosX, double p_cPosY, double p_cVelX, double p_cVelY, double p_coSpacing, double p_sRadius) {
+void rdr_obj::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass, double p_cRadius, double p_oRadius, double p_cPosX, double p_cPosY, double p_cVelX, double p_cVelY, double p_coSpacing, double p_sRadius, const float p_Color[3]) {
   // Create a Pseudo-random circular distribution of bodies around a central body.
   // Temporary Variables
 
@@ -22,7 +23,7 @@ void rdr_obj::createSuperstructure(int p_soBodies, double p_cMass, double p_oMas
 
   double tempRand, tempCirX, tempCirY, tempDist, tempVelX, tempVelY;
   // Add Central Body
-  newBody(p_cMass, p_cRadius, p_cPosX, p_cPosY, p_cVelX, p_cVelY);
+  newBody(p_cMass, p_cRadius, p_cPosX, p_cPosY, p_cVelX, p_cVelY, p_Color);
   int bodyOffset = bodyStore.size() - 1;
   for(int bIDC = 0; bIDC < p_soBodies; bIDC++) {
     // Ensure that bodies are not too close to center.
@@ -34,13 +35,12 @@ void rdr_obj::createSuperstructure(int p_soBodies, double p_cMass, double p_oMas
 
     // Calculate Distance to Body
     tempDist = sqrt(pow(p_cPosX-tempCirX,2) + pow(p_cPosY-tempCirY,2));
-    std::cerr << tempDist << std::endl;
 
     // Calc Velocity
     tempVelX = copysign(sqrt((UGC*(p_cMass+p_oMass)) / pow(tempDist,3)) * (tempCirY-p_cPosY), (tempCirY-p_cPosY)) + p_cVelX;
     tempVelY = copysign(sqrt((UGC*(p_cMass+p_oMass)) / pow(tempDist,3)) * (tempCirX-p_cPosX), -(tempCirX-p_cPosX)) + p_cVelY;
 
-    newBody(p_oMass, p_oRadius, tempCirX, tempCirY, tempVelX, tempVelY);
+    newBody(p_oMass, p_oRadius, tempCirX, tempCirY, tempVelX, tempVelY, p_Color);
   }
 }
 

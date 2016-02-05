@@ -12,7 +12,7 @@ body::body() {
   velocity[0] = 0;
 }
 
-body::body(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double p_VelX, double p_VelY) {
+body::body(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double p_VelX, double p_VelY, const float p_Color[3]) {
   mass = p_Mass;
   radius = p_Radius;
   // Set Position
@@ -22,9 +22,9 @@ body::body(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double 
   velocity[0] = p_VelX;
   velocity[1] = p_VelY;
   // Set Colour
-  color[0] = 1.0f;
-  color[1] = 1.0f;
-  color[2] = 1.0f;
+  color[0] = p_Color[0];
+  color[1] = p_Color[1];
+  color[2] = p_Color[2];
 }
 
 body::body(double p_PosX, double p_PosY) {

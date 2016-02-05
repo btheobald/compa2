@@ -11,7 +11,7 @@
 #include "handling.hpp"
 
 void initDisplay(int lXRes, int lYRes);
-void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess);
+void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, int &acc, int &c);
 
 int main() {
   // Set Random Seed Using Current Time
@@ -59,13 +59,16 @@ int main() {
   // Configure Projection Matrix, adapt to current resolution.
   initDisplay(wXRes, wYRes);
 
+  int acc = 10;
+  int c = 0;
+
   while(!glfwWindowShouldClose(echoWindow)) {
     //renderMain.sets
     // Pull Changes from Shared
     renderMain.updateLocalStore(&sharedData);
 
     // Draw and Display
-    displayLoopCall(echoWindow, &renderMain);
+    displayLoopCall(echoWindow, &renderMain, acc, c);
 
     // TODO: Update Local Scenario with Changes
   }
@@ -103,10 +106,11 @@ void initDisplay(int lXRes, int lYRes) {
   glPushMatrix();
 
   // Set Clear Color for Window
-  glClearColor(0.05f, 0.05f, 0.1f, 1);
+  //glClearColor(0.05f, 0.05f, 0.1f, 1);
+  glClearColor(0.0f, 0.0f, 0.0f, 1);
 }
 
-void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess) {
+void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, int &acc, int &c) {
   // Clear Display for Rendering
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -126,8 +130,19 @@ void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess) {
   glPushMatrix(); */
   matrixCamera();
 
-  // Swap Render / Draw Buffers
-  glfwSwapBuffers(localWindow);
+  if(c == 0) {
+    glAccum(GL_LOAD, 1.0 / acc);
+  } else {
+    glAccum(GL_ACCUM, 1.0 / acc);
+  }
+
+  c++;
+  if(c >= acc) {
+    c = 0;
+    glAccum(GL_RETURN, 1.0);
+    // Swap Render / Draw Buffers
+    glfwSwapBuffers(localWindow);
+  }
 
   // Check For Input Events
   glfwPollEvents();

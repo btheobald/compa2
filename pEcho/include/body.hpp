@@ -17,7 +17,7 @@ private:
 public:
   // Constructors
   body();
-  body(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double p_VelX, double p_VelY);
+  body(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double p_VelX, double p_VelY, const float p_Color[3]);
   body(double p_PosX, double p_PosY);
   // Destructor
   ~body();
