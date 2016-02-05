@@ -1,61 +1,47 @@
 // Header Include
 #include "rdr_obj.hpp"
 
-#define BODIES 300
-#define RADIUS 500
-#define SPACING 50
-
 void rdr_obj::setupDefaultScenario() {
   // Simulation Control
   UGC = 1;
   IDT = 0.01;
   IPF = 1;
 
-  // Create a Pseudo-random circular distribution of bodies around 0,0
+  createSuperstructure(10000, 0.01, 2000, 10, 1, 100, 0, 0, 0, 50, 100);
+  //createSuperstructure(1E4, 0.01, 1000, 10, 1, 1000, 100, 0, 0, 50, 500);
+}
+
+void rdr_obj::createSuperstructure(double p_cMass, double p_oMass, int p_soBodies, double p_cRadius, double p_oRadius, double p_cPosX, double p_cPosY, double p_cVelX, double p_cVelY, double p_coSpacing, double p_sRadius) {
+  // Create a Pseudo-random circular distribution of bodies around a central body.
   // Temporary Variables
 
-  // Use Mersenne Twister for RNE, range 0 - 800.
-  std::uniform_real_distribution<> pos(0, RADIUS*2);
+  // Use Mersenne Twister for RNE within range.
+  std::uniform_real_distribution<> pos(0, p_sRadius*2);
+   // Use random device for seed value
   std::random_device r;
   std::mt19937 gen(r());
+
   double tempRand, tempCirX, tempCirY, tempDist, tempVelX, tempVelY;
-  // Add Massive Central Body
-  newBody(100000, 10, 0, 0, 0, 0);
-  for(int bIDC = 0; bIDC < BODIES; bIDC++) {
+  // Add Central Body
+  newBody(p_cMass, p_cRadius, p_cPosX, p_cPosY, p_cVelX, p_cVelY);
+  int bodyOffset = bodyStore.size() - 1;
+  for(int bIDC = 0; bIDC < p_soBodies; bIDC++) {
     // Ensure that bodies are not too close to center.
-    do tempRand = pos(gen) - RADIUS/2; while((tempRand < SPACING) & (tempRand > -SPACING));
+    do tempRand = pos(gen) - p_sRadius/2; while((tempRand < p_coSpacing) & (tempRand > -p_coSpacing));
 
     // Map to Circle
-    tempCirX = bodyStore[0].getPosition(0)+(tempRand * cos(2 * M_PI * tempRand));
-    tempCirY = bodyStore[0].getPosition(1)+(tempRand * sin(2 * M_PI * tempRand));
+    tempCirX = p_cPosX+(tempRand * cos(2 * M_PI * tempRand));
+    tempCirY = p_cPosY+(tempRand * sin(2 * M_PI * tempRand));
 
     // Calculate Distance to Body
-    tempDist = sqrt(pow(bodyStore[0].getPosition(0)-tempCirX,2) + pow(bodyStore[0].getPosition(1)-tempCirY,2));
+    tempDist = sqrt(pow(p_cPosX-tempCirX,2) + pow(p_cPosY-tempCirY,2));
+    std::cerr << tempDist << std::endl;
 
     // Calc Velocity
-    tempVelY = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * tempCirX, tempCirX);
-    tempVelX = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * tempCirY, -tempCirY);
+    tempVelX = copysign(sqrt((UGC*(p_cMass+p_oMass)) / pow(tempDist,3)) * (tempCirY-p_cPosY), -tempCirY-p_cPosY) + p_cVelX;
+    tempVelY = copysign(sqrt((UGC*(p_cMass+p_oMass)) / pow(tempDist,3)) * (tempCirX-p_cPosX), tempCirX-p_cPosX) + p_cVelY;
 
-    newBody(0.01, 1, tempCirX, tempCirY, tempVelX, tempVelY);
-  }
-
-  newBody(100000, 10, 1500, 0, 0, 1);
-  for(int bIDC = 0; bIDC < BODIES; bIDC++) {
-    // Ensure that bodies are not too close to center.
-    do tempRand = pos(gen) - RADIUS/2; while((tempRand < SPACING) & (tempRand > -SPACING));
-
-    // Map to Circle
-    tempCirX = bodyStore[301].getPosition(0)+(tempRand * cos(2 * M_PI * tempRand));
-    tempCirY = bodyStore[301].getPosition(1)+(tempRand * sin(2 * M_PI * tempRand));
-
-    // Calculate Distance to Body
-    tempDist = sqrt(pow(bodyStore[301].getPosition(0)-tempCirX,2) + pow(bodyStore[301].getPosition(1)-tempCirY,2));
-
-    // Calc Velocity
-    tempVelY = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * (tempCirX-bodyStore[301].getPosition(0)), (tempCirX-bodyStore[301].getPosition(0)));
-    tempVelX = copysign(sqrt((UGC*100000) / pow(tempDist,3)) * (tempCirY-bodyStore[301].getPosition(1)), -(tempCirY-bodyStore[301].getPosition(1)));
-
-    newBody(0.01, 1, tempCirX, tempCirY, tempVelX, tempVelY);
+    newBody(p_oMass, p_oRadius, tempCirX, tempCirY, tempVelX, tempVelY);
   }
 }
 
