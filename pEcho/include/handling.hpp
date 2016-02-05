@@ -2,13 +2,15 @@
 #include <GLFW/glfw3.h>   // GLFW
 #include <iostream>
 #include <cmath>
+#include <GL/glu.h>
 #include "AntTweakBar.h"
 
 // Custom Inputs
 bool getMouseHeld(GLFWwindow* window, int button);
 void moveCamera(GLFWwindow* window, double cursorX, double cursorY);
 void zoomCamera(double change);
-void matrixCamera();
+void matrixCamera(GLFWwindow* window);
+void getCoord(double cX, double cY, double &aX, double &aY);
 
 // Mouse Callback
 void cursorPosCallback(GLFWwindow* window, double cursorX, double cursorY);

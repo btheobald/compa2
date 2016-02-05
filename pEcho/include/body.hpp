@@ -31,6 +31,7 @@ public:
   double getAcceleration(int xyIndex);
   double getVelocity(int xyIndex);
   double getPosition(int xyIndex);
+  double getMomentum(int xyIndex);
 
   // Set Variables (Returns OK/FAIL [0/1])
   int setMass(double p_Mass);

@@ -59,7 +59,7 @@ int main() {
   // Configure Projection Matrix, adapt to current resolution.
   initDisplay(wXRes, wYRes);
 
-  int acc = 10;
+  int acc = 50;
   int c = 0;
 
   while(!glfwWindowShouldClose(echoWindow)) {
@@ -90,6 +90,7 @@ int main() {
 }
 
 void initDisplay(int lXRes, int lYRes) {
+  glEnable(GL_DEPTH);
   // Init Projection
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
@@ -120,29 +121,12 @@ void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, int &acc, i
   // Draw Tweak Bars
   TwDraw();
 
-/*  glMatrixMode(GL_MODELVIEW);
-  glPopMatrix();
-  glLoadIdentity();
+  matrixCamera(localWindow);
 
-  glTranslated( -vectX*RESPONSIVENESS, vectY*RESPONSIVENESS, 0);
-  glScaled(-scaleFactor, -scaleFactor, 0);
+  // Swap Render / Draw Buffers
+  glfwSwapBuffers(localWindow);
 
-  glPushMatrix(); */
-  matrixCamera();
-
-  if(c == 0) {
-    glAccum(GL_LOAD, 1.0 / acc);
-  } else {
-    glAccum(GL_ACCUM, 1.0 / acc);
-  }
-
-  c++;
-  if(c >= acc) {
-    c = 0;
-    glAccum(GL_RETURN, 1.0);
-    // Swap Render / Draw Buffers
-    glfwSwapBuffers(localWindow);
-  }
+  //glfwSwapBuffers(localWindow);
 
   // Check For Input Events
   glfwPollEvents();

@@ -64,6 +64,9 @@ double body::getVelocity(int xyIndex) {
 double body::getPosition(int xyIndex) {
   return position[xyIndex];
 }
+double body::getMomentum(int xyIndex) {
+  return mass * velocity[xyIndex];
+}
 // Used in Setup and Interface
 int body::setMass(double p_Mass) {
   mass = p_Mass;

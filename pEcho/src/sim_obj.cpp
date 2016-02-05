@@ -119,8 +119,6 @@ void sim_obj::calcCollision() {
 
           bodyStore[bodyIDC_A].resetForce();
 
-          //std::cerr << bodyStore[bodyIDC_A].getVelocity(1) << std::endl;
-
           delBody(bodyIDC_B);
           //std::cerr << "Collision Detected " << bodyIDC_A << ":" << bodyIDC_B << std::endl;
           //bodyStore[bodyIDC_A].setColor(red);
@@ -154,7 +152,7 @@ int sim_obj::itteration() {
   calcPositionAB();
 
   // Check for Collisions
-  //calcCollision();
+  calcCollision();
 
   // Update Forces and Accelerations
   calcForceMatrix();

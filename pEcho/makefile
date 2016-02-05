@@ -17,12 +17,12 @@ INCLUDES   := $(wildcard $(INCLUDE_DIR)/*.hpp)
 OBJECTS    := $(SOURCES:$(SOURCE_DIR)/%.cpp=$(BINARY_DIR)/%.o)
 
 # Libraries
-LIBS  = `pkg-config --static --libs glfw3` -lAntTweakBar
+LIBS  = `pkg-config --static --libs glfw3` -lAntTweakBar -lGLU
 # Debugger
 DB    = gdb
 DBOPT =
 # Compiler Flags
-CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) `pkg-config --cflags glfw3` -Ofast
+CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) `pkg-config --cflags glfw3` -lGLU -Ofast -g
 # Linker Flags
 LFLAGS = -Wall $(LIBS)
 
