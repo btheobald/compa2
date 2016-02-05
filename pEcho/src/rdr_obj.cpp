@@ -7,11 +7,10 @@ void rdr_obj::setupDefaultScenario() {
   IDT = 0.01;
   IPF = 1;
 
-  createSuperstructure(10000, 0.01, 2000, 10, 1, 100, 0, 0, 0, 50, 100);
-  //createSuperstructure(1E4, 0.01, 1000, 10, 1, 1000, 100, 0, 0, 50, 500);
+  createSuperstructure(500, 10000, 0.1, 5, 0.7, 1000, 200, 0, 0, 50, 250);
 }
 
-void rdr_obj::createSuperstructure(double p_cMass, double p_oMass, int p_soBodies, double p_cRadius, double p_oRadius, double p_cPosX, double p_cPosY, double p_cVelX, double p_cVelY, double p_coSpacing, double p_sRadius) {
+void rdr_obj::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass, double p_cRadius, double p_oRadius, double p_cPosX, double p_cPosY, double p_cVelX, double p_cVelY, double p_coSpacing, double p_sRadius) {
   // Create a Pseudo-random circular distribution of bodies around a central body.
   // Temporary Variables
 
@@ -38,8 +37,8 @@ void rdr_obj::createSuperstructure(double p_cMass, double p_oMass, int p_soBodie
     std::cerr << tempDist << std::endl;
 
     // Calc Velocity
-    tempVelX = copysign(sqrt((UGC*(p_cMass+p_oMass)) / pow(tempDist,3)) * (tempCirY-p_cPosY), -tempCirY-p_cPosY) + p_cVelX;
-    tempVelY = copysign(sqrt((UGC*(p_cMass+p_oMass)) / pow(tempDist,3)) * (tempCirX-p_cPosX), tempCirX-p_cPosX) + p_cVelY;
+    tempVelX = copysign(sqrt((UGC*(p_cMass+p_oMass)) / pow(tempDist,3)) * (tempCirY-p_cPosY), (tempCirY-p_cPosY)) + p_cVelX;
+    tempVelY = copysign(sqrt((UGC*(p_cMass+p_oMass)) / pow(tempDist,3)) * (tempCirX-p_cPosX), -(tempCirX-p_cPosX)) + p_cVelY;
 
     newBody(p_oMass, p_oRadius, tempCirX, tempCirY, tempVelX, tempVelY);
   }
