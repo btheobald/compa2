@@ -43,7 +43,7 @@ int main() {
   TwBar* controls;
   TwInit(TW_OPENGL, NULL);
   TwWindowSize(wXRes, wYRes);
-  controls = TwNewBar("Test");
+  controls = TwNewBar("Controls");
   double UGC = 0.1;
   double IDT = 0.1;
   int IPF = 1;

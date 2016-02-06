@@ -2,7 +2,9 @@
 #include "rdr_obj.hpp"
 
 void rdr_obj::setupDefaultScenario() {
-  createSuperstructure(2000, 100000, 0.1, 5, 0.5, 0, 0, 0, 0, 50, 250, com::white);
+  newBody(1000, 10, -100, 0, 0, 0, com::white);
+  newBody(1000, 10, 100, 0, 0, 0, com::white);
+  //createSuperstructure(2000, 100000, 0.1, 5, 0.5, 0, 0, 0, 0, 50, 250, com::white);
   //newBody(0.001, 1, 0, 0, 0, 0, com::white);
   //newBody(0.001, 1, 100, 0, 0, 0, com::white);
   //newBody(0.001, 1, 0, 100, 0, 0, com::white);
@@ -12,7 +14,6 @@ void rdr_obj::setupDefaultScenario() {
 
 void rdr_obj::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass, double p_cRadius, double p_oRadius, double p_cPosX, double p_cPosY, double p_cVelX, double p_cVelY, double p_coSpacing, double p_sRadius, const float p_Color[3]) {
   // Create a Pseudo-random circular distribution of bodies around a central body.
-  // Temporary Variables
 
   // Use Mersenne Twister for RNE within range.
   std::uniform_real_distribution<> pos(0, p_sRadius*2);
@@ -20,6 +21,7 @@ void rdr_obj::createSuperstructure(int p_soBodies, double p_cMass, double p_oMas
   std::random_device r;
   std::mt19937 gen(r());
 
+  // Temporary Variables
   double tempRand, tempCirX, tempCirY, tempDist, tempVelX, tempVelY;
   // Add Central Body
   newBody(p_cMass, p_cRadius, p_cPosX, p_cPosY, p_cVelX, p_cVelY, p_Color);

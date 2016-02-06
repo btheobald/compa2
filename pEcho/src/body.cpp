@@ -68,64 +68,48 @@ double body::getMomentum(int xyIndex) {
   return mass * velocity[xyIndex];
 }
 // Used in Setup and Interface
-int body::setMass(double p_Mass) {
+void body::setMass(double p_Mass) {
   mass = p_Mass;
-  return 0;
 }
-int body::setRadius(double p_Radius) {
+void body::setRadius(double p_Radius) {
   radius = p_Radius;
-  return 0;
 }
-int body::setFixed(bool p_Fixed) {
+void body::setFixed(bool p_Fixed) {
   fixed = p_Fixed;
-  return 0;
 }
-int body::setColor(const float p_Color[3]) {
+void body::setColor(const float p_Color[3]) {
   color[0] = p_Color[0];
   color[1] = p_Color[1];
   color[2] = p_Color[2];
-  return 0;
 }
-int body::setAcceleration(double p_acceleration, int xyIndex) {
+void body::setAcceleration(double p_acceleration, int xyIndex) {
   acceleration[xyIndex] = p_acceleration;
-  return 0;
 }
-int body::setVelocity(double p_velocity, int xyIndex) {
+void body::setVelocity(double p_velocity, int xyIndex) {
   velocity[xyIndex] = p_velocity;
-  return 0;
 }
-int body::setPosition(double p_position, int xyIndex) {
+void body::setPosition(double p_position, int xyIndex) {
   position[xyIndex] = p_position;
-  return 0;
 }
 
 // Used In Simulation
-int body::addForce(double p_Force, int xyIndex) {
+void body::addForce(double p_Force, int xyIndex) {
   force[xyIndex] = force[xyIndex] + p_Force;
-  return 0;
 }
-int body::resetForce() {
+void body::resetForce() {
   force[0] = 0;
   force[1] = 0;
-  return 0;
 }
 
-int body::calcAcceleration() {
-  for (int xy = 0; xy < 2; xy++) {
-    acceleration[xy] = force[xy] / mass;
-  }
-  return 0;
-  return 0;
+void body::calcAcceleration() {
+  acceleration[0] = force[0] / mass;
+  acceleration[1] = force[1] / mass;
 }
-int body::calcHalfVelocity(double timestep) {
-  for (int xy = 0; xy < 2; xy++) {
-    velocity[xy] = velocity[xy] + ( acceleration[xy] * (timestep * 0.5) );
-  }
-  return 0;
+void body::calcHalfVelocity(double timestep) {
+  velocity[0] = velocity[0] + ( acceleration[0] * (timestep * 0.5) );
+  velocity[1] = velocity[1] + ( acceleration[1] * (timestep * 0.5) );
 }
-int body::calcPosition(double timestep) {
-  for (int xy = 0; xy < 2; xy++) {
-    position[xy] = position[xy] + ( velocity[xy] * timestep );
-  }
-  return 0;
+void body::calcPosition(double timestep) {
+  position[0] = position[0] + ( velocity[0] * timestep );
+  position[1] = position[1] + ( velocity[1] * timestep );
 }
