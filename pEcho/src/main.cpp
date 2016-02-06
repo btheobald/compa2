@@ -22,10 +22,6 @@ int main() {
   // Init Shared Stage
   sharedStage sharedData;
 
-  // Setup Scenario and Commit
-  renderMain.setupDefaultScenario();
-  renderMain.updateSharedArea(&sharedData);
-
   // Init GLFW
   glfwInit();
   // MSSA 8X
@@ -48,10 +44,17 @@ int main() {
   TwInit(TW_OPENGL, NULL);
   TwWindowSize(wXRes, wYRes);
   controls = TwNewBar("Test");
-  //double UGC, IDT, IPF;
-  //TwAddVarRW(controls, "UGC", TW_TYPE_DOUBLE, &IDT, " min=0 max=10 step=0.01 group=Engine label='Gravi' ");
-  //TwAddVarRW(controls, "IDT", TW_TYPE_DOUBLE, &IDT, " min=0 max=10 step=0.01 group=Engine label='Delta Time' ");
-  //TwAddVarRW(controls, "IPF", TW_TYPE_DOUBLE, &IDT, " min=0 max=10 step=0.01 group=Engine label='Delta Time' ");
+  double UGC = 0.1;
+  double IDT = 0.1;
+  int IPF = 1;
+  renderMain.updateLocalControl(UGC, IDT, IPF);
+  TwAddVarRW(controls, "UGC", TW_TYPE_DOUBLE, &UGC, " min=1E-12 max=10 step=0.01 group=Engine label='Graviational Constant' ");
+  TwAddVarRW(controls, "IDT", TW_TYPE_DOUBLE, &IDT, " min=1E-8 max=1000 step=0.01 group=Engine label='Itteration Delta Time' ");
+  TwAddVarRW(controls, "IPF", TW_TYPE_INT32, &IPF,  " min=1 max=1000 step=1 group=Engine label='Itterations Per Frame' ");
+
+  // Setup Scenario and Commit
+  renderMain.setupDefaultScenario();
+  renderMain.updateSharedArea(&sharedData);
 
   // Start Sim Thread, Pass SharedData Address
   std::thread simThread(simInit, &sharedData);
@@ -63,7 +66,8 @@ int main() {
   int c = 0;
 
   while(!glfwWindowShouldClose(echoWindow)) {
-    //renderMain.sets
+    renderMain.updateLocalControl(UGC, IDT, IPF);
+    renderMain.updateSharedControl(&sharedData);
     // Pull Changes from Shared
     renderMain.updateLocalStore(&sharedData);
 

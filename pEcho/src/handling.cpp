@@ -92,9 +92,9 @@ void matrixCamera(GLFWwindow* window) {
   double zoomToX = aX - oldaX;
   double zoomToY = aY - oldaY;
 
-  glTranslated(zoomToX, -zoomToY, 0);
+  //glTranslated(zoomToX, -zoomToY, 0);
   glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 0);
-  glTranslated(zoomToX, -zoomToY, 0);
+  //glTranslated(zoomToX, -zoomToY, 0);
   glTranslated((-vectX*responsiveness), (vectY*responsiveness), 0);
   glPushMatrix();
 
