@@ -2,11 +2,12 @@
 #include "rdr_obj.hpp"
 
 void rdr_obj::setupDefaultScenario() {
-  newBody(1000, 10, -100, 0, 0, 0, com::white);
-  newBody(1000, 10, 100, 0, 0, 0, com::white);
-  //createSuperstructure(2000, 100000, 0.1, 5, 0.5, 0, 0, 0, 0, 50, 250, com::white);
-  //newBody(0.001, 1, 0, 0, 0, 0, com::white);
-  //newBody(0.001, 1, 100, 0, 0, 0, com::white);
+  // Realistic Size ISH
+  //createSuperstructure(10, 1.989E30, 5E24, 696000000, 100000000, 0, 0, 0, 0, 1E9, 1E11, com::white);
+  // Small Galaxy
+  createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 50, 1000, com::white);
+  //newBody(1, 10,  200, 0, 0, 0, com::white);
+  //newBody(1, 10, -200, 0, 0, 0, com::white);
   //newBody(0.001, 1, 0, 100, 0, 0, com::white);
   //newBody(0.001, 1, 150, 150, 0, 0, com::white);
   //newBody(p_cMass, p_cRadius, p_cPosX, p_cPosY, p_cVelX, p_cVelY, p_Color);
@@ -32,7 +33,7 @@ void rdr_obj::createSuperstructure(int p_soBodies, double p_cMass, double p_oMas
 
     // Map to Circle
     tempCirX = p_cPosX+(tempRand * cos(2 * M_PI * tempRand));
-    tempCirY = p_cPosY+(tempRand * sin(2 * M_PI * tempRand)) * 0.4;
+    tempCirY = p_cPosY+(tempRand * sin(2 * M_PI * tempRand));
 
     // Calculate Distance to Body
     tempDist = sqrt(pow(p_cPosX-tempCirX,2) + pow(p_cPosY-tempCirY,2));

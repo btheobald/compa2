@@ -11,7 +11,7 @@
 #include "handling.hpp"
 
 void initDisplay(int lXRes, int lYRes);
-void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, int &acc, int &c);
+void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess);
 
 int main() {
   // Set Random Seed Using Current Time
@@ -62,9 +62,6 @@ int main() {
   // Configure Projection Matrix, adapt to current resolution.
   initDisplay(wXRes, wYRes);
 
-  int acc = 50;
-  int c = 0;
-
   while(!glfwWindowShouldClose(echoWindow)) {
     renderMain.updateLocalControl(UGC, IDT, IPF);
     renderMain.updateSharedControl(&sharedData);
@@ -72,7 +69,7 @@ int main() {
     renderMain.updateLocalStore(&sharedData);
 
     // Draw and Display
-    displayLoopCall(echoWindow, &renderMain, acc, c);
+    displayLoopCall(echoWindow, &renderMain);
 
     // TODO: Update Local Scenario with Changes
   }
@@ -115,7 +112,7 @@ void initDisplay(int lXRes, int lYRes) {
   glClearColor(0.0f, 0.0f, 0.0f, 1);
 }
 
-void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, int &acc, int &c) {
+void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess) {
   // Clear Display for Rendering
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 

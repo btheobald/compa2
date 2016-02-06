@@ -49,33 +49,34 @@ void moveCamera(GLFWwindow* window, double cursorX, double cursorY){
 }
 
 void zoomCamera(double change){
-  //static double scaleFactor;
-
   scaleFactor += change/10;
-  if(scaleFactor < 0.3) {
-    scaleFactor = 0.3;
+  if(scaleFactor < 0.01) {
+    scaleFactor = 0.01;
   }
   if(scaleFactor > 10) {
     scaleFactor = 10;
   }
+  std::cerr << scaleFactor << std::endl;
 }
 
 void getCoord(double cX, double cY, double &aX, double &aY) {
   GLint viewport[4];
   GLdouble modelview[16];
   GLdouble projection[16];
+  GLdouble nX, nY;
 
   // Z is not important here
   GLdouble ignoreZ;
 
+  glPopMatrix();
   glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
   glGetDoublev(GL_PROJECTION_MATRIX, projection);
   glGetIntegerv(GL_VIEWPORT, viewport);
 
   gluUnProject(cX, cY, 0, modelview, projection, viewport, &aX, &aY, &ignoreZ);
   // Apply zoom and scale to coordinates
-  aX = ((aX-(-vectX*responsiveness))/pow(scaleFactor,2));
-  aY = ((aY-(-vectY*responsiveness))/pow(scaleFactor,2));
+  aX = aX-((-vectX*responsiveness));
+  aY = aY-((-vectY*responsiveness));
 }
 
 void matrixCamera(GLFWwindow* window) {
@@ -114,7 +115,7 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
 
 void mouseScrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
   if(!TwEventMouseWheelGLFW(yoffset)) {
-    zoomCamera(yoffset);
+    //zoomCamera(yoffset);
   }
 }
 
