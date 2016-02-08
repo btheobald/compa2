@@ -72,30 +72,31 @@ void getCoord(double cX, double cY, double &aX, double &aY) {
   glGetDoublev(GL_PROJECTION_MATRIX, projection);
   glGetIntegerv(GL_VIEWPORT, viewport);
 
-  gluUnProject(cX, cY, 0, modelview, projection, viewport, &aX, &aY, &ignoreZ);
+  //gluUnProject(cX, cY, 0, modelview, projection, viewport, &aX, &aY, &ignoreZ);
   // Apply zoom and scale to coordinates
   aX = ((aX-(-vectX*responsiveness))/pow(scaleFactor,2));
   aY = ((aY-(-vectY*responsiveness))/pow(scaleFactor,2));
 }
 
 void matrixCamera(GLFWwindow* window) {
-  glMatrixMode(GL_MODELVIEW);
-  glPopMatrix();
-  glLoadIdentity();
-
   double msX, msY, aX, aY;
   int wX, wY;
-  glfwGetCursorPos(window, &msX, &msY);
-  glfwGetWindowSize(window, &wX, &wY);
-  getCoord(msX, msY, aX, aY);
 
   double zoomToX = aX - oldaX;
   double zoomToY = aY - oldaY;
 
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+
+  glfwGetCursorPos(window, &msX, &msY);
+  glfwGetWindowSize(window, &wX, &wY);
+  getCoord(msX, msY, aX, aY);
+
   glTranslated(zoomToX, -zoomToY, 0);
+  glTranslated(-vectX*responsiveness, vectY*responsiveness, 0);
   glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 0);
   glTranslated(zoomToX, -zoomToY, 0);
-  glTranslated((-vectX*responsiveness), (vectY*responsiveness), 0);
+
   glPushMatrix();
 
   cerr << zoomToX << " " << zoomToY << endl;

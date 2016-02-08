@@ -7,11 +7,11 @@ void rdr_obj::setupDefaultScenario() {
   IDT = 0.1;
   IPF = 1;
 
-  //createSuperstructure(1000, 100000, 0.1, 5, 0.7, 500, 200, -3, -2, 50, 250, com::white);
-  newBody(0.001, 1, 0, 0, 0, 0, com::white);
-  newBody(0.001, 1, 100, 0, 0, 0, com::white);
-  newBody(0.001, 1, 0, 100, 0, 0, com::white);
-  newBody(0.001, 1, 150, 150, 0, 0, com::white);
+  createSuperstructure(1000, 100000, 0.1, 5, 0.7, 500, 200, -3, -2, 50, 250, com::white);
+  //newBody(0.001, 1, 0, 0, 0, 0, com::white);
+  //newBody(0.001, 1, 100, 0, 0, 0, com::white);
+  //newBody(0.001, 1, 0, 100, 0, 0, com::white);
+  //newBody(0.001, 1, 150, 150, 0, 0, com::white);
   //newBody(p_cMass, p_cRadius, p_cPosX, p_cPosY, p_cVelX, p_cVelY, p_Color);
 }
 
