@@ -5,7 +5,7 @@ void rdr_obj::setupDefaultScenario() {
   // Realistic Size ISH
   //createSuperstructure(10, 1.989E30, 5E24, 696000000, 100000000, 0, 0, 0, 0, 1E9, 1E11, com::white);
   // Small Galaxy
-  createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 50, 1000, com::white);
+  createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 50, 500, com::white);
   //newBody(1, 10,  200, 0, 0, 0, com::white);
   //newBody(1, 10, -200, 0, 0, 0, com::white);
   //newBody(0.001, 1, 0, 100, 0, 0, com::white);
@@ -29,7 +29,7 @@ void rdr_obj::createSuperstructure(int p_soBodies, double p_cMass, double p_oMas
   int bodyOffset = bodyStore.size() - 1;
   for(int bIDC = 0; bIDC < p_soBodies; bIDC++) {
     // Ensure that bodies are not too close to center.
-    do tempRand = pos(gen) - p_sRadius/2; while((tempRand < p_coSpacing) & (tempRand > -p_coSpacing));
+    do tempRand = pos(gen) - p_sRadius; while((tempRand < p_coSpacing) & (tempRand > -p_coSpacing));
 
     // Map to Circle
     tempCirX = p_cPosX+(tempRand * cos(2 * M_PI * tempRand));
@@ -106,5 +106,13 @@ void rdr_obj::drawScene() {
   // Draw Bodies
   for(unsigned int bIDC = 0; bIDC < bodyStore.size(); bIDC++) {
     drawBody(bIDC);
+  }
+}
+
+int rdr_obj::checkCoord(double x, double y) {
+  for(int bIDC = 0; bIDC < bodyStore.size(); bIDC++) {
+    if(((x < bodyStore[bIDC].getPosition(0)+bodyStore[bIDC].getRadius()) & (x > bodyStore[bIDC].getPosition(0)-bodyStore[bIDC].getRadius())) & ((y < bodyStore[bIDC].getPosition(1)+bodyStore[bIDC].getRadius()) & (y > bodyStore[bIDC].getPosition(1)-bodyStore[bIDC].getRadius()))) {
+      std::cerr << bIDC << std::endl;
+    }
   }
 }

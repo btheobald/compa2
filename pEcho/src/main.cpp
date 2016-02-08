@@ -8,10 +8,10 @@
 #include "rdr_obj.hpp"
 #include "sharedStage.hpp"
 #include "simEntry.hpp"
-#include "handling.hpp"
+#include "interface.hpp"
 
 void initDisplay(int lXRes, int lYRes);
-void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess);
+void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, interface* mainViewAccess);
 
 int main() {
   // Set Random Seed Using Current Time
@@ -35,9 +35,7 @@ int main() {
 
   echoWindow = glfwCreateWindow(wXRes, wYRes, "Echo", NULL, NULL);
   glfwMakeContextCurrent(echoWindow);
-
-  // Set Callbacks
-  setCallbacks(echoWindow);
+  interface mainDisplay(echoWindow);
 
   // Init AntTweakBar
   TwBar* controls;
@@ -69,7 +67,7 @@ int main() {
     renderMain.updateLocalStore(&sharedData);
 
     // Draw and Display
-    displayLoopCall(echoWindow, &renderMain);
+    displayLoopCall(echoWindow, &renderMain, &mainDisplay);
 
     // TODO: Update Local Scenario with Changes
   }
@@ -112,7 +110,7 @@ void initDisplay(int lXRes, int lYRes) {
   glClearColor(0.0f, 0.0f, 0.0f, 1);
 }
 
-void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess) {
+void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, interface* mainViewAccess) {
   // Clear Display for Rendering
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -122,13 +120,10 @@ void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess) {
   // Draw Tweak Bars
   TwDraw();
 
-  matrixCamera(localWindow);
-
   // Swap Render / Draw Buffers
   glfwSwapBuffers(localWindow);
 
-  //glfwSwapBuffers(localWindow);
-
   // Check For Input Events
   glfwPollEvents();
+  mainViewAccess->inputLoop(localWindow);
 }

@@ -20,4 +20,6 @@ public:
   // Render-Specific Functions Here
   void drawBody(int bodyID);
   void drawScene(void);
+  // Check Coordinates
+  int checkCoord(double x, double y);
 };
