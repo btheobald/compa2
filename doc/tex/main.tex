@@ -2,6 +2,14 @@
 \usepackage{import}
 \usepackage{example}
 \usepackage{scrpage2}
+\usepackage{siunitx}
+
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
+\usepackage{setspace}
+\onehalfspacing
 
 \usepackage{makeidx}
 \makeindex
@@ -11,14 +19,11 @@
 %% Setup Footer
 \pagestyle{scrheadings}
 \lofoot{Byron Theobald}
-\cofoot{4277}
-\rofoot{19235}
+\cofoot{4277 - 19235}
+\rofoot{\thepage{}}
 
 \begin{document}
 \import{./}{title.tex}
-
-\clearpage
-\thispagestyle{empty}
 
 \tableofcontents
 
