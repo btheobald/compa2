@@ -25,10 +25,21 @@ com::bodyVector scenario::returnBodyStore() {
   return bodyStore;
 }
 
-void scenario::updateControl(sharedStage* l_sharedDataAccess) {
+void scenario::updateLocalControl(sharedStage* l_sharedDataAccess) {
   UGC = l_sharedDataAccess->getUGC();
   IDT = l_sharedDataAccess->getIDT();
   IPF = l_sharedDataAccess->getIPF();
+}
+void scenario::updateLocalControl(double p_UGC, double p_IDT, int p_IPF) {
+  UGC = p_UGC;
+  IDT = p_IDT;
+  IPF = p_IPF;
+}
+
+void scenario::updateSharedControl(sharedStage* l_sharedDataAccess) {
+  l_sharedDataAccess->setUGC(UGC);
+  l_sharedDataAccess->setIDT(IDT);
+  l_sharedDataAccess->setIPF(IPF);
 }
 
 double scenario::getUGC() {

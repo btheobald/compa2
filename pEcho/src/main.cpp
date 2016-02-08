@@ -8,10 +8,10 @@
 #include "rdr_obj.hpp"
 #include "sharedStage.hpp"
 #include "simEntry.hpp"
-#include "handling.hpp"
+#include "interface.hpp"
 
 void initDisplay(int lXRes, int lYRes);
-void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, int &acc, int &c);
+void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, interface* mainViewAccess);
 
 int main() {
   // Set Random Seed Using Current Time
@@ -21,10 +21,6 @@ int main() {
   rdr_obj renderMain;
   // Init Shared Stage
   sharedStage sharedData;
-
-  // Setup Scenario and Commit
-  renderMain.setupDefaultScenario();
-  renderMain.updateSharedArea(&sharedData);
 
   // Init GLFW
   glfwInit();
@@ -39,19 +35,24 @@ int main() {
 
   echoWindow = glfwCreateWindow(wXRes, wYRes, "Echo", NULL, NULL);
   glfwMakeContextCurrent(echoWindow);
-
-  // Set Callbacks
-  setCallbacks(echoWindow);
+  interface mainDisplay(echoWindow);
 
   // Init AntTweakBar
   TwBar* controls;
   TwInit(TW_OPENGL, NULL);
   TwWindowSize(wXRes, wYRes);
-  controls = TwNewBar("Test");
-  //double UGC, IDT, IPF;
-  //TwAddVarRW(controls, "UGC", TW_TYPE_DOUBLE, &IDT, " min=0 max=10 step=0.01 group=Engine label='Gravi' ");
-  //TwAddVarRW(controls, "IDT", TW_TYPE_DOUBLE, &IDT, " min=0 max=10 step=0.01 group=Engine label='Delta Time' ");
-  //TwAddVarRW(controls, "IPF", TW_TYPE_DOUBLE, &IDT, " min=0 max=10 step=0.01 group=Engine label='Delta Time' ");
+  controls = TwNewBar("Controls");
+  double UGC = 0.1;
+  double IDT = 0.1;
+  int IPF = 1;
+  renderMain.updateLocalControl(UGC, IDT, IPF);
+  TwAddVarRW(controls, "UGC", TW_TYPE_DOUBLE, &UGC, " min=1E-12 max=10 step=0.01 group=Engine label='Graviational Constant' ");
+  TwAddVarRW(controls, "IDT", TW_TYPE_DOUBLE, &IDT, " min=1E-8 max=1000 step=0.01 group=Engine label='Itteration Delta Time' ");
+  TwAddVarRW(controls, "IPF", TW_TYPE_INT32, &IPF,  " min=1 max=1000 step=1 group=Engine label='Itterations Per Frame' ");
+
+  // Setup Scenario and Commit
+  renderMain.setupDefaultScenario();
+  renderMain.updateSharedArea(&sharedData);
 
   // Start Sim Thread, Pass SharedData Address
   std::thread simThread(simInit, &sharedData);
@@ -59,16 +60,14 @@ int main() {
   // Configure Projection Matrix, adapt to current resolution.
   initDisplay(wXRes, wYRes);
 
-  int acc = 50;
-  int c = 0;
-
   while(!glfwWindowShouldClose(echoWindow)) {
-    //renderMain.sets
+    renderMain.updateLocalControl(UGC, IDT, IPF);
+    renderMain.updateSharedControl(&sharedData);
     // Pull Changes from Shared
     renderMain.updateLocalStore(&sharedData);
 
     // Draw and Display
-    displayLoopCall(echoWindow, &renderMain, acc, c);
+    displayLoopCall(echoWindow, &renderMain, &mainDisplay);
 
     // TODO: Update Local Scenario with Changes
   }
@@ -111,7 +110,7 @@ void initDisplay(int lXRes, int lYRes) {
   glClearColor(0.0f, 0.0f, 0.0f, 1);
 }
 
-void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, int &acc, int &c) {
+void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, interface* mainViewAccess) {
   // Clear Display for Rendering
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -121,13 +120,10 @@ void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, int &acc, i
   // Draw Tweak Bars
   TwDraw();
 
-  matrixCamera(localWindow);
-
   // Swap Render / Draw Buffers
   glfwSwapBuffers(localWindow);
 
-  //glfwSwapBuffers(localWindow);
-
   // Check For Input Events
   glfwPollEvents();
+  mainViewAccess->inputLoop(localWindow);
 }

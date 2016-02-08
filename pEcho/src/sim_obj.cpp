@@ -108,24 +108,24 @@ void sim_obj::calcCollision() {
         double vDist = calcVectDistance(xDist, yDist);
 
         if((bodyStore[bodyIDC_A].getRadius()+bodyStore[bodyIDC_B].getRadius()) > vDist) {
+          // Body A Becomes New Body
+          // Add Together Areas
+          bodyStore[bodyIDC_A].setRadius(sqrt(pow(bodyStore[bodyIDC_A].getRadius(),2)+pow(bodyStore[bodyIDC_B].getRadius(),2)));
+
+          // Add Together Masses
           double combinedMass = bodyStore[bodyIDC_A].getMass()+bodyStore[bodyIDC_B].getMass();
 
-          bodyStore[bodyIDC_A].setRadius(sqrt((bodyStore[bodyIDC_A].getRadius()*bodyStore[bodyIDC_A].getRadius())+(bodyStore[bodyIDC_B].getRadius()*bodyStore[bodyIDC_B].getRadius())));
+          // Get Weighted Mean Position XY
           bodyStore[bodyIDC_A].setPosition(((bodyStore[bodyIDC_A].getPosition(0)*bodyStore[bodyIDC_A].getMass())+(bodyStore[bodyIDC_B].getPosition(0)*bodyStore[bodyIDC_B].getMass()))/combinedMass, 0);
           bodyStore[bodyIDC_A].setPosition(((bodyStore[bodyIDC_A].getPosition(1)*bodyStore[bodyIDC_A].getMass())+(bodyStore[bodyIDC_B].getPosition(1)*bodyStore[bodyIDC_B].getMass()))/combinedMass, 1);
-          bodyStore[bodyIDC_A].setVelocity(((bodyStore[bodyIDC_A].getMass()*bodyStore[bodyIDC_A].getVelocity(0))+(bodyStore[bodyIDC_B].getMass()*bodyStore[bodyIDC_B].getVelocity(0)))/combinedMass, 0);
-          bodyStore[bodyIDC_A].setVelocity(((bodyStore[bodyIDC_A].getMass()*bodyStore[bodyIDC_A].getVelocity(1))+(bodyStore[bodyIDC_B].getMass()*bodyStore[bodyIDC_B].getVelocity(1)))/combinedMass, 1);
+
+          // Calculate New Velocity through Inelastic Collision (mv+Mv)/(m+M) = v XY
+          bodyStore[bodyIDC_A].setVelocity(((bodyStore[bodyIDC_A].getMomentum(0))+bodyStore[bodyIDC_B].getMomentum(0))/combinedMass, 0);
+          bodyStore[bodyIDC_A].setVelocity(((bodyStore[bodyIDC_A].getMomentum(1))+bodyStore[bodyIDC_B].getMomentum(1))/combinedMass, 1);
           bodyStore[bodyIDC_A].setMass(combinedMass);
 
-          bodyStore[bodyIDC_A].resetForce();
-
+          // Delete Body B
           delBody(bodyIDC_B);
-          //std::cerr << "Collision Detected " << bodyIDC_A << ":" << bodyIDC_B << std::endl;
-          //bodyStore[bodyIDC_A].setColor(red);
-          //bodyStore[bodyIDC_B].setColor(red);
-        } else {
-          //bodyStore[bodyIDC_A].setColor(white);
-          //bodyStore[bodyIDC_B].setColor(white);
         }
       }
     }
@@ -162,7 +162,6 @@ int sim_obj::itteration() {
   // Calculate New Velocity
   calcHalfVelocityAB();
 
-  //cout << bodyStore[1].getPosition(0) << " " << bodyStore[1].getPosition(1) << endl;
   return 0;
 }
 

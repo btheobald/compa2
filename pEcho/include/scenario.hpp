@@ -29,7 +29,10 @@ public:
   void delBody(int index);
   void delAllBodies(int index);
 
-  void updateControl(sharedStage* l_sharedDataAccess);
+  void updateLocalControl(sharedStage* l_sharedDataAccess);
+  void updateLocalControl(double p_UGC, double p_IDT, int p_IPF);
+
+  void updateSharedControl(sharedStage* l_sharedDataAccess);
 
   double getUGC();
   double getIDT();

@@ -34,18 +34,18 @@ public:
   double getMomentum(int xyIndex);
 
   // Set Variables (Returns OK/FAIL [0/1])
-  int setMass(double p_Mass);
-  int setRadius(double p_Radius);
-  int setFixed(bool p_Fixed);
-  int setColor(const float p_Color[3]);
-  int addForce(double p_Force, int xyIndex);
-  int resetForce();
-  int setAcceleration(double p_Acceleration, int xyIndex);
-  int setVelocity(double p_Velocity, int xyIndex);
-  int setPosition(double p_Position, int xyIndex);
+  void setMass(double p_Mass);
+  void setRadius(double p_Radius);
+  void setFixed(bool p_Fixed);
+  void setColor(const float p_Color[3]);
+  void addForce(double p_Force, int xyIndex);
+  void resetForce();
+  void setAcceleration(double p_Acceleration, int xyIndex);
+  void setVelocity(double p_Velocity, int xyIndex);
+  void setPosition(double p_Position, int xyIndex);
 
   // Calculate and Set (Returns OK/FAIL [0/1])
-  int calcAcceleration();
-  int calcHalfVelocity(double timestep);
-  int calcPosition(double timestep);
+  void calcAcceleration();
+  void calcHalfVelocity(double timestep);
+  void calcPosition(double timestep);
 };

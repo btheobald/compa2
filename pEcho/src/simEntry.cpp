@@ -19,7 +19,7 @@ void simInit(sharedStage* sharedDataAccess) {
     }
     // Stage Data to Shared Area
     simMain.updateSharedArea(sharedDataAccess);
-    simMain.updateControl(sharedDataAccess);
+    simMain.updateLocalControl(sharedDataAccess);
     // Check If Paused or Exit Request
     if(!(sharedDataAccess->getStatus(0) | sharedDataAccess->getStatus(1))) {
       for(int icnt = 0; icnt < simMain.getIPF(); icnt++) {
