@@ -1,0 +1,47 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+\usepackage{import}
+\usepackage{example}
+\usepackage{scrpage2}
+
+\usepackage{makeidx}
+\makeindex
+
+\setkomafont{disposition}{\normalfont\bfseries}
+
+%% Setup Footer
+\pagestyle{scrheadings}
+\lofoot{Byron Theobald}
+\cofoot{4277}
+\rofoot{19235}
+
+\begin{document}
+\import{./}{title.tex}
+
+\clearpage
+\thispagestyle{empty}
+
+\tableofcontents
+
+\pagebreak
+
+\section{Analysis}
+\import{sections/}{analysis_root.tex}
+\pagebreak
+
+\section{Design}
+\import{sections/}{design_root.tex}
+\pagebreak
+
+\section{Implementation}
+\import{sections/}{impl_root.tex}
+\pagebreak
+
+\section{Manual}
+\import{sections/}{manual_root.tex}
+\pagebreak
+
+\section{Evaluation}
+\import{sections/}{eval_root.tex}
+\pagebreak
+
+\end{document}
