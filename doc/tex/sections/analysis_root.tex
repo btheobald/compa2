@@ -10,14 +10,18 @@ Mr Snowden requires a teaching tool that can provide a graphical sandbox to crea
 \paragraph{}
 While Mr Snowden is intended to be the primary user, other teachers could also have access to the tool as it could be put on the shared network drive, making the tool easy to access and used as a teaching aid in lessons, the tool will also be accessed by students, allowing the tool to be used as a revision resource for individual students on the school computers or at home. Because of this special attention should be paid to make sure that the program is as compatible as possible 
 
-\subsubsection{Requirements and Processes}
+\subsection{Requirements and Processes}
 \paragraph{}
 The interface must be intuitive and self-explanatory in order to ensure that it is easy for teachers to understand, meaning that keyboard short-cuts should be commonly known and any buttons should be clearly labelled. It must also be able to run well on the school computers, most of which are running on low end hardware (Dual-Core HT Intel i3 / Quad-Core Intel i5, ~2-4GB RAM) using a 32-Bit Windows operating system, as this is what all computers in the school are running for internal compatibility reasons. This applies a limit of 4GB to the total system RAM but a maximum per program usage of 2GB, meaning that the program will need to handle memory efficiently and potentially have a limit on the number of bodies (In the range of 1000s) to avoid using too much memory and causing the system to crash, a sensible limit would be 500MB. The number of bodies that this would support can be estimated however actual memory usage will likely be higher due to graphics library overhead, meaning that memory profiling should be used. The program must not require installation on the system or any secondary redistributes to be installed containing dynamic libraries.
+
+\subsubsection{Graphics Processing}
 
 \paragraph{}
 While the resources of these systems are limited, keeping the program to being 2D should help to improve performance as there will be less demand on the integrated GPU (Graphics Processing Unit), meaning that it requires less system resources to display the simulation. This means that an external graphics library would need to be used in order to interface with this hardware and still function across different platforms. (The two main GPU Vendors, AMD and Nvidia, both have different interfaces for using GPUs for compute applications) 
 
 \paragraph{}Having a 2D model also means that far less calculations need to be made for the simulation, making it faster, but it also reduces the load GPU in terms of rendering, As 3D would require shading and lighting to make depth perceivable. Input and camera movement would also be far more complex.
+
+\subsubsection{Calculations and Trigonometry}
 
 \paragraph{}
 The application must be able to simulate the paths of at least three bodies, as this will encounter the n-body problem (n = Any positive integer), which in essence means that any interaction between two bodies can simply be predicted, however there is no direct solution for three or more bodies, and must be simulated through iterative process between each body to every other body.
@@ -40,6 +44,8 @@ There is also the issue that signs of calculated components to be flipped depend
 \paragraph{}
 Because of these difficulties, it is worth investigating alternative methods for the calculation of the forces, as there could be far simpler methods that reduce the required complexity of code.
 
+\subsubsection{Performance and Multithreading}
+
 \paragraph{}
 \textit{Since the Mid-2000s, CPU Clock speeds have all but stopped increasing in the consumer market, with most coming in at the 2GHz to 3GHz range. Some high end desktop processors are able to be effectively over-clocked, with processors like the AMD FX-9590 capable of 5GHz as long as adequate cooling is provided, the current world record is 8.794GHz, achieved by an AMD FX-8350, however this with with the use of Liquid Nitrogen to keep it cool.}
 
@@ -55,8 +61,12 @@ Mutli-threading leads to is the potential to speed up the execution of the progr
 \paragraph{} 
 This opens up new challenges in the form of ensuring that the programming is \textit{'thread safe'}, this means that the program is not going to \textit{‘step on its own toes’}, for example modifying data while another thread is reading it causing lock-ups, or race conditions where one thread completes a task before another and the program fails. When done properly the improvements to performance can be quite impressive.
 
+\subsubsection{Saving of Scenarios}
+
 \paragraph{}
 The system will also need the ability to save the current scenario to a file, most likely a plain comma separated value file with a different file extension such as .sav, this will allow a teacher to set up a scenario inside the program outside of lesson time and save it for a future lesson, at which point it can be loaded into the program and used as a quick demo. These files could also be provided to students for use in their revision. Data for every body would need to be stored, namely Mass, Velocity and Position, constants could also be stored which would enable them to be changed in particular scenarios.
+
+\subsubsection{Scale}
 
 \paragraph{}
 It is unlikely that true scale would translate particularly well to a program like this without visual aids added to the program, as distances are extremely massive, and planets are extremely small small in comparison to the sun, let alone the distances involved, for example, Earth has a diameter of only 12700 km, however it orbits the sun at a height of 150 Million km. At a zoom where both the sun and earth will be visible, the earth will be too small to make out, even on extremely high resolution monitors.
@@ -75,8 +85,7 @@ It is unlikely that true scale would translate particularly well to a program li
 \item Some limitations will be required on variables such as position and velocity in order to ensure that a minimum precision is kept and that the laws of physics are not violated. (Speed of Light)
 \end{itemize}
 
-\pagebreak
-
+\subsection{Data Management}
 \subsubsection{Data Sources and Destinations}
 \import{tables/}{1_datasrcdest.tex}
 % Data Sources and Destinations Table
@@ -107,3 +116,38 @@ The variables written in the table below are likely to change as this project de
 
 \import{tables/}{2_datadictionary.tex}
 % Data Dictionary Tables
+
+\pagebreak
+
+\subsection{Objectives}
+
+\subsubsection{System}
+\begin{itemize}
+\item The system must perform well under the kind of scenarios that are likely to need to be demonstrated by a teacher, for A2, this generally does not go over 2 bodies, however having a much larger number of bodies could be useful for showcase simulations.
+\item Target performance is 60 frames per second with 100 bodies on screen.
+\item The graphics used in the program should be rudimentary 2D vector shapes and lines of varying colours in order to effectively convey the information without becoming too crowded.
+\item The program must be compiled to run under 32-bit Windows. it should also not require any external dependencies to be installed in order to run and should be able to be run from any folder on any computer.
+\item The size of the scenario should be limited so that objects the precision on the position of the far bodies is not too large, which would potentially affect the simulation.
+\end{itemize}
+
+
+\subsubsection{Processing}
+\begin{itemize}
+\item The application will use the gravitational force equation to calculate the force between two bodies and newtons second law to convert to acceleration.
+\item Trigonometric functions are the currently known way to resolve vector forces to a global X and Y axis. Because of the computational cost these are likely to have an alternative should be investigated.
+\item Collisions can be simulated using basic conservation of momentum equation, in order to calculate the resultant direction of travel.
+\item The simulation should not be able to take up more than 500MB of system memory, meaning that memory usage must be profiled and a limit coded in.
+\item The system should make use of dedicated hardware features such as the GPU to accelerate rendering, this will require external libraries in order to maintain compatibility on multiple computers.
+\item Multi-threading should be used to improve runtime performance where it is needed, as well as improve the overall user experience.
+\item If multi-threading is used, the programming must be thread safe in order to prevent lock ups or race conditions, each thread must be aware of the state of other threads in order to prevent this.
+
+\end{itemize}
+
+\subsubsection{User}
+\begin{itemize}
+\item The interface to the program should be basic and self explanatory, making use of the mouse for the placement (position) of bodies and definition of size, mass and velocity, the keyboard can be used for more precise entry of values.
+\item It should be possible for the the user to save scenarios that have been set-up so that they can be accessed at a later date or shared with others. The data can be saved to a single file that can be loaded into the program, allowing teachers to set up a scenario outside lesson time to use as a demo.
+\item The output of the program should be able to show up well on a projector, meaning that bodies must contrast highly with the background as well as with each other, it may be useful to allow the user to choose the colour of bodies.
+\item The user should be able to change any of the values for bodies, position, mass, velocity, should all be possible to change on the fly even when the simulation is running.
+\item The user should also be able to change variables such as the gravitational constant and time acceleration to suit smaller scale simulations which will be more visible and understandable to students.
+\end{itemize}

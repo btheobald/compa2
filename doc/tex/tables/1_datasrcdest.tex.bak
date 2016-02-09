@@ -1,7 +1,8 @@
-\begin{table}[ht]
+\begin{table}[htbp]
 \caption{Data Sources and Destinations}
 \centering
 \footnotesize
+\def\arraystretch{1.5}
 \begin{tabular}{|P{4.5cm}|P{4.5cm}|P{4.5cm}|}
 \hline 
 \textbf{Data Name} & \textbf{Source} & \textbf{Destination} \\
