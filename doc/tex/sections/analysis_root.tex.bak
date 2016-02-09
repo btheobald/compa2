@@ -120,7 +120,7 @@ The variables written in the table below are likely to change as this project de
 \pagebreak
 
 \subsubsection{Data Flow Diagrams}
-\includepdf[pages={4}]{pdfs/dfds.pdf}
+\fbox{\includegraphics[page=1,scale=0.5]{pdfs/DFDs.pdf}}
 
 \subsection{Objectives}
 

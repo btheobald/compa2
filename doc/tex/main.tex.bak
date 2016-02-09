@@ -3,6 +3,7 @@
 \usepackage{example}
 \usepackage{scrpage2}
 \usepackage{siunitx}
+\usepackage{pdfpages}
 
 \usepackage{array}
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
