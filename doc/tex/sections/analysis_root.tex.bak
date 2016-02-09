@@ -90,20 +90,14 @@ It is unlikely that true scale would translate particularly well to a program li
 \pagebreak
 
 \subsubsection{Data Dictionary}
-\paragraph{}
-The main flow of data around the program will be body data, as there will need to be a container of some data type that will contain a large number of these bodies. Because this is a simulation, I want to make use of the common double data type, this is the IEEE Standard, 64 bit variable providing anywhere from 15-17 digits of precision depending on the specific hardware and software implementation used.
-
 \paragraph{} 
-While a float variable is smaller and only 32-Bits long, it is generally considered that there will be minimal computational benefit from using float instead of double on CPU bound simulations. In the majority of language mathematical functions take in double variables. While these can still take float variables, the operation will still performed as a double variable.
+While a float variable is smaller and only 32-Bits long, it is generally considered that there will be minimal computational benefit from using float instead of double, a 64-Bit variable (Can still be used in a 32-Bit program). In the majority of language mathematical functions take in double variables. While these can still take float variables, the operation will still performed as a double variable.
 
 \paragraph{}
 The double variable will also be useful for providing extra precision when it comes to the simulation variables, allowing the simulation to be potentially more accurate, however there may be situations where float can be beneficial to the memory footprint of the program.
 
 \paragraph{}
 It is also worth noting that if the simulation was being written to run on a GPU, the variables would need to be stored as floats unless a GPU with a large amount of double-precision units was being used as the target, as most GPUs will only have a small number of double-precision cores, often resulting in their performance being lower than what could be achieved using a CPU.
-
-\paragraph{}
-The variables written in the table below are likely to change as this project develops, particularly once the specific implementation is picked, things like program flow are more likely to develop during the programming stage.
 
 \import{tables/}{2_datadictionary.tex}
 % Data Dictionary Tables

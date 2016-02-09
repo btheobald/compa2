@@ -1,0 +1,52 @@
+\documentclass[a4paper, 12pt]{scrartcl}
+\usepackage{import}
+\usepackage{example}
+\usepackage{scrpage2}
+\usepackage{siunitx}
+
+\usepackage{array}
+\newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
+\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+
+\usepackage{setspace}
+\onehalfspacing
+
+\usepackage{makeidx}
+\makeindex
+
+\setkomafont{disposition}{\normalfont\bfseries}
+
+%% Setup Footer
+\pagestyle{scrheadings}
+\lofoot{Byron Theobald}
+\cofoot{4277 - 19235}
+\rofoot{\thepage{}}
+
+\begin{document}
+\import{./}{title.tex}
+
+\tableofcontents
+
+\pagebreak
+
+\section{Analysis}
+\import{sections/}{analysis_root.tex}
+\pagebreak
+
+\section{Design}
+\import{sections/}{design_root.tex}
+\pagebreak
+
+\section{Implementation}
+\import{sections/}{impl_root.tex}
+\pagebreak
+
+\section{Manual}
+\import{sections/}{manual_root.tex}
+\pagebreak
+
+\section{Evaluation}
+\import{sections/}{eval_root.tex}
+\pagebreak
+
+\end{document}
