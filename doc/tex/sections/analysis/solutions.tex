@@ -1,0 +1,83 @@
+\subsubsection{C++, OpenGL, GLFW}
+\paragraph{}
+C/C++ using the GLFW OpenGL library, this library provides a window management library, handling operating system specific tasks. OpenGL is mainly geared towards 3D rendering, however it is still possible to create a simple 2D scene in the software. The C++ standard library also contains support for multi-threaded applications.
+\subsubsection*{Advantages}
+\begin{itemize}
+\item I already have an understanding of the C Programming Language, the syntax used by C++ is near identical to C and has a more modern feature set as well as some extra features, such as support for object oriented programming.
+\item OpenGL makes direct use of the GPU for rendering of scenes, meaning that high performance will be easier to achieve than with a software based renderer (Using the CPU).
+\item The GLFW library contains support for multithreading, this can potentially be used to gain large performance boosts particularly for simulation. (Multithreading is also defined in C++ the standard library. (C++2011))
+\item GLFW takes a lot of the tedium out of programming for OpenGL, mainly in the creation and display of a window that fits in with the current operating system. It also contains support for keyboard and mouse inputs to the program. Traditionally, setting up a window for an OpenGL context would require a large amount of operating specific programming that does not warrant itself for small projects.
+\item GLFW is also a multi-platform library, making it significantly easier to port the program to other platforms should it be necessary. 
+\item GLFW is an extremely minimal library, simply providing the utility to create OpenGL contexts to draw to and get the input from it. By including the GLFW header you also include the OpenGL headers as well, which are generally found in any standard development package.
+\end{itemize}
+\subsubsection*{Disadvantages}
+\begin{itemize}
+\item On Windows systems, and external .dll (Dynamic Linked Library) will be required in the program directory in order for the program to run.
+\item The library may contain excess bulk that will increase the size of the program when compiled, even if the entire library isn’t being used.
+\item There will be a large increase in the memory usage of the program due to the use of the library and set-up that is required, particularly for OpenGL, this will be in the range of 200MB.
+\item As the library is not written by me, there may be bugs in the code, however the library is open source and maintained by a relatively large group of people, meaning this would be quickly fixed.
+\item C++ is a complicated language and is known for having longer compile times than a language like C.
+\item GLFW has no inbuilt support for GUI, there are extra libraries available that could be used in order to create basic GUIs, such as AntTweakBar.
+\item The issue with both GLFW and AntTweakBar is that they are written with C style interfaces, this can make integrating into a C++ program in a clean way somewhat more difficult.
+\item Hardware will support a particular version of OpenGL and below, for example a GPU that supports OpenGL 3.0 will not support programs written for OpenGL 4.0, and most computers in the school will have a processor with new enough integrated graphics to support GLFW, which requires an OpenGL version above 3.2.
+\item OpenGL has some added complexity in terms of its use of matrix mathematics, something that can be something difficult to follow at times.
+\end{itemize}
+
+\pagebreak
+\subsubsection{Pascal, Graph, Forms}
+\paragraph{}
+Pascal contains an inbuilt unit known as graph, this allows the program to create a window and provide basic graphical output to the user.
+\subsubsection*{Advantages}
+\begin{itemize}
+\item Pascal is a language that I am familiar with and would be relatively understandable to write the program using Pascal, the more modern Free Pascal Compiler also supports Object Pascal, which is an object orientated subset of Pascal.
+\item The graph library is self-contained and part of the default pascal library included with the compiler, meaning that no libraries for external sources would be necessary for display output.
+\item I have a decent understanding of writing programs in Pascal from my studies for my AS qualifications.
+\item Lazarus, one of the main IDEs for Pascal has inbuilt support for Forms, these allow the developer to produce a GUI application, a small form could be created alongside the graph window for the modification of properties of bodies.
+\item Pascal does support multi-threading, which could be used to improve the speed of computation.
+\item Pascal can be compiled for any platform without the need to change code, assuming external libraries are not used.
+\end{itemize}
+\subsubsection*{Disadvantages}
+\begin{itemize}
+\item Pascal is much less supported at present than languages such as C or C++, while the compiler still gets updates, it has much less of an active community, the most likely place where this would affect the program is in the optimisations that have been applied to the compiler and how it translates code.
+\item Pascal has been shown to have lower performance than C in certain examples, which could be a problem as the application will be quite demanding of performance.
+\item Pascal has no native way to obtain mouse input from the graph screen output, meaning that the program would either be limited to just keyboard inputs or an external library of some kind would likely be required in order to get mouse input.
+\item Pascal as a language is extremely verbose, using full words such as begin and end as opposed to braces, \{ and \} as delimiters, this can lead to making the code extremely difficult to read when there is a large number of these on the screen.
+\item Pascal also is not case-sensitive, which can lead to some confusion when a particular case styling is not kept throughout the code.
+\item Pascal has a large amount of functions included in the standard library, without needing to define any extra uses, leading to potentially larger binaries as these are linked in even if they are not used.
+\item The graph library is also not particularly efficient, and relies on CPU software bound rendering to draw to the display, meaning that it is unlikely that the target update rate could be achieved.
+\end{itemize}
+
+\pagebreak
+\subsubsection{C++, OpenGL, SFML}
+\paragraph{}
+SFML (Simple and Fast Multimedia Library) and C/C++ (Also has bindings for .NET, Java, Ruby, Python, Pascal and many other languages, this library is geared towards the development of 2D applications, it is a more modern alternative to SDL (Simple DirectMedia Layer) built in C++ from the ground up with object orientation in mind. SFML can be used a lightweight window manager for an OpenGL application or as a full multimedia library, making use of all of the features that it provides.
+\subsubsection*{Advantages}
+\begin{itemize}
+\item SFML is relatively modern and is built around the idea of object orientation.
+\item SFML provides a window management wrapper for the creation of OpenGL applications, similar to GLFW, however it provides many more features, such as a layer of abstraction on top of the OpenGL, Networking (TCP / UDP) and Audio (OpenAL) features.
+\item It is possible to choose which parts of the library that you want to use, split into the following:
+  \begin{itemize}
+    \item Systems
+    \item Window - Depends on System
+    \item Graphics - Depends on System, Window
+    \item Audio - Depends on System
+    \item Networking - Depends on System
+  \end{itemize}
+\item SFML will work on any platform that has an OpenGL version above 3.0.
+\item The library is cross platform and can be compiled to run on Windows, Linux and OSX.
+\item Similar to GLFW, SFML removes the need to produce complex code that allows the basic set-up of an OpenGL context that fits in with the surrounding operating system.
+\item Multi-threading support is also provided, however there seem to be fewer features for controlling the flow of said runtime.
+\end{itemize}
+\subsubsection*{Disadvantages}
+\begin{itemize}
+\item The Audio and Networking components of SFML are not required for this project, while it is not necessary to include them, it removes most of what sets SFML apart from GLFW, the only functionally different part would be graphics, which contains pre-defined functions for loading images and drawing shapes, which is also unnecessary as this is relatively straightforward to to using plain OpenGL, at this stage SFML is functionally identical to GLFW.
+\item Because of its relative newness (First released in 2007), SFML does not have nearly as much support available compared to GLFW, which was originally released in 2001.
+\item This library will also share many of the same disadvantages as GLFW due to its similarities.
+\end{itemize}
+
+\subsubsection{Conclusion}
+\paragraph{}
+Based on this analysis, I feel that Solution 1 would be best choice, namely because the minimal nature of the GLFW library, providing only the bare essentials for setting up an OpenGL context and system utilities such as multi-threading, it also can be programmed using C/C++, a language that I am familiar with and would be comfortable with writing a large scale program with, There are also tools that I can use that integrate well into the language to allow me to debug my code and step through it on a line by line basis.
+
+\paragraph{}
+While it would still be valid to use SFML and simply make use of the System and Window components and use it in a similar way to GLFW. It makes more sense to use the library that is more focused on the features that I plan to use.
