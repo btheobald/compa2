@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.2.8)  9 FEB 2016 01:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.2.8)  9 FEB 2016 09:07
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -420,9 +420,95 @@ Package: l3keys2e 2015/12/20 v6326 LaTeX2e option processing using LaTeX3 keys
 Package: translator 2010/06/12 ver 1.10
 
 (/usr/share/texlive/texmf-dist/tex/latex/beamer/translator/translator-language-
-mappings.tex))) (/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
+mappings.tex))) (/home/bct/texmf/tex/latex/pdfpages/pdfpages.sty
+Package: pdfpages 2015/09/18 v0.5d Insert pages of external PDF documents (AM)
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/ifthen.sty
+Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/tools/calc.sty
+Package: calc 2014/10/28 v4.3 Infix arithmetic (KKT,FJ)
+\calc@Acount=\count133
+\calc@Bcount=\count134
+\calc@Adimen=\dimen150
+\calc@Bdimen=\dimen151
+\calc@Askip=\skip60
+\calc@Bskip=\skip61
+LaTeX Info: Redefining \setlength on input line 80.
+LaTeX Info: Redefining \addtolength on input line 81.
+\calc@Ccount=\count135
+\calc@Cskip=\skip62
+)
+(/usr/share/texlive/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+Package: eso-pic 2015/07/21 v2.0g eso-pic (RN)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+Package: atbegshi 2011/10/05 v1.16 At begin shipout hook (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/share/texlive/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+\Gread@gobject=\count136
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+))
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 94.
+)
+\Gin@req@height=\dimen152
+\Gin@req@width=\dimen153
+)
+\AM@pagewidth=\dimen154
+\AM@pageheight=\dimen155
+
+(/home/bct/texmf/tex/latex/pdfpages/pppdftex.def
+File: pppdftex.def 2015/09/18 v0.5d Pdfpages driver for pdfTeX (AM)
+)
+\AM@pagebox=\box49
+\AM@toc@title=\toks17
+\c@AM@survey=\count137
+\AM@templatesizebox=\box50
+)
+(/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2011/12/19 v6.7a set line spacing
-) (/usr/share/texlive/texmf-dist/tex/latex/base/makeidx.sty
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/makeidx.sty
 Package: makeidx 2014/09/29 v1.0m Standard LaTeX package
 )
 \@indexfile=\write4
@@ -433,18 +519,18 @@ Writing index file main.idx
 (./main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
-LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 26.
+LaTeX Font Info:    ... okay on input line 26.
 
 
 Package scrpage2 Warning: seems you are using a very small headheight.
@@ -462,14 +548,84 @@ Dictionary: translator-basic-dictionary, Language: English
 (/home/bct/texmf/tex/latex/siunitx/siunitx-abbreviations.cfg
 File: siunitx-abbreviations.cfg 2016/01/19 v2.6p siunitx: Abbreviated units
 )
-\c__siunitx_mathsf_int=\count133
+\AtBeginShipoutBox=\box51
+
+(/usr/share/texlive/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count138
+\scratchdimen=\dimen156
+\scratchbox=\box52
+\nofMPsegments=\count139
+\nofMParguments=\count140
+\everyMPshowfont=\toks18
+\MPscratchCnt=\count141
+\MPscratchDim=\dimen157
+\MPnumerator=\count142
+\makeMPintoPDFobject=\count143
+\everyMPtoPDFconversion=\toks19
+) (/usr/share/texlive/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/share/texlive/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+(/usr/share/texlive/texmf-dist/tex/latex/oberdiek/pdflscape.sty
+Package: pdflscape 2008/08/11 v0.10 Display of landscape pages in PDF (HO)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/lscape.sty
+Package: lscape 2000/10/22 v3.01 Landscape Pages (DPC)
+)
+Package pdflscape Info: Auto-detected driver: pdftex on input line 80.
+
+(/usr/share/texlive/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+Package: ifxetex 2010/09/12 v0.6 Provides ifxetex conditional
+))
+\c__siunitx_mathsf_int=\count144
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <12> on input line 25.
+(Font)              <12> on input line 26.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <8> on input line 25.
+(Font)              <8> on input line 26.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <6> on input line 25.
-\c__siunitx_mathtt_int=\count134
+(Font)              <6> on input line 26.
+\c__siunitx_mathtt_int=\count145
  (./title.tex
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <17.28> on input line 16.
@@ -478,7 +634,12 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 
 
 
-{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) (./main.toc)
+{/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}]) (./main.toc
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 2.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 2.
+)
 \tf@toc=\write5
 \openout5 = `main.toc'.
 
@@ -499,46 +660,125 @@ File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 76.
  [7]
-(./tables/1_datasrcdest.tex
-LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 6.
-) [8] (./tables/2_datadictionary.tex
-Missing character: There is no Ã in font cmr10!
-Missing character: There is no — in font cmr10!
-
+(./tables/1_datasrcdest.tex) [8] (./tables/2_datadictionary.tex
 
 LaTeX Warning: Float too large for page by 16.59978pt on input line 39.
 
-) [9] [10] [11] [12]) [13] (./sections/design_root.tex) [14]
-(./sections/impl_root.tex) [15] (./sections/manual_root.tex) [16]
-(./sections/eval_root.tex) [17] (./main.aux) ) 
+) [9] [10] [11] <pdfs/DFDs.pdf, id=53, 845.04607pt x 597.50731pt>
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+
+<use pdfs/DFDs.pdf>
+Package pdftex.def Info: pdfs/DFDs.pdf used on input line 123.
+(pdftex.def)             Requested size: 845.044pt x 597.50584pt.
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+ <use pdfs/DFDs.pdf>
+Package pdftex.def Info: pdfs/DFDs.pdf used on input line 123.
+(pdftex.def)             Requested size: 845.044pt x 597.50584pt.
+
+<pdfs/DFDs.pdf, id=56, page=1, 845.04607pt x 597.50731pt>
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+
+<use pdfs/DFDs.pdf, page 1>
+Package pdftex.def Info: pdfs/DFDs.pdf, page1 used on input line 123.
+(pdftex.def)             Requested size: 845.044pt x 597.50584pt.
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+ <use pdfs/DFDs.pdf, page 1>
+Package pdftex.def Info: pdfs/DFDs.pdf, page1 used on input line 123.
+(pdftex.def)             Requested size: 597.53699pt x 422.50089pt.
+ [12]
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+
+<use pdfs/DFDs.pdf, page 1>
+Package pdftex.def Info: pdfs/DFDs.pdf, page1 used on input line 123.
+(pdftex.def)             Requested size: 597.53699pt x 422.50089pt.
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+ <use pdfs/DFDs.pdf, page 1>
+Package pdftex.def Info: pdfs/DFDs.pdf, page1 used on input line 123.
+(pdftex.def)             Requested size: 597.53699pt x 422.50089pt.
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+
+<use pdfs/DFDs.pdf, page 1>
+Package pdftex.def Info: pdfs/DFDs.pdf, page1 used on input line 123.
+(pdftex.def)             Requested size: 597.53699pt x 422.50089pt.
+ [13 <./pdfs/DFDs.pdf>]
+<pdfs/DFDs.pdf, id=76, page=2, 845.04607pt x 597.50731pt>
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+
+<use pdfs/DFDs.pdf, page 2>
+Package pdftex.def Info: pdfs/DFDs.pdf, page2 used on input line 123.
+(pdftex.def)             Requested size: 597.53699pt x 422.50089pt.
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+ <use pdfs/DFDs.pdf, page 2>
+Package pdftex.def Info: pdfs/DFDs.pdf, page2 used on input line 123.
+(pdftex.def)             Requested size: 597.53699pt x 422.50089pt.
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+
+<use pdfs/DFDs.pdf, page 2>
+Package pdftex.def Info: pdfs/DFDs.pdf, page2 used on input line 123.
+(pdftex.def)             Requested size: 597.53699pt x 422.50089pt.
+ [14 <./pdfs/DFDs.pdf>]
+<pdfs/DFDs.pdf, id=81, page=3, 845.04607pt x 597.50731pt>
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+
+<use pdfs/DFDs.pdf, page 3>
+Package pdftex.def Info: pdfs/DFDs.pdf, page3 used on input line 123.
+(pdftex.def)             Requested size: 597.53699pt x 422.50089pt.
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+ <use pdfs/DFDs.pdf, page 3>
+Package pdftex.def Info: pdfs/DFDs.pdf, page3 used on input line 123.
+(pdftex.def)             Requested size: 597.53699pt x 422.50089pt.
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+
+<use pdfs/DFDs.pdf, page 3>
+Package pdftex.def Info: pdfs/DFDs.pdf, page3 used on input line 123.
+(pdftex.def)             Requested size: 597.53699pt x 422.50089pt.
+ [15 <./pdfs/DFDs.pdf>]
+<pdfs/DFDs.pdf, id=86, page=4, 845.04607pt x 597.50731pt>
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+
+<use pdfs/DFDs.pdf, page 4>
+Package pdftex.def Info: pdfs/DFDs.pdf, page4 used on input line 123.
+(pdftex.def)             Requested size: 597.53699pt x 422.50089pt.
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+ <use pdfs/DFDs.pdf, page 4>
+Package pdftex.def Info: pdfs/DFDs.pdf, page4 used on input line 123.
+(pdftex.def)             Requested size: 597.53699pt x 422.50089pt.
+File: pdfs/DFDs.pdf Graphic file (type pdf)
+
+<use pdfs/DFDs.pdf, page 4>
+Package pdftex.def Info: pdfs/DFDs.pdf, page4 used on input line 123.
+(pdftex.def)             Requested size: 597.53699pt x 422.50089pt.
+ [16 <./pdfs/DFDs.pdf>] [17]) [18]
+(./sections/design_root.tex) [19] (./sections/impl_root.tex) [20]
+(./sections/manual_root.tex) [21] (./sections/eval_root.tex) [22] (./main.aux) 
+) 
 Here is how much of TeX's memory you used:
- 11664 strings out of 494922
- 245988 string characters out of 6179937
- 321928 words of memory out of 5000000
- 14887 multiletter control sequences out of 15000+600000
+ 14311 strings out of 494922
+ 285665 string characters out of 6179937
+ 372684 words of memory out of 5000000
+ 17435 multiletter control sequences out of 15000+600000
  12821 words of font info for 47 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
- 43i,11n,50p,10355b,482s stack positions out of 5000i,500n,10000p,200000b,80000s
-</usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmbx10.pfb></usr/share/texlive/texmf-dist/fonts/ty
-pe1/public/amsfonts/cm/cmbx12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pu
-blic/amsfonts/cm/cmmi10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
-msfonts/cm/cmmi12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmmi7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cm
-mi8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></usr/share/t
-exlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/share/texlive/t
-exmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/share/texlive/texmf-dis
-t/fonts/type1/public/amsfonts/cm/cmsl12.pfb></usr/share/texlive/texmf-dist/font
-s/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/publi
-c/amsfonts/cm/cmti12.pfb>
-Output written on main.pdf (17 pages, 209466 bytes).
+ 47i,18n,55p,10376b,490s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/share
+/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/texli
+ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texlive/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf-dist
+/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/fonts/
+type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/type1/p
+ublic/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmr17.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8
+.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl12.pfb><
+/usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/s
+hare/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/te
+xlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/t
+exmf-dist/fonts/type1/public/amsfonts/cm/cmti12.pfb>
+Output written on main.pdf (22 pages, 308156 bytes).
 PDF statistics:
- 119 PDF objects out of 1000 (max. 8388607)
- 84 compressed objects within 1 object stream
+ 170 PDF objects out of 1000 (max. 8388607)
+ 117 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 36 words of extra memory for PDF output out of 10000 (max. 10000000)
 

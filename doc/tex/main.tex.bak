@@ -25,7 +25,9 @@
 \begin{document}
 \import{./}{title.tex}
 
+\begin{footnotesize}
 \tableofcontents
+\end{footnotesize}
 
 \pagebreak
 

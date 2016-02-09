@@ -119,6 +119,9 @@ The variables written in the table below are likely to change as this project de
 
 \pagebreak
 
+\subsubsection{Data Flow Diagrams}
+\includepdf[pages={4}]{pdfs/dfds.pdf}
+
 \subsection{Objectives}
 
 \subsubsection{System}
@@ -138,7 +141,7 @@ The variables written in the table below are likely to change as this project de
 \item Collisions can be simulated using basic conservation of momentum equation, in order to calculate the resultant direction of travel.
 \item The simulation should not be able to take up more than 500MB of system memory, meaning that memory usage must be profiled and a limit coded in.
 \item The system should make use of dedicated hardware features such as the GPU to accelerate rendering, this will require external libraries in order to maintain compatibility on multiple computers.
-\item Multithreading should be used to improve runtime performance where it is needed, as well as improve the overall user experience.
+\item Multi-threading should be used to improve runtime performance where it is needed, as well as improve the overall user experience.
 \item If multi-threading is used, the programming must be thread safe in order to prevent lock ups or race conditions, each thread must be aware of the state of other threads in order to prevent this.
 
 \end{itemize}

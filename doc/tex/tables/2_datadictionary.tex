@@ -31,7 +31,7 @@ Distance between Bodies & Double & The distance between the two bodies in curren
 \hline
 Body & Complex Structure ($\approx 120B$) & This will define a particular body, containing all the variables that relate to a particular body, stored in some kind of structure / object. \\
 \hline
-Gravitational Constant & Double & This defines the gravitational constant which is used to calculate the force that gravity will exert on two bodies, real value is 6.67408 × 10-11 m3 kg-1 s-2 However this value will not be particularly useful and should be something larger to allow for smaller scale simulations. The user will be able to modify this themselves. \\
+Gravitational Constant & Double & This defines the gravitational constant which is used to calculate the force that gravity will exert on two bodies, real value is $\num{6.67408e-11} m^{3} kg^{-1} s^{-2}$ However this value will not be particularly useful and should be something larger to allow for smaller scale simulations. The user will be able to modify this themselves. \\
 \hline
 Time Multiplier & Double & This value will be used when calculating the simulation time per displayed frame to allow the simulation to be run faster or slower than real time \\
 \hline
@@ -51,7 +51,7 @@ Paused & Boolean & This variable will be a simple TRUE/FALSE describing if the s
 \hline
 Scenario & Complex Structure & Size is dependant on the number of bodies present in the simulation, Also contains constant variables that affect simulation, namely time multiplier and the gravitational constant, as well as if the simulation is paused, it may be more efficient and safer to have separate scenarios for simulation and rendering, copying the simulation scenario over to render when a frame has finished simulation. \\
 \hline
-Pi $\pi$ & Constant & Pi is the ratio of a circle's circumference to its diameter, it is defined as 3.14159265358979323846 as a constant in the C++ cmath library. While Pi is not entirely necessary for the calculations used in the simulation, it may be useful for writing other functions, particularly when converting between Radians and Degrees. \\
+Pi $\pi$ & Constant & Pi is the ratio of a circle's circumference to its diameter, it is defined as $3.14159265358979323846$ as a constant in the C++ cmath library. While Pi is not entirely necessary for the calculations used in the simulation, it may be useful for writing other functions, particularly when converting between Radians and Degrees. \\
 \hline
 $$F=\frac{Gm_1m_2}{d^2}$$ & Formula & This equation can be used for calculating the force between two bodies due to gravity, F is a vector Force, G is the Gravitational Constant, m is the mass of a body, d is the distance between the bodies. \\
 \hline
