@@ -32,15 +32,16 @@
 \contentsline {section}{\numberline {2}Prototyping}{27}
 \contentsline {subsection}{\numberline {2.1}Simulation Efficiency}{27}
 \contentsline {subsection}{\numberline {2.2}Simulation Prototyping}{28}
-\contentsline {subsubsection}{\numberline {2.2.1}Leapfrog Intergration}{29}
-\contentsline {section}{\numberline {3}Design}{31}
-\contentsline {section}{\numberline {4}Implementation}{32}
-\contentsline {section}{\numberline {5}Manual}{33}
-\contentsline {section}{\numberline {6}Evaluation}{34}
-\contentsline {section}{\numberline {7}Code Listing}{35}
-\contentsline {subsection}{\numberline {7.1}Early Prototypes}{35}
-\contentsline {subsubsection}{\numberline {7.1.1}Euler (Trig)}{35}
-\contentsline {subsubsection}{\numberline {7.1.2}Euler (Vector) with $\Delta {} E$}{37}
-\contentsline {subsubsection}{\numberline {7.1.3}Leapfrog (Vector) with $\Delta {} E$}{38}
-\contentsline {section}{APPENDICES}{39}
-\contentsline {section}{\numberline {A}Dialogue}{39}
+\contentsline {subsubsection}{\numberline {2.2.1}Leapfrog Intergration}{30}
+\contentsline {subsubsection}{\numberline {2.2.2}Vector Equations}{30}
+\contentsline {section}{\numberline {3}Design}{32}
+\contentsline {section}{\numberline {4}Implementation}{33}
+\contentsline {section}{\numberline {5}Manual}{34}
+\contentsline {section}{\numberline {6}Evaluation}{35}
+\contentsline {section}{\numberline {7}Code Listing}{36}
+\contentsline {subsection}{\numberline {7.1}Early Prototypes}{36}
+\contentsline {subsubsection}{\numberline {7.1.1}Euler (Trig)}{36}
+\contentsline {subsubsection}{\numberline {7.1.2}Euler (Vector) with $\Delta {} E$}{38}
+\contentsline {subsubsection}{\numberline {7.1.3}Leapfrog (Vector) with $\Delta {} E$}{39}
+\contentsline {section}{APPENDICES}{40}
+\contentsline {section}{\numberline {A}Dialogue}{40}
