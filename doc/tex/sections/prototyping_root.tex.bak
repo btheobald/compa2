@@ -1,0 +1,18 @@
+\subsection{Simulation Efficiency}
+\paragraph{•}
+It is also worth noting that the method that I am using to simulate the orbits is generally known as being the brute force method, where every body in the simulation has all of its forces simulated based on every other body in the simulation, while this enables the most accurate method of simulation, it is not particularly efficient, and only really works well for small numbers of bodies, meaning that it would suit the purposes of this program.
+
+\paragraph{•}
+There are some forces that will be calculated to be so insignificant that it will not majorly affect the outcome of the simulation. For example, the orbit of two bodies will not be massively affected by a third body that is extremely far away. 
+
+\paragraph{•}
+This principle is applied in the Barnes-Hut Algorithm, in which space is divided up into a quadtree. (octree for 3D simulation.) In this method, only particles/bodies that are close to the particle being simulated will be individually simulated. Particles that are further away will be simulated as one large particle based on its center of mass. This mainly increases the effectiveness if there are a large number of particles in a particular area, as this greatly reduces the number of interactions that need to be calculated.
+
+\paragraph{•}
+While this method would have some benefits, the method is mainly designed for simulations with thousands of bodies or particles, something that is outside the scope for this project, it also makes use of a relatively complex algorithm that could be difficult to replicate in the time that I have available.
+
+\paragraph{•}
+It may be possible to save some computational time by computing the values force forces inside a matrix. This would describe every particle to particle permutation that is possible and thus the forces between them in a undirected, weighted graph. While it won't really be used as a graph, it is a valid abstraction for the computation, removing duplication of a calculation that would decrease calculation performance.
+
+\paragraph{•}
+This may be something that is worth investigating at a later date in 

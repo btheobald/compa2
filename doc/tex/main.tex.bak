@@ -1,9 +1,14 @@
 \documentclass[a4paper, 12pt]{scrartcl}
 \usepackage{import}
 \usepackage{example}
+\usepackage[dvipsnames]{xcolor}
 \usepackage{scrpage2}
 \usepackage{siunitx}
 \usepackage{pdfpages}
+\usepackage{appendix}
+
+\usepackage{parskip}
+\parskip=0pt
 
 \usepackage{array}
 \newcolumntype{P}[1]{>{\centering\arraybackslash}p{#1}}
@@ -36,6 +41,10 @@
 \import{sections/}{analysis_root.tex}
 \pagebreak
 
+\section{Prototyping}
+\import{sections/}{prototyping_root.tex}
+\pagebreak
+
 \section{Design}
 \import{sections/}{design_root.tex}
 \pagebreak
@@ -51,5 +60,13 @@
 \section{Evaluation}
 \import{sections/}{eval_root.tex}
 \pagebreak
+
+\section{Code Listing}
+\import{sections/}{eval_root.tex}
+\pagebreak
+
+\appendix
+\addcontentsline{toc}{section}{APPENDICES}
+\import{sections/}{appendix_root.tex}
 
 \end{document}

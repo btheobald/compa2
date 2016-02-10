@@ -30,10 +30,13 @@
 \contentsline {paragraph}{\nonumberline Included Tools}{25}
 \contentsline {subsubsection}{\numberline {1.6.5}\LaTeX - Document Authoring}{26}
 \contentsline {section}{\numberline {2}Prototyping}{27}
-\contentsline {section}{\numberline {3}Design}{28}
-\contentsline {section}{\numberline {4}Implementation}{29}
-\contentsline {section}{\numberline {5}Manual}{30}
-\contentsline {section}{\numberline {6}Evaluation}{31}
-\contentsline {section}{\numberline {7}Code Listing}{32}
-\contentsline {section}{APPENDICES}{33}
-\contentsline {section}{\numberline {A}Dialogue}{33}
+\contentsline {subsection}{\numberline {2.1}Simulation Efficiency}{27}
+\contentsline {subsection}{\numberline {2.2}Simulation Prototyping}{28}
+\contentsline {subsubsection}{\numberline {2.2.1}Leapfrog Intergration}{29}
+\contentsline {section}{\numberline {3}Design}{30}
+\contentsline {section}{\numberline {4}Implementation}{31}
+\contentsline {section}{\numberline {5}Manual}{32}
+\contentsline {section}{\numberline {6}Evaluation}{33}
+\contentsline {section}{\numberline {7}Code Listing}{34}
+\contentsline {section}{APPENDICES}{35}
+\contentsline {section}{\numberline {A}Dialogue}{35}
