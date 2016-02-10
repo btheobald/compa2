@@ -35,13 +35,28 @@
 \contentsline {subsubsection}{\numberline {2.2.1}Leapfrog Intergration}{30}
 \contentsline {subsubsection}{\numberline {2.2.2}Vector Equations}{30}
 \contentsline {section}{\numberline {3}Design}{32}
-\contentsline {section}{\numberline {4}Implementation}{33}
-\contentsline {section}{\numberline {5}Manual}{34}
-\contentsline {section}{\numberline {6}Evaluation}{35}
-\contentsline {section}{\numberline {7}Code Listing}{36}
-\contentsline {subsection}{\numberline {7.1}Early Prototypes}{36}
-\contentsline {subsubsection}{\numberline {7.1.1}Euler (Trig)}{36}
-\contentsline {subsubsection}{\numberline {7.1.2}Euler (Vector) with $\Delta {} E$}{38}
-\contentsline {subsubsection}{\numberline {7.1.3}Leapfrog (Vector) with $\Delta {} E$}{39}
-\contentsline {section}{APPENDICES}{40}
-\contentsline {section}{\numberline {A}Dialogue}{40}
+\contentsline {subsection}{\numberline {3.1}Threading}{32}
+\contentsline {subsection}{\numberline {3.2}Libraries}{35}
+\contentsline {subsection}{\numberline {3.3}Structure}{37}
+\contentsline {subsubsection}{\numberline {3.3.1}Overall System Design}{37}
+\contentsline {subsubsection}{\numberline {3.3.2}Program Flowchart}{39}
+\contentsline {subsubsection}{\numberline {3.3.3}Data Range and Validation}{40}
+\contentsline {subsubsection}{\numberline {3.3.4}Data Security and Integrity}{44}
+\contentsline {subsubsection}{\numberline {3.3.5}Data Record Structure}{44}
+\contentsline {subsection}{\numberline {3.4}Object Orientation}{47}
+\contentsline {subsubsection}{\numberline {3.4.1}OO Data Structure}{47}
+\contentsline {subsubsection}{\numberline {3.4.2}Object Classes}{48}
+\contentsline {subsection}{\numberline {3.5}Human-Computer Interaction}{48}
+\contentsline {subsubsection}{\numberline {3.5.1}Frame Rate}{48}
+\contentsline {subsubsection}{\numberline {3.5.2}Mock Interface}{48}
+\contentsline {subsection}{\numberline {3.6}Testing}{48}
+\contentsline {section}{\numberline {4}Implementation}{49}
+\contentsline {section}{\numberline {5}Manual}{50}
+\contentsline {section}{\numberline {6}Evaluation}{51}
+\contentsline {section}{\numberline {7}Code Listing}{52}
+\contentsline {subsection}{\numberline {7.1}Early Prototypes}{52}
+\contentsline {subsubsection}{\numberline {7.1.1}Euler (Trig)}{52}
+\contentsline {subsubsection}{\numberline {7.1.2}Euler (Vector) with $\Delta {} E$}{55}
+\contentsline {subsubsection}{\numberline {7.1.3}Leapfrog (Vector) with $\Delta {} E$}{57}
+\contentsline {section}{APPENDICES}{59}
+\contentsline {section}{\numberline {A}Dialogue}{59}

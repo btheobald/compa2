@@ -1,0 +1,35 @@
+// Save File Template
+
+// Constants
+// Gravitational Constant
+UGCONST = 1
+// Simulation Iteration Timestep
+SIMITTS = 0.01
+// Simulation Iterations per Frame
+SIMITPF = 6
+// Scenario Data
+// Number of Bodies
+NUM_BODY = 3
+// Simulation State
+// 1 = Default State, Paused
+STATREG = 1
+// Body Data
+B_ID = 1 {
+  MASS     = 10.0
+  RADIUS   = 100.0
+  COLOUR   = 1.0f, 0.8f, 0.1f
+  FIXED    = TRUE
+}
+B_ID = 2 {
+  MASS     = 0.1
+  RADIUS   = 1.0
+  COLOUR   = 0.0f, 0.4f, 0.1f
+  POSITION = 1000.0, 0.0
+  ORBITALV = TRUE
+}
+B_ID = 3 {
+  MASS     = 0.1
+  RADIUS   = 1.0
+  POSITION = 0.0, 2500.0
+  VELOCITY = 0.0064, 0.0
+}
