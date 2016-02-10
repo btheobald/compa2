@@ -66,6 +66,5 @@ int main() {
   // Calculate Error
   double error = (e_f-e_i)/e_i * 100;
   cerr << "Percentage Error: " << error << "%." << endl;
-  
   return 0;
 }

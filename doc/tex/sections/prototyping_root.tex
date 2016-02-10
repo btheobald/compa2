@@ -22,7 +22,7 @@ It may be possible to save some computational time by computing the values force
 The main thing that I wanted to check in the design of the project is that the mechanics that I plan to use will work correctly and as intended, due to the sheer volume of data involved, the easiest way to deal with this is to write a small program that runs through a simple scenario.
 
 \paragraph{}
-I started by writing a program that ran through a two body problem, using the intended algorithm and a fixed one second time step, I adjusted the gravitational constant to a more manageable number (1) that would work for small values of mass and velocity.
+I started by writing a program that ran through a two body problem, using the intended algorithm and a fixed one second time step, I adjusted the gravitational constant to a more manageable number (1) that would work for small values of mass and velocity. 
 
 \paragraph{}
 After the program was running, I set up a quick terminal output of the position of the body, these values were then pasted directly into a spreadsheet application and displayed on a graph, much to my dismay, it did not quite work correctly, the expected result of this should be a near perfect circle that loops back on itself, the system is theoretically closed and should remain constant.
@@ -39,11 +39,18 @@ The fix for this was to check when the orbit crosses the X axis and flip the sig
 \paragraph{}
 As the body orbits, its height increases dramatically, and mainly on the negative X side of the graph, it is pretty clear that energy is not being conserved in this closed system and the orbiting body is gaining energy allowing it to reach a higher and higher orbit.
 
+\begin{wrapfigure}{r}{0.5\textwidth}
+  \centering
+  \includegraphics[width=0.45\textwidth]{img/orbitbad.png}
+  \caption{Integration Deviation}
+
+\end{wrapfigure}
+
 \paragraph{}
 Upon further reading, it appears that this is simply a flaw of the system that I have elected to use, known generally as Cowell’s Method, while this method is relatively simple to implement, it comes with significant disadvantages, the main one being is that a much smaller time base is required when bodies become extremely close together, meaning that a fixed time base will not be an option. The method does not maintain conservation of energy and orbits will become higher over time due to error accumulated in the equations, the sheer amount of calculations that need to be done only worsen this effect, this is more obvious when looking at a highly eccentric orbit. while I understood that this would be the case, I did not consider that it would be quite this severe.
 
 \paragraph{}
-At a mathematical level, the algorithm is performing a method of numerical integration through the equation $s=ut+\frac{1}{2}at^2$ which in essence will find the area under a velocity / time graph which equates to the distance traveled. This method performs this equation at every single time step, during the time the acceleration is constant and it is performed over the provided time step. This results in an issue when the orbiting body is close to the central body, as the distance travelled over the fixed time step becomes too large to correctly map to the intended orbit path, which causes the accumulation of error and instability over time. This is widely known as Euler Integration, Acceleration, Velocity and Position ($a-v-p$) are all updated sequentially in each time step.
+At a mathematical level, the algorithm is performing a method of numerical integration through the equation $s=ut+\frac{1}{2}at^2$ which in essence will find the area under a velocity / time graph which equates to the distance travelled. This method performs this equation at every single time step, during the time the acceleration is constant and it is performed over the provided time step. This results in an issue when the orbiting body is close to the central body, as the distance travelled over the fixed time step becomes too large to correctly map to the intended orbit path, which causes the accumulation of error and instability over time. This is widely known as Euler Integration, Acceleration, Velocity and Position ($a-v-p$) are all updated sequentially in each time step.
 
 \subsubsection{Leapfrog Intergration}
 \paragraph{}
@@ -51,3 +58,4 @@ After some research into this problem, it was clear that this is not a problem t
 
 \paragraph{}
 Because it is somewhat difficult to step for half an iteration as integer loop counters are generally preferred for performance reasons, there are versions of these equations that are synchronised to update simultaneously. This effectively then becomes a calculation flow of $\frac{1}{2}v-p-a-\frac{1}{2}v$.
+
