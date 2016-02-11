@@ -2,7 +2,7 @@
 #include <GLFW/glfw3.h>   // GLFW
 #include <iostream>
 #include <cmath>
-#include <glm/glm.hpp>
+#include <GL/glu.h>
 #include "AntTweakBar.h"
 
 // Custom Inputs

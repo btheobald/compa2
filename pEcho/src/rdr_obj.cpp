@@ -2,23 +2,12 @@
 #include "rdr_obj.hpp"
 
 void rdr_obj::setupDefaultScenario() {
-<<<<<<< HEAD
-  // Simulation Control
-  UGC = 1;
-  IDT = 0.1;
-  IPF = 1;
-
-  createSuperstructure(1000, 100000, 0.1, 5, 0.7, 500, 200, -3, -2, 50, 250, com::white);
-  //newBody(0.001, 1, 0, 0, 0, 0, com::white);
-  //newBody(0.001, 1, 100, 0, 0, 0, com::white);
-=======
   // Realistic Size ISH
   //createSuperstructure(10, 1.989E30, 5E24, 696000000, 100000000, 0, 0, 0, 0, 1E9, 1E11, com::white);
   // Small Galaxy
-  createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 50, 500, com::white);
+  createSuperstructure(1200, 10000, 0.1, 10, 1, 0, 0, 0, 0, 15, 800, com::white);
   //newBody(1, 10,  200, 0, 0, 0, com::white);
   //newBody(1, 10, -200, 0, 0, 0, com::white);
->>>>>>> 4a5a618abaf4e58c0faf489fdea2f4ea2417c070
   //newBody(0.001, 1, 0, 100, 0, 0, com::white);
   //newBody(0.001, 1, 150, 150, 0, 0, com::white);
   //newBody(p_cMass, p_cRadius, p_cPosX, p_cPosY, p_cVelX, p_cVelY, p_Color);

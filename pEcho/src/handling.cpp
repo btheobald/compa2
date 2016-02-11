@@ -35,7 +35,6 @@ bool getMouseHeld(GLFWwindow* window, int button){
 // Checks if held and translates world based on vector.
 void moveCamera(GLFWwindow* window, double cursorX, double cursorY){
   static double prevX, prevY;
-  //static double vectX, vectY;
   if(!TwEventMousePosGLFW(cursorX, cursorY)) {
     if(getMouseHeld(window, 0)) {
       // Get Change in Cursor
@@ -49,14 +48,12 @@ void moveCamera(GLFWwindow* window, double cursorX, double cursorY){
 }
 
 void zoomCamera(double change){
-  //static double scaleFactor;
-
-  scaleFactor += change/10;
+  scaleFactor += change/20;
   if(scaleFactor < 0.3) {
     scaleFactor = 0.3;
   }
-  if(scaleFactor > 10) {
-    scaleFactor = 10;
+  if(scaleFactor > 4) {
+    scaleFactor = 4;
   }
 }
 
@@ -72,18 +69,12 @@ void getCoord(double cX, double cY, double &aX, double &aY) {
   glGetDoublev(GL_PROJECTION_MATRIX, projection);
   glGetIntegerv(GL_VIEWPORT, viewport);
 
-  //gluUnProject(cX, cY, 0, modelview, projection, viewport, &aX, &aY, &ignoreZ);
-  // Apply zoom and scale to coordinates
-  aX = ((aX-(-vectX*responsiveness))/pow(scaleFactor,2));
-  aY = ((aY-(-vectY*responsiveness))/pow(scaleFactor,2));
+  gluUnProject(cX, cY, 0, modelview, projection, viewport, &aX, &aY, &ignoreZ);
 }
 
 void matrixCamera(GLFWwindow* window) {
   double msX, msY, aX, aY;
   int wX, wY;
-
-  double zoomToX = aX - oldaX;
-  double zoomToY = aY - oldaY;
 
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
@@ -92,14 +83,15 @@ void matrixCamera(GLFWwindow* window) {
   glfwGetWindowSize(window, &wX, &wY);
   getCoord(msX, msY, aX, aY);
 
-  glTranslated(zoomToX, -zoomToY, 0);
-  glTranslated(-vectX*responsiveness, vectY*responsiveness, 0);
-  glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 0);
-  glTranslated(zoomToX, -zoomToY, 0);
+  double zoomToX = aX - oldaX;
+  double zoomToY = aY - oldaY;
+
+  glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 1);
+  glTranslated((-vectX*responsiveness), (vectY*responsiveness), 0);
+
+  std::cerr << scaleFactor << std::endl;
 
   glPushMatrix();
-
-  cerr << zoomToX << " " << zoomToY << endl;
 }
 
 // Input
@@ -140,8 +132,8 @@ void windowResizeCallback(GLFWwindow* window, int width, int height) {
   double cX, cY;
   glfwGetCursorPos(window, &cX, &cY);
 
+  glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 1);
   glTranslated(-vectX*responsiveness+cX, vectY*responsiveness+cY, 0);
-  glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 0);
 
   TwWindowSize(width, height);
 
