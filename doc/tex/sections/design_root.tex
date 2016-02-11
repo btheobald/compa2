@@ -239,20 +239,52 @@ Also, if velocity is omitted and the ORBITALV flag is set for the body, the pars
 \paragraph{}
 If either Mass or Radius are not defined the body will be ignored and removed from the scenario.
 
-\subsection{Object Orientation}
-\subsubsection{OO Data Structure}
+\subsection{OO Data Structure}
 \begin{figure}[!ht]
   \centering
   \includegraphics[width=0.8\textwidth]{img/ofd.png}
   \caption{Object Relationship Diagram}
 \end{figure}
 
-The object/class structure for this program is extremely basic, and used primarily as the Thread-Local Storage for the separate render and simulation threads. Class Scenario contains a vector consisting of type body, as well as the functions required to manage, return and update the body storage and any other relevant variables, rdr\_obj and sim\_obj will the inherit the scenario class and add on specific functions that pertain to that particular thread.
+The object/class structure for this program is extremely basic, and used primarily as the Thread-Local Storage for the separate render and simulation threads. Class Scenario contains a vector consisting of type body, as well as the functions required to manage, return and update the body storage and any other relevant variables, rdrTLC and simTLC (Thread Local Class) will the inherit the scenario class and add on specific functions that pertain to that particular thread.
 
 \paragraph{}
 The sharedStage class will contain storage variables similar to the scenario class, however no active management must be carried out in the shared area, which is why it does not inherit the scenario class as it contains functions that allow for the creation or deletion of bodies, scenarios private variables will be 'protected' which allows them to be accessed by the sub-scenario classes that inherit the scenario class.
 
-\subsubsection{Object Classes}
+\subsubsection{body}
+\texttt{\lstinputlisting{design/body.hpp}} 
+
+\pagebreak
+\subsubsection{scenario}
+\texttt{\lstinputlisting{design/scenario.hpp}}
+\paragraph{}
+The scenario class is designed to be a class template for the Thread-Local Class or Thread-Local Storage for the simulation and rendering threads, the specific classes for which will inherit this class.
+
+\paragraph{}
+Other than a body storage vector and the simulation controls, this class also has a status register, this is an 8 bit variable that will be used in a similar fashion to registers in embedded programming, each bit will represent a true / false state and will be used to describe the current state of the executing thread, this is mainly useful for debugging purposes.
+
+\pagebreak
+\subsubsection{simTLC}
+\texttt{\lstinputlisting{design/simTLC.hpp}}
+
+\subsubsection{rdrTLC}
+\texttt{\lstinputlisting{design/rdrTLC.hpp}}
+
+\paragraph{}
+Both simTLC and rdrTLC inherit the scenario class, giving them both a body storage vector, simulation control variables and basic public management functions for these variables to keep encapsulation. rdrTLC is very lightweight, including functions that link into the graphics portion, drawBody will draw any particular body given the ID, while draw scene calls drawBody for every body in the store. checkCoord will return the bodyID of a body should one be clicked on.
+
+\paragraph{}
+By contrast, simTLC is more complicated, containing functions for dealing with the simulation portion of the program, almost in its entirety. Methods for returning the distance and forces between bodies are the only methods that will return variables, while all other methods make changes to other variables directly. 
+
+\paragraph{}
+Forces for every single body relationship for the current iteration will be stored in a single 2D vector matrix, this will be reset and resized at the beginning of every iteration. The forces are stored for both X and Y, split by the diagonal of the same-same relationship. calcForceSum takes all of these relationships and adds them together for each body, putting them into the respective body object in the vector. (scenario) Force calculation is one of the main computational costs in the program.
+
+\paragraph{}
+Most actions, such as calculations for velocity, acceleration and position, are all calculated in the body object itself, the functions present in this class are loops to call functions for every body.
+
+\pagebreak
+\subsubsection{sharedStage}
+\texttt{\lstinputlisting{design/sharedStage.hpp}}
 
 \subsection{Human-Computer Interaction}
 \subsubsection{Frame Rate}

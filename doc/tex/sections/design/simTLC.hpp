@@ -1,4 +1,4 @@
-class sim_obj : public scenario {
+class simTLC : public scenario {
 private:
   double calcCompDistance(int bodyID_A, int bodyID_B, int xy);
   double calcVectDistance(double distX, double distY);

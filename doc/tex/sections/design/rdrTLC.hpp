@@ -1,4 +1,4 @@
-class rdr_obj : public scenario {
+class rdrTLC : public scenario {
 public:
   // Render-Specific Functions Here
   void drawBody(int bodyID);
