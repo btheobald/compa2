@@ -5,7 +5,7 @@ void rdr_obj::setupDefaultScenario() {
   // Realistic Size ISH
   //createSuperstructure(10, 1.989E30, 5E24, 696000000, 100000000, 0, 0, 0, 0, 1E9, 1E11, com::white);
   // Small Galaxy
-  createSuperstructure(1500, 10000, 1, 10, 1, 0, 0, 0, 0, 50, 600, com::white);
+  createSuperstructure(30000, 10000, 1, 10, 1, 0, 0, 0, 0, 50, 600, com::white);
   //newBody(1, 10,  200, 0, 0, 0, com::white);
   //newBody(1, 10, -200, 0, 0, 0, com::white);
   //newBody(0.001, 1, 0, 100, 0, 0, com::white);

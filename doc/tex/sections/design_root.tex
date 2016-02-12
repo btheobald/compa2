@@ -121,6 +121,8 @@ While the rendering and interface will be mostly programmed using callbacks and 
   \caption{System Flowchart}
 \end{figure}
 
+\subsubsection{Algorithms}
+\import{sections/design/}{algorithms.tex}
 
 \pagebreak
 \subsubsection{Data Range and Validation}
@@ -182,7 +184,6 @@ I am still somewhat hesitant to implement limitations that are too stringent as 
 While all of the data is primarily numerical, notation such as 'E' ($\times10^x$) is likely to be used to make very large or small numbers easier to type. The numerical validation is by default handled by the AntTweakBar GUI and the data boxes will not accept text as they are defined variable types. While custom validation functions could be added by setting the variable type to string and manually reading and converting it, there are other areas where validation could be manually implemented. (This would only add extra overhead and reduce features.)
 
 \subsubsection{Data Security and Integrity}
-\paragraph{}
 None of the data handled by the application is considered sensitive from a user sense, however all of the data is considered critical to the correct and accurate operation of the calculation. The main place that integrity is important is when it comes to sharing data between the simulation and the renderer, as both threads have the potential to be reading and writing to the same data, race conditions come into play and are likely to cause issues, such as reading data that is only partially updated. This area will be managed using a state machine like algorithm to ensure that data is written to and read at the correct times.
 
 \paragraph{}
@@ -192,7 +193,6 @@ When it comes to the saving of scenarios, these files will be by default outputt
 It is important that thread shared data is managed effectively so that there are no concurrent reads or writes as this will cause the corruption of data and potential issues further down the line in the event that a variable changes while another thread is reading the data. This can be managed via the use of \textit{Mutex} lock objects, if one of these are locked and another thread attempts to lock the same mutex it will pause until the locking thread unlocks the mutex, thus preventing concurrent read/write access.
 
 \subsubsection{Data Record Structure}
-\paragraph{}
 The user has the ability to save the current state of the simulation, this will be stored in a file (.sav, text format) inside a sub-folder next to the application executable. The user has the ability to choose the particular name of the file.\\\
 
 The data file must be able to store the following:
