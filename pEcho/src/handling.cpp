@@ -83,13 +83,8 @@ void matrixCamera(GLFWwindow* window) {
   glfwGetWindowSize(window, &wX, &wY);
   getCoord(msX, msY, aX, aY);
 
-  double zoomToX = aX - oldaX;
-  double zoomToY = aY - oldaY;
-
   glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 1);
-  glTranslated((-vectX*responsiveness), (vectY*responsiveness), 0);
-
-  std::cerr << scaleFactor << std::endl;
+  glTranslated(((-vectX)*responsiveness), ((vectY)*responsiveness), 0);
 
   glPushMatrix();
 }
