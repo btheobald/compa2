@@ -10,6 +10,8 @@
 #include "simEntry.hpp"
 #include "handling.hpp"
 
+bool shouldCheck;
+
 void initDisplay(int lXRes, int lYRes);
 void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess);
 
@@ -43,7 +45,7 @@ int main() {
   controls = TwNewBar("Controls");
   double UGC = 0.1;
   double IDT = 0.1;
-  int IPF = 1;
+  int IPF = 0;
   renderMain.updateLocalControl(UGC, IDT, IPF);
   TwAddVarRW(controls, "UGC", TW_TYPE_DOUBLE, &UGC, " min=1E-12 max=10 step=0.01 group=Engine label='Graviational Constant' ");
   TwAddVarRW(controls, "IDT", TW_TYPE_DOUBLE, &IDT, " min=-1000 max=1000 step=0.01 group=Engine label='Itteration Delta Time' ");
@@ -122,6 +124,14 @@ void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess) {
   TwDraw();
 
   matrixCamera(localWindow);
+
+  if(shouldCheck) {
+    double X, Y, aX, aY;
+    glfwGetCursorPos(localWindow, &X, &Y);
+    getCoord(X, Y, aX, aY);
+    std::cerr << renderAccess->checkCoord(aX, aY) << std::endl;
+    shouldCheck = false;
+  }
 
   // Swap Render / Draw Buffers
   glfwSwapBuffers(localWindow);

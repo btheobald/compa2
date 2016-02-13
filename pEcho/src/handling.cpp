@@ -24,6 +24,7 @@ bool getMouseHeld(GLFWwindow* window, int button){
     }
   }
 
+  GLdouble projection[16];
   if((glfwGetMouseButton(window, button) == GLFW_RELEASE)){
     checking = false;
     held = false;
@@ -69,6 +70,8 @@ void getCoord(double cX, double cY, double &aX, double &aY) {
   glGetDoublev(GL_PROJECTION_MATRIX, projection);
   glGetIntegerv(GL_VIEWPORT, viewport);
 
+  cY = viewport[3] - cY;
+
   gluUnProject(cX, cY, 0, modelview, projection, viewport, &aX, &aY, &ignoreZ);
 }
 
@@ -97,7 +100,11 @@ void cursorPosCallback(GLFWwindow* window, double cursorX, double cursorY) {
 }
 
 void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
-  if(!TwEventMouseButtonGLFW(button, action)) {}
+  if(!TwEventMouseButtonGLFW(button, action)) {
+    if((action == GLFW_PRESS) & (button == 2)) {
+      shouldCheck = true;
+    }
+  }
 }
 
 void mouseScrollCallback(GLFWwindow* window, double xoffset, double yoffset) {

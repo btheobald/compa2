@@ -5,6 +5,8 @@
 #include <GL/glu.h>
 #include "AntTweakBar.h"
 
+extern bool shouldCheck;
+
 // Custom Inputs
 bool getMouseHeld(GLFWwindow* window, int button);
 void moveCamera(GLFWwindow* window, double cursorX, double cursorY);

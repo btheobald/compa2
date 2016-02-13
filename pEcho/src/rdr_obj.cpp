@@ -5,7 +5,17 @@ void rdr_obj::setupDefaultScenario() {
   // Realistic Size ISH
   //createSuperstructure(10, 1.989E30, 5E24, 696000000, 100000000, 0, 0, 0, 0, 1E9, 1E11, com::white);
   // Small Galaxy
-  createSuperstructure(30000, 10000, 1, 10, 1, 0, 0, 0, 0, 50, 600, com::white);
+  //createSuperstructure(1000, 10000, 1, 10, 1, 0, 0, 0, 0, 50, 600, com::white);
+
+  // Precessing Orbits
+  //newBody(10000, 10,  100, 0, 0,  1.6, com::white);
+  //newBody(10000, 10, -100, 0, 0, -1.6 , com::white);
+
+  // Sun Earth Moon System
+  newBody(1000, 10, 0, 0, 0, 0, com::red);
+  newBody(0.1, 1, 1000, 0, 0, 0.316, com::green);
+  newBody(0.001, 0.5, 1000, 10, 0.0317, 0.316, com::white);
+
   //newBody(1, 10,  200, 0, 0, 0, com::white);
   //newBody(1, 10, -200, 0, 0, 0, com::white);
   //newBody(0.001, 1, 0, 100, 0, 0, com::white);
@@ -26,7 +36,7 @@ void rdr_obj::createSuperstructure(int p_soBodies, double p_cMass, double p_oMas
   double tempRand, tempCirX, tempCirY, tempDist, tempVelX, tempVelY;
   // Add Central Body
   newBody(p_cMass, p_cRadius, p_cPosX, p_cPosY, p_cVelX, p_cVelY, p_Color);
-  int bodyOffset = bodyStore.size() - 1;
+  //int bodyOffset = bodyStore.size() - 1;
   for(int bIDC = 0; bIDC < p_soBodies; bIDC++) {
     // Ensure that bodies are not too close to center.
     do tempRand = pos(gen) - p_sRadius; while((tempRand < p_coSpacing) & (tempRand > -p_coSpacing));
@@ -67,7 +77,7 @@ void rdr_obj::updateLocalStore(sharedStage* l_sharedDataAccess) {
 }
 
 void rdr_obj::drawBody(int bodyID) {
-  const int segments = 32;
+  const int segments = 16;
 
   double posX = bodyStore[bodyID].getPosition(0);
   double posY = bodyStore[bodyID].getPosition(1);
@@ -82,6 +92,13 @@ void rdr_obj::drawBody(int bodyID) {
   float x = radius;
   float y = 0;
 
+  // Plot Minimum Point.
+  glBegin(GL_POINTS);
+  glColor3f(bodyStore[bodyID].getColor(0), bodyStore[bodyID].getColor(1), bodyStore[bodyID].getColor(2));
+  glVertex2f(posX, posY);
+  glEnd();
+
+  // Plot Real Size
   glBegin(GL_POLYGON);
   for(int i = 0; i < segments; i++) {
     // Output Vertex
@@ -110,9 +127,10 @@ void rdr_obj::drawScene() {
 }
 
 int rdr_obj::checkCoord(double x, double y) {
-  for(int bIDC = 0; bIDC < bodyStore.size(); bIDC++) {
-    if(((x < bodyStore[bIDC].getPosition(0)+bodyStore[bIDC].getRadius()) & (x > bodyStore[bIDC].getPosition(0)-bodyStore[bIDC].getRadius())) & ((y < bodyStore[bIDC].getPosition(1)+bodyStore[bIDC].getRadius()) & (y > bodyStore[bIDC].getPosition(1)-bodyStore[bIDC].getRadius()))) {
-      std::cerr << bIDC << std::endl;
+  for(unsigned int bIDC = 0; bIDC < bodyStore.size(); bIDC++) {
+    if(((x < bodyStore[bIDC].getPosition(0)+(bodyStore[bIDC].getRadius()+5)) & (x > bodyStore[bIDC].getPosition(0)-(bodyStore[bIDC].getRadius()+5))) & ((y < bodyStore[bIDC].getPosition(1)+(bodyStore[bIDC].getRadius()+5)) & (y > bodyStore[bIDC].getPosition(1)-(bodyStore[bIDC].getRadius()+5)))) {
+      return bIDC;
     }
   }
+  return -1;
 }
