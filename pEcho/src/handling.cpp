@@ -37,7 +37,7 @@ bool getMouseHeld(GLFWwindow* window, int button){
 void moveCamera(GLFWwindow* window, double cursorX, double cursorY){
   static double prevX, prevY;
   if(!TwEventMousePosGLFW(cursorX, cursorY)) {
-    if(getMouseHeld(window, 0)) {
+    if(getMouseHeld(window, 2)) {
       // Get Change in Cursor
       vectX += prevX - cursorX;
       vectY += prevY - cursorY;
@@ -101,7 +101,7 @@ void cursorPosCallback(GLFWwindow* window, double cursorX, double cursorY) {
 
 void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
   if(!TwEventMouseButtonGLFW(button, action)) {
-    if((action == GLFW_PRESS) & (button == 2)) {
+    if((action == GLFW_PRESS) & (button == 0)) {
       shouldCheck = true;
     }
   }

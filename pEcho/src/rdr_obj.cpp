@@ -84,7 +84,8 @@ void rdr_obj::drawBody(int bodyID) {
   double radius = bodyStore[bodyID].getRadius();
 
   // Precalc
-  float theta = 2 * 3.1415926 / float(segments);
+  float theta = 2 * M_PI / segments;
+
   // Factors
   float tanFact = tan(theta);
   float radFact = cos(theta);
