@@ -41,28 +41,31 @@
 \contentsline {subsubsection}{\numberline {3.3.1}Overall System Design}{37}
 \contentsline {subsubsection}{\numberline {3.3.2}Program Flowchart}{39}
 \contentsline {subsubsection}{\numberline {3.3.3}Algorithms}{40}
-\contentsline {paragraph}{\nonumberline Force Calculation Between Two Bodies (S.1)}{40}
-\contentsline {paragraph}{\nonumberline Calculation of all Forces (S.2)}{40}
-\contentsline {subsubsection}{\numberline {3.3.4}Data Range and Validation}{42}
-\contentsline {subsubsection}{\numberline {3.3.5}Data Security and Integrity}{46}
-\contentsline {subsubsection}{\numberline {3.3.6}Data Record Structure}{46}
-\contentsline {subsection}{\numberline {3.4}OO Data Structure}{49}
-\contentsline {subsubsection}{\numberline {3.4.1}body}{50}
-\contentsline {subsubsection}{\numberline {3.4.2}scenario}{51}
-\contentsline {subsubsection}{\numberline {3.4.3}simTLC}{52}
-\contentsline {subsubsection}{\numberline {3.4.4}rdrTLC}{52}
-\contentsline {subsubsection}{\numberline {3.4.5}sharedStage}{54}
-\contentsline {subsection}{\numberline {3.5}Human-Computer Interaction}{55}
-\contentsline {subsubsection}{\numberline {3.5.1}Frame Rate}{55}
-\contentsline {subsubsection}{\numberline {3.5.2}Mock Interface}{55}
-\contentsline {subsection}{\numberline {3.6}Testing}{55}
-\contentsline {section}{\numberline {4}Implementation}{56}
-\contentsline {section}{\numberline {5}Manual}{57}
-\contentsline {section}{\numberline {6}Evaluation}{58}
-\contentsline {section}{\numberline {7}Code Listing}{59}
-\contentsline {subsection}{\numberline {7.1}Early Prototypes}{59}
-\contentsline {subsubsection}{\numberline {7.1.1}Euler (Trig)}{59}
-\contentsline {subsubsection}{\numberline {7.1.2}Euler (Vector) with $\Delta {} E$}{62}
-\contentsline {subsubsection}{\numberline {7.1.3}Leapfrog (Vector) with $\Delta {} E$}{64}
-\contentsline {section}{APPENDICES}{66}
-\contentsline {section}{\numberline {A}Dialogue}{66}
+\contentsline {paragraph}{\nonumberline S.1. Force Calculation Between Two Bodies}{40}
+\contentsline {paragraph}{\nonumberline S.2. Calculation of all Forces}{40}
+\contentsline {paragraph}{\nonumberline S.3. Summation of Forces on Bodies}{41}
+\contentsline {paragraph}{\nonumberline S.4. Integration of New Position}{42}
+\contentsline {paragraph}{\nonumberline S.5. Body Collision Detection and Calculation}{42}
+\contentsline {subsubsection}{\numberline {3.3.4}Data Range and Validation}{44}
+\contentsline {subsubsection}{\numberline {3.3.5}Data Security and Integrity}{48}
+\contentsline {subsubsection}{\numberline {3.3.6}Data Record Structure}{48}
+\contentsline {subsection}{\numberline {3.4}OO Data Structure}{51}
+\contentsline {subsubsection}{\numberline {3.4.1}body}{52}
+\contentsline {subsubsection}{\numberline {3.4.2}scenario}{53}
+\contentsline {subsubsection}{\numberline {3.4.3}simTLC}{54}
+\contentsline {subsubsection}{\numberline {3.4.4}rdrTLC}{54}
+\contentsline {subsubsection}{\numberline {3.4.5}sharedStage}{56}
+\contentsline {subsection}{\numberline {3.5}Human-Computer Interaction}{57}
+\contentsline {subsubsection}{\numberline {3.5.1}Frame Rate}{57}
+\contentsline {subsubsection}{\numberline {3.5.2}Mock Interface}{57}
+\contentsline {subsection}{\numberline {3.6}Testing}{57}
+\contentsline {section}{\numberline {4}Implementation}{58}
+\contentsline {section}{\numberline {5}Manual}{59}
+\contentsline {section}{\numberline {6}Evaluation}{60}
+\contentsline {section}{\numberline {7}Code Listing}{61}
+\contentsline {subsection}{\numberline {7.1}Early Prototypes}{61}
+\contentsline {subsubsection}{\numberline {7.1.1}Euler (Trig)}{61}
+\contentsline {subsubsection}{\numberline {7.1.2}Euler (Vector) with $\Delta {} E$}{64}
+\contentsline {subsubsection}{\numberline {7.1.3}Leapfrog (Vector) with $\Delta {} E$}{66}
+\contentsline {section}{APPENDICES}{68}
+\contentsline {section}{\numberline {A}Dialogue}{68}

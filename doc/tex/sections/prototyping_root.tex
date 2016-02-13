@@ -64,11 +64,11 @@ Upon further reading, it appears that this is simply a flaw of the system that I
 \end{wrapfigure}
 
 \paragraph{}
-At a mathematical level, the algorithm is performing a method of numerical integration through the equation $s=ut+\frac{1}{2}at^2$ which in essence will find the area under a velocity / time graph which equates to the distance travelled. This method performs this equation at every single time step, during the time the acceleration is constant and it is performed over the provided time step. This results in an issue when the orbiting body is close to the central body, as the distance travelled over the fixed time step becomes too large to correctly map to the intended orbit path, which causes the accumulation of error and instability over time. This is widely known as Euler Integration, Acceleration, Velocity and Position ($a \rightarrow v \rightarrow p$) are all updated sequentially in each time step.
+At a mathematical level, the algorithm is performing a method of numerical integration through the equation $s=ut+\frac{1}{2}at^2$ which in essence will find the area under a velocity / time graph which equates to the distance travelled. This method performs this equation at every single time step, during the time the acceleration is constant and it is performed over the provided time step. This results in an issue when the orbiting body is close to the central body, as the distance travelled over the fixed time step becomes too large to correctly map to the intended orbit path, which causes the accumulation of error and instability over time. This is widely known as Euler Integration, Acceleration, Velocity and Position ($a \rightarrow v \rightarrow r$) are all updated sequentially in each time step.
 
 \subsubsection{Leapfrog Intergration}
 \paragraph{}
-After some research into this problem, it was clear that this is not a problem that can be solved while still retaining the simple sequential a-v-p calculation flow and would require some investigation into alternate methods. One of the numerical integration methods that is commonly used in gravitational particle simulations is Leapfrog integration, this method involves updating the velocity half time step out of phase with the acceleration and position, hence the name leapfrog.
+After some research into this problem, it was clear that this is not a problem that can be solved while still retaining the simple sequential $a \rightarrow v \rightarrow r$ calculation flow and would require some investigation into alternate methods. One of the numerical integration methods that is commonly used in gravitational particle simulations is Leapfrog integration, this method involves updating the velocity half time step out of phase with the acceleration and position, hence the name leapfrog.
 
 \begin{figure}[!ht]
   \centering
@@ -77,7 +77,7 @@ After some research into this problem, it was clear that this is not a problem t
 \end{figure}
 
 \paragraph{}
-Because it is somewhat difficult to step for half an iteration as integer loop counters are generally preferred for performance reasons, there are versions of these equations that are synchronised to update simultaneously. This effectively then becomes a calculation flow of $\frac{1}{2}v \rightarrow p \rightarrow a \rightarrow \frac{1}{2}v$.
+Because it is somewhat difficult to step for half an iteration as integer loop counters are generally preferred for performance reasons, there are versions of these equations that are synchronised to update simultaneously. This effectively then becomes a calculation flow of $\frac{1}{2}v \rightarrow r \rightarrow a \rightarrow \frac{1}{2}v$.
 
 \begin{figure}[!ht]
   $$x_{i+1}=x_i+v_i\Delta{t}+\frac{1}{2}a_i\Delta{t}^2$$

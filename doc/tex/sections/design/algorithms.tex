@@ -1,4 +1,4 @@
-\paragraph{Force Calculation Between Two Bodies (S.1)}
+\paragraph{S.1. Force Calculation Between Two Bodies}
 This equation can be used to calculate the gravitational force exerted by two masses on x and y components without the need to use the trigonometric functions.
 
 $$\begin{bmatrix} F_x \\ F_y \end{bmatrix} = \frac{Gm_1m_2}{r^3} \begin{bmatrix} r_x \\ r_y \end{bmatrix}$$
@@ -12,7 +12,7 @@ Required Parameters:
 \item Distance between bodies on component axis. ($r_x$ or $r_y$) (Must retain correct sign)
 \end{itemize}
 
-\paragraph{Calculation of all Forces (S.2)}
+\paragraph{S.2. Calculation of all Forces}
 In order to simulate the interaction of multiple bodies, all relationships between bodies must be calculated, this can be presented as an undirected graph in an abstract sense. This also means that it can be represented as a matrix. 
 
 \paragraph{}
@@ -24,7 +24,7 @@ In order to reduce wasted memory footprint and increase ease of passing the vari
 
 \paragraph{}
 Sign of the force must be retained, meaning that the way round that the force is calculated must be constant throughout all (x to y).
-The number of individual calculations that need to be done becomes $\frac{1}{2}n^2-n$, this is still $O(n^2)$ time complexity. \\\
+The number of individual calculations that need to be done becomes $\frac{1}{2}n^2-n$ for the main force calculation and $n^2-n$ for the directional vector, this is still $O(n^2)$ time complexity. \\\
 
 Required Parameters:
 \begin{itemize}
@@ -32,16 +32,76 @@ Required Parameters:
 \item Scenario Body Structure. 
 \end{itemize}
 
-$$\begin{array}{c|c|c|c|c|c}
-  ~ & 0 & 1 & 2 & 3 & 4 \\ 
+\begin{figure}[!ht]
+  \centering
+  $$\begin{array}{c|c|c|c|c|c}
+  ~ & \textbf{0} & \textbf{1} & \textbf{2} & \textbf{3} & \textbf{4} \\ 
   \hline
-  0 & -      & y_{01} & y_{02} & y_{03} & y_{04} \\
+  \textbf{0} & -      & y_{01} & y_{02} & y_{03} & y_{04} \\
   \hline
-  1 & x_{01} & -      & y_{12} & y_{13} & y_{14} \\
+  \textbf{1} & x_{01} & -      & y_{12} & y_{13} & y_{14} \\
   \hline
-  2 & x_{02} & x_{12} & -      & y_{23} & y_{24} \\
+  \textbf{2} & x_{02} & x_{12} & -      & y_{23} & y_{24} \\
   \hline
-  3 & x_{03} & x_{13} & x_{23} & -      & y_{34} \\
+  \textbf{3} & x_{03} & x_{13} & x_{23} & -      & y_{34} \\
   \hline
-  4 & x_{04} & x_{14} & x_{24} & x_{34} & -
+  \textbf{4} & x_{04} & x_{14} & x_{24} & x_{34} & -
  \end{array}$$
+  \caption{Example Force Matrix Representation (Body Count = 5)}
+\end{figure}
+
+\paragraph{S.3. Summation of Forces on Bodies}
+The forces on each body must be summed up so the total force on each body can be resolved to two numbers for x and y respectively.
+
+\paragraph{}
+Because the force is only stored in the matrix an implied direction, in certain cases it may be necessary to flip the sign of some of the results to correctly sum the answers, Results will be stored in an individual bodies dataset.
+
+\paragraph{}
+The force is calculated x to y on the matrix, meaning that all forces will initially be calculated with a sign that represents this direction (The sign of the unit vector distance).
+This function will need to 'traverse' the matrix in a similar way to the previous function, but only add a force if one of the loop axis is equal to the current body ID.
+
+\paragraph{} If the body ID is found in the first array access column, the original sign is kept. If it is found in the second, the sign must be flipped to preserve the correct direction of force relative to the body because of the way round that force has been calculated. \\\
+
+Required Parameters
+\begin{itemize}
+\item Current Number of bodies.
+\item Scenario Body Structure.
+\item Scenario Component Force Matrix
+\end{itemize}
+
+\pagebreak
+\paragraph{S.4. Integration of New Position}
+Using the second order leapfrog integration method, calculates change in velocity and change in position/acceleration out of step with each other in order to reduce deviation.
+
+\paragraph{}
+Each iteration will be calculated in the order $\frac{1}{2}v \rightarrow r \rightarrow F \rightarrow a \rightarrow \frac{1}{2}v$, but initial acceleration should be calculated should any new bodies be added into the simulation as velocity is calculated at the start of each iteration.
+
+\paragraph{}
+In order to calculate the acceleration of each body the force gets calculated for every body and given to the individual body objects, the instantaneous force for that iteration is then used to calculate instantaneous acceleration based on Newton's Second Law or $a=\frac{F}{m}$ after which all other operations are done in the body object methods instead.
+
+\paragraph{}
+Velocity and Position are both accumulative properties, meaning that they are conserved in the body objects iteration to iteration. Velocity is $\Delta{v}=a\Delta{t}$, but this will be calculated as $\Delta{v}=\frac{1}{2}a\Delta{t}$ and will be done at two points in the iteration. Position is calculated as $\Delta{r}=v\Delta{t}$. (Velocity and Acceleration are first and second derivatives of position respectively.) \\\
+
+Required Parameters
+\begin{itemize}
+\item Current Number of bodies.
+\item Scenario Body Structure.
+\end{itemize}
+
+\paragraph{S.5. Body Collision Detection and Calculation}
+The simulation will have a simple body collision detection algorithm implemented that makes use of basic inelastic collisions, no fragments will be created and colliding bodies will simply merge together in mass and circular area.
+
+\paragraph{}
+Detecting if bodies are colliding can be done using the radius property of bodies, if two bodies vector distance is smaller than the sum of their radii, the bodies can be considered to have collided and the result can be calculated. Because this method checks every single body, the time order complexity is $O(n^2)$.
+
+\paragraph{}
+If a collision is detected, the momentum for individual bodies can be calculated using the equation $p=mv$, momentum will be conserved in an inelastic collision, meaning that the momentum for both bodies can be added together and then divided by the total mass of both bodies combined to get the new velocity for the result. This will need to be done for both X and Y vectors.
+
+\paragraph{}
+In order to retain some level of accuracy, the radii of the two bodies will need to be used to calculate the circular area and both areas will be added together and used to calculate the new radius of the combined bodies. The position of the new body will then be calculated using a weighted mean mass of both bodies to determine a more realistic position for the new body. \\\
+
+Required Parameters
+\begin{itemize}
+\item Current Number of bodies.
+\item Scenario Body Structure.
+\end{itemize}
