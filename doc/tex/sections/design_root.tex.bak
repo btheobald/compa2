@@ -121,8 +121,9 @@ While the rendering and interface will be mostly programmed using callbacks and 
   \caption{System Flowchart}
 \end{figure}
 
+\pagebreak
 \subsubsection{Algorithms}
-\import{design/}{algorthims.tex}
+\import{sections/design/}{algorithms.tex}
 
 \pagebreak
 \subsubsection{Data Range and Validation}
