@@ -128,7 +128,10 @@ void rdr_obj::drawScene() {
 
 int rdr_obj::checkCoord(double x, double y) {
   for(unsigned int bIDC = 0; bIDC < bodyStore.size(); bIDC++) {
-    if(((x < bodyStore[bIDC].getPosition(0)+(bodyStore[bIDC].getRadius()+5)) & (x > bodyStore[bIDC].getPosition(0)-(bodyStore[bIDC].getRadius()+5))) & ((y < bodyStore[bIDC].getPosition(1)+(bodyStore[bIDC].getRadius()+5)) & (y > bodyStore[bIDC].getPosition(1)-(bodyStore[bIDC].getRadius()+5)))) {
+    if(((x < bodyStore[bIDC].getPosition(0)+(bodyStore[bIDC].getRadius()+5))   &
+        (x > bodyStore[bIDC].getPosition(0)-(bodyStore[bIDC].getRadius()+5)))  &
+       ((y < bodyStore[bIDC].getPosition(1)+(bodyStore[bIDC].getRadius()+5))   &
+        (y > bodyStore[bIDC].getPosition(1)-(bodyStore[bIDC].getRadius()+5)))) {
       return bIDC;
     }
   }
