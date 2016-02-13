@@ -1,18 +1,18 @@
-\paragraph{S.1. Force Calculation Between Two Bodies}
+\subsubsection{Simulation}
+\paragraph{Algorithm 1: Force Calculation Between Two Bodies}
 This equation can be used to calculate the gravitational force exerted by two masses on x and y components without the need to use the trigonometric functions.
 
 $$\begin{bmatrix} F_x \\ F_y \end{bmatrix} = \frac{Gm_1m_2}{r^3} \begin{bmatrix} r_x \\ r_y \end{bmatrix}$$
 
 Required Parameters:
 \begin{itemize}
-\item Gravitational Constant. ($G$)
-\item Mass of body 1. ($M_1$)
-\item Mass of body 2. ($M_2$)
-\item Distance between bodies. ($r$)
-\item Distance between bodies on component axis. ($r_x$ or $r_y$) (Must retain correct sign)
+\item Gravitational Constant ($G$)
+\item Mass of Body 1 ($M_1$)
+\item Mass of Body 2 ($M_2$)
+\item Distance Between Bodies ($r$, $r_x$ and $r_y$)
 \end{itemize}
 
-\paragraph{S.2. Calculation of all Forces}
+\paragraph{Algorithm 2: Calculation of all Forces}
 In order to simulate the interaction of multiple bodies, all relationships between bodies must be calculated, this can be presented as an undirected graph in an abstract sense. This also means that it can be represented as a matrix. 
 
 \paragraph{}
@@ -24,12 +24,12 @@ In order to reduce wasted memory footprint and increase ease of passing the vari
 
 \paragraph{}
 Sign of the force must be retained, meaning that the way round that the force is calculated must be constant throughout all (x to y).
-The number of individual calculations that need to be done becomes $\frac{1}{2}n^2-n$ for the main force calculation and $n^2-n$ for the directional vector, this is still $O(n^2)$ time complexity. \\\
+The number of individual calculations that need to be done becomes $\frac{1}{2}n^2-n$ for the main force calculation and $n^2-n$ for the directional vector, this is still $O(n^2)$ time complexity per body. \\\
 
 Required Parameters:
 \begin{itemize}
-\item Current Number of bodies.
-\item Scenario Body Structure. 
+\item Current Number of Bodies
+\item Scenario Body Structure
 \end{itemize}
 
 \begin{figure}[!ht]
@@ -50,7 +50,7 @@ Required Parameters:
   \caption{Example Force Matrix Representation (Body Count = 5)}
 \end{figure}
 
-\paragraph{S.3. Summation of Forces on Bodies}
+\paragraph{Algorithm 3: Summation of Forces on Bodies}
 The forces on each body must be summed up so the total force on each body can be resolved to two numbers for x and y respectively.
 
 \paragraph{}
@@ -64,13 +64,13 @@ This function will need to 'traverse' the matrix in a similar way to the previou
 
 Required Parameters
 \begin{itemize}
-\item Current Number of bodies.
-\item Scenario Body Structure.
+\item Current Number of Bodies
+\item Scenario Body Structure
 \item Scenario Component Force Matrix
 \end{itemize}
 
 \pagebreak
-\paragraph{S.4. Integration of New Position}
+\paragraph{Algorithm 4: Integration of New Position}
 Using the second order leapfrog integration method, calculates change in velocity and change in position/acceleration out of step with each other in order to reduce deviation.
 
 \paragraph{}
@@ -82,13 +82,15 @@ In order to calculate the acceleration of each body the force gets calculated fo
 \paragraph{}
 Velocity and Position are both accumulative properties, meaning that they are conserved in the body objects iteration to iteration. Velocity is $\Delta{v}=a\Delta{t}$, but this will be calculated as $\Delta{v}=\frac{1}{2}a\Delta{t}$ and will be done at two points in the iteration. Position is calculated as $\Delta{r}=v\Delta{t}$. (Velocity and Acceleration are first and second derivatives of position respectively.) \\\
 
+References: \cite{leapfrog} \\\
+
 Required Parameters
 \begin{itemize}
-\item Current Number of bodies.
-\item Scenario Body Structure.
+\item Current Number of Bodies
+\item Scenario Body Structure
 \end{itemize}
 
-\paragraph{S.5. Body Collision Detection and Calculation}
+\paragraph{Algorithm 5: Body Collision Detection and Calculation}
 The simulation will have a simple body collision detection algorithm implemented that makes use of basic inelastic collisions, no fragments will be created and colliding bodies will simply merge together in mass and circular area.
 
 \paragraph{}
@@ -97,11 +99,74 @@ Detecting if bodies are colliding can be done using the radius property of bodie
 \paragraph{}
 If a collision is detected, the momentum for individual bodies can be calculated using the equation $p=mv$, momentum will be conserved in an inelastic collision, meaning that the momentum for both bodies can be added together and then divided by the total mass of both bodies combined to get the new velocity for the result. This will need to be done for both X and Y vectors.
 
-\paragraph{}
-In order to retain some level of accuracy, the radii of the two bodies will need to be used to calculate the circular area and both areas will be added together and used to calculate the new radius of the combined bodies. The position of the new body will then be calculated using a weighted mean mass of both bodies to determine a more realistic position for the new body. \\\
-
 Required Parameters
 \begin{itemize}
-\item Current Number of bodies.
-\item Scenario Body Structure.
+\item Current Number of Bodies
+\item Scenario Body Structure
 \end{itemize}
+
+\pagebreak
+\subsubsection{Graphics}
+\paragraph{Algorithm 6: Circle Drawing}
+Due to the fact that OpenGL has no inbuilt support for drawing circle primitives, they must be constructed using vertices and line segments in order to form a polygon (GL\_POLYGON) and fill it in to create a approximated circle.
+
+\paragraph{}
+To do this, the center coordinates will be used in conjunction with the radius to calculate trigonometric factors in order to speed up the calculation of the circle. Traditionally, you would calculate the position of the next point in respect to radius by calling the trigonometric functions for every vertex, however with this method they only need to be called once per object as they will be the same for every vertex.
+
+\paragraph{}
+The benefit of this is that it still allows for different numbers of segments to be used, higher numbers will make a much smoother looking circle, however it will be dependant somewhat on the radius of the drawn circle, as being able to zoom in will make the straight edges a lot more visible, even when anti-aliasing is used. Due to performance constraints, a lower number here would be better, 16 or 32 is sensible.
+
+$$ \theta=2\pi/Segments \hspace{20pt} k_{\tan}=\tan\theta \hspace{20pt} k_{\cos}=\cos\theta $$
+$$ x_{pos} = r \hspace{10pt} \& \hspace{10pt} y_{pos} = 0 $$
+$$ x_{pos}+(-y_{pos}k_{\tan})k_{rad} \hspace{10pt} \& \hspace{10pt} y_{pos}+(x_{pos}k_{\tan})k_{rad}$$
+
+References: \cite{circle} \\\
+
+Required Parameters:
+\begin{itemize}
+\item Center Point
+\item Radius
+\item Segments
+\end{itemize}
+
+\pagebreak
+\subsubsection{Interface}
+\paragraph{Algorithm 7: Body Selection}
+This algorithm will work in a similar way to the collision detection code, but on the end of a single body instead of two. By getting the current position of the cursor in the world by using the function gluUnProject() and checking to see if the cursor is inside the radius of any body when a click occurs. Mouse input is handled by GLFW.
+
+\paragraph{}
+This function is used as it will use the current matrices that are used for manipulating what is displayed on screen on the cursor coordinates, providing a perfect mapping of what is happening on screen to the window system coordinates.
+
+\paragraph{}
+If a body is selected, a GUI will open which will allow the properties of that body to be modified, and then applied with a button on that GUI.
+
+\paragraph{Algorithm 8: Pan and Zoom}
+By holding down middle click and dragging, the user will be able to pan the view around the scene to get a better view of different parts. By scrolling, they will also be able to zoom into the position currently at the center of their screen, mouse coordinates and clicks are provided by GLFW.
+
+\paragraph{}
+The panning will be calculated by first waiting to see if the mouse has been held down for at least several hundred milliseconds using the GLFW timer, after which the change in cursor positions can be calculated per frame. Zoom will will modify a scale variable that will have set limits, preventing the user from zooming too far in and out.
+
+\paragraph{}
+These variables will then be passed into OpenGL specific functions that will perform transformation and scales on the OpenGL ModelView Matrix, giving the illusion of movement and zooming.
+
+\paragraph{Algorithm 9: Scenario Saving and Loading}
+The scenario will be able to be saved by the user using elements provided on the UI. The user will be required to enter a file-name in order to save the scenario. The file extension (.sav) will be automatically added.
+
+\paragraph{}
+The file will contain a structured and human readable/editable version of the scenario data used by the program, it contains any scenario control variables and the properties of any bodies present in the simulation. There will also be some utility for auto-generation features, such as providing bodies with orbital velocity relative to any other body in the simulation or the generation of large super-structures.
+
+\paragraph{}
+In order to load a save, the user can either drag and drop a .sav file into the window or they can enter the file name into the UI element and click on the 'load' button.
+
+\subsubsection{Management}
+\paragraph{Algorithm 10: Thread Synchronisation and Shared Data Management}
+When shared data is accessed, other threads must be prevented from accessing (Read or Write) the data at the same time as it could cause corruption or deadlocks due to race conditions. Once the thread is done accessing the data it will unlock it to allow another thread to access it.
+
+\paragraph{}
+The simulation thread will get initially get the body storage and control variables from the shared storage area (Previously set up and sent to shared by the main thread). It will then perform a number of iterations based on iterations per frame and place the data in the shared area buffer as well as setting a variable to show that new data is available.
+
+\paragraph{}
+If the simulation completes another frames worth of iteration before the renderer has taken the data and unset the new data available flag the simulation thread will wait until that data has been taken.
+
+\paragraph{}
+If any changes are made to the input scenario, the main thread will update the shared area and notify the simulation thread that new data is available, the Sim thread will discard any data it is currently carrying and take on the new user changes.

@@ -1,0 +1,101 @@
+\paragraph{}
+The several algorithms that are being used warrant having some high-level pseudocode written in order to better explain their operation in the programming, those that where omitted are either highly implementation specific or basic equations.
+
+\setcounter{algorithm}{1}
+
+\begin{algorithm}[H]
+\caption{Calculation of All Forces}
+\begin{algorithmic}[1]
+\FOR{$Body_A \leftarrow 1$ \TO Bodies} 
+  \FOR{$Body_B \leftarrow (Body_A-1)$ \TO Bodies}
+    \IF{$Body_B \neq Body_A$}
+      \STATE $Matrix_F[Body_A][Body_B] \leftarrow calculateForce(Body_A, Body_B, x)$
+      \STATE $Matrix_F[Body_B][Body_A] \leftarrow calculateForce(Body_A, Body_B, y)$
+    \ENDIF
+  \ENDFOR
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{Summation of All Forces}
+\begin{algorithmic}[1]
+\FOR{$Body_A \leftarrow 1$ \TO Bodies} 
+  \FOR{$Body_B \leftarrow 1$ \TO Bodies}
+    \IF{$Body_B \neq Body_A$}
+      \IF{$Body_B < BodyA$}
+        \STATE $Body[xAccess]_F~-\leftarrow Matrix_F[Body_B][Body_A]$
+        \STATE $Body[yAccess]_F~+\leftarrow Matrix_F[Body_A][Body_B]$   
+      \ELSE
+        \STATE $Body[xAccess]_F~+\leftarrow Matrix_F[Body_A][Body_B]$
+        \STATE $Body[yAccess]_F~-\leftarrow Matrix_F[Body_B][Body_A]$      
+      \ENDIF
+    \ENDIF
+  \ENDFOR
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{Integration of New Position}
+\begin{algorithmic}[1]
+\IF{$ScenarioChange$}
+  \STATE $CalculateForceMatrix()$
+  \STATE $SumAllForcesToBodies()$
+  \STATE
+  \FOR{$bC \leftarrow 1$ \TO $Bodies$}
+    \STATE \COMMENT{Acceleration}
+    \STATE $Body[bC]_{ax} \leftarrow Body[bC]_{Fx}/Body[bC]_{m})$
+    \STATE $Body[bC]_{ay} \leftarrow Body[bC]_{Fy}/Body[bC]_{m})$
+  \ENDFOR
+  \STATE
+  \STATE $ScenarioChange \leftarrow false$
+\ENDIF
+\STATE
+\FOR{$bC \leftarrow 1$ \TO $Bodies$}
+  \STATE \COMMENT{Half-Velocity}
+  \STATE $Body[bC]_{vx} ~+\leftarrow 0.5(Body[bC]_{ax}\times\Delta{t})$
+  \STATE $Body[bC]_{vy} ~+\leftarrow 0.5(Body[bC]_{ay}\times\Delta{t})$
+  \STATE \COMMENT{Position}
+  \STATE $Body[bC]_{rx} ~+\leftarrow Body[bC]_{vx}\times\Delta{t}$
+  \STATE $Body[bC]_{ry} ~+\leftarrow Body[bC]_{vy}\times\Delta{t}$
+\ENDFOR
+\STATE
+\STATE $CheckCollisions()$
+\STATE
+\STATE $CalculateForceMatrix()$
+\STATE $SumAllForcesToBodies()$
+\STATE
+\FOR{$bC \leftarrow 1$ \TO $Bodies$}
+  \STATE \COMMENT{Acceleration}    
+  \STATE $Body[bC]_{ax} \leftarrow Body[bC]_{Fx}/Body[bC]_{m})$
+  \STATE $Body[bC]_{ay} \leftarrow Body[bC]_{Fy}/Body[bC]_{m})$
+  \STATE \COMMENT{Half-Velocity}
+  \STATE $Body[bC]_{vx} ~+\leftarrow 0.5(Body[bC]_{ax}\times\Delta{t})$
+  \STATE $Body[bC]_{vy} ~+\leftarrow 0.5(Body[bC]_{ay}\times\Delta{t})$
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[H]
+\caption{Collision Detection and Simulation}
+\begin{algorithmic}[1]
+\FOR{$bC_A \leftarrow 1$ \TO $Bodies$} 
+  \FOR{$bC_B \leftarrow (bC_A-1)$ \TO $Bodies$}
+    \IF{$bC_B \neq bC_A$}
+      \STATE $Distance \leftarrow calculateDistance(bC_A, bC_B)$
+      \IF{$Distance < (Body[bC_A]_r+Body[bC_B]_r)$)}
+        \STATE $p_{x} \leftarrow ((Body[bC_A]_m \cdot Body[bC_A]_{vx}) + (Body[bC_B]_m \cdot Body[bC_B]_{vx}))$
+        \STATE $p_{y} \leftarrow ((Body[bC_A]_m \cdot Body[bC_A]_{vy}) + (Body[bC_B]_m \cdot Body[bC_B]_{vy}))$
+        \STATE
+        \STATE $Body[bC_A]_m \leftarrow (Body[bC_A]_m+Body[bC_B]_m)$
+        \STATE $Body[bC_A]_{vx} \leftarrow (p_{x}/Body[bC_A]_m)$
+        \STATE $Body[bC_A]_{vy} \leftarrow (p_{y}/Body[bC_A]_m)$
+        \STATE
+        \STATE $DeleteBody(bC_B)$
+      \ENDIF
+    \ENDIF
+  \ENDFOR
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}

@@ -47,8 +47,6 @@ int main() {
   currentBodies[1].velocity[0] = 1.58;
   currentBodies[1].velocity[1] = 0.0;
 
-  //cout << "1x, 1y" << endl;
-
   // Simulation
   while (i < 500000) {
     // Calculate Distance bettween Bodies
