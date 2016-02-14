@@ -5,7 +5,17 @@ void rdr_obj::setupDefaultScenario() {
   // Realistic Size ISH
   //createSuperstructure(10, 1.989E30, 5E24, 696000000, 100000000, 0, 0, 0, 0, 1E9, 1E11, com::white);
   // Small Galaxy
-  createSuperstructure(1000, 10000, 1, 10, 1, 0, 0, 0, 0, 50, 600, com::white);
+
+  /// Grid
+  for(int x = -100; x <= 100; x++) {
+    for(int y = -100; y <= 100; y++) {
+      if((x==0) & (y==0)) {
+        newBody(0.001, 1, x*10, y*10, 0, 0, com::red);
+      } else {
+        newBody(0.001, 1, x*10, y*10, 0, 0, com::white);
+      }
+    }
+  }
 
   // Precessing Orbits
   //newBody(10000, 10,  100, 0, 0,  1.6, com::white);
@@ -94,8 +104,8 @@ void rdr_obj::drawBody(int bodyID) {
   float y = 0;
 
   // Plot Minimum Point.
-  glBegin(GL_POINTS);
   glColor3f(bodyStore[bodyID].getColor(0), bodyStore[bodyID].getColor(1), bodyStore[bodyID].getColor(2));
+  glBegin(GL_POINTS);
   glVertex2f(posX, posY);
   glEnd();
 

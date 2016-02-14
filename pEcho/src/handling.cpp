@@ -24,7 +24,6 @@ bool getMouseHeld(GLFWwindow* window, int button){
     }
   }
 
-  GLdouble projection[16];
   if((glfwGetMouseButton(window, button) == GLFW_RELEASE)){
     checking = false;
     held = false;
@@ -39,8 +38,8 @@ void moveCamera(GLFWwindow* window, double cursorX, double cursorY){
   if(!TwEventMousePosGLFW(cursorX, cursorY)) {
     if(getMouseHeld(window, 2)) {
       // Get Change in Cursor
-      vectX += prevX - cursorX;
-      vectY += prevY - cursorY;
+      vectX += ((prevX - cursorX) * responsiveness) * pow(1/scaleFactor,2);
+      vectY += ((prevY - cursorY) * responsiveness) * pow(1/scaleFactor,2);
     }
   }
   // Update Previous Position
@@ -49,12 +48,12 @@ void moveCamera(GLFWwindow* window, double cursorX, double cursorY){
 }
 
 void zoomCamera(double change){
-  scaleFactor += change/20;
-  if(scaleFactor < 0.3) {
-    scaleFactor = 0.3;
+  scaleFactor += change/10;
+  if(scaleFactor < 0.2) {
+    scaleFactor = 0.2;
   }
-  if(scaleFactor > 4) {
-    scaleFactor = 4;
+  if(scaleFactor > 10) {
+    scaleFactor = 10;
   }
 }
 
@@ -76,18 +75,11 @@ void getCoord(double cX, double cY, double &aX, double &aY) {
 }
 
 void matrixCamera(GLFWwindow* window) {
-  double msX, msY, aX, aY;
-  int wX, wY;
-
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
-  glfwGetCursorPos(window, &msX, &msY);
-  glfwGetWindowSize(window, &wX, &wY);
-  getCoord(msX, msY, aX, aY);
-
   glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 1);
-  glTranslated(((-vectX)*responsiveness), ((vectY)*responsiveness), 0);
+  glTranslated(-vectX, vectY, 0);
 
   glPushMatrix();
 }
@@ -131,11 +123,8 @@ void windowResizeCallback(GLFWwindow* window, int width, int height) {
   glPopMatrix();
   glLoadIdentity();
 
-  double cX, cY;
-  glfwGetCursorPos(window, &cX, &cY);
-
-  glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 1);
-  glTranslated(-vectX*responsiveness+cX, vectY*responsiveness+cY, 0);
+  glScaled(scaleFactor, scaleFactor, 1);
+  glTranslated(-vectX*responsiveness, vectY*responsiveness, 0);
 
   TwWindowSize(width, height);
 
