@@ -7,6 +7,9 @@
 \usepackage{appendix}
 \usepackage{wrapfig}
 \usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{algorithm}
+\usepackage{algorithmic}
 
 \usepackage{listings}
 \usepackage[T1]{fontenc}
@@ -86,7 +89,11 @@
 \pagebreak
 
 \appendix
-\addcontentsline{toc}{section}{APPENDICES}
+\section*{Appendices}
+\addcontentsline{toc}{section}{Appendices}
+\renewcommand{\thesubsection}{\Alph{subsection}}
 \import{sections/}{appendix_root.tex}
+\pagebreak
 
-\end{document}
+\addcontentsline{toc}{section}{References}
+\import{./}{bib.tex}

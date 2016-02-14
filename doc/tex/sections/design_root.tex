@@ -340,4 +340,13 @@ As mentioned previously, the circular bodies cannot be drawn as true circles, bu
 Another feature is that it is possible to drag and drop save files into the program from any directory rather than having the file inside the save file directory and typing in its name.
 
 \pagebreak
-\subsection{Testing}
+\subsection{Testing Strategy}
+Throughout both the implementation and testing stage there should be a range of different testing carried out to ensure that the program is functioning correctly, due to the complexity and 'locked-modular' construction of the multi-threaded program, it is somewhat difficult to test certain portions of the code using white-box testing, this means that a large proportion of the tests will be done using black-box testing.
+
+\paragraph{}
+Due to the vast quantity of data involved in the simulation and the number of iterations that are required to gain any accurate and noticeable results, I plan to implement some automated testing routines that will make use of certain scenarios that are already set up, these automated tests will display the results that they have gathered and the results that are required for a Pass/Fail.
+
+\paragraph{}
+Some of these automated tests are designed to be a form of benchmark, these tests provide a useful tool for stress testing the simulation on different systems and providing a baseline through which results from other computers can be compared to have a look at how well performance scales. However with a large number of bodies, these tests will also provide a stress-testing tool that will be particularly useful for analysing the use of memory by the program. Any potential memory leaks would likely be amplified by higher body counts.
+
+\paragraph{}

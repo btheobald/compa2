@@ -5,16 +5,16 @@ void rdr_obj::setupDefaultScenario() {
   // Realistic Size ISH
   //createSuperstructure(10, 1.989E30, 5E24, 696000000, 100000000, 0, 0, 0, 0, 1E9, 1E11, com::white);
   // Small Galaxy
-  //createSuperstructure(1000, 10000, 1, 10, 1, 0, 0, 0, 0, 50, 600, com::white);
+  createSuperstructure(1000, 10000, 1, 10, 1, 0, 0, 0, 0, 50, 600, com::white);
 
   // Precessing Orbits
   //newBody(10000, 10,  100, 0, 0,  1.6, com::white);
   //newBody(10000, 10, -100, 0, 0, -1.6 , com::white);
 
   // Sun Earth Moon System
-  newBody(1000, 10, 0, 0, 0, 0, com::red);
-  newBody(0.1, 1, 1000, 0, 0, 0.316, com::green);
-  newBody(0.001, 0.5, 1000, 10, 0.0317, 0.316, com::white);
+  //newBody(1000, 10, 0, 0, 0, 0, com::red);
+  //newBody(0.1, 1, 1000, 0, 0, 0.316, com::green);
+  //newBody(0.001, 0.5, 1000, 10, 0.0317, 0.316, com::white);
 
   //newBody(1, 10,  200, 0, 0, 0, com::white);
   //newBody(1, 10, -200, 0, 0, 0, com::white);

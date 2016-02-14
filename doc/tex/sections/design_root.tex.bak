@@ -122,10 +122,6 @@ While the rendering and interface will be mostly programmed using callbacks and 
 \end{figure}
 
 \pagebreak
-\subsubsection{Algorithms}
-\import{sections/design/}{algorithms.tex}
-
-\pagebreak
 \subsubsection{Data Range and Validation}
 The main issue with the validation of data is that it does not play particularly nicely with the medium of the simulation, which is Space, in reality, an orbit is massive because the size of the bodies and their velocities are massive, for example, the earth orbits about 149.6 million kilometres from the sun and at a velocity of 29.78 kilometres per second. The (current) furthest known common body in our solar system, Pluto, orbits at a range of 4.4-7.4 billion kilometres and at a velocity of only 4.67 kilometres per second.
 
@@ -240,6 +236,15 @@ Also, if velocity is omitted and the ORBITALV flag is set for the body, the pars
 \paragraph{}
 If either Mass or Radius are not defined the body will be ignored and removed from the scenario.
 
+\pagebreak
+\subsection{Algorithms}
+\import{sections/design/}{algorithms.tex}
+
+\pagebreak
+\subsection{Pseudocode}
+\import{sections/design/}{pseudocode.tex}
+
+\pagebreak
 \subsection{OO Data Structure}
 \begin{figure}[!ht]
   \centering
@@ -252,6 +257,10 @@ The object/class structure for this program is extremely basic, and used primari
 \paragraph{}
 The sharedStage class will contain storage variables similar to the scenario class, however no active management must be carried out in the shared area, which is why it does not inherit the scenario class as it contains functions that allow for the creation or deletion of bodies, scenarios private variables will be 'protected' which allows them to be accessed by the sub-scenario classes that inherit the scenario class.
 
+\paragraph{}
+The preliminary classes have been written in the C++ syntax style as this enables me to display them with syntax highlighting, small modifications will likely be made during implementation.
+
+\pagebreak
 \subsubsection{body}
 \texttt{\lstinputlisting{design/body.hpp}} 
 
@@ -262,7 +271,7 @@ The sharedStage class will contain storage variables similar to the scenario cla
 The scenario class is designed to be a class template for the Thread-Local Class or Thread-Local Storage for the simulation and rendering threads, the specific classes for which will inherit this class.
 
 \paragraph{}
-Other than a body storage vector and the simulation controls, this class also has a status register, this is an 8 bit variable that will be used in a similar fashion to registers in embedded programming, each bit will represent a true / false state and will be used to describe the current state of the executing thread, this is mainly useful for debugging purposes.
+Other than a body storage vector and the simulation controls, this class also has a status register, this is an 8 bit variable that will be used in a similar fashion to registers in embedded programming, each bit will represent a true / false state and will be used to describe the current state of the executing thread, this is mainly useful for debugging purposes. (It will likely be removed during implementation if there is no need for it.)
 
 \pagebreak
 \subsubsection{simTLC}
@@ -288,7 +297,56 @@ Most actions, such as calculations for velocity, acceleration and position, are 
 \texttt{\lstinputlisting{design/sharedStage.hpp}}
 
 \subsection{Human-Computer Interaction}
-\subsubsection{Frame Rate}
-\subsubsection{Mock Interface}
+\paragraph{}
+Due to the interactive nature of this piece of software, the user experience is extremely important and ties in to both the design of the interface (Effective Layout) and the programming (Ensuring Responsiveness), It is extremely important that the application does not stutter or skip, miss user inputs due to hanging threads, in essence, the render thread should not hang for any considerable length of time, as this will greatly reduce the effective frame rate of the application.
 
-\subsection{Testing}
+\subsubsection{Frame Rate}
+Frame rate of the application is is something that should be kept as high as possible to ensure that the interface is always responsive. The main reason for separating the simulation from the render thread is so that the render loop could run independently of the simulation and not hang or stutter on large simulations.
+
+\paragraph{}
+24 FPS is the widely accepted frame rate at which the human eye will perceive smooth motion from a moving object on screen. While this a frame rate that is workable for a movie or other non interactive content, when it comes to an application that is taking human input the higher the frame rate, the better. Having a higher frame rate means that the user interface has the ability to be far more responsive, not least of which is that the input is actually tied to the frame as it is polled at the end of each frame.
+
+\paragraph{}
+60 FPS is the generally accepted frame rate for interactive media, this will be the frame rate that the operating system will run at as most PC monitors will display at 60Hz. By default, OpenGL sets a frame rate limit to the refresh rate of the monitor, this also brings the benefit of preventing screen tearing.
+
+\begin{wrapfigure}{r}{0.55\textwidth}
+  \centering
+  \includegraphics[width=0.5\textwidth]{img/framerate.png}
+  \caption{Frame Rate Example}
+\end{wrapfigure}
+
+\paragraph{}
+For an object travelling at a constant velocity, higher frame rate will end up providing more of the information in terms of the movement of the object. Resulting in fast moving objects being more visible, a display at 15FPS may only show 3 points while 60 FPS will show 12 points in the same period of time. Considering the simplicity of the graphics, 60FPS should be easy to obtain even on low end hardware.
+
+\subsubsection{Mock Interface}
+The following mock-up of the software interface represents the intended layout of the GUI. GLFW is responsible for the setup of the window frame itself, while the main renderer; OpenGL, draws and renders the graphics on a context inside the window. AntTweakBar is responsible for the management of the GUI itself, injecting itself into the OpenGL draw code and the GLFW Input Callbacks.
+
+\begin{figure}[!ht]
+  \centering
+  \includegraphics[width=\textwidth]{img/uiex.png}
+  \caption{Initial UI Mockup}
+\end{figure}
+
+\paragraph{}
+The AntTweakBar windows can be moved around within the OpenGL window, they will remain a constant size even if the main window is resized. The same goes for the OpenGL render, as it will stay a constant size even if the window is redrawn and will require the user to zoom in using the mouse wheel to change it.
+
+\paragraph{}
+All of the windows will be slightly transparent, but will be able to be closed using controls on the top of individual windows. The windows can also be opened with a respective keyboard short-cut, with the exception of the body window, which opens when a particular body is selected, only one body can be selected at any time.
+
+\paragraph{}
+As mentioned previously, the circular bodies cannot be drawn as true circles, but instead must be drawn as a polygon, this will potentially cause objects to have very visible edges, it may be worthwhile to implement an algorithm that dynamically adjusts the number of vertices in the circle based on its radius in order to keep it visually smooth as an extension.
+
+\paragraph{}
+Another feature is that it is possible to drag and drop save files into the program from any directory rather than having the file inside the save file directory and typing in its name.
+
+\pagebreak
+\subsection{Testing Strategy}
+Throughout both the implementation and testing stage there should be a range of different testing carried out to ensure that the program is functioning correctly, due to the complexity and 'locked-modular' construction of the multi-threaded program, it is somewhat difficult to test certain portions of the code using white-box testing, this means that a large proportion of the tests will be done using black-box testing.
+
+\paragraph{}
+Due to the vast quantity of data involved in the simulation and the number of iterations that are required to gain any accurate and noticeable results, I plan to implement some automated testing routines that will make use of certain scenarios that are already set up, these automated tests will display the results that they have gathered and the results that are required for a Pass/Fail.
+
+\paragraph{}
+Some of these automated tests are designed to be a form of benchmark, these tests provide a useful tool for stress testing the simulation on different systems and providing a baseline through which results from other computers can be compared to have a look at how well performance scales. However with a large number of bodies, these tests will also provide a stress-testing tool that will be particularly useful for analysing the use of memory by the program. Any potential memory leaks would likely be amplified by higher body counts.
+
+\paragraph{}
