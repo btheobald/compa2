@@ -49,12 +49,13 @@ void moveCamera(GLFWwindow* window, double cursorX, double cursorY){
 
 void zoomCamera(double change){
   scaleFactor += change/10;
-  if(scaleFactor < 0.2) {
-    scaleFactor = 0.2;
+  if(scaleFactor < 0.1) {
+    scaleFactor = 0.1;
   }
-  if(scaleFactor > 10) {
-    scaleFactor = 10;
+  if(scaleFactor > 15) {
+    scaleFactor = 15;
   }
+  std::cerr << scaleFactor << std::endl;
 }
 
 void getCoord(double cX, double cY, double &aX, double &aY) {
@@ -78,7 +79,18 @@ void matrixCamera(GLFWwindow* window) {
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
+  double cx, cy, ax, ay;
+
+  glfwGetCursorPos(window, &cx, &cy);
+  getCoord(cx, cy, ax, ay);
+  glTranslated(ax, ay, 0);
+
   glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 1);
+
+  glfwGetCursorPos(window, &cx, &cy);
+  getCoord(cx, cy, ax, ay);
+  glTranslated(-ax, -ay, 0);
+
   glTranslated(-vectX, vectY, 0);
 
   glPushMatrix();
@@ -123,8 +135,8 @@ void windowResizeCallback(GLFWwindow* window, int width, int height) {
   glPopMatrix();
   glLoadIdentity();
 
-  glScaled(scaleFactor, scaleFactor, 1);
-  glTranslated(-vectX*responsiveness, vectY*responsiveness, 0);
+  glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 1);
+  glTranslated(-vectX, vectY, 0);
 
   TwWindowSize(width, height);
 
