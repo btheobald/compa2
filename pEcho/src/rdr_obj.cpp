@@ -2,11 +2,12 @@
 #include "rdr_obj.hpp"
 
 void rdr_obj::setupDefaultScenario() {
-  // Realistic Size ISH
-  //createSuperstructure(10, 1.989E30, 5E24, 696000000, 100000000, 0, 0, 0, 0, 1E9, 1E11, com::white);
+  // Realistic Size Superstructure
+  //createSuperstructure(10, 1.989E30, 5E24, 696000000, 6371000, 0, 0, 0, 0, 5E10, 2E11, com::white);
   // Small Galaxy
+  createSuperstructure(1000, 1.989E30, 5E24, 696000000, 6371000, 0, 0, 0, 0, 5E10, 1E24, com::white);
 
-  /// Grid
+  /*/// Grid
   for(int x = -100; x <= 100; x++) {
     for(int y = -100; y <= 100; y++) {
       if((x==0) & (y==0)) {
@@ -15,7 +16,7 @@ void rdr_obj::setupDefaultScenario() {
         newBody(0.001, 1, x*10, y*10, 0, 0, com::white);
       }
     }
-  }
+  }*/
 
   // Precessing Orbits
   //newBody(10000, 10,  100, 0, 0,  1.6, com::white);

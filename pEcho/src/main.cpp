@@ -43,12 +43,12 @@ int main() {
   TwInit(TW_OPENGL, NULL);
   TwWindowSize(wXRes, wYRes);
   controls = TwNewBar("Controls");
-  double UGC = 0.1;
-  double IDT = 0.1;
-  int IPF = 0;
+  double UGC = 6E-11;
+  double IDT = 1E12;
+  int IPF = 1;
   renderMain.updateLocalControl(UGC, IDT, IPF);
   TwAddVarRW(controls, "UGC", TW_TYPE_DOUBLE, &UGC, " min=1E-12 max=10 step=0.01 group=Engine label='Graviational Constant' ");
-  TwAddVarRW(controls, "IDT", TW_TYPE_DOUBLE, &IDT, " min=-1000 max=1000 step=0.01 group=Engine label='Itteration Delta Time' ");
+  TwAddVarRW(controls, "IDT", TW_TYPE_DOUBLE, &IDT, " min=-1000 max=1E20 step=0.01 group=Engine label='Itteration Delta Time' ");
   TwAddVarRW(controls, "IPF", TW_TYPE_INT32, &IPF,  " min=1 max=1000 step=1 group=Engine label='Itterations Per Frame' ");
 
   // Setup Scenario and Commit

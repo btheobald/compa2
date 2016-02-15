@@ -2,7 +2,7 @@
 using namespace std;
 
 double vectX = 0, vectY = 0;
-double scaleFactor = 1;
+double scaleFactor = 1E-12;
 double responsiveness = 2;
 double oldaX = 0, oldaY = 0;
 
@@ -38,8 +38,8 @@ void moveCamera(GLFWwindow* window, double cursorX, double cursorY){
   if(!TwEventMousePosGLFW(cursorX, cursorY)) {
     if(getMouseHeld(window, 2)) {
       // Get Change in Cursor
-      vectX += ((prevX - cursorX) * responsiveness) * pow(1/scaleFactor,2);
-      vectY += ((prevY - cursorY) * responsiveness) * pow(1/scaleFactor,2);
+      vectX += ((prevX - cursorX) * responsiveness) * (1/scaleFactor);//pow(1/scaleFactor,2);
+      vectY += ((prevY - cursorY) * responsiveness) * (1/scaleFactor);//pow(1/scaleFactor,2);
     }
   }
   // Update Previous Position
@@ -48,14 +48,15 @@ void moveCamera(GLFWwindow* window, double cursorX, double cursorY){
 }
 
 void zoomCamera(double change){
-  scaleFactor += change/10;
-  if(scaleFactor < 0.1) {
-    scaleFactor = 0.1;
+  double changeFactor = scaleFactor/5;
+  scaleFactor += change*changeFactor;
+  if(scaleFactor < 1E-20) {
+    scaleFactor = 1E-20;
   }
-  if(scaleFactor > 15) {
-    scaleFactor = 15;
+  if(scaleFactor > 1E3) {
+    scaleFactor = 1E3;
   }
-  std::cerr << scaleFactor << std::endl;
+  //std::cerr << scaleFactor << std::endl;
 }
 
 void getCoord(double cX, double cY, double &aX, double &aY) {
@@ -81,15 +82,17 @@ void matrixCamera(GLFWwindow* window) {
 
   double cx, cy, ax, ay;
 
-  glfwGetCursorPos(window, &cx, &cy);
-  getCoord(cx, cy, ax, ay);
-  glTranslated(ax, ay, 0);
+  //glfwGetCursorPos(window, &cx, &cy);
+  //getCoord(cx, cy, ax, ay);
+  //glTranslated(ax, ay, 0);
 
-  glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 1);
 
-  glfwGetCursorPos(window, &cx, &cy);
-  getCoord(cx, cy, ax, ay);
-  glTranslated(-ax, -ay, 0);
+  //glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 1);
+  glScaled(scaleFactor, scaleFactor, 1);
+
+  //glfwGetCursorPos(window, &cx, &cy);
+  //getCoord(cx, cy, ax, ay);
+  //glTranslated(-ax, -ay, 0);
 
   glTranslated(-vectX, vectY, 0);
 
