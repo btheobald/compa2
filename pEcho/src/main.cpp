@@ -43,8 +43,8 @@ int main() {
   TwInit(TW_OPENGL, NULL);
   TwWindowSize(wXRes, wYRes);
   controls = TwNewBar("Controls");
-  double UGC = 6E-11;
-  double IDT = 1E12;
+  double UGC = 0.1;
+  double IDT = 0.1;
   int IPF = 1;
   renderMain.updateLocalControl(UGC, IDT, IPF);
   TwAddVarRW(controls, "UGC", TW_TYPE_DOUBLE, &UGC, " min=1E-12 max=10 step=0.01 group=Engine label='Graviational Constant' ");

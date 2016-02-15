@@ -10,8 +10,11 @@ void simInit(sharedStage* sharedDataAccess) {
   // Get Body Data from shared
   simMain.updateLocalStore(sharedDataAccess);
 
+  double timer;
+
   // Check Exit Request
   while (!(sharedDataAccess->getStatus(1))) {
+    timer = glfwGetTime();
     // Wait for old data to be taken.
     if(sharedDataAccess->newSScenarioCheck()) {
       std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
@@ -26,6 +29,7 @@ void simInit(sharedStage* sharedDataAccess) {
         simMain.itteration();
       }
     }
+    std::cerr << glfwGetTime()-timer << std::endl;
   }
   // Sim Now Exits
 }
