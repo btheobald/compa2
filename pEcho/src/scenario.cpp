@@ -9,7 +9,7 @@ scenario::~scenario() {
 
 }
 
-void scenario::newBody(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double p_VelX, double p_VelY, const float p_Color[3]) {
+void scenario::newBody(float p_Mass, float p_Radius, float p_PosX, float p_PosY, float p_VelX, float p_VelY, const float p_Color[3]) {
   bodyStore.push_back(std::move(body(p_Mass, p_Radius, p_PosX, p_PosY, p_VelX, p_VelY, p_Color)));
 }
 void scenario::delBody(int index) {
@@ -30,7 +30,7 @@ void scenario::updateLocalControl(sharedStage* l_sharedDataAccess) {
   IDT = l_sharedDataAccess->getIDT();
   IPF = l_sharedDataAccess->getIPF();
 }
-void scenario::updateLocalControl(double p_UGC, double p_IDT, int p_IPF) {
+void scenario::updateLocalControl(float p_UGC, float p_IDT, int p_IPF) {
   UGC = p_UGC;
   IDT = p_IDT;
   IPF = p_IPF;
@@ -42,10 +42,10 @@ void scenario::updateSharedControl(sharedStage* l_sharedDataAccess) {
   l_sharedDataAccess->setIPF(IPF);
 }
 
-double scenario::getUGC() {
+float scenario::getUGC() {
   return UGC;
 }
-double scenario::getIDT() {
+float scenario::getIDT() {
   return IDT;
 }
 int scenario::getIPF() {

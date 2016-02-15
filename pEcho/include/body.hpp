@@ -3,49 +3,49 @@
 class body {
 private:
   // Body Attributes
-  double mass = 1;
-  double radius = 1;
+  float mass = 1;
+  float radius = 1;
   bool fixed = false;
   float color[3] = { 0.0f, 0.0f, 0.0f };
 
   // Simulation Properties     X    Y
-  double force[2]         = { 0.0, 0.0 };
-  double acceleration[2]  = { 0.0, 0.0 };
-  double velocity[2]      = { 0.0, 0.0 };
-  double position[2]      = { 0.0, 0.0 };
+  float force[2]         = { 0.0, 0.0 };
+  float acceleration[2]  = { 0.0, 0.0 };
+  float velocity[2]      = { 0.0, 0.0 };
+  float position[2]      = { 0.0, 0.0 };
 
 public:
   // Constructors
   body();
-  body(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double p_VelX, double p_VelY, const float p_Color[3]);
-  body(double p_PosX, double p_PosY);
+  body(float p_Mass, float p_Radius, float p_PosX, float p_PosY, float p_VelX, float p_VelY, const float p_Color[3]);
+  body(float p_PosX, float p_PosY);
   // Destructor
   ~body();
 
   // Variable Access
   // Return Variables
-  double getMass(void);
-  double getRadius(void);
+  float getMass(void);
+  float getRadius(void);
   bool getFixedStatus(void);
   float getColor(int cIndex);
-  double getAcceleration(int xyIndex);
-  double getVelocity(int xyIndex);
-  double getPosition(int xyIndex);
-  double getMomentum(int xyIndex);
+  float getAcceleration(int xyIndex);
+  float getVelocity(int xyIndex);
+  float getPosition(int xyIndex);
+  float getMomentum(int xyIndex);
 
   // Set Variables (Returns OK/FAIL [0/1])
-  void setMass(double p_Mass);
-  void setRadius(double p_Radius);
+  void setMass(float p_Mass);
+  void setRadius(float p_Radius);
   void setFixed(bool p_Fixed);
   void setColor(const float p_Color[3]);
-  void addForce(double p_Force, int xyIndex);
+  void addForce(float p_Force, int xyIndex);
   void resetForce();
-  void setAcceleration(double p_Acceleration, int xyIndex);
-  void setVelocity(double p_Velocity, int xyIndex);
-  void setPosition(double p_Position, int xyIndex);
+  void setAcceleration(float p_Acceleration, int xyIndex);
+  void setVelocity(float p_Velocity, int xyIndex);
+  void setPosition(float p_Position, int xyIndex);
 
   // Calculate and Set (Returns OK/FAIL [0/1])
   void calcAcceleration();
-  void calcHalfVelocity(double timestep);
-  void calcPosition(double timestep);
+  void calcHalfVelocity(float timestep);
+  void calcPosition(float timestep);
 };

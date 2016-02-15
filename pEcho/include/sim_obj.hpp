@@ -10,11 +10,11 @@
 class sim_obj : public scenario {
 private:
   int prevBodyCount = 0;
-  com::double2DVector forceMatrix;
-  void resizeMatrix(com::double2DVector &p_Matrix, int newSize);
-  double calcCompDistance(int bodyID_A, int bodyID_B, int xy);
-  double calcVectDistance(double distX, double distY);
-  double calcForceBodyPair(int bodyID_A, int bodyID_B, double distV);
+  com::float2DVector forceMatrix;
+  void resizeMatrix(com::float2DVector &p_Matrix, int newSize);
+  float calcCompDistance(int bodyID_A, int bodyID_B, int xy);
+  float calcVectDistance(float distX, float distY);
+  float calcForceBodyPair(int bodyID_A, int bodyID_B, float distV);
   int calcForceMatrix();
   int calcForceSumAB();
   int calcAcceleraitonAB();

@@ -2,7 +2,7 @@
 using namespace std;
 
 double vectX = 0, vectY = 0;
-double scaleFactor = 1E-12;
+double scaleFactor = 1;
 double responsiveness = 2;
 double oldaX = 0, oldaY = 0;
 

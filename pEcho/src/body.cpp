@@ -12,7 +12,7 @@ body::body() {
   velocity[0] = 0;
 }
 
-body::body(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double p_VelX, double p_VelY, const float p_Color[3]) {
+body::body(float p_Mass, float p_Radius, float p_PosX, float p_PosY, float p_VelX, float p_VelY, const float p_Color[3]) {
   mass = p_Mass;
   radius = p_Radius;
   // Set Position
@@ -27,7 +27,7 @@ body::body(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double 
   color[2] = p_Color[2];
 }
 
-body::body(double p_PosX, double p_PosY) {
+body::body(float p_PosX, float p_PosY) {
   mass = 100;
   radius = 1;
   // Set Position
@@ -43,10 +43,10 @@ body::~body() {
 }
 
 // Used in Interface
-double body::getMass(void) {
+float body::getMass(void) {
   return mass;
 }
-double body::getRadius(void) {
+float body::getRadius(void) {
   return radius;
 }
 bool body::getFixedStatus(void) {
@@ -55,23 +55,23 @@ bool body::getFixedStatus(void) {
 float body::getColor(int cIndex) {
   return color[cIndex];
 }
-double body::getAcceleration(int xyIndex) {
+float body::getAcceleration(int xyIndex) {
   return acceleration[xyIndex];
 }
-double body::getVelocity(int xyIndex) {
+float body::getVelocity(int xyIndex) {
   return velocity[xyIndex];
 }
-double body::getPosition(int xyIndex) {
+float body::getPosition(int xyIndex) {
   return position[xyIndex];
 }
-double body::getMomentum(int xyIndex) {
+float body::getMomentum(int xyIndex) {
   return mass * velocity[xyIndex];
 }
 // Used in Setup and Interface
-void body::setMass(double p_Mass) {
+void body::setMass(float p_Mass) {
   mass = p_Mass;
 }
-void body::setRadius(double p_Radius) {
+void body::setRadius(float p_Radius) {
   radius = p_Radius;
 }
 void body::setFixed(bool p_Fixed) {
@@ -82,18 +82,18 @@ void body::setColor(const float p_Color[3]) {
   color[1] = p_Color[1];
   color[2] = p_Color[2];
 }
-void body::setAcceleration(double p_acceleration, int xyIndex) {
+void body::setAcceleration(float p_acceleration, int xyIndex) {
   acceleration[xyIndex] = p_acceleration;
 }
-void body::setVelocity(double p_velocity, int xyIndex) {
+void body::setVelocity(float p_velocity, int xyIndex) {
   velocity[xyIndex] = p_velocity;
 }
-void body::setPosition(double p_position, int xyIndex) {
+void body::setPosition(float p_position, int xyIndex) {
   position[xyIndex] = p_position;
 }
 
 // Used In Simulation
-void body::addForce(double p_Force, int xyIndex) {
+void body::addForce(float p_Force, int xyIndex) {
   force[xyIndex] = force[xyIndex] + p_Force;
 }
 void body::resetForce() {
@@ -105,11 +105,11 @@ void body::calcAcceleration() {
   acceleration[0] = force[0] / mass;
   acceleration[1] = force[1] / mass;
 }
-void body::calcHalfVelocity(double timestep) {
+void body::calcHalfVelocity(float timestep) {
   velocity[0] = velocity[0] + ( acceleration[0] * (timestep * 0.5) );
   velocity[1] = velocity[1] + ( acceleration[1] * (timestep * 0.5) );
 }
-void body::calcPosition(double timestep) {
+void body::calcPosition(float timestep) {
   position[0] = position[0] + ( velocity[0] * timestep );
   position[1] = position[1] + ( velocity[1] * timestep );
 }

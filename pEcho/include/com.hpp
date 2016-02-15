@@ -5,7 +5,7 @@
 // Custom Typedefs
 namespace com {
 	typedef std::vector<body> bodyVector;
-	typedef std::vector<std::vector<double>> double2DVector;
+	typedef std::vector<std::vector<float>> float2DVector;
   typedef std::lock_guard<std::mutex> lockGuard;
 
   // Color Arrays

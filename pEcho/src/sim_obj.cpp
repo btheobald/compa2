@@ -1,25 +1,25 @@
 // Header Include
 #include "sim_obj.hpp"
 
-void sim_obj::resizeMatrix(com::double2DVector& p_Matrix, int newSize) {
+void sim_obj::resizeMatrix(com::float2DVector& p_Matrix, int newSize) {
   p_Matrix.clear();
-  p_Matrix.resize(newSize, std::vector<double>(newSize, 0));
+  p_Matrix.resize(newSize, std::vector<float>(newSize, 0));
 }
 
-double sim_obj::calcCompDistance(int bodyID_A, int bodyID_B, int xy) {
-  double posA = bodyStore[bodyID_A].getPosition(xy);
-  double posB = bodyStore[bodyID_B].getPosition(xy);
+float sim_obj::calcCompDistance(int bodyID_A, int bodyID_B, int xy) {
+  float posA = bodyStore[bodyID_A].getPosition(xy);
+  float posB = bodyStore[bodyID_B].getPosition(xy);
   // Return component distance
   return posA - posB;
 }
 
-double sim_obj::calcVectDistance(double distX, double distY) {
+float sim_obj::calcVectDistance(float distX, float distY) {
   return sqrt(pow(std::abs(distX),2) + pow(std::abs(distY), 2));
 }
 
-double sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B, double distV) {
+float sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B, float distV) {
   // GMm/(r^3)
-  double forceResult;
+  float forceResult;
   forceResult = UGC * bodyStore[bodyID_A].getMass() * bodyStore[bodyID_B].getMass();
   forceResult = forceResult / pow(distV, 3);
 
@@ -27,7 +27,7 @@ double sim_obj::calcForceBodyPair(int bodyID_A, int bodyID_B, double distV) {
 }
 
 int sim_obj::calcForceMatrix() {
-  double tempPreForce, distX, distY, distV;
+  float tempPreForce, distX, distY, distV;
   resizeMatrix(forceMatrix, bodyStore.size());
   prevBodyCount = bodyStore.size();
 
@@ -103,9 +103,9 @@ void sim_obj::calcCollision() {
   for (unsigned int bodyIDC_A = 0; bodyIDC_A < bodyStore.size(); bodyIDC_A++) {
     for (unsigned int bodyIDC_B = 0; bodyIDC_B < bodyStore.size(); bodyIDC_B++) {
       if (bodyIDC_A != bodyIDC_B) {
-        double xDist = calcCompDistance(bodyIDC_A, bodyIDC_B, 0);
-        double yDist = calcCompDistance(bodyIDC_A, bodyIDC_B, 1);
-        double vDist = calcVectDistance(xDist, yDist);
+        float xDist = calcCompDistance(bodyIDC_A, bodyIDC_B, 0);
+        float yDist = calcCompDistance(bodyIDC_A, bodyIDC_B, 1);
+        float vDist = calcVectDistance(xDist, yDist);
 
         if((bodyStore[bodyIDC_A].getRadius()+bodyStore[bodyIDC_B].getRadius()) > vDist) {
           // Body A Becomes New Body
@@ -113,7 +113,7 @@ void sim_obj::calcCollision() {
           bodyStore[bodyIDC_A].setRadius(sqrt(pow(bodyStore[bodyIDC_A].getRadius(),2)+pow(bodyStore[bodyIDC_B].getRadius(),2)));
 
           // Add Together Masses
-          double combinedMass = bodyStore[bodyIDC_A].getMass()+bodyStore[bodyIDC_B].getMass();
+          float combinedMass = bodyStore[bodyIDC_A].getMass()+bodyStore[bodyIDC_B].getMass();
 
           // Get Weighted Mean Position XY
           bodyStore[bodyIDC_A].setPosition(((bodyStore[bodyIDC_A].getPosition(0)*bodyStore[bodyIDC_A].getMass())+(bodyStore[bodyIDC_B].getPosition(0)*bodyStore[bodyIDC_B].getMass()))/combinedMass, 0);

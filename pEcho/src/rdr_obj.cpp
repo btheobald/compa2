@@ -4,8 +4,10 @@
 void rdr_obj::setupDefaultScenario() {
   // Realistic Size Superstructure
   //createSuperstructure(10, 1.989E30, 5E24, 696000000, 6371000, 0, 0, 0, 0, 5E10, 2E11, com::white);
+  // Massive Galaxy
+  //createSuperstructure(1000, 1.989E30, 5E24, 696000000, 6371000, 0, 0, 0, 0, 5E10, 1E24, com::white);
   // Small Galaxy
-  createSuperstructure(1000, 1.989E30, 5E24, 696000000, 6371000, 0, 0, 0, 0, 5E10, 1E24, com::white);
+  createSuperstructure(50000, 10000, 0.1, 10, 0.1, 0, 0, 0, 0, 50.0, 1000.0, com::white);
 
   /*/// Grid
   for(int x = -100; x <= 100; x++) {
@@ -34,7 +36,7 @@ void rdr_obj::setupDefaultScenario() {
   //newBody(p_cMass, p_cRadius, p_cPosX, p_cPosY, p_cVelX, p_cVelY, p_Color);
 }
 
-void rdr_obj::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass, double p_cRadius, double p_oRadius, double p_cPosX, double p_cPosY, double p_cVelX, double p_cVelY, double p_coSpacing, double p_sRadius, const float p_Color[3]) {
+void rdr_obj::createSuperstructure(int p_soBodies, float p_cMass, float p_oMass, float p_cRadius, float p_oRadius, float p_cPosX, float p_cPosY, float p_cVelX, float p_cVelY, float p_coSpacing, float p_sRadius, const float p_Color[3]) {
   // Create a Pseudo-random circular distribution of bodies around a central body.
 
   // Use Mersenne Twister for RNE within range.
@@ -44,7 +46,7 @@ void rdr_obj::createSuperstructure(int p_soBodies, double p_cMass, double p_oMas
   std::mt19937 gen(r());
 
   // Temporary Variables
-  double tempRand, tempCirX, tempCirY, tempDist, tempVelX, tempVelY;
+  float tempRand, tempCirX, tempCirY, tempDist, tempVelX, tempVelY;
   // Add Central Body
   newBody(p_cMass, p_cRadius, p_cPosX, p_cPosY, p_cVelX, p_cVelY, p_Color);
   //int bodyOffset = bodyStore.size() - 1;
@@ -90,9 +92,9 @@ void rdr_obj::updateLocalStore(sharedStage* l_sharedDataAccess) {
 void rdr_obj::drawBody(int bodyID) {
   const int segments = 16;
 
-  double posX = bodyStore[bodyID].getPosition(0);
-  double posY = bodyStore[bodyID].getPosition(1);
-  double radius = bodyStore[bodyID].getRadius();
+  float posX = bodyStore[bodyID].getPosition(0);
+  float posY = bodyStore[bodyID].getPosition(1);
+  float radius = bodyStore[bodyID].getRadius();
 
   // Precalc
   float theta = 2 * M_PI / segments;
@@ -138,7 +140,7 @@ void rdr_obj::drawScene() {
   }
 }
 
-int rdr_obj::checkCoord(double x, double y) {
+int rdr_obj::checkCoord(float x, float y) {
   for(unsigned int bIDC = 0; bIDC < bodyStore.size(); bIDC++) {
     if(((x < bodyStore[bIDC].getPosition(0)+(bodyStore[bIDC].getRadius()+5))   &
         (x > bodyStore[bIDC].getPosition(0)-(bodyStore[bIDC].getRadius()+5)))  &
