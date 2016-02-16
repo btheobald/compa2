@@ -9,14 +9,6 @@ private:
   quadNode* sw;
   quadNode* nw;
 
-  // Node Markers
-  bool pbMark;
-  bool neMark;
-  bool seMark;
-  bool swMark;
-  bool nwMark;
-  bool hasChildren;
-
   body* pseudoBody;                   // Actual body or center of mass
 
   double centerX, centerY;            // Square Center, used for subdivision
