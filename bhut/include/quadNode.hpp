@@ -9,18 +9,27 @@ private:
   quadNode* sw;
   quadNode* nw;
 
+  // Node Markers
+  bool neMark;
+  bool seMark;
+  bool swMark;
+  bool nwMark;
+  bool hasChildren;
+
   body* pseudoBody;          // Actual body or center of mass
 
   double centerX, centerY;  // Square Center, used for subdivision
   double half;              // Half Dimension, used for subdivision
 
-  void subdivide(int r_depth);         // Split Node into 4
-  int checkPlace(body* p_addBody, int r_depth);  // Check if Body is in quad.
+  void subdivide();         // Split Node into 4
+  int checkPlace(body* p_addBody);  // Check if Body is in quad.
+  int insertSubDiv(body* p_addBody);
 
 public:
   quadNode();
   quadNode(double centerX, double centerY, double half);
   ~quadNode();
 
-  int insert(body* p_addBody, int r_depth);
+  int insert(body* p_addBody);
+  void recurseBID(int level);
 };
