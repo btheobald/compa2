@@ -77,15 +77,19 @@ int quadNode::insert(body* p_addBody) {
       // Put new body into subdivied tree
       // Handle New Body
       if(ne->insert(p_addBody)) {
+        *pseudoBody = (*pseudoBody+*p_addBody);
         return true;
       }
       if(se->insert(p_addBody))  {
+        *pseudoBody = (*pseudoBody+*p_addBody);
         return true;
       }
       if(sw->insert(p_addBody)) {
+        *pseudoBody = (*pseudoBody+*p_addBody);
         return true;
       }
       if(nw->insert(p_addBody))  {
+        *pseudoBody = (*pseudoBody+*p_addBody);
         return true;
       }
     }
@@ -94,23 +98,22 @@ int quadNode::insert(body* p_addBody) {
   return false;
 }
 
-void quadNode::recurseBID(int level) {
-  std::cerr << level << ": " << " " << pseudoBody->getID() << std::endl;
-
+void quadNode::recurse(int level) {
   if(ne != NULL) {
-    //std::cerr << "NE ";
-    ne->recurseBID(level+1);
+    //std::cerr << " vNEv" << std::endl;
+    ne->recurse(level+1);
   }
   if(se != NULL) {
-    //std::cerr << "SE ";
-    se->recurseBID(level+1);
+    //std::cerr << " vSEv" << std::endl;
+    se->recurse(level+1);
   }
   if(sw != NULL) {
-    //std::cerr << "SW ";
-    sw->recurseBID(level+1);
+    //std::cerr << " vSWv" << std::endl;
+    sw->recurse(level+1);
   }
   if(nw != NULL) {
-    //std::cerr << "NW ";
-    nw->recurseBID(level+1);
+    //std::cerr << " vNWv" << std::endl;
+    nw->recurse(level+1);
   }
+  //std::cerr << " ^" << std::endl;
 }

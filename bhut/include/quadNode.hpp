@@ -24,5 +24,5 @@ public:
   ~quadNode();
 
   int insert(body* p_addBody);
-  void recurseBID(int level);
+  void recurse(int level);
 };

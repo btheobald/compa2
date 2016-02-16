@@ -6,7 +6,7 @@
 #include "quadNode.hpp"
 #include <GLFW/glfw3.h>
 
-const int bodies = 10000000;
+const int bodies = 10000;
 
 int main() {
 
@@ -24,26 +24,29 @@ int main() {
   std::vector<body> storage;
   for(int bIDC = 0; bIDC < bodies; bIDC++) {
     // Ensure that bodies are not too close to center.
-    do tempRand = pos(gen) - 10000; while((tempRand < 100) & (tempRand > -100));
+    do tempRand = pos(gen) - 1000000; while((tempRand < 100) & (tempRand > -100));
     // Map to Circle
     tempCirX = tempRand * cos(2 * M_PI * tempRand);
     tempCirY = tempRand * sin(2 * M_PI * tempRand);
-    storage.push_back(body(1, tempCirX, tempCirY, 0, 0, bIDC));
+    storage.push_back(body(1, tempCirX, tempCirY, 0, 0));
   }
 
   timer = (double)glfwGetTime();
 
   std::cerr << "Quad-Tree Begin" << std::endl;
-  quadNode* root = new quadNode(0, 0, 5000);
+  quadNode* root = new quadNode(0, 0, 100000000);
   for(int i = 0; i < bodies; i++) {
     root->insert(std::move(&storage[i]));
   }
   std::cerr << "Quad-Tree End" << std::endl;
 
-  std::cerr << "Time: " << (double)glfwGetTime()-timer << std::endl;
+  std::cerr << "Fill Time: " << (double)glfwGetTime()-timer << std::endl;
+
+  timer = (double)glfwGetTime();
+  root->recurse(0);
+  std::cerr << "Traverse Time: " << (double)glfwGetTime()-timer << std::endl;
 
   root->~quadNode();
 
-  //std::cerr << "Printing Tree" << std::endl;
-  //root->recurseBID(0);
+  glfwTerminate();
 }
