@@ -1,37 +1,26 @@
 #include <iostream>
 #include <vector>
+#include <cmath>
 #include "body.hpp"
 #include "quadNode.hpp"
 
-const int bodyCount = 10;
+const int bodies = 1E5;
 
 int main() {
-  body b1(1, 1,  1, 0, 0, 1);
-  body b2(1, 2, -4, 0, 0, 2);
-  body b3(1, -4,  2, 0, 0, 3);
-  body b4(1, -6,  2, 0, 0, 4);
+  std::vector<body> storage;
+  for(int x = 0; x < sqrt(bodies); x++) {
+    for(int y = 0; y < sqrt(bodies); y++) {
+      storage.push_back(body(1, x*100, y*100-bodies/2, 0, 0, (x+y)));
+    }
+  }
 
-  quadNode* root = new quadNode(0, 0, 10);
-  std::cerr << "Body 1" << std::endl;
-  root->insert(&b1);
-  std::cerr << "Body 2" << std::endl;
-  root->insert(&b2);
-  std::cerr << "Body 3" << std::endl;
-  root->insert(&b3);
-  std::cerr << "Body 4" << std::endl;
-  root->insert(&b4);
-
-  /*std::vector<body> storage;
-
-  for(int i = 0; i < bodyCount; i++) {
-    storage.push_back(body());
+  quadNode* root = new quadNode(0, 0, 1000000000);
+  for(int i = 0; i < bodies; i++) {
+    root->insert(&storage[i]);
   }
 
   std::cerr << "Done" << std::endl;
-  while(1) {
-    __asm__("nop");
-  }*/
 
-  std::cerr << "Printing Tree" << std::endl;
-  root->recurseBID(0);
+  //std::cerr << "Printing Tree" << std::endl;
+  //root->recurseBID(0);
 }

@@ -9,7 +9,8 @@ quadNode::quadNode(double p_centerX, double p_centerY, double p_half) {
   centerX = p_centerX;
   centerY = p_centerY;
   half = p_half;
-  pseudoBody = NULL;
+
+  pbMark = false;
 
   neMark = false;
   seMark = false;
@@ -26,10 +27,10 @@ quadNode::~quadNode() {
 void quadNode::subdivide() {
   //std::cerr << "Subdivision : " << r_depth << std::endl;
 
-  std::cerr << "NE Quad : " << centerX+(half/2) << " " << centerY+(half/2) << " " << half/2 << std::endl;
-  std::cerr << "SE Quad : " << centerX+(half/2) << " " << centerY-(half/2) << " " << half/2 << std::endl;
-  std::cerr << "SW Quad : " << centerX-(half/2) << " " << centerY-(half/2) << " " << half/2 << std::endl;
-  std::cerr << "NW Quad : " << centerX-(half/2) << " " << centerY+(half/2) << " " << half/2 << std::endl;
+  //std::cerr << "NE Quad : " << centerX+(half/2) << " " << centerY+(half/2) << " " << half/2 << std::endl;
+  //std::cerr << "SE Quad : " << centerX+(half/2) << " " << centerY-(half/2) << " " << half/2 << std::endl;
+  //std::cerr << "SW Quad : " << centerX-(half/2) << " " << centerY-(half/2) << " " << half/2 << std::endl;
+  //std::cerr << "NW Quad : " << centerX-(half/2) << " " << centerY+(half/2) << " " << half/2 << std::endl;
 
   ne = new quadNode(centerX+(half/2), centerY+(half/2), half/2);
   se = new quadNode(centerX+(half/2), centerY-(half/2), half/2);
@@ -40,8 +41,8 @@ void quadNode::subdivide() {
 int quadNode::checkPlace(body* p_addBody) {
   //std::cerr << "Check : " << r_depth << std::endl;
   // Check X
-  if((p_addBody->getP(0) >= centerX-half) & (p_addBody->getP(0) < centerX+half)) {
-    if((p_addBody->getP(1) >= centerY-half) & (p_addBody->getP(1) < centerY+half)) {
+  if((p_addBody->getP(0) > centerX-half) & (p_addBody->getP(0) <= centerX+half)) {
+    if((p_addBody->getP(1) > centerY-half) & (p_addBody->getP(1) <= centerY+half)) {
       return true;
     }
   }
@@ -49,56 +50,48 @@ int quadNode::checkPlace(body* p_addBody) {
   return false;
 }
 
-int quadNode::insertSubDiv(body* p_addBody) {
-  //neMark = false;
-  //seMark = false;
-  //swMark = false;
-  //neMark = false;
+void quadNode::updateCOM() {
 
-  // Handle New Body
-  if(ne->insert(p_addBody)) {
-    //std::cerr << "NE Good" << std::endl;
-    neMark = true;
-    return true;
-  }
-  if(se->insert(p_addBody))  {
-    //std::cerr << "SE Good" << std::endl;
-    seMark = true;
-    return true;
-  }
-  if(sw->insert(p_addBody)) {
-    //std::cerr << "SW Good" << std::endl;
-    swMark = true;
-    return true;
-  }
-  if(nw->insert(p_addBody))  {
-    //std::cerr << "NW Good" << std::endl;
-    nwMark = true;
-    return true;
-  }
-  return false;
 }
 
 int quadNode::insert(body* p_addBody) {
-  //std::cerr << "Insert : " << r_depth << std::endl;
   if(checkPlace(p_addBody)) {
-    if(pseudoBody == NULL) {
+    if(!pbMark) {
       pseudoBody = p_addBody;
+      pbMark = true;
       return true;
     } else {
       if(!hasChildren) { // If nw is NULL, subdivide has not been called yet.
         subdivide();
         hasChildren = true;
         // Put Old Body Into Subdivided Tree
-        insertSubDiv(pseudoBody);
-      } else {
-        //std::cerr << "Already Subdivided" << std::endl;
+        insert(pseudoBody);
+        updateCOM();
       }
       // Put new body into subdivied tree
-      return insertSubDiv(p_addBody);
+      // Handle New Body
+      if(ne->insert(p_addBody)) {
+        //std::cerr << "NE Good" << std::endl;
+        neMark = true;
+        return true;
+      }
+      if(se->insert(p_addBody))  {
+        //std::cerr << "SE Good" << std::endl;
+        seMark = true;
+        return true;
+      }
+      if(sw->insert(p_addBody)) {
+        //std::cerr << "SW Good" << std::endl;
+        swMark = true;
+        return true;
+      }
+      if(nw->insert(p_addBody))  {
+        //std::cerr << "NW Good" << std::endl;
+        nwMark = true;
+        return true;
+      }
     }
   }
-
   // Return False if Invalid Quad
   return false;
 }
@@ -108,20 +101,22 @@ void quadNode::recurseBID(int level) {
 
   if(hasChildren) {
     if(neMark) {
-      std::cerr << "NE ";
-      ne->recurseBID(level++);
+      //std::cerr << "NE ";
+      ne->recurseBID(level+1);
     }
     if(seMark) {
-      std::cerr << "SE ";
-      se->recurseBID(level++);
+      //std::cerr << "SE ";
+      se->recurseBID(level+1);
     }
     if(swMark) {
-      std::cerr << "SW ";
-      sw->recurseBID(level++);
+      //std::cerr << "SW ";
+      sw->recurseBID(level+1);
     }
     if(nwMark) {
-      std::cerr << "NW ";
-      nw->recurseBID(level++);
+      //std::cerr << "NW ";
+      nw->recurseBID(level+1);
     }
+
+    std::cerr << std::endl;
   }
 }

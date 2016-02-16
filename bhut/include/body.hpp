@@ -11,7 +11,7 @@ private:
 
 public:
   body();
-  body(float p_mass, float p_posX, float p_posY, float p_velX, float p_velY, int p_id);
+  body(float p_m, float p_pX, float p_pY, float p_vX, float p_vY, int p_id);
   ~body();
 
   inline double getP(int index) {return p[index];}
