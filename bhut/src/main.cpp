@@ -2,7 +2,7 @@
 #include <vector>
 #include "body.hpp"
 
-const int bodyCount = 1E8;
+const int bodyCount = 10;
 
 int main() {
   std::vector<body> storage;

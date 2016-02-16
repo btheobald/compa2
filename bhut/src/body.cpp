@@ -4,14 +4,14 @@
 body::body(){
 }
 
-body::body(float p_mass, float p_posX, float p_posY, float p_velX, float p_velY) {
-  mass = p_mass;
+body::body(float p_m, float p_pX, float p_pY, float p_vX, float p_vY) {
+  m = p_m;
 
-  pos[0] = p_posX;
-  pos[1] = p_posY;
+  p[0] = p_pX;
+  p[1] = p_pY;
 
-  vel[0] = p_velX;
-  vel[1] = p_velY;
+  v[0] = p_vX;
+  v[1] = p_vY;
 }
 
 body::~body(){
