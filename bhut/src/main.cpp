@@ -24,11 +24,11 @@ int main() {
   std::vector<body> storage;
   for(int bIDC = 0; bIDC < bodies; bIDC++) {
     // Ensure that bodies are not too close to center.
-    do tempRand = pos(gen) - 10000; while((tempRand < 100) & (tempRand > -100));
+    do tempRand = pos(gen) - 100; while((tempRand < 10) & (tempRand > -10));
     // Map to Circle
     tempCirX = tempRand * cos(2 * M_PI * tempRand);
     tempCirY = tempRand * sin(2 * M_PI * tempRand);
-    storage.push_back(body(1, tempCirX, tempCirY, 0, 0, bIDC));
+    storage.push_back(body(1, tempCirX, tempCirY, 0, 0));
   }
 
   timer = (double)glfwGetTime();
