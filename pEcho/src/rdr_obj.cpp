@@ -11,7 +11,7 @@ void rdr_obj::setupDefaultScenario() {
   //createSuperstructure(1000, 1.989E30, 5E24, 696000000, 6371000, 0, 0, 0, 0, 5E10, 1E24, com::white);
 
   // Small Galaxy
-  createSuperstructure(200, 1000, 0.1, 10, 0.1, 0, 0, 0, 0, 50.0, 500.0, com::white);
+  createSuperstructure(800, 10000, 0.1, 10, 0.1, 0, 0, 0, 0, 100.0, 500.0, com::white);
 
   /*/// Grid
   for(int x = -100; x <= 100; x++) {

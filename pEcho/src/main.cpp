@@ -17,11 +17,8 @@ void initDisplay(int lXRes, int lYRes);
 void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess);
 
 int main() {
-  // Set Random Seed Using Current Time
-  srand(time(NULL));
-
   // Create Render Thread Local Class
-  rdr_obj renderMain;
+  rdr_obj* renderMain = new rdr_obj;
   // Create Shared Stage Object
   sharedStage sharedData;
 
@@ -33,8 +30,8 @@ int main() {
   GLFWwindow* echoWindow;
   // Get User Resolution
   const GLFWvidmode* mode = glfwGetVideoMode(glfwGetPrimaryMonitor());
-  int wXRes = mode->width/1.2;
-  int wYRes = mode->height/1.2;
+  int wXRes = mode->width*0.8;
+  int wYRes = mode->height*0.8;
 
   echoWindow = glfwCreateWindow(wXRes, wYRes, "Echo", NULL, NULL);
   glfwMakeContextCurrent(echoWindow);
@@ -43,8 +40,8 @@ int main() {
   interface localInterface(wXRes, wYRes);
 
   // Setup Scenario and Commit
-  renderMain.setupDefaultScenario();
-  renderMain.updateSharedArea(&sharedData);
+  renderMain->setupDefaultScenario();
+  renderMain->updateSharedArea(&sharedData);
 
   // Start Sim Thread, Pass SharedData Address
   std::thread simThread(simInit, &sharedData);
@@ -56,12 +53,12 @@ int main() {
 
   while(!glfwWindowShouldClose(echoWindow)) {
     //renderMain.updateLocalControl(UGC, IDT, IPF);
-    renderMain.updateSharedControl(&sharedData);
+    renderMain->updateSharedControl(&sharedData);
     // Pull Changes from Shared
-    renderMain.updateLocalStore(&sharedData);
+    renderMain->updateLocalStore(&sharedData);
 
     // Draw and Display
-    displayLoopCall(echoWindow, &renderMain);
+    displayLoopCall(echoWindow, renderMain);
 
     // TODO: Update Local Scenario with Changes
   }
