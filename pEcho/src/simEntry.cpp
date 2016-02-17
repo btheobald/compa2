@@ -14,7 +14,7 @@ void simInit(sharedStage* sharedDataAccess) {
 
   // Check Exit Request
   while (!(sharedDataAccess->getStatus(1))) {
-    timer = glfwGetTime();
+    //timer = glfwGetTime();
     // Wait for old data to be taken.
     if(sharedDataAccess->newSScenarioCheck()) {
       std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
@@ -29,7 +29,7 @@ void simInit(sharedStage* sharedDataAccess) {
         simMain.itteration();
       }
     }
-    std::cerr << glfwGetTime()-timer << std::endl;
+    //std::cerr << glfwGetTime()-timer << std::endl;
   }
   // Sim Now Exits
 }

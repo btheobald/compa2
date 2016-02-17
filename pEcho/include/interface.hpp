@@ -1,57 +1,43 @@
 #pragma once
 #include <GLFW/glfw3.h>   // GLFW
 #include <iostream>
-#include <cmath>
-#include <GL/glu.h>
 #include <AntTweakBar.h>  // AntTweakBar
 
+// This class acts as a tider interface for ATB and GLFW?
 class interface {
-private:
-  // Camera Variables
-  //  World Position
-  double cameraPosX, cameraPosY;
-  // Movement Factor
-  double moveFact;
-  // Zoom Scale Factor
-  double scaleFact;
+  private:
+    TwBar* simInterface;
+    TwBar* bodyInterface;
+    TwBar* systemInterface;
+    TwBar* dialog;
 
-  // Mouse Variables
-  double winX, winY;
-  double prevWinX, prevWinY;
-  double actX, actY;
+    // Sim Control
+    double UGC_I;
+    double IDT_I;
+    double IPF_I;
 
-  // Screen
-  int resX, resY;
 
-  // Check if mouse is held
-  bool getMouseHeld(GLFWwindow* window, int button);
-  // Calculate drag vector and add to transform total
+    // Active Body Interface
+    int abID_I;
+    double abMass_I;
+    double abPosX_I;
+    double abPosY_I;
+    double abVelX_I;
+    double abVelY_I;
+    bool abFixed_I;
 
-  void updateMouseActual();
-  // Callbacks
-  // Checks for position of cursor for camera movement
-  void cursorPos(GLFWwindow* window);
-  // Checks for a right mouse button click for body selection
-  void mouseButton(GLFWwindow* window);
-  // Checks for scroll wheel movement for zoom
-  void mouseScroll(GLFWwindow* window);
-  // Checks for arrow keys for camera movement / zoom
-  void keyboardKey(GLFWwindow* window);
-  void keyboardChar(GLFWwindow* window);
-  // Resets GLOrtho on window resize, also sets ATB window size and maintains camera
-  void windowResize(GLFWwindow* window);
+    // Sim and System Interface Setup, Will be called once at start.
+    void setupSimInterface();
+    void setupSystemInterface();
 
-public:
-  // Constructor sets callbacks
-  interface(GLFWwindow* window);
-  ~interface();
+    // Dialog setup, tbd.
+    void setupDialog();
 
-  // Set Camera XY
-  //void setCameraPos(int xyIndex);
-  //void setCameraScale(double p_Scale);
+  public:
+    bool paused_I;
+    interface(int p_wXRes, int p_wYRes);
+    ~interface();
 
-  // Update All Inputs
-  void inputLoop(GLFWwindow* window);
-
-  void performOperations();
+    // Body Interface Setup, Will be called throughout program, handled by Main.
+    void setupBodyInterface(int p_abID);
 };
