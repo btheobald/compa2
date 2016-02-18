@@ -1,7 +1,7 @@
 # Project Name
 NAME = bhut
 # Compiler
-CCX = clang
+CCX = gcc
 TARGET = $(NAME).out
 
 # Linker
@@ -12,9 +12,9 @@ SOURCE_DIR  = src
 BINARY_DIR  = bin
 LIB_DIR     = lib
 
-SOURCES    := $(wildcard $(SOURCE_DIR)/*.cpp)
-INCLUDES   := $(wildcard $(INCLUDE_DIR)/*.hpp)
-OBJECTS    := $(SOURCES:$(SOURCE_DIR)/%.cpp=$(BINARY_DIR)/%.o)
+SOURCES    := $(wildcard $(SOURCE_DIR)/*.c)
+INCLUDES   := $(wildcard $(INCLUDE_DIR)/*.h)
+OBJECTS    := $(SOURCES:$(SOURCE_DIR)/%.c=$(BINARY_DIR)/%.o)
 
 # Libraries
 LIBS  = `pkg-config --static --libs glfw3` -lAntTweakBar -lGLU
@@ -22,7 +22,7 @@ LIBS  = `pkg-config --static --libs glfw3` -lAntTweakBar -lGLU
 DB    = gdb
 DBOPT =
 # Compiler Flags
-CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) `pkg-config --cflags glfw3` -lGLU -g -Ofast
+CPPFLAGS = -Wall -I$(INCLUDE_DIR) `pkg-config --cflags glfw3` -lGLU -g -Ofast
 # Linker Flags
 LFLAGS = -Wall $(LIBS)
 
