@@ -50,7 +50,7 @@ void interface::setupBodyInterface(int p_abID) {
   TwDefine(" 'Body' color='255 255 255' alpha=150 text=dark");
 
   // Size
-  TwDefine(" 'Body' size='300 310'");
+  TwDefine(" 'Body' size='300 330'");
   TwDefine(" 'Body' position='0 182'");
   TwDefine(" 'Body' resizable=false ");
   TwDefine(" 'Body' valueswidth=100 ");
@@ -79,7 +79,7 @@ void interface::setupSystemInterface() {
 
   // Size
   TwDefine(" 'System' size='300 90'");
-  TwDefine(" 'System' position='0 494'");
+  TwDefine(" 'System' position='0 514'");
   TwDefine(" 'System' resizable=false ");
   TwDefine(" 'System' valueswidth=100 ");
   TwDefine(" 'System' movable=false");
@@ -91,6 +91,32 @@ void interface::setupSystemInterface() {
 }
 void interface::setupDialog() {
 
+}
+
+void interface::updateScenario(rdr_obj* localScenario) {
+
+}
+void interface::updateInterface(rdr_obj* localScenario) {
+  abMass_I = ;
+  abRadius_I;
+  abFixed_I;
+  abColor_I;
+
+  abPositionX_I;
+  abPositionY_I;
+
+  abVelocityX_I;
+  abVelocityY_I;
+
+  abForceX_I;
+  abForceY_I;
+
+  abAccelerationX_I;
+  abAccelerationY_I;
+}
+
+void interface::updateActiveID(int p_bodyID) {
+  abID_I = p_bodyID;
 }
 
 // Class External Callbacks

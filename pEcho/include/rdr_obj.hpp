@@ -22,4 +22,7 @@ public:
   void drawScene(void);
   // Check Coordinates
   int checkCoord(double x, double y);
+
+  // WARNING : BREAKS ENCAPSULATION
+  body* getBodyPointer(int bodyID);
 };
