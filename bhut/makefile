@@ -1,11 +1,11 @@
 # Project Name
 NAME = bhut
 # Compiler
-CCX = gcc
+CC = gcc
 TARGET = $(NAME).out
 
 # Linker
-LINKER = $(CXX) -o
+LINKER = $(CC) -o
 # Directories
 INCLUDE_DIR = include
 SOURCE_DIR  = src
@@ -17,12 +17,12 @@ INCLUDES   := $(wildcard $(INCLUDE_DIR)/*.h)
 OBJECTS    := $(SOURCES:$(SOURCE_DIR)/%.c=$(BINARY_DIR)/%.o)
 
 # Libraries
-LIBS  = `pkg-config --static --libs glfw3` -lAntTweakBar -lGLU
+LIBS  =
 # Debugger
 DB    = gdb
-DBOPT =
+DBOPT = -tui
 # Compiler Flags
-CPPFLAGS = -Wall -I$(INCLUDE_DIR) `pkg-config --cflags glfw3` -lGLU -g -Ofast
+CFLAGS = -Wall -I$(INCLUDE_DIR) -g -Ofast
 # Linker Flags
 LFLAGS = -Wall $(LIBS)
 
@@ -32,18 +32,16 @@ $(TARGET): $(OBJECTS)
 	@echo "Linking Complete"
 
 # Compile
-$(OBJECTS): $(BINARY_DIR)/%.o: $(SOURCE_DIR)/%.cpp
-	@$(CXX) $(CPPFLAGS) -c $< -o $@
+$(OBJECTS): $(BINARY_DIR)/%.o: $(SOURCE_DIR)/%.c
+	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "Compiled "$<" Successfully"
+
+# Debug
+debug: $(TARGET)
+	@$(DB) $(DBOPT) $(TARGET)
 
 output.txt:$(TARGET)
 	./$(TARGET) > plot/output.txt
-
-anim:output.txt
-	gnuplot plot/anim
-
-still:output.txt
-	gnuplot plot/still
 
 .PHONEY: setup
 setup:
