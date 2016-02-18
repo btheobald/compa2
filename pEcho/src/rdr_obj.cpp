@@ -11,7 +11,7 @@ void rdr_obj::setupDefaultScenario() {
   //createSuperstructure(1000, 1.989E30, 5E24, 696000000, 6371000, 0, 0, 0, 0, 5E10, 1E24, com::white);
 
   // Small Galaxy
-  createSuperstructure(800, 10000, 0.1, 10, 0.1, 0, 0, 0, 0, 100.0, 500.0, com::white);
+  createSuperstructure(10, 10000, 0.1, 10, 0.1, 0, 0, 0, 0, 100.0, 500.0, com::white);
 
   /*/// Grid
   for(int x = -100; x <= 100; x++) {
@@ -46,8 +46,10 @@ void rdr_obj::createSuperstructure(int p_soBodies, double p_cMass, double p_oMas
   // Use Mersenne Twister for RNE within range.
   std::uniform_real_distribution<> pos(0, p_sRadius*2);
    // Use random device for seed value
-  std::random_device r;
-  std::mt19937 gen(r());
+  //std::random_device r;
+  //std::mt19937 gen(r());
+  std::mt19937 gen;
+
 
   // Temporary Variables
   double tempRand, tempCirX, tempCirY, tempDist, tempVelX, tempVelY;
