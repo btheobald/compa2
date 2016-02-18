@@ -5,7 +5,9 @@
 
 int insert(node* currentNode, body* pBody, int level) {
   // Return false if body does not belong in this node.
-  if(!checkBounds(pBody, currentNode)) return 0;
+  if(!checkBounds(pBody, currentNode)) {
+    return 0;
+  }
 
   // Insert body into node
   if(currentNode->nodeBody == NULL) {
@@ -13,14 +15,15 @@ int insert(node* currentNode, body* pBody, int level) {
     return 1;
   }
 
-  // Prevent adding body to same location
-  if((currentNode->nodeBody->pX == pBody->pX) & (currentNode->nodeBody->pY == pBody->pY)) {
+  // Prevent adding body to same location (Skip Parents)
+  if((!currentNode->isParent) & ((currentNode->nodeBody->pX == pBody->pX) & (currentNode->nodeBody->pY == pBody->pY))) {
     return 0;
   }
 
   // Subdivide node
   if(currentNode->northWest == NULL) {
     subdivide(currentNode);
+    currentNode->isParent = 1;
     insert(currentNode, currentNode->nodeBody, level+1);
     // TODO: Add body averaging
     currentNode->nodeBody = newBody(1,  -1,  -1,  0,  0);
@@ -50,6 +53,8 @@ node* newNode(bounds* boundary) {
   n->southWest = NULL;
   n->nodeBody = NULL;
 
+  n->isParent = 0;
+
   // Return allocated pointer
   return n;
 }
@@ -76,8 +81,12 @@ int deleteNode(node* d) {
 
   // Free boundary memory allocation
   free(d->boundary);
-  // Free body memory allocation
-  deleteBody(d->nodeBody);
+  // Ensure body is Not Null
+  if(d->nodeBody != NULL) {
+    // Free body Memory Assignment
+    printf("Freeing Body\n");
+    free(d->nodeBody);
+  }
   // Free node memory allocation
   free(d);
 

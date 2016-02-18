@@ -22,6 +22,9 @@ typedef struct node{
   struct node* southEast;
   struct node* southWest;
 
+  // State
+  char isParent;
+
   // Node boundary pointer
   bounds* boundary;
 
