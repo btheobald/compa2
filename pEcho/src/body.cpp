@@ -58,6 +58,9 @@ float body::getColor(int cIndex) {
 double body::getAcceleration(int xyIndex) {
   return acceleration[xyIndex];
 }
+double body::getForce(int xyIndex) {
+  return force[xyIndex];
+}
 double body::getVelocity(int xyIndex) {
   return velocity[xyIndex];
 }

@@ -157,3 +157,8 @@ int rdr_obj::checkCoord(double x, double y) {
   }
   return -1;
 }
+
+// WARNING : BREAKS ENCAPSULATION
+body* rdr_obj::getBodyPointer(int bodyID) {
+  return &bodyStore[bodyID];
+}

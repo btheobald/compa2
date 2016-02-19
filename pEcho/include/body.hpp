@@ -29,6 +29,7 @@ public:
   bool getFixedStatus(void);
   float getColor(int cIndex);
   double getAcceleration(int xyIndex);
+  double getForce(int xyIndex);
   double getVelocity(int xyIndex);
   double getPosition(int xyIndex);
   double getMomentum(int xyIndex);

@@ -2,6 +2,7 @@
 #include <GLFW/glfw3.h>   // GLFW
 #include <iostream>
 #include <AntTweakBar.h>  // AntTweakBar
+#include "rdr_obj.hpp"
 
 // This class acts as a tider interface for ATB and GLFW?
 class interface {
@@ -20,9 +21,9 @@ class interface {
     // Pause / Run
     bool paused_I = false;
     // Current bodies in simulation
-    int numBodies = 0;
+    int numBodies_I = 0;
     // Flag if Collisions should be calculated
-    bool doCollisions = true;
+    bool doCollisions_I = true;
 
     // Active Body Interface
     int abID_I = 0;

@@ -34,16 +34,17 @@ void interface::setupSimInterface() {
   TwDefine(" 'Simulation' resizable=false ");
   TwDefine(" 'Simulation' valueswidth=100 ");
   TwDefine(" 'Simulation' movable=false");
+  TwDefine(" 'Simulation' refresh=0.01");
 
   // Control
   TwAddVarRW(simInterface, "ugcvar", TW_TYPE_DOUBLE,  &UGC_I,        " min=1E-12  max=10   step=0.01  precision=7   label='Gravitational Constant'  group=Control ");
   TwAddVarRW(simInterface, "idtvar", TW_TYPE_DOUBLE,  &IDT_I,        " max=-1E9   max=1E9  step=0.01  precision=7   label='Itteration Delta Time'   group=Control ");
-  TwAddVarRW(simInterface, "collid", TW_TYPE_BOOLCPP, &doCollisions, " true=On      false=Off                       label='Simulate Collisions'     group=Control ");
+  TwAddVarRW(simInterface, "collid", TW_TYPE_BOOLCPP, &doCollisions_I,"true=On      false=Off                       label='Simulate Collisions'     group=Control ");
   // Runtime
   TwAddVarRW(simInterface, "paused", TW_TYPE_BOOLCPP, &paused_I,     " true=Paused  false=Running                   label='Run/Pause'               group=Runtime ");
-  TwAddVarRW(simInterface, "ipfvar", TW_TYPE_INT32,   &IPF_I,        " min=1      max=10000  step=1                   label='Itterations Per Frame'   group=Runtime ");
+  TwAddVarRW(simInterface, "ipfvar", TW_TYPE_INT32,   &IPF_I,        " min=1      max=10000  step=1                 label='Itterations Per Frame'   group=Runtime ");
   // Statistics
-  TwAddVarRO(simInterface, "numbod", TW_TYPE_INT32,   &numBodies,    "                                              label='Number of Bodies'        group=Statistics ");
+  TwAddVarRO(simInterface, "numbod", TW_TYPE_INT32,   &numBodies_I,  "                                              label='Number of Bodies'        group=Statistics ");
 }
 void interface::setupBodyInterface(int p_abID) {
   // Color
@@ -55,6 +56,7 @@ void interface::setupBodyInterface(int p_abID) {
   TwDefine(" 'Body' resizable=false ");
   TwDefine(" 'Body' valueswidth=100 ");
   TwDefine(" 'Body' movable=false");
+  TwDefine(" 'Body' refresh=0.01");
 
   TwAddVarRO(bodyInterface, "bodyid", TW_TYPE_INT32, &abID_I,        "                                              label='Selected Body ID' ");
   TwAddVarRW(bodyInterface, "bdmass", TW_TYPE_DOUBLE,  &abMass_I,    " min=1E-3  max=1E40 step=1      precision=7   label='Mass'                    group=Properties ");
@@ -83,6 +85,7 @@ void interface::setupSystemInterface() {
   TwDefine(" 'System' resizable=false ");
   TwDefine(" 'System' valueswidth=100 ");
   TwDefine(" 'System' movable=false");
+  TwDefine(" 'System' refresh=0.01");
 
   TwCopyStdStringToClientFunc(handleFilename);
   TwAddVarRW(systemInterface, "filenm", TW_TYPE_STDSTRING, &fileName,  " label='File Name' ");
@@ -97,26 +100,38 @@ void interface::updateScenario(rdr_obj* localScenario) {
 
 }
 void interface::updateInterface(rdr_obj* localScenario) {
-  abMass_I = ;
-  abRadius_I;
-  abFixed_I;
-  abColor_I;
+  // Update Sim Variables
+  UGC_I = localScenario->getUGC();
+  IDT_I = localScenario->getIDT();
+  IPF_I = localScenario->getIPF();
+  numBodies_I = localScenario->getCurrentBodies();
 
-  abPositionX_I;
-  abPositionY_I;
 
-  abVelocityX_I;
-  abVelocityY_I;
+  // Update Body Interface
+  body* bodyPointer = localScenario->getBodyPointer(abID_I);
 
-  abForceX_I;
-  abForceY_I;
+  abMass_I = bodyPointer->getMass();
+  abRadius_I = bodyPointer->getRadius();
+  abFixed_I = bodyPointer->getFixedStatus();
+  abColor_I[0] = bodyPointer->getColor(0);
+  abColor_I[1] = bodyPointer->getColor(1);
+  abColor_I[2] = bodyPointer->getColor(2);
 
-  abAccelerationX_I;
-  abAccelerationY_I;
+  abPositionX_I = bodyPointer->getPosition(0);
+  abPositionY_I = bodyPointer->getPosition(1);
+
+  abVelocityX_I = bodyPointer->getVelocity(0);
+  abVelocityY_I = bodyPointer->getVelocity(1);
+
+  abForceX_I = bodyPointer->getForce(0);
+  abForceY_I = bodyPointer->getForce(1);
+
+  abAccelerationX_I = bodyPointer->getAcceleration(0);
+  abAccelerationY_I = bodyPointer->getAcceleration(1);
 }
 
 void interface::updateActiveID(int p_bodyID) {
-  abID_I = p_bodyID;
+  if(p_bodyID != -1) abID_I = p_bodyID;
 }
 
 // Class External Callbacks

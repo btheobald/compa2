@@ -14,11 +14,11 @@
 bool shouldCheck;
 
 void initDisplay(int lXRes, int lYRes);
-void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess);
+void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, interface* interfaceAccess);
 
 int main() {
   // Create Render Thread Local Class
-  rdr_obj* renderMain = new rdr_obj;
+  rdr_obj renderMain;
   // Create Shared Stage Object
   sharedStage sharedData;
 
@@ -40,8 +40,8 @@ int main() {
   interface localInterface(wXRes, wYRes);
 
   // Setup Scenario and Commit
-  renderMain->setupDefaultScenario();
-  renderMain->updateSharedArea(&sharedData);
+  renderMain.setupDefaultScenario();
+  renderMain.updateSharedArea(&sharedData);
 
   // Start Sim Thread, Pass SharedData Address
   std::thread simThread(simInit, &sharedData);
@@ -53,12 +53,12 @@ int main() {
 
   while(!glfwWindowShouldClose(echoWindow)) {
     //renderMain.updateLocalControl(UGC, IDT, IPF);
-    renderMain->updateSharedControl(&sharedData);
+    renderMain.updateSharedControl(&sharedData);
     // Pull Changes from Shared
-    renderMain->updateLocalStore(&sharedData);
+    renderMain.updateLocalStore(&sharedData);
 
     // Draw and Display
-    displayLoopCall(echoWindow, renderMain);
+    displayLoopCall(echoWindow, &renderMain, &localInterface);
 
     // TODO: Update Local Scenario with Changes
   }
@@ -102,7 +102,7 @@ void initDisplay(int lXRes, int lYRes) {
   glClearColor(0.0f, 0.0f, 0.0f, 1);
 }
 
-void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess) {
+void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, interface* interfaceAccess) {
   // Clear Display for Rendering
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
@@ -118,9 +118,12 @@ void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess) {
     double X, Y, aX, aY;
     glfwGetCursorPos(localWindow, &X, &Y);
     getCoord(X, Y, aX, aY);
-    std::cerr << renderAccess->checkCoord(aX, aY) << std::endl;
+    //std::cerr << renderAccess->checkCoord(aX, aY) << std::endl;
     shouldCheck = false;
+
+    interfaceAccess->updateActiveID(renderAccess->checkCoord(aX, aY));
   }
+  interfaceAccess->updateInterface(renderAccess);
 
   // Swap Render / Draw Buffers
   glfwSwapBuffers(localWindow);
