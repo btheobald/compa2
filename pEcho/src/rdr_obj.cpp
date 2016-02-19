@@ -78,6 +78,7 @@ void rdr_obj::createSuperstructure(int p_soBodies, double p_cMass, double p_oMas
 void rdr_obj::updateSharedArea(sharedStage* l_sharedDataAccess) {
   // Push Body Data To Shared
   l_sharedDataAccess->populateBodyStore_R(returnBodyStore());
+  l_sharedDataAccess->populateBodyStore_S(returnBodyStore());
   // Push Simulation Control To Shared
   l_sharedDataAccess->setUGC(UGC);
   l_sharedDataAccess->setIDT(IDT);

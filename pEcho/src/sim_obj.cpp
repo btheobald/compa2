@@ -173,6 +173,7 @@ void sim_obj::updateSharedArea(sharedStage* l_sharedDataAccess) {
 void sim_obj::updateLocalStore(sharedStage* l_sharedDataAccess) {
   // Get New Data from Render
   if(l_sharedDataAccess->newRScenarioCheck()) {
+    std::cerr << "Update From Shared" << std::endl;
     populateBodyStore(l_sharedDataAccess->returnBodyStore_R());
   }
   // Skip if No New Data Avaliable

@@ -96,14 +96,17 @@ void interface::setupDialog() {
 
 }
 
-void interface::updateScenario(rdr_obj* localScenario) {
+void interface::updateControl(rdr_obj* localScenario) {
   localScenario->updateLocalControl(UGC_I, IDT_I, IPF_I);
+}
 
+void interface::updateScenario(rdr_obj* localScenario) {
   body* bodyPointer = localScenario->getBodyPointer(abID_I);
 
   // TODO: Only update variables if sim is paused.
   bodyPointer->setPosition(abPositionX_I, 0);
 }
+
 void interface::updateInterface(rdr_obj* localScenario) {
   // Update Sim Variables
   UGC_I = localScenario->getUGC();

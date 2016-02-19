@@ -55,9 +55,11 @@ class interface {
 
     // Body Interface Setup, Will be called throughout program, handled by Main.
     void setupBodyInterface(int p_abID);
+    void updateControl(rdr_obj* localScenario);
     void updateScenario(rdr_obj* localScenario);
     void updateInterface(rdr_obj* localScenario);
     void updateActiveID(int p_bodyID);
+    inline bool getPaused() { return paused_I; };
 };
 
 // Class External Callbacks

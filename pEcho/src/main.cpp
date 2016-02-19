@@ -41,8 +41,8 @@ int main() {
   renderMain.updateSharedArea(&sharedData);
 
   // Create Interface Object
-  interface localInterface(wXRes, wYRes);
-  localInterface.updateInterface(&renderMain);
+  interface interfaceMain(wXRes, wYRes);
+  interfaceMain.updateInterface(&renderMain);
 
   // Start Sim Thread, Pass SharedData Address
   std::thread simThread(simInit, &sharedData);
@@ -53,13 +53,40 @@ int main() {
   setCallbacks(echoWindow);
 
   while(!glfwWindowShouldClose(echoWindow)) {
-    //renderMain.updateLocalControl(UGC, IDT, IPF);
     renderMain.updateSharedControl(&sharedData);
-    // Pull Changes from Shared
-    renderMain.updateLocalStore(&sharedData);
+    sharedData.setStatus(interfaceMain.getPaused(), 0);
+    if(!interfaceMain.getPaused()) {
+      // Get New data from Sim if not paused
+      std::cerr << "Render Update from Shared" << std::endl;
+      renderMain.updateLocalStore(&sharedData);
+    } else {
+      // Send data to Sim if paused
+      std::cerr << "Render Update to Shared" << std::endl;
+      renderMain.updateSharedArea(&sharedData);
+    }
+
+    if(shouldCheck) {
+      double X, Y, aX, aY;
+      glfwGetCursorPos(echoWindow, &X, &Y);
+      getCoord(X, Y, aX, aY);
+      //std::cerr << renderAccess->checkCoord(aX, aY) << std::endl;
+      shouldCheck = false;
+
+      // Get Selected Body
+      interfaceMain.updateActiveID(renderMain.checkCoord(aX, aY));
+      // Update Variables for Body
+      interfaceMain.updateInterface(&renderMain);
+    }
+    // Only Update Body Data if Sim is Paused
+    if(interfaceMain.getPaused()) {
+      interfaceMain.updateScenario(&renderMain);
+    }
+    interfaceMain.updateControl(&renderMain);
+    // Update Display
+    interfaceMain.updateInterface(&renderMain);
 
     // Draw and Display
-    displayLoopCall(echoWindow, &renderMain, &localInterface);
+    displayLoopCall(echoWindow, &renderMain, &interfaceMain);
 
     // TODO: Update Local Scenario with Changes
   }
@@ -67,8 +94,8 @@ int main() {
   // Exit Procedure
   // TODO: Save Data to startup file here
   // Unset Paused and Set Exit Flag
-  sharedData.setStatus(0, false);
-  sharedData.setStatus(1, true);
+  sharedData.setStatus(false, 0);
+  sharedData.setStatus(true, 1);
   // Resume Thread if Waiting
   sharedData.simWait.notify_all();
   // Pause until simInit Exits.
@@ -108,19 +135,6 @@ void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, interface* 
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
   matrixCamera(localWindow);
-
-  if(shouldCheck) {
-    double X, Y, aX, aY;
-    glfwGetCursorPos(localWindow, &X, &Y);
-    getCoord(X, Y, aX, aY);
-    //std::cerr << renderAccess->checkCoord(aX, aY) << std::endl;
-    shouldCheck = false;
-
-    interfaceAccess->updateActiveID(renderAccess->checkCoord(aX, aY));
-  }
-  interfaceAccess->updateScenario(renderAccess);
-  interfaceAccess->updateInterface(renderAccess);
-  //TODO: IF simulation is paused then stage user changes
 
   // Draw Scene
   renderAccess->drawScene();
