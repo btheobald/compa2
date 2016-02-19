@@ -10,7 +10,7 @@ interface::interface(int p_wXRes, int p_wYRes) {
   systemInterface = TwNewBar("System");
 
   setupSimInterface();
-  setupBodyInterface(1);
+  setupBodyInterface(0);
   setupSystemInterface();
 
   // Set Globals
@@ -97,7 +97,12 @@ void interface::setupDialog() {
 }
 
 void interface::updateScenario(rdr_obj* localScenario) {
+  localScenario->updateLocalControl(UGC_I, IDT_I, IPF_I);
 
+  body* bodyPointer = localScenario->getBodyPointer(abID_I);
+
+  // TODO: Only update variables if sim is paused.
+  bodyPointer->setPosition(abPositionX_I, 0);
 }
 void interface::updateInterface(rdr_obj* localScenario) {
   // Update Sim Variables
@@ -105,7 +110,6 @@ void interface::updateInterface(rdr_obj* localScenario) {
   IDT_I = localScenario->getIDT();
   IPF_I = localScenario->getIPF();
   numBodies_I = localScenario->getCurrentBodies();
-
 
   // Update Body Interface
   body* bodyPointer = localScenario->getBodyPointer(abID_I);

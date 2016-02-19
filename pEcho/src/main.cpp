@@ -36,12 +36,13 @@ int main() {
   echoWindow = glfwCreateWindow(wXRes, wYRes, "Echo", NULL, NULL);
   glfwMakeContextCurrent(echoWindow);
 
-  // Create Interface Object
-  interface localInterface(wXRes, wYRes);
-
   // Setup Scenario and Commit
   renderMain.setupDefaultScenario();
   renderMain.updateSharedArea(&sharedData);
+
+  // Create Interface Object
+  interface localInterface(wXRes, wYRes);
+  localInterface.updateInterface(&renderMain);
 
   // Start Sim Thread, Pass SharedData Address
   std::thread simThread(simInit, &sharedData);
@@ -106,12 +107,6 @@ void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, interface* 
   // Clear Display for Rendering
   glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-  // Draw Scene
-  renderAccess->drawScene();
-
-  // Draw Tweak Bars
-  TwDraw();
-
   matrixCamera(localWindow);
 
   if(shouldCheck) {
@@ -123,7 +118,15 @@ void displayLoopCall(GLFWwindow* localWindow, rdr_obj* renderAccess, interface* 
 
     interfaceAccess->updateActiveID(renderAccess->checkCoord(aX, aY));
   }
+  interfaceAccess->updateScenario(renderAccess);
   interfaceAccess->updateInterface(renderAccess);
+  //TODO: IF simulation is paused then stage user changes
+
+  // Draw Scene
+  renderAccess->drawScene();
+
+  // Draw Tweak Bars
+  TwDraw();
 
   // Swap Render / Draw Buffers
   glfwSwapBuffers(localWindow);
