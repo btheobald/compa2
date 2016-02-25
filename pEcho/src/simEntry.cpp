@@ -12,19 +12,17 @@ void simInit(sharedStage* sharedDataAccess) {
 
   // Check Exit Request
   while (!sharedDataAccess->getStatus(1)) {
-    // Get new Render Data if Paused
     if(!sharedDataAccess->getStatus(0)) {
-      simMain.updateLocalStore(sharedDataAccess);
-      std::cerr << "Update Taken" << std::endl;
-    }
-
-    if(!sharedDataAccess->getStatus(0)) {
-      // Wait for old data to be taken.
       if(sharedDataAccess->newSScenarioCheck() & !sharedDataAccess->getStatus(0)) {
+        // Wait for old data to be taken.
         std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
         sharedDataAccess->simWait.wait(uniqueSimWaitMTX);
+        if(!sharedDataAccess->getStatus(0)) {
+          // Get new Render Data if Paused
+          simMain.updateLocalStore(sharedDataAccess);
+          std::cerr << "Update Taken" << std::endl;
+        }
       }
-
       // Stage Data to Shared Area
       simMain.updateSharedArea(sharedDataAccess);
       simMain.updateLocalControl(sharedDataAccess);

@@ -8,7 +8,7 @@ double oldaX = 0, oldaY = 0;
 
 // Custom Inputs
 // Returns true if mouse button held.
-bool getMouseHeld(GLFWwindow* window, int button){
+bool getMouseHeld(GLFWwindow* window, int button) {
   static bool checking;
   static bool held;
   static double startTime;

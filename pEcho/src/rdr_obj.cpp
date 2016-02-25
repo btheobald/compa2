@@ -6,27 +6,28 @@ void rdr_obj::setupDefaultScenario() {
   IDT = 0.1;
   IPF = 1;
   // Realistic Size Superstructure
-  //createSuperstructure(10, 1.989E30, 5E24, 696000000, 6371000, 0, 0, 0, 0, 5E10, 2E11, com::white);
+  //createSuperstructure(10, 1.989E30, 5E24, 696000000, 6371000, 0, 0, 0, 0, 5E10, 2E15, com::white);
   // Small Galaxy
   //createSuperstructure(1000, 1.989E30, 5E24, 696000000, 6371000, 0, 0, 0, 0, 5E10, 1E22, com::white);
 
   // Small Galaxy
-  createSuperstructure(1000, 10000, 0.1, 10, 0.1, 0, 0, 0, 0, 100.0, 500.0, com::white);
+  //createSuperstructure(500, 10000, 0.1, 10, 0.1, 0, 0, 0, 0, 100.0, 500.0, com::white);
+  //createSuperstructure(500, 10000, 0.1, 10, 0.1, 1000, 200, -4, 0, 100.0, 500.0, com::red);
 
   /*/// Grid
-  for(int x = -100; x <= 100; x++) {
-    for(int y = -100; y <= 100; y++) {
+  for(int x = -10; x <= 10; x++) {
+    for(int y = -10; y <= 10; y++) {
       if((x==0) & (y==0)) {
-        newBody(0.001, 1, x*10, y*10, 0, 0, com::red);
+        newBody(10, 1, x*10, y*10, 0, 0, com::red);
       } else {
-        newBody(0.001, 1, x*10, y*10, 0, 0, com::white);
+        newBody(10, 1, x*10, y*10, 0, 0, com::white);
       }
     }
   }*/
 
   // Precessing Orbits
-  //newBody(10000, 10,  100, 0, 0,  1.6, com::white);
-  //newBody(10000, 10, -100, 0, 0, -1.6 , com::white);
+  newBody(10000, 10,  100, 0, 0,  1.6, com::white);
+  newBody(10000, 10, -100, 0, 0, -1.6 , com::white);
 
   // Sun Earth Moon System
   //newBody(1000, 10, 0, 0, 0, 0, com::red);
@@ -79,6 +80,7 @@ void rdr_obj::updateSharedArea(sharedStage* l_sharedDataAccess) {
   // Push Body Data To Shared
   l_sharedDataAccess->populateBodyStore_R(returnBodyStore());
   l_sharedDataAccess->populateBodyStore_S(returnBodyStore());
+
   // Push Simulation Control To Shared
   l_sharedDataAccess->setUGC(UGC);
   l_sharedDataAccess->setIDT(IDT);
