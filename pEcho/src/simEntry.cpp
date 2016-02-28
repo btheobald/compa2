@@ -16,9 +16,7 @@ void simInit(sharedStage* sharedDataAccess) {
     simMain.updateLocalControl(sharedDataAccess);
 
     if(sharedDataAccess->getStatus(0)) { // Update Local from Render
-      if(!sharedDataAccess->newSScenarioCheck()) {
-        simMain.updateLocalStore(sharedDataAccess);
-      }
+      simMain.updateLocalStore(sharedDataAccess);
     } else { // Update Shared from Sim
       // Check for pause or exit request
       if(!(sharedDataAccess->getStatus(0) | sharedDataAccess->getStatus(1))) {
