@@ -12,29 +12,29 @@ void simInit(sharedStage* sharedDataAccess) {
 
   // Check Exit Request
   while (!sharedDataAccess->getStatus(1)) {
-    if(!sharedDataAccess->getStatus(0)) {
-      if(sharedDataAccess->newSScenarioCheck() & !sharedDataAccess->getStatus(0)) {
-        // Wait for old data to be taken.
-        std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
-        sharedDataAccess->simWait.wait(uniqueSimWaitMTX);
-        if(!sharedDataAccess->getStatus(0)) {
-          // Get new Render Data if Paused
-          simMain.updateLocalStore(sharedDataAccess);
-          std::cerr << "Update Taken" << std::endl;
+    // Update Control
+    simMain.updateLocalControl(sharedDataAccess);
+
+    if(sharedDataAccess->getStatus(0)) { // Update Local from Render
+      if(!sharedDataAccess->newSScenarioCheck()) {
+        simMain.updateLocalStore(sharedDataAccess);
+      }
+    } else { // Update Shared from Sim
+      // Check for pause or exit request
+      if(!(sharedDataAccess->getStatus(0) | sharedDataAccess->getStatus(1))) {
+        for(int icnt = 0; icnt < simMain.getIPF(); icnt++) {
+          simMain.itteration();
+          // Drop out if exit request
+          if(sharedDataAccess->getStatus(1)) break;
         }
       }
-      // Stage Data to Shared Area
       simMain.updateSharedArea(sharedDataAccess);
-      simMain.updateLocalControl(sharedDataAccess);
     }
 
-    // Check If Paused or Exit Request
-    if(!(sharedDataAccess->getStatus(0) | sharedDataAccess->getStatus(1))) {
-      for(int icnt = 0; icnt < simMain.getIPF(); icnt++) {
-        simMain.itteration();
-      }
-    }
-    //std::cerr << glfwGetTime()-timer << std::endl;
+    // Wait for data change
+    std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
+    sharedDataAccess->simWait.wait(uniqueSimWaitMTX);
+
   }
   // Sim Now Exits
 }

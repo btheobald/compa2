@@ -20,7 +20,6 @@ private:
   // Runtime Control
   bool pause;     // Pause Signal
   bool exit;      // Exit Signal
-  bool exitAck;   // Simulation Acknowleges Exit
 
   // Flow Control
   bool newRScenario;  // New Render Data Set

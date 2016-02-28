@@ -55,6 +55,7 @@ int main() {
   while(!glfwWindowShouldClose(echoWindow)) {
     renderMain.updateSharedControl(&sharedData);
     sharedData.setStatus(interfaceMain.getPaused(), 0);
+
     if(!interfaceMain.getPaused()) {
       // Get New data from Sim if not paused
       std::cerr << "Render Update from Shared" << std::endl;
@@ -65,11 +66,13 @@ int main() {
       renderMain.updateSharedArea(&sharedData);
     }
 
+    // Draw and Display
+    displayLoopCall(echoWindow, &renderMain, &interfaceMain);
+
     if(shouldCheck) {
       double X, Y, aX, aY;
       glfwGetCursorPos(echoWindow, &X, &Y);
       getCoord(X, Y, aX, aY);
-      //std::cerr << renderAccess->checkCoord(aX, aY) << std::endl;
       shouldCheck = false;
 
       // Get Selected Body
@@ -84,15 +87,9 @@ int main() {
     interfaceMain.updateControl(&renderMain);
     // Update Display
     interfaceMain.updateInterface(&renderMain);
-
-    // Draw and Display
-    displayLoopCall(echoWindow, &renderMain, &interfaceMain);
-
-    // TODO: Update Local Scenario with Changes
   }
 
   // Exit Procedure
-  // TODO: Save Data to startup file here
   // Unset Paused and Set Exit Flag
   sharedData.setStatus(false, 0);
   sharedData.setStatus(true, 1);
@@ -122,11 +119,10 @@ void initDisplay(int lXRes, int lYRes) {
   // Set Viewport Extents
   glViewport(0, 0, lXRes, lYRes);
 
-  // Save Default Matrix
+  // Save Default Matrixmk
   glPushMatrix();
 
   // Set Clear Color for Window
-  //glClearColor(0.05f, 0.05f, 0.1f, 1);
   glClearColor(0.0f, 0.0f, 0.0f, 1);
 }
 

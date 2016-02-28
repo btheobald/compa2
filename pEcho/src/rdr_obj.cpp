@@ -85,8 +85,6 @@ void rdr_obj::updateSharedArea(sharedStage* l_sharedDataAccess) {
   l_sharedDataAccess->setUGC(UGC);
   l_sharedDataAccess->setIDT(IDT);
   l_sharedDataAccess->setIPF(IPF);
-  // Unpause Sim
-  l_sharedDataAccess->setStatus(0, false);
 
   // Unlock sim so it can get data
   l_sharedDataAccess->simWait.notify_all();

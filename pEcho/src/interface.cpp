@@ -103,8 +103,16 @@ void interface::updateControl(rdr_obj* localScenario) {
 void interface::updateScenario(rdr_obj* localScenario) {
   body* bodyPointer = localScenario->getBodyPointer(abID_I);
 
-  // TODO: Only update variables if sim is paused.
+  bodyPointer->setMass(abMass_I);
+  bodyPointer->setRadius(abRadius_I);
+  bodyPointer->setFixed(abFixed_I);
+  bodyPointer->setColor(abColor_I);
+
   bodyPointer->setPosition(abPositionX_I, 0);
+  bodyPointer->setPosition(abPositionY_I, 1);
+
+  bodyPointer->setVelocity(abVelocityX_I, 0);
+  bodyPointer->setVelocity(abVelocityY_I, 1);
 }
 
 void interface::updateInterface(rdr_obj* localScenario) {

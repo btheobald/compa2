@@ -80,19 +80,7 @@ void matrixCamera(GLFWwindow* window) {
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 
-  double cx, cy, ax, ay;
-
-  //glfwGetCursorPos(window, &cx, &cy);
-  //getCoord(cx, cy, ax, ay);
-  //glTranslated(ax, ay, 0);
-
-
-  //glScaled(pow(scaleFactor,2), pow(scaleFactor,2), 1);
   glScaled(scaleFactor, scaleFactor, 1);
-
-  //glfwGetCursorPos(window, &cx, &cy);
-  //getCoord(cx, cy, ax, ay);
-  //glTranslated(-ax, -ay, 0);
 
   glTranslated(-vectX, vectY, 0);
 

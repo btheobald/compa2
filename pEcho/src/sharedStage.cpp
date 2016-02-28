@@ -1,10 +1,10 @@
 // Header Include
 #include "sharedStage.hpp"
+#include <iostream>
 
 sharedStage::sharedStage() {
   pause = true;
   exit = false;
-  exitAck = false;
 }
 sharedStage::~sharedStage(){
 
