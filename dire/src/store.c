@@ -4,21 +4,25 @@
 #include <stdlib.h>
 
 // Body array management functions
-body** allocateBodyArray(int numBodies) {
-  return 0;
+body** allocateBodyArray(int cbc) {
+  body** arrayBase;
+
+  // Allocate Memory
+  arrayBase = malloc(sizeof(body *) * cbc);
+
+  return arrayBase;
 }
 
-int freeBodyArray(body* arrayBase) {
-  return 0;
-}
-
-int freeFromArray(int index) {
-  return 0;
+int freeBodyArray(body** arrayBase, int cbc) {
+  for(int i = 0; i < cbc; i++) {
+    free(arrayBase[i]); // Free body at location
+  }
+  free(arrayBase); // Free Array
+  return 1;
 }
 
 // Calculation marking matrix
 uint8_t** genMatrix(int squareSize) {
-  // Create Pointer Variable
   uint8_t** matrixPtr;
 
   // Allocate Memory
@@ -32,6 +36,7 @@ uint8_t** genMatrix(int squareSize) {
   return matrixPtr;
 }
 
+// Set default state
 void resetMatrix(uint8_t** matrixPtr, int cbc) {
   // Populate Matrix
   for(int x = 0; x < cbc; x++) {
@@ -46,8 +51,4 @@ void resetMatrix(uint8_t** matrixPtr, int cbc) {
     }
     printf("\n");
   }
-}
-
-int freeMatrix(uint8_t** matrixBase, int cbc) {
-  return 0;
 }

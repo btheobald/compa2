@@ -6,13 +6,11 @@
 #include "body.h"
 
 // Body array management functions
-body** allocateBodyArray(int numBodies);  // Allocate memory for body array, return base pointer
-int freeBodyArray(body* arrayBase);       // Free memory used by body storage array
-int freeFromArray(int index);             // Free the item at the passed array position (reallocates and resizes Array)
+body** allocateBodyArray(int cbc);  // Allocate memory for body array, return base pointer
+int freeBodyArray(body** arrayBase, int cbc);  // Free memory used by body storage array
 
 // Calculation marking matrix
 uint8_t** genMatrix(int squareSize);      // Allocates memory for a 2D Matrix Array, parameter is side length, return base pointer (Type is 8 Bit unsigned int to reduce memory usage)
-void resetMatrix(uint8_t** matrixPtr, int cbc);
-int freeMatrix(uint8_t** matrixBase, int cbc);     // Free memory used by 2D Matrix Array.
+void resetMatrix(uint8_t** matrixPtr, int cbc); // Set to default state
 
 #endif//STORE_DEF_GUARD
