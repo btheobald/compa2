@@ -18,6 +18,6 @@ typedef struct {
 
 // Position, Velocity and Acceleration Calculations
 void calculatePosition(body* bd, float dt);
-void calculateVelocity(body* bd, float dt);
+void calculateHalfVelocity(body* bd, float dt);
 
 #endif//BODY_DEF_GUARD

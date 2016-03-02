@@ -54,9 +54,13 @@ void calculateAcceleration(float gc, body* bA, body* bB) {
 void itteration(body** bodyArray, int cbc, float gc, float dt) {
   uint8_t** forceMark = genMatrix(cbc);
 
-  int x, y;
-  for(x = 0; x < cbc; x++) {
-    for(y = x; y < cbc; y++) {
+  // 1/2 Velocity
+
+  // Position
+
+  // Acceleration
+  for(int x = 0; x < cbc; x++) {
+    for(int y = x; y < cbc; y++) {
       // Check to calculate acceleration for bodies
       if(checkIfNeeded(forceMark, x, y)) {
         calculateAcceleration(gc, bodyArray[x], bodyArray[y]);
@@ -64,4 +68,6 @@ void itteration(body** bodyArray, int cbc, float gc, float dt) {
       }
     }
   }
+
+  // 1/2 Velocity
 }
