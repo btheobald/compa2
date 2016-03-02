@@ -32,11 +32,6 @@ int checkIfNeeded(uint8_t** forceMark, int bA, int bB) {
   return 1;
 }
 
-int markCalculation(uint8_t** forceMark, int bA, int bB, uint8_t status) {
-  forceMark[bA][bB] = status;
-  return 0;
-}
-
 void calculateAcceleration(float gc, body* bA, body* bB) {
   float dV = getVectorDistance(bA, bB);
 
@@ -65,7 +60,7 @@ void itteration(body** bodyArray, int cbc, float gc, float dt) {
       // Check to calculate acceleration for bodies
       if(checkIfNeeded(forceMark, x, y)) {
         calculateAcceleration(gc, bodyArray[x], bodyArray[y]);
-        markCalculation(forceMark, x, y, 1);
+        forceMark[x][y] = 1;
       }
     }
   }

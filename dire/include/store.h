@@ -12,6 +12,7 @@ int freeFromArray(int index);             // Free the item at the passed array p
 
 // Calculation marking matrix
 uint8_t** genMatrix(int squareSize);      // Allocates memory for a 2D Matrix Array, parameter is side length, return base pointer (Type is 8 Bit unsigned int to reduce memory usage)
-int freeMatrix(uint8_t** matrixBase);     // Free memory used by 2D Matrix Array.
+void resetMatrix(uint8_t** matrixPtr, int cbc);
+int freeMatrix(uint8_t** matrixBase, int cbc);     // Free memory used by 2D Matrix Array.
 
 #endif//STORE_DEF_GUARD

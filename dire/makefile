@@ -1,5 +1,5 @@
 # Project Name
-NAME = pEcho
+NAME = dire
 # Compiler
 CC = clang
 TARGET = $(NAME).out
