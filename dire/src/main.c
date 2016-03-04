@@ -9,7 +9,7 @@ int main() {
   body** bStore = allocateBodyArray(2);
   bStore[0] = malloc(sizeof(body));
   bStore[1] = malloc(sizeof(body));
-  //bStore[2] = malloc(sizeof(body));
+  bStore[2] = malloc(sizeof(body));
 
   bStore[0]->m = 1000;
   bStore[0]->pX = 0;
