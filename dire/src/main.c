@@ -22,7 +22,7 @@ int main() {
   bStore[1]->vX = 0;
   bStore[1]->vY = 0.5;
 
-  for(int i = 0; i < 1000000; i++) {
+  for(int i = 0; i < 1000; i++) {
     itteration(bStore, 2, 1, 0.1);
   }
 

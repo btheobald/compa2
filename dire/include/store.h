@@ -12,5 +12,6 @@ int freeBodyArray(body** arrayBase, int cbc);  // Free memory used by body stora
 // Calculation marking matrix
 uint8_t** genMatrix(int squareSize);      // Allocates memory for a 2D Matrix Array, parameter is side length, return base pointer (Type is 8 Bit unsigned int to reduce memory usage)
 void resetMatrix(uint8_t** matrixPtr, int cbc); // Set to default state
+int freeMatrix(uint8_t** matrixPtr, int cbc); // Free memory used by 2D Matrix Array.
 
 #endif//STORE_DEF_GUARD

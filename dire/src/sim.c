@@ -1,6 +1,7 @@
 #include "sim.h"
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <stdint.h>
 
@@ -45,13 +46,11 @@ void calculateAcceleration(float gc, body* bA, body* bB) {
 
   // Calculate and set acceleration
   // Body A
-  bA->aX = -fX;
-  bA->aY =  fY;
+  bA->aX =  fX;
+  bA->aY = -fY;
   // Body B
-  bB->aX =  fX;
-  bB->aY = -fY;
-
-  //printf("%f %f \n", bB->aX, bB->aY);
+  bB->aX = -fX;
+  bB->aY =  fY;
 }
 
 void itteration(body** bodyArray, int cbc, float gc, float dt) {
@@ -84,4 +83,6 @@ void itteration(body** bodyArray, int cbc, float gc, float dt) {
   for(int bc = 0; bc < cbc; bc++) {
     calculateHalfVelocity(bodyArray[bc], dt);
   }
+
+  freeMatrix(forceMark, cbc);
 }

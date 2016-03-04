@@ -52,3 +52,11 @@ void resetMatrix(uint8_t** matrixPtr, int cbc) {
     //printf("\n");
   }
 }
+
+int freeMatrix(uint8_t** matrixPtr, int cbc) {
+  for(int i = 0; i < cbc; i++) {
+    free(matrixPtr[i]); // Free pointer at location
+  }
+  free(matrixPtr); // Free base array pointer
+  return 1;
+}
