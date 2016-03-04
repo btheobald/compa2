@@ -66,9 +66,9 @@ void itteration(body** bodyArray, int cbc, float gc, float dt) {
   // 1/2 Velocity
   for(int bc = 0; bc < cbc; bc++) {
     calculateHalfVelocity(bodyArray[bc], dt);
-    printf("%f %f ", bodyArray[bc]->pX, bodyArray[bc]->pY);
+    //printf("%f %f ", bodyArray[bc]->pX, bodyArray[bc]->pY);
   }
-  printf("\n");
+  //printf("\n");
 
   // Position
   for(int bc = 0; bc < cbc; bc++) {
