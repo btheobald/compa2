@@ -20,6 +20,7 @@ private:
   // Runtime Control
   bool pause;     // Pause Signal
   bool exit;      // Exit Signal
+  bool exitAck;   // ExitAck Signal
 
   // Flow Control
   bool newRScenario;  // New Render Data Set
@@ -60,7 +61,7 @@ public:
 
   std::condition_variable simWait;
 
-  // 0 :: Pause, 1 :: Exit, 2 :: ExitAck
-  void setStatus(bool set, int var);
+  // 0 :: Pause, 1 :: Exit
+  void setStatus(int var, bool set);
   bool getStatus(int var);
 };

@@ -5,6 +5,7 @@
 sharedStage::sharedStage() {
   pause = true;
   exit = false;
+  exitAck = false;
 }
 sharedStage::~sharedStage(){
 
@@ -88,7 +89,7 @@ bool sharedStage::newSScenarioCheck() {
   return newSScenario;
 }
 
-void sharedStage::setStatus(bool set, int var) {
+void sharedStage::setStatus(int var, bool set) {
   switch(var) {
     case 0: {
       com::lockGuard lockAccess(pause_Lock);
@@ -98,6 +99,11 @@ void sharedStage::setStatus(bool set, int var) {
     case 1: {
       com::lockGuard lockAccess(exit_Lock);
       exit = set;
+      break;
+    }
+    case 2: {
+      com::lockGuard lockAccess(exitAck_Lock);
+      exitAck = set;
       break;
     }
   }
@@ -112,6 +118,10 @@ bool sharedStage::getStatus(int var) {
     case 1: {
       com::lockGuard lockAccess(exit_Lock);
       return exit;
+    }
+    case 2: {
+      com::lockGuard lockAccess(exitAck_Lock);
+      return exitAck;
     }
     default: return true;
   }

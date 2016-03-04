@@ -26,13 +26,16 @@ void simInit(sharedStage* sharedDataAccess) {
           if(sharedDataAccess->getStatus(1)) break;
         }
       }
-      simMain.updateSharedArea(sharedDataAccess);
+      if(!sharedDataAccess->getStatus(1)) {
+        simMain.updateSharedArea(sharedDataAccess);
+      }
     }
 
     // Wait for data change
     std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
     sharedDataAccess->simWait.wait(uniqueSimWaitMTX);
-
   }
+  // Exit Acknowlege
+  sharedDataAccess->setStatus(2, true);
   // Sim Now Exits
 }

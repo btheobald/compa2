@@ -58,17 +58,17 @@ int main() {
 
     if(!interfaceMain.getPaused()) {
       // Get New data from Sim if not paused
-      std::cerr << "Render Update from Shared" << std::endl;
       renderMain.updateLocalStore(&sharedData);
     } else {
       // Send data to Sim if paused
-      std::cerr << "Render Update to Shared" << std::endl;
       renderMain.updateSharedArea(&sharedData);
     }
 
     // Draw and Display
     displayLoopCall(echoWindow, &renderMain, &interfaceMain);
 
+    // Interface Update
+    // Check Cursor Location
     if(shouldCheck) {
       double X, Y, aX, aY;
       glfwGetCursorPos(echoWindow, &X, &Y);
@@ -80,6 +80,7 @@ int main() {
       // Update Variables for Body
       interfaceMain.updateInterface(&renderMain);
     }
+
     // Only Update Body Data if Sim is Paused
     if(interfaceMain.getPaused()) {
       interfaceMain.updateScenario(&renderMain);
@@ -91,10 +92,14 @@ int main() {
 
   // Exit Procedure
   // Unset Paused and Set Exit Flag
-  sharedData.setStatus(false, 0);
-  sharedData.setStatus(true, 1);
+  sharedData.setStatus(0, false);
+  sharedData.setStatus(1, true);
+
   // Resume Thread if Waiting
-  sharedData.simWait.notify_all();
+  do {
+    sharedData.simWait.notify_all();
+  } while(sharedData.getStatus(2));
+
   // Pause until simInit Exits.
   simThread.join();
   std::cerr << "Sim Exit" << std::endl;
@@ -118,11 +123,6 @@ void initDisplay(int lXRes, int lYRes) {
 
   // Set Viewport Extents
   glViewport(0, 0, lXRes, lYRes);
-
-  // Save Default Matrixmk
-  glPushMatrix();
-
-  // Set Clear Color for Window
   glClearColor(0.0f, 0.0f, 0.0f, 1);
 }
 

@@ -4,7 +4,6 @@
 #include <AntTweakBar.h>  // AntTweakBar
 #include "rdr_obj.hpp"
 
-// This class acts as a tider interface for ATB and GLFW?
 class interface {
   private:
     // Windows
@@ -40,8 +39,6 @@ class interface {
     bool abFixed_I = false;
     float abColor_I[3] = {0.0f, 0.0f, 0.0f};
 
-    std::string fileName = "Default.sav";
-
     // Sim and System Interface Setup, Will be called once at start.
     void setupSimInterface();
     void setupSystemInterface();
@@ -53,6 +50,8 @@ class interface {
     interface(int p_wXRes, int p_wYRes);
     ~interface();
 
+    std::string fileName = "Default.sav";
+
     // Body Interface Setup, Will be called throughout program, handled by Main.
     void setupBodyInterface(int p_abID);
     void updateControl(rdr_obj* localScenario);
@@ -63,10 +62,12 @@ class interface {
 };
 
 // Class External Callbacks
-void TW_CALL saveFileButton(void *);
-void TW_CALL loadFileButton(void *);
+void TW_CALL saveFileButton(void *cData);
+void TW_CALL loadFileButton(void *cData);
 
 // Filename should always have a string and must have a .sav file extension.
 void TW_CALL handleFilename(std::string& destinationClientString, const std::string& sourceLibraryString);
 
-void TW_CALL deleteBodyButton(void *);
+void TW_CALL deleteBodyButton(void *cData);
+void TW_CALL newBodyButton(void *cData);
+void TW_CALL newSuperStructureButton(void *cData);

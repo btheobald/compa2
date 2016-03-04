@@ -89,9 +89,10 @@ void interface::setupSystemInterface() {
 
   TwCopyStdStringToClientFunc(handleFilename);
   TwAddVarRW(systemInterface, "filenm", TW_TYPE_STDSTRING, &fileName,  " label='File Name' ");
-  TwAddButton(systemInterface,"savebn", saveFileButton, NULL, " label='Save Scenario' ");
-  TwAddButton(systemInterface,"loadbn", loadFileButton, NULL, " label='Load Scenario' ");
+  TwAddButton(systemInterface,"savebn", saveFileButton, this, " label='Save Scenario' ");
+  TwAddButton(systemInterface,"loadbn", loadFileButton, this, " label='Load Scenario' ");
 }
+
 void interface::setupDialog() {
 
 }
@@ -150,11 +151,13 @@ void interface::updateActiveID(int p_bodyID) {
 }
 
 // Class External Callbacks
-void TW_CALL saveFileButton(void *) {
+void TW_CALL saveFileButton(void *cData) {
+  interface *iface = static_cast<interface*>(cData); // scene pointer is stored in clientData
   std::cerr << "Saving File: " << std::endl;
+  std::cerr << iface->fileName << std::endl;
 }
 
-void TW_CALL loadFileButton(void *) {
+void TW_CALL loadFileButton(void *cData) {
   std::cerr << "Loading File: " << std::endl;
 }
 
