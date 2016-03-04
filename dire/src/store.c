@@ -47,8 +47,8 @@ void resetMatrix(uint8_t** matrixPtr, int cbc) {
       else
         matrixPtr[x][y] = 0;
 
-      printf("%d ", matrixPtr[x][y]);
+      //printf("%d ", matrixPtr[x][y]);
     }
-    printf("\n");
+    //printf("\n");
   }
 }

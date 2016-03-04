@@ -6,6 +6,6 @@ void calculatePosition(body* bd, float dt) {
 }
 
 void calculateHalfVelocity(body* bd, float dt) {
-  bd->vX += bd->aX * dt * 0.5;
-  bd->vY += bd->aY * dt * 0.5;
+  bd->vX += 0.5 * bd->aX * dt;
+  bd->vY += 0.5 * bd->aY * dt;
 }
