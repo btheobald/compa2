@@ -61,7 +61,7 @@ public:
 
   std::condition_variable simWait;
 
-  // 0 :: Pause, 1 :: Exit
+  // 0 : Pause, 1 : Exit, 2 : ExitAck
   void setStatus(int var, bool set);
   bool getStatus(int var);
 };

@@ -98,7 +98,7 @@ int main() {
   // Resume Thread if Waiting
   do {
     sharedData.simWait.notify_all();
-  } while(sharedData.getStatus(2));
+  } while(!sharedData.getStatus(2));
 
   // Pause until simInit Exits.
   simThread.join();
@@ -111,7 +111,6 @@ int main() {
 }
 
 void initDisplay(int lXRes, int lYRes) {
-  glEnable(GL_DEPTH);
   // Init Projection
   glMatrixMode(GL_PROJECTION);
   glLoadIdentity();
