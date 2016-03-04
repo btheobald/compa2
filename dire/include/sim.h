@@ -6,13 +6,18 @@
 #include "body.h"
 
 // Distance
-float getComponentDistance(body* bA, body* bB, int xy);   // Find the x/y distance bettween two bodies
-float getVectorDistance(body* bA, body* bB);              // Find vector/total distance bettwen two bodies
+// Find the x/y distance bettween two bodies
+float getComponentDistance(body* bA, body* bB, int xy);
+// Find vector/total distance bettwen two bodies
+float getVectorDistance(body* bA, body* bB);
 
 // Calculate Forces
-int checkIfNeeded(uint8_t** forceMark, int bA, int bB);    // Return true/false if force calculation is needed
-void calculateAcceleration(float gc, body* bA, body* bB);          // Calculate acceleration bettween two bodies, using force calculation and mass, returns value
+// Return true/false if force calculation is needed
+int checkIfNeeded(uint8_t** forceMark, int bA, int bB);
+// Calculate acceleration bettween two bodies, using force calculation and mass, returns value
+void calculateAcceleration(float gc, body* bA, body* bB);
 
-void itteration(body** bodyArray, int cbc, float gc, float dt); // Itteration call, pass current body count
+// Itteration call, pass current body count
+void itteration(body** bodyArray, int cbc, float gc, float dt);
 
 #endif//SIM_DEF_GUARD

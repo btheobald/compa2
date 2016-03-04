@@ -5,6 +5,7 @@
 
 // Body array management functions
 body** allocateBodyArray(int cbc) {
+  // Create allocation pointer
   body** arrayBase;
 
   // Allocate Memory
@@ -23,9 +24,10 @@ int freeBodyArray(body** arrayBase, int cbc) {
 
 // Calculation marking matrix
 uint8_t** genMatrix(int squareSize) {
+  // Create allocation pointer
   uint8_t** matrixPtr;
 
-  // Allocate Memory
+  // Allocate memory
   matrixPtr = malloc(sizeof(uint8_t *) * squareSize);
   for(int x = 0; x < squareSize; x++) {
     matrixPtr[x] = malloc(sizeof(uint8_t) * squareSize);
@@ -38,7 +40,7 @@ uint8_t** genMatrix(int squareSize) {
 
 // Set default state
 void resetMatrix(uint8_t** matrixPtr, int cbc) {
-  // Populate Matrix
+  // Populate matrix
   for(int x = 0; x < cbc; x++) {
     for(int y = 0; y < cbc; y++) {
       if(x == y)
@@ -46,10 +48,7 @@ void resetMatrix(uint8_t** matrixPtr, int cbc) {
         matrixPtr[x][y] = 2;
       else
         matrixPtr[x][y] = 0;
-
-      //printf("%d ", matrixPtr[x][y]);
     }
-    //printf("\n");
   }
 }
 
