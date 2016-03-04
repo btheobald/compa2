@@ -46,11 +46,11 @@ void calculateAcceleration(float gc, body* bA, body* bB) {
 
   // Calculate and set acceleration
   // Body A
-  bA->aX =  fX;
-  bA->aY = -fY;
+  bA->aX =  fX / bA->m;
+  bA->aY = -fY / bA->m;
   // Body B
-  bB->aX = -fX;
-  bB->aY =  fY;
+  bB->aX = -fX / bB->m;
+  bB->aY =  fY / bB->m;
 }
 
 void itteration(body** bodyArray, int cbc, float gc, float dt) {
