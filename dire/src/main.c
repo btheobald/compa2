@@ -10,19 +10,19 @@ int main() {
   bStore[0] = malloc(sizeof(body));
   bStore[1] = malloc(sizeof(body));
 
-  bStore[0]->m = 1;
-  bStore[0]->pX = -1;
+  bStore[0]->m = 1000;
+  bStore[0]->pX = 0;
   bStore[0]->pY = 0;
   bStore[0]->vX = 0;
-  bStore[0]->vY = -0.5;
+  bStore[0]->vY = 0;
 
   bStore[1]->m = 1;
-  bStore[1]->pX = 1;
+  bStore[1]->pX = 100;
   bStore[1]->pY = 0;
   bStore[1]->vX = 0;
-  bStore[1]->vY = 0.5;
+  bStore[1]->vY = 3.164;
 
-  for(int i = 0; i < 1000; i++) {
+  for(int i = 0; i < 2000; i++) {
     itteration(bStore, 2, 1, 0.1);
   }
 
