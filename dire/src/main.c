@@ -21,16 +21,16 @@ int main() {
   bStore[1]->pX = 100;
   bStore[1]->pY = 0;
   bStore[1]->vX = 0;
-  bStore[1]->vY = 3.164;
+  bStore[1]->vY = 3.16;
 
   bStore[2]->m = 10;
   bStore[2]->pX = 1000;
   bStore[2]->pY = 0;
   bStore[2]->vX = 0;
-  bStore[2]->vY = 0.5;
+  bStore[2]->vY = 0.8;
 
-  for(int i = 0; i < 10000000; i++) {
-    itteration(bStore, 3, 1, 0.1);
+  for(int i = 0; i < 400000; i++) {
+    itteration(bStore, 3, 1, 0.01);
   }
 
   freeBodyArray(bStore, 3);
