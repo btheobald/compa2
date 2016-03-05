@@ -8,8 +8,6 @@
 int main() {
   body** bStore = allocateBodyArray(10000);
 
-  printf("%d \n", (int)sizeof(body));
-
   int c = 0;
   for (int x = 0; x < 100; x++) {
     for (int y = 0; y < 100; y++) {
