@@ -24,6 +24,20 @@ class interface {
     // Flag if Collisions should be calculated
     bool doCollisions_I = false;
 
+    // Sim and System Interface Setup, Will be called once at start.
+    void setupSimInterface();
+    void setupSystemInterface();
+
+    // Dialog setup, tbd.
+    void setupDialog();
+
+  public:
+    interface(int p_wXRes, int p_wYRes, rdr_obj* renderAccess);
+    ~interface();
+
+    // Used by button callback functions
+    rdr_obj* renderAccess;
+    std::string fileName = "Default.sav";
     // Active Body Interface
     int abID_I = 0;
     double abMass_I = 0;
@@ -38,21 +52,6 @@ class interface {
     double abAccelerationY_I = 0;
     bool abFixed_I = false;
     float abColor_I[3] = {0.0f, 0.0f, 0.0f};
-
-    // Sim and System Interface Setup, Will be called once at start.
-    void setupSimInterface();
-    void setupSystemInterface();
-
-    // Dialog setup, tbd.
-    void setupDialog();
-
-  public:
-    interface(int p_wXRes, int p_wYRes);
-    ~interface();
-
-    // Used by button callback functions
-    rdr_obj* renderAccess;
-    std::string fileName = "Default.sav";
 
     // Body Interface Setup, Will be called throughout program, handled by Main.
     void setupBodyInterface(int p_abID);

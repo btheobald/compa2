@@ -1,6 +1,9 @@
 #include "interface.hpp"
 
-interface::interface(int p_wXRes, int p_wYRes) {
+interface::interface(int p_wXRes, int p_wYRes, rdr_obj* p_renderAccess) {
+  // Populate render access pointer for callbacks.
+  renderAccess = p_renderAccess;
+
   // Init AntTweakBar
   TwInit(TW_OPENGL, NULL);
   TwWindowSize(p_wXRes, p_wYRes);
@@ -153,12 +156,12 @@ void interface::updateActiveID(int p_bodyID) {
 // Class External Callbacks
 void TW_CALL saveFileButton(void *cData) {
   interface *iface = static_cast<interface*>(cData); // scene pointer is stored in clientData
-  std::cerr << "Saving File: " << std::endl;
-  std::cerr << iface->fileName << std::endl;
+  std::cerr << "Saving File: " << iface->fileName << std::endl;
 }
 
 void TW_CALL loadFileButton(void *cData) {
-  std::cerr << "Loading File: " << std::endl;
+  interface *iface = static_cast<interface*>(cData); // scene pointer is stored in clientData
+  std::cerr << "Loading File: " << iface->fileName << std::endl;
 }
 
 void TW_CALL handleFilename(std::string& destinationClientString, const std::string& sourceLibraryString) {
@@ -178,6 +181,15 @@ void TW_CALL handleFilename(std::string& destinationClientString, const std::str
   }
 }
 
-void TW_CALL deleteBodyButton(void *) {
-  std::cerr << "Delete Body: " << std::endl;
+void TW_CALL deleteBodyButton(void *cData) {
+  interface *iface = static_cast<interface*>(cData);
+  iface->renderAccess->deleteb(0);
+}
+
+void TW_CALL newBodyButton(void *cData) {
+
+}
+
+void TW_CALL newSuperStructureButton(void *cData) {
+
 }

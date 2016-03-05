@@ -38,10 +38,11 @@ int main() {
 
   // Setup Scenario and Commit
   renderMain.setupDefaultScenario();
+
   renderMain.updateSharedArea(&sharedData);
 
   // Create Interface Object
-  interface interfaceMain(wXRes, wYRes);
+  interface interfaceMain(wXRes, wYRes, &renderMain);
   interfaceMain.updateInterface(&renderMain);
 
   // Start Sim Thread, Pass SharedData Address

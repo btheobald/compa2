@@ -140,8 +140,8 @@ sim_obj::~sim_obj() {
 
 int sim_obj::itteration() {
   if (scenarioChanged) {
-    // Calculate Initial Forces and Accelerations
-    calcForceMatrix();
+      // Calculate Initial Forces and Accelerations
+      calcForceMatrix();
     calcForceSumAB();
     calcAcceleraitonAB();
     scenarioChanged = false;

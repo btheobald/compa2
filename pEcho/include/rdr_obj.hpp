@@ -23,6 +23,8 @@ public:
   // Check Coordinates
   int checkCoord(double x, double y);
 
+  void deleteb(int id);
+
   inline int getCurrentBodies() { return bodyStore.size(); }
 
   // WARNING : BREAKS ENCAPSULATION

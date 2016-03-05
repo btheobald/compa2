@@ -1,6 +1,10 @@
 // Header Include
 #include "rdr_obj.hpp"
 
+void rdr_obj::deleteb(int id) {
+  delBody(id);
+}
+
 void rdr_obj::setupDefaultScenario() {
   UGC = 0.1;
   IDT = 0.1;

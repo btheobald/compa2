@@ -26,6 +26,7 @@ public:
   scenario();
   ~scenario();
 
+  void newBody(body* bPtr);
   void newBody(double p_Mass, double p_Radius, double p_PosX, double p_PosY, double p_VelX, double p_VelY, const float p_Color[3]);
   void delBody(int index);
   void delAllBodies(int index);
