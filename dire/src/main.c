@@ -5,22 +5,20 @@
 #include "body.h"
 #include "sim.h"
 
+const int bodyCount = 3;
+
 int main() {
-  body** bStore = allocateBodyArray(10000);
+  body** bStore = allocateBodyArray(bodyCount);
 
-  int c = 0;
-  for (int x = 0; x < 100; x++) {
-    for (int y = 0; y < 100; y++) {
-      bStore[c] = createBody(1, x, y, 0, 0);
-      c++;
-    }
+  bStore[0] = createBody(1000, 0, 0, 0, 0);
+  bStore[1] = createBody(1, 10, 0, 0, 10);
+  bStore[2] = createBody(1, 20, 0, 0, 7.071);
+
+  for (int i = 0; i < 1000; i++) {
+    itteration(bStore, bodyCount, 1, 0.01);
   }
 
-  for (int i = 0; i < 1; i++) {
-    itteration(bStore, 10000, 1, 0.1);
-  }
-
-  freeBodyArray(bStore, 10000);
+  freeBodyArray(bStore, bodyCount);
 
   return 0;
 }
