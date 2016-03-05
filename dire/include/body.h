@@ -20,4 +20,7 @@ typedef struct {
 void calculatePosition(body* bd, float dt);
 void calculateHalfVelocity(body* bd, float dt);
 
+// Allocate and create body
+body* createBody(float m, float pX, float pY, float vX, float vY);
+
 #endif//BODY_DEF_GUARD
