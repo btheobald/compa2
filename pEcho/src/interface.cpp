@@ -38,7 +38,7 @@ void interface::setupSimInterface() {
 
   // Control
   TwAddVarRW(simInterface, "ugcvar", TW_TYPE_DOUBLE,  &UGC_I,        " min=1E-12  max=10   step=0.01  precision=7   label='Gravitational Constant'  group=Control ");
-  TwAddVarRW(simInterface, "idtvar", TW_TYPE_DOUBLE,  &IDT_I,        " max=-1E9   max=1E9  step=0.01  precision=7   label='Itteration Delta Time'   group=Control ");
+  TwAddVarRW(simInterface, "idtvar", TW_TYPE_DOUBLE,  &IDT_I,        " max=-1E9   max=1E15  step=0.01  precision=7   label='Itteration Delta Time'   group=Control ");
   TwAddVarRW(simInterface, "collid", TW_TYPE_BOOLCPP, &doCollisions_I,"true=On      false=Off                       label='Simulate Collisions'     group=Control ");
   // Runtime
   TwAddVarRW(simInterface, "paused", TW_TYPE_BOOLCPP, &paused_I,     " true=Paused  false=Running                   label='Run/Pause'               group=Runtime ");
@@ -98,7 +98,7 @@ void interface::setupDialog() {
 }
 
 void interface::updateControl(rdr_obj* localScenario) {
-  localScenario->updateLocalControl(UGC_I, IDT_I, IPF_I);
+  localScenario->updateLocalControl(UGC_I, IDT_I, IPF_I, doCollisions_I);
 }
 
 void interface::updateScenario(rdr_obj* localScenario) {

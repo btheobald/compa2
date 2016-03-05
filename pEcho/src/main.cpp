@@ -83,6 +83,7 @@ int main() {
 
     // Only Update Body Data if Sim is Paused
     if(interfaceMain.getPaused()) {
+      sharedData.setStatus(0, true);
       interfaceMain.updateScenario(&renderMain);
     }
     interfaceMain.updateControl(&renderMain);
@@ -102,7 +103,6 @@ int main() {
 
   // Pause until simInit Exits.
   simThread.join();
-  std::cerr << "Sim Exit" << std::endl;
 
   // Keep window open until simThread exits.
   TwTerminate();

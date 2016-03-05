@@ -6,6 +6,7 @@ sharedStage::sharedStage() {
   pause = true;
   exit = false;
   exitAck = false;
+  collisions = false;
 }
 sharedStage::~sharedStage(){
 
@@ -106,6 +107,11 @@ void sharedStage::setStatus(int var, bool set) {
       exitAck = set;
       break;
     }
+    case 3: {
+      com::lockGuard lockAccess(collision_Lock);
+      collisions = set;
+      break;
+    }
   }
 }
 
@@ -122,6 +128,10 @@ bool sharedStage::getStatus(int var) {
     case 2: {
       com::lockGuard lockAccess(exitAck_Lock);
       return exitAck;
+    }
+    case 3: {
+      com::lockGuard lockAccess(collision_Lock);
+      return collisions;
     }
     default: return true;
   }

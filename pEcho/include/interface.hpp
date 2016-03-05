@@ -22,7 +22,7 @@ class interface {
     // Current bodies in simulation
     int numBodies_I = 0;
     // Flag if Collisions should be calculated
-    bool doCollisions_I = true;
+    bool doCollisions_I = false;
 
     // Active Body Interface
     int abID_I = 0;
@@ -50,6 +50,8 @@ class interface {
     interface(int p_wXRes, int p_wYRes);
     ~interface();
 
+    // Used by button callback functions
+    rdr_obj* renderAccess;
     std::string fileName = "Default.sav";
 
     // Body Interface Setup, Will be called throughout program, handled by Main.

@@ -16,6 +16,7 @@ protected:
   double UGC;
   double IDT;
   int IPF;
+  bool collisions;
 
   bool scenarioChanged = true;
   void populateBodyStore(com::bodyVector tempStore);
@@ -30,7 +31,7 @@ public:
   void delAllBodies(int index);
 
   void updateLocalControl(sharedStage* l_sharedDataAccess);
-  void updateLocalControl(double p_UGC, double p_IDT, int p_IPF);
+  void updateLocalControl(double p_UGC, double p_IDT, int p_IPF, bool collisions);
 
   void updateSharedControl(sharedStage* l_sharedDataAccess);
 

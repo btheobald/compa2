@@ -26,7 +26,7 @@ void simInit(sharedStage* sharedDataAccess) {
           if(sharedDataAccess->getStatus(1)) break;
         }
       }
-      if(!sharedDataAccess->getStatus(1)) {
+      if(!sharedDataAccess->getStatus(0)) {
         simMain.updateSharedArea(sharedDataAccess);
       }
     }

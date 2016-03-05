@@ -16,6 +16,7 @@ private:
   double UGC;     // Simulation Universal Gravitational Constant
   double IDT;     // Simulation Itteration Delta Time
   int IPF;        // Simulation Itterations per Render Frame
+  bool collisions;
 
   // Runtime Control
   bool pause;     // Pause Signal
@@ -35,6 +36,7 @@ private:
   std::mutex pause_Lock;
   std::mutex exit_Lock;
   std::mutex exitAck_Lock;
+  std::mutex collision_Lock;
   std::mutex newRS_Lock;
   std::mutex newSS_Lock;
 
@@ -61,7 +63,7 @@ public:
 
   std::condition_variable simWait;
 
-  // 0 : Pause, 1 : Exit, 2 : ExitAck
+  // 0 : Pause, 1 : Exit, 2 : ExitAck, 3 : Collisions
   void setStatus(int var, bool set);
   bool getStatus(int var);
 };

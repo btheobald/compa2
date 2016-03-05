@@ -29,17 +29,20 @@ void scenario::updateLocalControl(sharedStage* l_sharedDataAccess) {
   UGC = l_sharedDataAccess->getUGC();
   IDT = l_sharedDataAccess->getIDT();
   IPF = l_sharedDataAccess->getIPF();
+  collisions = l_sharedDataAccess->getStatus(3);
 }
-void scenario::updateLocalControl(double p_UGC, double p_IDT, int p_IPF) {
+void scenario::updateLocalControl(double p_UGC, double p_IDT, int p_IPF, bool p_collisions) {
   UGC = p_UGC;
   IDT = p_IDT;
   IPF = p_IPF;
+  collisions = p_collisions;
 }
 
 void scenario::updateSharedControl(sharedStage* l_sharedDataAccess) {
   l_sharedDataAccess->setUGC(UGC);
   l_sharedDataAccess->setIDT(IDT);
   l_sharedDataAccess->setIPF(IPF);
+  l_sharedDataAccess->setStatus(3, collisions);
 }
 
 double scenario::getUGC() {
