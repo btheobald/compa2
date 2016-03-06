@@ -1,9 +1,11 @@
 #include "shared.hpp"
+#include <iostream>
 
 void shared::updateBodies(std::vector<body*> p_bodies) {
   // Must create a copy of objects at pointers, not just copy pointers
   // Lock access to body store
   std::lock_guard<std::mutex> lock(bodyLock);
+  deleteAllBodies(); // Flush current body storage allocation
   bodies.reserve(p_bodies.size()); // Reserve space to create copy
 
   for(unsigned int i = 0; i < p_bodies.size(); i++) {
@@ -27,6 +29,7 @@ std::vector<body*> shared::getBodies(void) {
   for(unsigned int i = 0; i < bodies.size(); i++) {
     r_bodies.push_back(new body(bodies[i])); // Adds to 'bodies' (Scenario Local)
   }
+
   return r_bodies;
 }
 

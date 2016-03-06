@@ -2,6 +2,7 @@
 
 #include "scenario.hpp"
 #include <mutex>
+#include <condition_variable>
 
 class shared: public scenario {
 private:
@@ -14,4 +15,7 @@ public:
   void updateControl(control p_control) override;
   std::vector<body*> getBodies(void) override;
   control getControl(void) override;
+
+  // Condition variable, makes sim wait till unlocked
+  std::condition_variable simWait;
 };

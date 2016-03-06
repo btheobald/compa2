@@ -33,7 +33,7 @@ public:
 
   // Data management
   // Update local body storage
-  virtual inline void updateBodies(std::vector<body*> p_bodies) { bodies = p_bodies; };
+  virtual inline void updateBodies(std::vector<body*> p_bodies) { deleteAllBodies(); bodies = p_bodies; };
   // Update local control storage
   virtual inline void updateControl(control p_control) { lControl = p_control; };
   // Get local body storage - Needed by interface and to update shared (Returns actual pointer vector)

@@ -1,14 +1,14 @@
-// Program Includes
-#include "shared.hpp"
-#include "simulation.hpp"
-#include "render.hpp"
-
 // Standard Library
 #include <iostream>
 #include <thread>
 // External Libraries
 #include <GLFW/glfw3.h>
 #include <AntTweakBar.h>
+// Program Includes
+#include "shared.hpp"
+#include "simulation.hpp"
+#include "render.hpp"
+#include "screen.hpp"
 
 // Sim thread startup function
 void startup(shared* sharedAP);
@@ -40,6 +40,7 @@ int main() {
   }
 
   glfwMakeContextCurrent(window);
+  initDisplay(wXRes, wYRes);
     /*                       */
    // GLFW Boilerplate End  //
   /*                       */
@@ -48,8 +49,8 @@ int main() {
   render* renderAP = new render;
   shared* sharedAP = new shared;
 
-  renderAP->addBody(new body(1, 1, 0, 0, true));
-  renderAP->addBody(new body(1, 1, 1, 0, 0, 1));
+  renderAP->addBody(new body(10, 1, 0, 0, true));
+  renderAP->addBody(new body(1, 1, 100, 0, 0, 0.105));
 
   // Update shared area
   sharedAP->updateBodies(renderAP->getBodies());
@@ -59,7 +60,14 @@ int main() {
 
   // Main Runtime Loop
   while(!glfwWindowShouldClose(window)) {
-    // TODO: Render Here
+    // Clear screen before drawing
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    // Get update from shared
+    std::cerr << "render from shared" << std::endl;
+    renderAP->updateBodies(sharedAP->getBodies());
+    sharedAP->simWait.notify_all();
+    // Render Scene
     renderAP->drawScene();
     // Display is double buffered to prevent screen tearing
     // Swap display buffers
@@ -81,11 +89,26 @@ int main() {
 
 // Second thread, concurrent execution of simulation
 void startup(shared* sharedAP) {
+  // Sim Wait Control Mutex
+  std::mutex simWaitMTX;
+
   // Create access pointer
   simulation* simAP = new simulation;
 
   // Get new data from shared
   simAP->updateBodies(sharedAP->getBodies());
+
+  while(1) {
+    //if(sharedAP->getTaken()) {
+      std::cerr << "itteration" << std::endl;
+      simAP->itteration();
+      sharedAP->updateBodies(simAP->getBodies());
+
+      // Wait for data change
+      std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
+      sharedAP->simWait.wait(uniqueSimWaitMTX);
+    //}
+  }
 
   // Delete heap objects
   delete simAP;
