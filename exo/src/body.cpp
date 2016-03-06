@@ -1,5 +1,22 @@
 #include "body.hpp"
 
+body::body(body* p_b) { // Creates a copy of body at pointer
+  m = p_b->m;
+
+  r = p_b->r;
+
+  pX = p_b->pX;
+  pY = p_b->pY;
+
+  vX = p_b->vX;
+  vY = p_b->vY;
+
+  fixed = p_b->fixed;
+
+  aX = 0;
+  aY = 0;
+}
+
 body::body(double p_m, double p_r, double p_pX, double p_pY, bool p_fixed) {
   m = p_m;
 

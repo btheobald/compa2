@@ -1,29 +1,34 @@
 //#include <iostream>
 #include "scenario.hpp"
+#include "render.hpp"
 #include "simulation.hpp"
 #include <thread>
 
+// Sim thread startup function
+void startup(shared* sharedAP);
+
 int main() {
   // Create access pointers
-  simulation* simAP = new simulation;
+  render* renderAP = new render;
+  shared* sharedAP = new shared;
 
-  // Add bodies
-  simAP->addBody(new body(1, 0, 0, 0, true));
-  simAP->addBody(new body(1, 0, 10, 0, 0, 0.316));
-  simAP->addBody(new body(1, 0, 1, 0, 0, 1));
+  renderAP->addBody(new body(1, 0, 0, 0, true));
+  renderAP->addBody(new body(1, 0, 10, 0, 0, 3.16));
 
-  control local;
-  local.UGC = 1;
-  local.IDT = 0.1;
+  // Create simulation thread
+  std::thread simThread(startup, sharedAP);
 
-  simAP->updateLocalControl(local);
 
-  for(int i = 0; i < 2000; i++) {
-    simAP->itteration();
-  }
-
-  simAP->deleteAllBodies();
-  delete(simAP);
+  // Program Exit
+  simThread.join();
+  delete renderAP;
+  delete sharedAP;
 
   return 0;
+}
+
+void startup(shared* sharedAP) {
+  simulation* simAP = new simulation;
+
+  delete simAP;
 }

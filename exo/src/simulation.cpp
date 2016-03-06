@@ -2,10 +2,6 @@
 #include <cmath>
 #include <iostream>
 
-void startup(shared* sharedAP) {
-
-}
-
 double simulation::getComponentDistance(body* bA, body* bB, int xy) {
   if(xy)
     // Y Component
