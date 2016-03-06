@@ -1,10 +1,6 @@
 #pragma once
 
 #include "scenario.hpp"
-#include "shared.hpp"
-
-// Thread spawn function - thread/object management
-void startup(shared* sharedAP);
 
 class simulation: public scenario {
 private:
@@ -31,6 +27,8 @@ private:
   void calcAllAcceleration();
 
   void calcAllCollisions(void);
+
+  // Calls functions in individual bodies
   void calcAllHalfVelocity(void);
   void calcAllPosition(void);
 

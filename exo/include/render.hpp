@@ -1,3 +1,5 @@
+#pragma once
+
 #include "scenario.hpp"
 
 class render: public scenario {

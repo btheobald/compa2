@@ -10,8 +10,8 @@ private:
 
 public:
   // Local store in shared (Polymorphic), add a mutex lock to access
-  void updateLocalBodies(std::vector<body*> p_bodies) override;
-  void updateLocalControl(control p_control) override;
-  std::vector<body*> getLocalBodies(void) override;
-  control getLocalControl(void) override;
+  void updateBodies(std::vector<body*> p_bodies) override;
+  void updateControl(control p_control) override;
+  std::vector<body*> getBodies(void) override;
+  control getControl(void) override;
 };

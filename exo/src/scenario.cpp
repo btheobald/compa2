@@ -11,7 +11,7 @@ scenario::scenario() {
 }
 
 scenario::~scenario() {
-  deleteAllBodies();
+  deleteAllBodies(); // Cleanup all bodies in local storage
 }
 
 void scenario::addBody(body* p_nb) {

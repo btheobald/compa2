@@ -1,6 +1,6 @@
 #include "shared.hpp"
 
-void shared::updateLocalBodies(std::vector<body*> p_bodies) {
+void shared::updateBodies(std::vector<body*> p_bodies) {
   // Must create a copy of objects at pointers, not just copy pointers
   // Lock access to body store
   std::lock_guard<std::mutex> lock(bodyLock);
@@ -11,13 +11,13 @@ void shared::updateLocalBodies(std::vector<body*> p_bodies) {
   }
 }
 
-void shared::updateLocalControl(control p_control) {
+void shared::updateControl(control p_control) {
   // Lock access to control store
   std::lock_guard<std::mutex> lock(controlLock);
   lControl = p_control;
 }
 
-std::vector<body*> shared::getLocalBodies(void) {
+std::vector<body*> shared::getBodies(void) {
   // Lock access to body store
   std::lock_guard<std::mutex> lock(bodyLock);
   std::vector<body*> r_bodies;
@@ -30,7 +30,7 @@ std::vector<body*> shared::getLocalBodies(void) {
   return r_bodies;
 }
 
-control shared::getLocalControl(void) {
+control shared::getControl(void) {
   // Lock access to body store
   std::lock_guard<std::mutex> lock(controlLock);
   return lControl;
