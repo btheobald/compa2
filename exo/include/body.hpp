@@ -21,7 +21,7 @@ public:
   ~body();
 
   // Calculation Methods - Requires itteration delta time
-  void calcPosiiton(double p_dt); // Calculate new position based on current velocity
+  void calcPosition(double p_dt); // Calculate new position based on current velocity
   void calcHalfVelocity(double p_dt); // Calculate new velocity based on current acceleration (Half Timestep)
 
   double calcMomentum(int xy); // Calculate momentum and return component, used in collisions

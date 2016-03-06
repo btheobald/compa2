@@ -29,11 +29,11 @@ body::body(double p_m, double p_r, double p_pX, double p_pY, double p_vX, double
 }
 
 body::~body() {
-  
+
 }
 
 // Calculation Methods - Requires itteration delta time
-void body::calcPosiiton(double p_dt) {
+void body::calcPosition(double p_dt) {
   // ΔPosition = Velocity * ΔTime
   if(!fixed) {
     pX += vX * p_dt;
