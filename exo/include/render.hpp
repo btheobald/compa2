@@ -4,11 +4,11 @@
 
 class render: public scenario {
 private:
-  void drawBody();
-  void applyCamera();
+  void drawBody(body* p_b);
+  void applyCamera(void);
 
 public:
   void createSuperstructure();
-  void drawScene();
+  void drawScene(void);
 
 };

@@ -18,9 +18,11 @@ int main() {
    // GLFW Init Boilerplate //
   /*                       */
   if(!glfwInit()) {
+    // Exit if GLFW does not init
     std::cerr << "GLFW could not init" << std::endl;
     return 1;
   }
+
   GLFWwindow* window; // Create window
   glfwWindowHint(GLFW_SAMPLES,8); // MSAA 8x
   // Get user screen resolution
@@ -28,12 +30,15 @@ int main() {
   // Make window smaller than screen
   int wXRes = mode->width * 0.8;
   int wYRes = mode->height * 0.8;
+
   window = glfwCreateWindow(wXRes, wYRes, "Exo N-Body", NULL, NULL);
   if (!window) {
+    // Terminate and exit if window cannot open
     std::cerr << "GLFW could not create window" << std::endl;
     glfwTerminate();
     return 1;
   }
+
   glfwMakeContextCurrent(window);
     /*                       */
    // GLFW Boilerplate End  //
@@ -43,6 +48,10 @@ int main() {
   render* renderAP = new render;
   shared* sharedAP = new shared;
 
+  renderAP->addBody(new body(1, 1, 0, 0, true));
+  renderAP->addBody(new body(1, 1, 1, 0, 0, 1));
+
+  // Update shared area
   sharedAP->updateBodies(renderAP->getBodies());
 
   // Create simulation thread
@@ -50,8 +59,8 @@ int main() {
 
   // Main Runtime Loop
   while(!glfwWindowShouldClose(window)) {
-
-
+    // TODO: Render Here
+    renderAP->drawScene();
     // Display is double buffered to prevent screen tearing
     // Swap display buffers
     glfwSwapBuffers(window);
@@ -72,9 +81,12 @@ int main() {
 
 // Second thread, concurrent execution of simulation
 void startup(shared* sharedAP) {
+  // Create access pointer
   simulation* simAP = new simulation;
 
+  // Get new data from shared
   simAP->updateBodies(sharedAP->getBodies());
 
+  // Delete heap objects
   delete simAP;
 }
