@@ -61,28 +61,26 @@ void resetAcceleration(body** bodyStore, float cbc) {
 }
 
 void itteration(body** bodyArray, int cbc, float gc, float dt) {
-  //uint8_t** forceMark = genMatrix(cbc);
-
   // 1/2 Velocity
   for(int bc = 0; bc < cbc; bc++) {
     calculateHalfVelocity(bodyArray[bc], dt);
-    printf("%f %f ", bodyArray[bc]->pX, bodyArray[bc]->pY);
+
   }
-  printf("\n");
 
   // Position
   for(int bc = 0; bc < cbc; bc++) {
     calculatePosition(bodyArray[bc], dt);
+    printf("%f %f ", bodyArray[bc]->pX, bodyArray[bc]->pY);
   }
+  printf("\n");
 
   // Acceleration
   resetAcceleration(bodyArray, cbc);
   for(int x = 0; x < cbc; x++) {
     for(int y = x; y < cbc; y++) {
       // Check to calculate acceleration for bodies
-      if(x != y) {
+      if(x != y) {6
         calculateAcceleration(gc, bodyArray[x], bodyArray[y]);
-        //forceMark[x][y] = 1;
       }
     }
   }
@@ -91,6 +89,4 @@ void itteration(body** bodyArray, int cbc, float gc, float dt) {
   for(int bc = 0; bc < cbc; bc++) {
     calculateHalfVelocity(bodyArray[bc], dt);
   }
-
-  //freeMatrix(forceMark, cbc);
 }

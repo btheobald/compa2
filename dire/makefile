@@ -36,7 +36,7 @@ $(OBJECTS): $(BINARY_DIR)/%.o: $(SOURCE_DIR)/%.c
 	@$(CC) $(CFLAGS) -c $< -o $@
 	@echo "Compiled "$<" Successfully"
 
-output.txt:$(TARGET)
+output:$(TARGET)
 	./$(TARGET) > stdout.txt
 
 .PHONEY: setup

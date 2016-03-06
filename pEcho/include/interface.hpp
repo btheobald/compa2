@@ -35,8 +35,8 @@ class interface {
     interface(int p_wXRes, int p_wYRes, rdr_obj* renderAccess);
     ~interface();
 
-    // Used by button callback functions
     rdr_obj* renderAccess;
+
     std::string fileName = "Default.sav";
     // Active Body Interface
     int abID_I = 0;

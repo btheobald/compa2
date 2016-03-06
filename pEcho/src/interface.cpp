@@ -1,7 +1,6 @@
 #include "interface.hpp"
 
 interface::interface(int p_wXRes, int p_wYRes, rdr_obj* p_renderAccess) {
-  // Populate render access pointer for callbacks.
   renderAccess = p_renderAccess;
 
   // Init AntTweakBar
@@ -76,7 +75,7 @@ void interface::setupBodyInterface(int p_abID) {
   TwAddVarRO(bodyInterface, "bdforx", TW_TYPE_DOUBLE, &abForceX_I,        "                           precision=7   label='X'                       group=Force ");
   TwAddVarRO(bodyInterface, "bdfory", TW_TYPE_DOUBLE, &abForceY_I,        "                           precision=7   label='Y'                       group=Force ");
 
-  TwAddButton(bodyInterface,"delbody", deleteBodyButton, NULL, " label='Delete Body' ");
+  TwAddButton(bodyInterface,"delbody", deleteBodyButton, this, " label='Delete Body' ");
 }
 void interface::setupSystemInterface() {
   // Color
@@ -183,7 +182,9 @@ void TW_CALL handleFilename(std::string& destinationClientString, const std::str
 
 void TW_CALL deleteBodyButton(void *cData) {
   interface *iface = static_cast<interface*>(cData);
-  iface->renderAccess->deleteb(0);
+  delete(iface->renderAccess->getBodyPointer(iface->abID_I));
+  iface->renderAccess->delBody(iface->abID_I-1);
+  iface->updateInterface(iface->renderAccess);
 }
 
 void TW_CALL newBodyButton(void *cData) {
