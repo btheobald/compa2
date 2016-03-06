@@ -28,6 +28,10 @@ body::body(double p_m, double p_r, double p_pX, double p_pY, double p_vX, double
   fixed = false;
 }
 
+body::~body() {
+  
+}
+
 // Calculation Methods - Requires itteration delta time
 void body::calcPosiiton(double p_dt) {
   // ΔPosition = Velocity * ΔTime
@@ -37,7 +41,7 @@ void body::calcPosiiton(double p_dt) {
   }
 }
 
-void body::calcVelocity(double p_dt) {
+void body::calcHalfVelocity(double p_dt) {
   // (1/2)ΔVelocity = Acceleration * ΔTime * 0.5
   if(!fixed) {
     vX += aX * p_dt * 0.5;
@@ -45,7 +49,7 @@ void body::calcVelocity(double p_dt) {
   }
 }
 
-double body::calcMomentum(int xy); {
+double body::calcMomentum(int xy) {
   // p = mv
   if(xy) {
     // Y Component

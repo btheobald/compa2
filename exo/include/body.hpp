@@ -1,3 +1,5 @@
+#pragma once
+
 class body {
 private:
 
@@ -13,7 +15,7 @@ public:
   bool fixed;     // Fixed
 
   // Constructors
-  body(double p_m, double p_r, double p_pX, double p_pY);
+  body(double p_m, double p_r, double p_pX, double p_pY, bool p_fixed);
   body(double p_m, double p_r, double p_pX, double p_pY, double p_vX, double p_vY);
   // Destructor
   ~body();

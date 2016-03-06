@@ -1,3 +1,6 @@
+#pragma once
+
+#include "body.hpp"
 #include <vector>
 
 // Control structure
@@ -16,8 +19,8 @@ typedef struct {
 
 class scenario {
 protected:
-  vector<body*> bodies; // Vector containing pointers to body objects
-  control lControl; // Object containing control variables
+  std::vector<body*> bodies; // Vector containing pointers to body objects
+  control lControl; // structure containing control variables
 
 public:
   scenario();
@@ -30,11 +33,11 @@ public:
 
   // Data management
   // Update local body storage
-  virtual inline void updateLocalBodies(vector<body*> p_bodies) { bodies = p_bodies; };
+  virtual inline void updateLocalBodies(std::vector<body*> p_bodies) { bodies = p_bodies; };
   // Update local control storage
   virtual inline void updateLocalControl(control p_control) { lControl = p_control; };
-  // Commit bodies to shared
-  virtual inline void updateSharedBodies(shared* stage) { stage->updateLocalBodies(bodies); };
-  // Commit control to shared
-  virtual inline void updateSharedControl(shared* stage) { stage->updateLocalControl(lControl); };
-}
+  // Get local body storage
+  virtual inline std::vector<body*> getLocalBodies(void) { return bodies; };
+  // Get local control storage
+  virtual inline control getLocalControl(void) { return lControl; };
+};

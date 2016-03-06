@@ -1,7 +1,7 @@
 # Project Name
 NAME = exo
 # Compiler
-CCX = clang
+CCX = g++
 TARGET = $(NAME).out
 
 # Linker
@@ -17,12 +17,12 @@ INCLUDES   := $(wildcard $(INCLUDE_DIR)/*.hpp)
 OBJECTS    := $(SOURCES:$(SOURCE_DIR)/%.cpp=$(BINARY_DIR)/%.o)
 
 # Libraries
-LIBS  = `pkg-config --static --libs glfw3` -lAntTweakBar -lGLU
+LIBS  = #`pkg-config --static --libs glfw3` -lAntTweakBar -lGLU
 # Debugger
 DB    = gdb
 DBOPT =
 # Compiler Flags
-CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) `pkg-config --cflags glfw3` -lGLU -g -Ofast
+CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) -g # `pkg-config --cflags glfw3` -lGLU -g -Ofast
 # Linker Flags
 LFLAGS = -Wall $(LIBS)
 

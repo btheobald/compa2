@@ -1,3 +1,13 @@
+#include "scenario.hpp"
+#include <iostream>
+scenario::scenario() {
+
+}
+
+scenario::~scenario() {
+
+}
+
 void scenario::addBody(body* p_nb) {
   bodies.push_back(p_nb); // Add pointer to dynamic array
 }
@@ -8,8 +18,8 @@ void scenario::delBody(int p_bdID) {
 }
 
 void scenario::deleteAllBodies() {
-  for(int i = 0; i < bodies.size(); i++) {
-    delete(bodies.[i]); // Free all memory in vector
+  for(unsigned int i = 0; i < bodies.size(); i++) {
+    delete(bodies[i]); // Free all memory in vector
   }
   bodies.clear(); // Reset vector
 }
