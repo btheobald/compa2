@@ -64,7 +64,7 @@ int main() {
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Get update from shared
-    std::cerr << "render from shared" << std::endl;
+    //std::cerr << "render from shared" << std::endl;
     renderAP->updateBodies(sharedAP->getBodies());
     sharedAP->simWait.notify_all();
     // Render Scene
@@ -98,9 +98,10 @@ void startup(shared* sharedAP) {
   // Get new data from shared
   simAP->updateBodies(sharedAP->getBodies());
 
-  while(1) {
+  //while(1) {
+  for(int i = 0; i < 600; i++) {
     //if(sharedAP->getTaken()) {
-      std::cerr << "itteration" << std::endl;
+      //std::cerr << "itteration" << std::endl;
       simAP->itteration();
       sharedAP->updateBodies(simAP->getBodies());
 
@@ -109,7 +110,7 @@ void startup(shared* sharedAP) {
       sharedAP->simWait.wait(uniqueSimWaitMTX);
     //}
   }
-
+  std::cerr << "Sim Egit xit" << std::endl;
   // Delete heap objects
   delete simAP;
 }
