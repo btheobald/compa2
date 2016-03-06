@@ -24,7 +24,7 @@ protected:
 
 public:
   scenario();
-  ~scenario();
+  virtual ~scenario();
 
   // Storage vector functions
   void addBody(body* p_nb); // Add body pointer to vector

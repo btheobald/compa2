@@ -1,6 +1,10 @@
 #pragma once
 
 #include "scenario.hpp"
+#include "shared.hpp"
+
+// Thread spawn function - thread/object management
+void startup(shared* sharedAP);
 
 class simulation: public scenario {
 private:
@@ -10,7 +14,7 @@ private:
 
   /* Forces are calulated and directly put into bodies as acceleration
     - Acceleration is summed up for each relationship that a body has
-    - In order to reduce the ammount of calculation, the algorthim can be likened to graph theory, however in order to keep withn the constrains of memory, there is no storage matrix used as this would result in n^2 memory usage.
+    - In order to reduce the ammount of calculation, the algorthim can be visualised best using graph theory. In order to keep memory usage to a minimum, there is no storage matrix used as this would result in n^2 memory usage.
     - Pattern:
     + 0 1 2 3 4 5
     0 -

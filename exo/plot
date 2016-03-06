@@ -1,0 +1,11 @@
+set key off
+set size square
+
+set tics font ", 30"
+set xrange [-10:10]
+set yrange [-10:10]
+
+plot "output.txt" using 1:2 with lines lw 3 lt rgb "green", \
+     "output.txt" using 3:4 with lines lw 3 lt rgb "red"
+
+pause -1

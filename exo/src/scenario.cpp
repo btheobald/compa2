@@ -1,7 +1,13 @@
 #include "scenario.hpp"
 #include <iostream>
 scenario::scenario() {
-
+  lControl.UGC = 0.1;
+  lControl.IDT = 0.1;
+  lControl.IPF = 1;
+  lControl.collide = false;
+  lControl.paused = false;
+  lControl.exit = false;
+  lControl.exitAck = false;
 }
 
 scenario::~scenario() {

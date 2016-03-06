@@ -12,6 +12,9 @@ body::body(double p_m, double p_r, double p_pX, double p_pY, bool p_fixed) {
   vY = 0;
 
   fixed = p_fixed;
+
+  aX = 0;
+  aY = 0;
 }
 
 body::body(double p_m, double p_r, double p_pX, double p_pY, double p_vX, double p_vY) {
@@ -26,6 +29,9 @@ body::body(double p_m, double p_r, double p_pX, double p_pY, double p_vX, double
   vY = p_vY;
 
   fixed = false;
+
+  aX = 0;
+  aY = 0;
 }
 
 body::~body() {
