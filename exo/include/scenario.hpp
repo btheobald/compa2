@@ -36,8 +36,8 @@ public:
   virtual inline void updateLocalBodies(std::vector<body*> p_bodies) { bodies = p_bodies; };
   // Update local control storage
   virtual inline void updateLocalControl(control p_control) { lControl = p_control; };
-  // Get local body storage
+  // Get local body storage - Needed by interface
   virtual inline std::vector<body*> getLocalBodies(void) { return bodies; };
-  // Get local control storage
+  // Get local control storage - Needed by interface
   virtual inline control getLocalControl(void) { return lControl; };
 };

@@ -5,14 +5,14 @@
 class simulation: public scenario {
 private:
   double getComponentDistance(body* bA, body* bB, int xy);
-  double getVectorDistance(body* bA, body* bB);
+  double getVectorDistance(double dX, double dY);
 
   void resetAcceleration(void);
-  double calcAcceleration(body* bA, body* bB);
-  double calcAllAcceleration();
-  double calcAllCollisions();
-  double calcAllHalfVelocity();
-  double calcAllPosition();
+  void calcAcceleration(body* bA, body* bB);
+  void calcAllAcceleration();
+  void calcAllCollisions();
+  void calcAllHalfVelocity();
+  void calcAllPosition();
 
 public:
   void itteration();
