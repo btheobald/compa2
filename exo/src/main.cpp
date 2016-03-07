@@ -26,6 +26,7 @@ int main() {
   setRenderPointer(renderAP); // Provide render pointer to interface
   shared* sharedAP = new shared;
   setupDefaultScenario(renderAP, sharedAP);
+  gui* guiAP = new gui(1920*0.8, 1080*0.8);
 
   // Create simulation thread
   std::thread simThread(startup, sharedAP);
@@ -42,10 +43,14 @@ int main() {
     renderAP->updateBodies(sharedAP->getBodies());
     sharedAP->simWait.notify_all();
 
-    // Render Scene
+    // Render scene
     renderAP->drawScene();
 
+    // Apply camera transform and scale
     applyCamera(window);
+
+    // Draw GUI
+    TwDraw();
 
     // Display is double buffered to prevent screen tearing
     // Swap display buffers
