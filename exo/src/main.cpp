@@ -9,6 +9,7 @@
 #include "simulation.hpp"
 #include "render.hpp"
 #include "screen.hpp"
+#include "body.hpp"
 
 // Sim thread startup function
 void startup(shared* sharedAP);
@@ -57,7 +58,7 @@ int main() {
   //renderAP->addBody(new body(0.1, 1, 500, 0, 0, 0.44));
   //renderAP->addBody(new body(0.001, 0.5, 500, 10, 0.0317, 0.44));
 
-  renderAP->createSuperstructure(5000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 100.0, 150.0);
+  renderAP->createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 100.0, 600.0);
   //renderAP->addBody(new body(10, 1, 0, 0, true));
   //renderAP->addBody(new body(1, 1, 100, 0, 0, 0.105));
 
@@ -67,6 +68,7 @@ int main() {
   // Create simulation thread
   std::thread simThread(startup, sharedAP);
 
+  // Used by interface
   control main;
 
   // Main Runtime Loop
@@ -75,7 +77,6 @@ int main() {
     glClear(GL_COLOR_BUFFER_BIT);
 
     // Get update from shared
-    //std::cerr << "render from shared" << std::endl;
     renderAP->updateBodies(sharedAP->getBodies());
     sharedAP->simWait.notify_all();
     // Render Scene
@@ -87,12 +88,12 @@ int main() {
     glfwPollEvents();
   }
 
+  // Unpause and Exit
+  main.paused = false;
   main.exit = true;
+  // Control direct to shared
   sharedAP->updateControl(main);
-
-  renderAP->updateBodies(sharedAP->getBodies());
   sharedAP->simWait.notify_all();
-  std::cerr << "notified" << std::endl;
 
   // Program exit
   simThread.join();

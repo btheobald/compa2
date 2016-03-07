@@ -4,11 +4,45 @@
 #include <random>
 
 void render::drawBody(body* p_b) {
+  const int segments = 64;
+
+  double posX = p_b->pX;
+  double posY = p_b->pY;
+  double radius = p_b->r;
+
+  // Precalc
+  float theta = 2 * M_PI / segments;
+
+  // Factors
+  float tanFact = tan(theta);
+  float radFact = cos(theta);
+
+  float x = radius;
+  float y = 0;
+
+  // Plot Minimum Point.
   glBegin(GL_POINTS);
-    glVertex2f(p_b->pX, p_b->pY);
+    glVertex2f(posX, posY);
   glEnd();
 
+  // Plot Real Size
+  glBegin(GL_POLYGON);
+    for(int i = 0; i < segments; i++) {
+      // Output Vertex
+      glVertex2f(x + posX, y + posY);
 
+      // Copy previous coordinates
+      float lx = -y;
+      float ly =  x;
+
+      // Calculate Next Vertex
+      x += lx * tanFact;
+      y += ly * tanFact;
+
+      x *= radFact;
+      y *= radFact;
+    }
+  glEnd();
 }
 
 void render::applyCamera(void) {
