@@ -7,7 +7,6 @@ scenario::scenario() {
   lControl.collide = false;
   lControl.paused = false;
   lControl.exit = false;
-  lControl.exitAck = false;
 }
 
 scenario::~scenario() {

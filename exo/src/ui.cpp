@@ -1,8 +1,9 @@
 #include "ui.hpp"
 using namespace std;
 
-// Used by gui
+// Used by GUI
 static render* renderAP;
+static gui* guiAP;
 
 double vectX = 0, vectY = 0;
 double scaleFactor = 1;
@@ -111,7 +112,10 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
     if((action == GLFW_PRESS) & (button == 0)) {
       double aX, aY;
       getCoord(window, aX, aY);
-      std::cerr << renderAP->checkCoord(aX, aY, (1/scaleFactor)*10) << std::endl;
+      int id = renderAP->checkCoord(aX, aY, (1/scaleFactor)*10);
+      if(id != -1) {
+
+      }
     }
   }
 }
@@ -150,10 +154,13 @@ void setRenderPointer(render* p_renderAP) {
   renderAP = p_renderAP;
 }
 
-gui::gui(int p_wXRes, int p_wYRes) {
+gui::gui(render* renderAP, int p_wXRes, int p_wYRes) {
   // Init AntTweakBar
   TwInit(TW_OPENGL, NULL);
   TwWindowSize(p_wXRes, p_wYRes);
+
+  controlPointer = renderAP->returnControlPointer();
+  bodiesPointer = renderAP->returnBodiesPointer();
 
   simGUI = TwNewBar("Simulation");
   bodyGUI = TwNewBar("Body");
@@ -163,15 +170,13 @@ gui::gui(int p_wXRes, int p_wYRes) {
   setupBodyGUI(0);
   setupSystemGUI();
 
+  guiAP = this; // eh.
+
   // Set Globals
   TwDefine(" GLOBAL contained=true ");
   TwDefine(" GLOBAL fontresizable=false ");
   TwDefine(" GLOBAL fontstyle=default ");
   TwDefine(" GLOBAL buttonalign=center");
-}
-
-gui::~gui() {
-
 }
 
 void gui::setupSimGUI() {
@@ -187,16 +192,17 @@ void gui::setupSimGUI() {
   TwDefine(" 'Simulation' refresh=0.01");
 
   // Control
-  TwAddVarRW(simGUI, "ugcvar", TW_TYPE_DOUBLE,  &UGC_I,        " min=1E-12  max=10   step=0.01  precision=7   label='Gravitational Constant'  group=Control ");
-  TwAddVarRW(simGUI, "idtvar", TW_TYPE_DOUBLE,  &IDT_I,        " max=-1E9   max=1E15  step=0.01  precision=7   label='Itteration Delta Time'   group=Control ");
-  TwAddVarRW(simGUI, "collid", TW_TYPE_BOOLCPP, &doCollisions_I,"true=On      false=Off                       label='Simulate Collisions'     group=Control ");
+  TwAddVarRW(simGUI, "ugcvar", TW_TYPE_DOUBLE,  &controlPointer->UGC,        " min=1E-12  max=10   step=0.01  precision=7   label='Gravitational Constant'  group=Control ");
+  TwAddVarRW(simGUI, "idtvar", TW_TYPE_DOUBLE,  &controlPointer->IDT,        " max=-1E9   max=1E15  step=0.01  precision=7   label='Itteration Delta Time'   group=Control ");
+  TwAddVarRW(simGUI, "collid", TW_TYPE_BOOLCPP, &controlPointer->collide,"true=On      false=Off                       label='Simulate Collisions'     group=Control ");
   // Runtime
-  TwAddVarRW(simGUI, "paused", TW_TYPE_BOOLCPP, &paused_I,     " true=Paused  false=Running                   label='Run/Pause'               group=Runtime ");
-  TwAddVarRW(simGUI, "ipfvar", TW_TYPE_INT32,   &IPF_I,        " min=1      max=10000  step=1                 label='Itterations Per Frame'   group=Runtime ");
+  TwAddVarRW(simGUI, "paused", TW_TYPE_BOOLCPP, &controlPointer->paused,     " true=Paused  false=Running                   label='Run/Pause'               group=Runtime ");
+  TwAddVarRW(simGUI, "ipfvar", TW_TYPE_INT32,   &controlPointer->IPF,        " min=1      max=10000  step=1                 label='Itterations Per Frame'   group=Runtime ");
   // Statistics
-  TwAddVarRO(simGUI, "numbod", TW_TYPE_INT32,   &numBodies_I,  "                                              label='Number of Bodies'        group=Statistics ");
+//  TwAddVarRO(simGUI, "numbod", TW_TYPE_INT32,   &bodies.size(),  "                                              label='Number of Bodies'        group=Statistics ");
 }
-void gui::setupBodyGUI(int p_abID) {
+
+void gui::setupBodyGUI(int id) {
   // Color
   TwDefine(" 'Body' color='255 255 255' alpha=150 text=dark");
 
@@ -208,20 +214,18 @@ void gui::setupBodyGUI(int p_abID) {
   TwDefine(" 'Body' movable=false");
   TwDefine(" 'Body' refresh=0.01");
 
-  TwAddVarRO(bodyGUI, "bodyid", TW_TYPE_INT32, &abID_I,        "                                              label='Selected Body ID' ");
-  TwAddVarRW(bodyGUI, "bdmass", TW_TYPE_DOUBLE,  &abMass_I,    " min=1E-3  max=1E40 step=1      precision=7   label='Mass'                    group=Properties ");
-  TwAddVarRW(bodyGUI, "bdradi", TW_TYPE_DOUBLE,  &abRadius_I,  " min=1E-3  max=1E20 step=1      precision=7   label='Radius'                  group=Properties ");
-  TwAddVarRW(bodyGUI, "bdfixd", TW_TYPE_BOOLCPP, &abFixed_I,   " true=Yes      false=No                       label='Fixed'                   group=Properties ");
-  TwAddVarRW(bodyGUI, "bdcolr", TW_TYPE_COLOR3F, &abColor_I,   " coloralpha=false                             label='Colour'                  group=Properties ");
+  TwAddVarRO(bodyGUI, "bodyid", TW_TYPE_INT32, &id,        "                                              label='Selected Body ID' ");
+  TwAddVarRW(bodyGUI, "bdmass", TW_TYPE_DOUBLE,  &(*bodiesPointer)[id]->m,    " min=1E-3  max=1E40 step=1      precision=7   label='Mass'                    group=Properties ");
+  TwAddVarRW(bodyGUI, "bdradi", TW_TYPE_DOUBLE,  &(*bodiesPointer)[id]->r,  " min=1E-3  max=1E20 step=1      precision=7   label='Radius'                  group=Properties ");
+  TwAddVarRW(bodyGUI, "bdfixd", TW_TYPE_BOOLCPP, &(*bodiesPointer)[id]->fixed,   " true=Yes      false=No                       label='Fixed'                   group=Properties ");
+//  TwAddVarRW(bodyGUI, "bdcolr", TW_TYPE_COLOR3F, &bodies[cB]->,   " coloralpha=false                             label='Colour'                  group=Properties ");
 
-  TwAddVarRW(bodyGUI, "bdposx", TW_TYPE_DOUBLE, &abPositionX_I,     " min=-1E15 max=1E40 step=1 precision=7   label='X'                       group=Position ");
-  TwAddVarRW(bodyGUI, "bdposy", TW_TYPE_DOUBLE, &abPositionY_I,     " min=-1E15 max=1E15 step=1 precision=7   label='Y'                       group=Position ");
-  TwAddVarRW(bodyGUI, "bdvelx", TW_TYPE_DOUBLE, &abVelocityX_I,     " min=-3E8  max=3E8  step=1 precision=7   label='X'                       group=Velocity ");
-  TwAddVarRW(bodyGUI, "bdvely", TW_TYPE_DOUBLE, &abVelocityY_I,     " min=-3E8  max=3E8  step=1 precision=7   label='Y'                       group=Velocity ");
-  TwAddVarRO(bodyGUI, "bdaccx", TW_TYPE_DOUBLE, &abAccelerationX_I, "                           precision=7   label='X'                       group=Acceleration ");
-  TwAddVarRO(bodyGUI, "bdaccy", TW_TYPE_DOUBLE, &abAccelerationY_I, "                           precision=7   label='Y'                       group=Acceleration ");
-  TwAddVarRO(bodyGUI, "bdforx", TW_TYPE_DOUBLE, &abForceX_I,        "                           precision=7   label='X'                       group=Force ");
-  TwAddVarRO(bodyGUI, "bdfory", TW_TYPE_DOUBLE, &abForceY_I,        "                           precision=7   label='Y'                       group=Force ");
+  TwAddVarRW(bodyGUI, "bdposx", TW_TYPE_DOUBLE, &(*bodiesPointer)[id]->pX,     " min=-1E15 max=1E40 step=1 precision=7   label='X'                       group=Position ");
+  TwAddVarRW(bodyGUI, "bdposy", TW_TYPE_DOUBLE, &(*bodiesPointer)[id]->pY,     " min=-1E15 max=1E15 step=1 precision=7   label='Y'                       group=Position ");
+  TwAddVarRW(bodyGUI, "bdvelx", TW_TYPE_DOUBLE, &(*bodiesPointer)[id]->vX,     " min=-3E8  max=3E8  step=1 precision=7   label='X'                       group=Velocity ");
+  TwAddVarRW(bodyGUI, "bdvely", TW_TYPE_DOUBLE, &(*bodiesPointer)[id]->vY,     " min=-3E8  max=3E8  step=1 precision=7   label='Y'                       group=Velocity ");
+  TwAddVarRO(bodyGUI, "bdaccx", TW_TYPE_DOUBLE, &(*bodiesPointer)[id]->aX, "                           precision=7   label='X'                       group=Acceleration ");
+  TwAddVarRO(bodyGUI, "bdaccy", TW_TYPE_DOUBLE, &(*bodiesPointer)[id]->aY, "                           precision=7   label='Y'                       group=Acceleration ");
 
   TwAddButton(bodyGUI,"delbody", deleteBodyButton, this, " label='Delete Body' ");
 }
@@ -241,10 +245,6 @@ void gui::setupSystemGUI() {
   TwAddVarRW(systemGUI, "filenm", TW_TYPE_STDSTRING, &fileName,  " label='File Name' ");
   TwAddButton(systemGUI,"savebn", saveFileButton, this, " label='Save Scenario' ");
   TwAddButton(systemGUI,"loadbn", loadFileButton, this, " label='Load Scenario' ");
-}
-
-void gui::updateActiveID(int p_bodyID) {
-  if(p_bodyID != -1) abID_I = p_bodyID;
 }
 
 // Class External Callbacks

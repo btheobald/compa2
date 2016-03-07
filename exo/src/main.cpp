@@ -26,7 +26,8 @@ int main() {
   setRenderPointer(renderAP); // Provide render pointer to interface
   shared* sharedAP = new shared;
   setupDefaultScenario(renderAP, sharedAP);
-  gui* guiAP = new gui(1920*0.8, 1080*0.8);
+  gui* guiAP = new gui(renderAP, 1920*0.8, 1080*0.8);
+
 
   // Create simulation thread
   std::thread simThread(startup, sharedAP);
@@ -71,6 +72,7 @@ int main() {
   // Delete heap objects
   delete renderAP;
   delete sharedAP;
+  delete guiAP;
   // Terminate Libraries
   glfwDestroyWindow(window);
   glfwTerminate();
