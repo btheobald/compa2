@@ -7,6 +7,8 @@ void render::drawBody(body* p_b) {
   glBegin(GL_POINTS);
     glVertex2f(p_b->pX, p_b->pY);
   glEnd();
+
+
 }
 
 void render::applyCamera(void) {

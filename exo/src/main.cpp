@@ -57,7 +57,7 @@ int main() {
   //renderAP->addBody(new body(0.1, 1, 500, 0, 0, 0.44));
   //renderAP->addBody(new body(0.001, 0.5, 500, 10, 0.0317, 0.44));
 
-  renderAP->createSuperstructure(1000, 1000, 0.01, 10, 1, 0, 0, 0, 0, 100.0, 150.0);
+  renderAP->createSuperstructure(5000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 100.0, 150.0);
   //renderAP->addBody(new body(10, 1, 0, 0, true));
   //renderAP->addBody(new body(1, 1, 100, 0, 0, 0.105));
 
@@ -66,6 +66,8 @@ int main() {
 
   // Create simulation thread
   std::thread simThread(startup, sharedAP);
+
+  control main;
 
   // Main Runtime Loop
   while(!glfwWindowShouldClose(window)) {
@@ -84,6 +86,13 @@ int main() {
     // Poll and process events
     glfwPollEvents();
   }
+
+  main.exit = true;
+  sharedAP->updateControl(main);
+
+  renderAP->updateBodies(sharedAP->getBodies());
+  sharedAP->simWait.notify_all();
+  std::cerr << "notified" << std::endl;
 
   // Program exit
   simThread.join();
@@ -107,20 +116,21 @@ void startup(shared* sharedAP) {
 
   // Get new data from shared
   simAP->updateBodies(sharedAP->getBodies());
+  simAP->updateControl(sharedAP->getControl());
 
-  //while(1) {
-  for(int i = 0; i < 60; i++) {
-    //if(sharedAP->getTaken()) {
-      //std::cerr << "itteration" << std::endl;
-      simAP->itteration();
-      sharedAP->updateBodies(simAP->getBodies());
+  while(!simAP->getExit()) {
+    // Wait for data change
+    std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
+    sharedAP->simWait.wait(uniqueSimWaitMTX);
 
-      // Wait for data change
-      std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
-      sharedAP->simWait.wait(uniqueSimWaitMTX);
-    //}
+    // Do Itteration
+    simAP->itteration();
+    // Update shared bodies
+    sharedAP->updateBodies(simAP->getBodies());
+
+    // Update local control structure
+    simAP->updateControl(sharedAP->getControl());
   }
-  std::cerr << "Sim Exit" << std::endl;
   // Delete heap objects
   delete simAP;
 }
