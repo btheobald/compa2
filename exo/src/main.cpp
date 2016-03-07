@@ -10,6 +10,7 @@
 #include "render.hpp"
 #include "screen.hpp"
 #include "body.hpp"
+#include "ui.hpp"
 
 // Sim thread startup function
 void startup(shared* sharedAP);
@@ -42,6 +43,8 @@ int main() {
 
     // Render Scene
     renderAP->drawScene();
+
+    applyCamera(window);
 
     // Display is double buffered to prevent screen tearing
     // Swap display buffers
@@ -97,6 +100,7 @@ GLFWwindow* windowSetup() {
 
   glfwMakeContextCurrent(window);
   initDisplay(wXRes, wYRes);
+  setCallbacks(window);
 
   return window;
     /*                       */
@@ -126,7 +130,7 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
 // SIM THREAD CALL
 // Second thread, concurrent execution of simulation
 void startup(shared* sharedAP) {
-  // Sim Wait Control Mutex
+  // Sim wait control mutex
   std::mutex simWaitMTX;
 
   // Create access pointer
@@ -141,13 +145,18 @@ void startup(shared* sharedAP) {
     std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
     sharedAP->simWait.wait(uniqueSimWaitMTX);
 
-    // Do Itteration
-    simAP->itteration();
-    // Update shared bodies
-    sharedAP->updateBodies(simAP->getBodies());
-
     // Update local control structure
     simAP->updateControl(sharedAP->getControl());
+
+    if(!simAP->getPaused()) {
+      // Do itteration
+      simAP->itteration();
+      // Update shared bodies
+      sharedAP->updateBodies(simAP->getBodies());
+    } else {
+      // Get from shared if paused
+      simAP->updateBodies(sharedAP->getBodies());
+    }
   }
   // Delete heap objects
   delete simAP;

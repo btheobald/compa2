@@ -4,7 +4,7 @@
 #include <random>
 
 void render::drawBody(body* p_b) {
-  const int segments = 64;
+  const int segments = 32;
 
   double posX = p_b->pX;
   double posY = p_b->pY;
@@ -45,19 +45,7 @@ void render::drawBody(body* p_b) {
   glEnd();
 }
 
-void render::applyCamera(void) {
 
-}
-
-bool render::checkCloseTo(double x, double y, double cl) {
-  for(unsigned int i = 0; i < bodies.size(); i++) {
-    if(((bodies[i]->pX+cl < x) & (bodies[i]->pX-cl > x)) | ((bodies[i]->pY+cl < y) & (bodies[i]->pY-cl > y)))
-      return true;
-    else
-      return false;
-  }
-  return false;
-}
 
 void render::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass, double p_cRadius, double p_oRadius, double p_cPosX, double p_cPosY, double p_cVelX, double p_cVelY, double p_coSpacing, double p_sRadius) {
   // Create a Pseudo-random circular distribution of bodies around a central body.
