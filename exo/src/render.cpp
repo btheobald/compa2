@@ -100,8 +100,8 @@ void render::drawScene(void) {
   }
 }
 
-int rdr_obj::checkCoord(double x, double y, double ad) {
-  for(unsigned int i = 0; i < bodyStore.size(); i++) {
+int render::checkCoord(double x, double y, double ad) {
+  for(unsigned int i = 0; i < bodies.size(); i++) {
     if((x < bodies[i]->pX + (bodies[i]->r + ad))  &
        (x > bodies[i]->pX - (bodies[i]->r + ad))  &
        (y < bodies[i]->pY + (bodies[i]->r + ad))  &

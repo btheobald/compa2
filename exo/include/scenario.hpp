@@ -4,17 +4,15 @@
 #include <vector>
 
 // Control structure
-typedef struct control {
+typedef struct {
   // Simulation control
-  double UGC = 0.1; // Gravitational constant
-  double IDT = 0.1; // Itteration Δ time
-  double IPF = 1; // Itterations per frame
-  bool collide = false; // Simulate collisions
-  bool paused = false;  // Simulation paused
-
-  // Exit Management
-  bool exit = false;
-  bool exitAck = false;
+  double UGC;   // Gravitational constant
+  double IDT;   // Itteration Δ time
+  double IPF;   // Itterations per frame
+  
+  bool collide; // Simulate collisions
+  bool paused;  // Simulation paused
+  bool exit;    // Exit Management
 } control;
 
 class scenario {
