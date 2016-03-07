@@ -49,8 +49,9 @@ int main() {
   render* renderAP = new render;
   shared* sharedAP = new shared;
 
-  renderAP->addBody(new body(10, 1, 0, 0, true));
-  renderAP->addBody(new body(1, 1, 100, 0, 0, 0.105));
+  renderAP->createSuperstructure(100, 10000, 1, 10, 1, 0, 0, 0, 0, 100.0, 500.0);
+  //renderAP->addBody(new body(10, 1, 0, 0, true));
+  //renderAP->addBody(new body(1, 1, 100, 0, 0, 0.105));
 
   // Update shared area
   sharedAP->updateBodies(renderAP->getBodies());
@@ -82,6 +83,7 @@ int main() {
   delete renderAP;
   delete sharedAP;
   // Terminate Libraries
+  glfwDestroyWindow(window);
   glfwTerminate();
 
   return 0;
@@ -110,7 +112,7 @@ void startup(shared* sharedAP) {
       sharedAP->simWait.wait(uniqueSimWaitMTX);
     //}
   }
-  std::cerr << "Sim Egit xit" << std::endl;
+  std::cerr << "Sim Exit" << std::endl;
   // Delete heap objects
   delete simAP;
 }
