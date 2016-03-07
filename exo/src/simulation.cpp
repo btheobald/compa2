@@ -61,7 +61,7 @@ void simulation::calcAllAcceleration(void) {
 
 void simulation::calcAllCollisions(void) {
   for (unsigned int bA = 0; bA < bodies.size(); bA++) {
-    for (unsigned int bB = bA + 1; bB < bodies.size(); bB++) {
+    for (unsigned int bB = bA+1; bB < bodies.size(); bB++) {
       double xDist = getComponentDistance(bodies[bA], bodies[bB], 0);
       double yDist = getComponentDistance(bodies[bA], bodies[bB], 1);
       double vDist = getVectorDistance(xDist, yDist);
