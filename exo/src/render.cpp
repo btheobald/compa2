@@ -4,7 +4,6 @@
 #include <random>
 
 void render::drawBody(body* p_b) {
-  glPointSize(2);
   glBegin(GL_POINTS);
     glVertex2f(p_b->pX, p_b->pY);
   glEnd();
@@ -12,6 +11,16 @@ void render::drawBody(body* p_b) {
 
 void render::applyCamera(void) {
 
+}
+
+bool render::checkCloseTo(double x, double y, double cl) {
+  for(unsigned int i = 0; i < bodies.size(); i++) {
+    if(((bodies[i]->pX+cl < x) & (bodies[i]->pX-cl > x)) | ((bodies[i]->pY+cl < y) & (bodies[i]->pY-cl > y)))
+      return true;
+    else
+      return false;
+  }
+  return false;
 }
 
 void render::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass, double p_cRadius, double p_oRadius, double p_cPosX, double p_cPosY, double p_cVelX, double p_cVelY, double p_coSpacing, double p_sRadius) {
@@ -31,8 +40,9 @@ void render::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass
   //int bodyOffset = bodyStore.size() - 1;
   for(int bIDC = 0; bIDC < p_soBodies; bIDC++) {
     // Ensure that bodies are not too close to center.
-    do tempRand = pos(gen) - p_sRadius; while((tempRand < p_coSpacing) & (tempRand > -p_coSpacing));
-
+    do {
+      tempRand = pos(gen) - p_sRadius;
+    } while((tempRand < p_coSpacing) & (tempRand > -p_coSpacing));
     // Map to Circle
     tempCirX = p_cPosX+(tempRand * std::cos(2 * M_PI * tempRand));
     tempCirY = p_cPosY+(tempRand * std::sin(2 * M_PI * tempRand));

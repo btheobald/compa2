@@ -49,7 +49,15 @@ int main() {
   render* renderAP = new render;
   shared* sharedAP = new shared;
 
-  renderAP->createSuperstructure(100, 10000, 1, 10, 1, 0, 0, 0, 0, 100.0, 500.0);
+  // Precessing Orbits
+  //renderAP->addBody(new body(10000, 10,  100, 0, 0,  1.6));
+  //renderAP->addBody(new body(10000, 10, -100, 0, 0, -1.6));
+
+  //renderAP->addBody(new body(1000, 10, 0, 0, 0, 0));
+  //renderAP->addBody(new body(0.1, 1, 500, 0, 0, 0.44));
+  //renderAP->addBody(new body(0.001, 0.5, 500, 10, 0.0317, 0.44));
+
+  renderAP->createSuperstructure(1000, 1000, 0.01, 10, 1, 0, 0, 0, 0, 100.0, 150.0);
   //renderAP->addBody(new body(10, 1, 0, 0, true));
   //renderAP->addBody(new body(1, 1, 100, 0, 0, 0.105));
 
@@ -101,7 +109,7 @@ void startup(shared* sharedAP) {
   simAP->updateBodies(sharedAP->getBodies());
 
   //while(1) {
-  for(int i = 0; i < 600; i++) {
+  for(int i = 0; i < 60; i++) {
     //if(sharedAP->getTaken()) {
       //std::cerr << "itteration" << std::endl;
       simAP->itteration();

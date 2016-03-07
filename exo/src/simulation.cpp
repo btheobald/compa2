@@ -13,7 +13,7 @@ double simulation::getComponentDistance(body* bA, body* bB, int xy) {
 
 double simulation::getVectorDistance(double p_dX, double p_dY) {
   // Pythagoras - a^2 + b^2 = c^2
-  return std::sqrt(std::fabs(p_dX*p_dX) + std::fabs(p_dY*p_dY));
+  return std::sqrt(std::abs(p_dX*p_dX) + std::abs(p_dY*p_dY));
 }
 
 void simulation::resetAllAcceleration(void) {
@@ -31,10 +31,10 @@ void simulation::calcAcceleration(body* bA, body* bB) {
   double dV = getVectorDistance(dX, dY);
 
   // F=GmM/(r^3) - Pre-component force
-  double fP = (lControl.UGC * bA->m * bB->m) / (dV*dV*dV);
+  double fP = -(lControl.UGC * bA->m * bB->m) / (dV*dV*dV);
   // Component Forces
-  double fX = -fP *  dX;
-  double fY = -fP *  dY;
+  double fX = fP * dX;
+  double fY = fP * dY;
 
   // a=F/m - Set acceleration to bodies
   // Body A
@@ -49,17 +49,45 @@ void simulation::calcAllAcceleration(void) {
   resetAllAcceleration(); // Set all accelerations to 0;
   for(unsigned int x = 0; x < bodies.size(); x++) {
     // Evaluate bottom left of calculation matrix
-    for(unsigned int y = x; y < bodies.size(); y++) {
+    for(unsigned int y = x+1; y < bodies.size(); y++) {
       // Ignore same body relationship
-      if(x != y) {
-        calcAcceleration(bodies[x], bodies[y]);
-      }
+      //if(x != y) {
+      //std::cerr << x << " " << y << std::endl;
+      calcAcceleration(bodies[x], bodies[y]);
+      //}
     }
   }
 }
 
 void simulation::calcAllCollisions(void) {
-  // TODO: implement collisions
+  for (unsigned int bA = 0; bA < bodies.size(); bA++) {
+    for (unsigned int bB = bA + 1; bB < bodies.size(); bB++) {
+      double xDist = getComponentDistance(bodies[bA], bodies[bB], 0);
+      double yDist = getComponentDistance(bodies[bA], bodies[bB], 1);
+      double vDist = getVectorDistance(xDist, yDist);
+
+      if(bodies[bA]->r+bodies[bB]->r > vDist) {
+        // Body A Becomes New Body
+        // Add Together Areas
+        bodies[bA]->r = sqrt(pow(bodies[bA]->r,2)+pow(bodies[bB]->r,2));
+
+        // Add Together Masses
+        double totalMass = bodies[bA]->m + bodies[bB]->m;
+
+        // Get Weighted Mean Position XY
+        bodies[bA]->pX = ((bodies[bA]->pX*bodies[bA]->m) + (bodies[bB]->pX*bodies[bB]->m)) / totalMass;
+        bodies[bA]->pY = ((bodies[bA]->pY*bodies[bA]->m) + (bodies[bB]->pY*bodies[bB]->m)) / totalMass;
+
+        // Calculate New Velocity through Inelastic Collision (mv+Mv)/(m+M) = v XY
+        bodies[bA]->vX = ((bodies[bA]->calcMomentum(0)) + bodies[bB]->calcMomentum(0)) / totalMass;
+        bodies[bA]->vY = ((bodies[bA]->calcMomentum(1)) + bodies[bB]->calcMomentum(1)) / totalMass;
+        bodies[bA]->m = totalMass;
+
+        // Delete Body B
+        delBody(bB);
+      }
+    }
+  }
 }
 
 void simulation::calcAllHalfVelocity(void) {
@@ -77,6 +105,8 @@ void simulation::calcAllPosition(void) {
 }
 
 void simulation::itteration(void) {
+  // Acceleration
+  calcAllAcceleration();
   // 1/2 Velocity
   calcAllHalfVelocity();
   // Position
