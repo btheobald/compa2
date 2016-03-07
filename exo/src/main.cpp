@@ -58,7 +58,7 @@ int main() {
   //renderAP->addBody(new body(0.1, 1, 500, 0, 0, 0.44));
   //renderAP->addBody(new body(0.001, 0.5, 500, 10, 0.0317, 0.44));
 
-  renderAP->createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 100.0, 600.0);
+  renderAP->createSuperstructure(1000, 10000, 0.1, 20, 1, 0, 0, 0, 0, 100.0, 600.0);
   //renderAP->addBody(new body(10, 1, 0, 0, true));
   //renderAP->addBody(new body(1, 1, 100, 0, 0, 0.105));
 
