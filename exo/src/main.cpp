@@ -23,6 +23,7 @@ int main() {
 
   // Create access pointers
   render* renderAP = new render;
+  setRenderPointer(renderAP); // Provide render pointer to interface
   shared* sharedAP = new shared;
   setupDefaultScenario(renderAP, sharedAP);
 

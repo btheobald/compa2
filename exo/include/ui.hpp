@@ -4,13 +4,14 @@
 #include <cmath>
 #include <GL/glu.h>
 #include "AntTweakBar.h"
+#include "render.hpp"
 
 // Custom Inputs
 bool getMouseHeld(GLFWwindow* window, int button);
 void moveCamera(GLFWwindow* window, double cursorX, double cursorY);
 void zoomCamera(double change);
 void applyCamera(GLFWwindow* window);
-void getCoord(double cX, double cY, double &aX, double &aY);
+void getCoord(GLFWwindow* window, double &aX, double &aY);
 
 // Mouse Callback
 void cursorPosCallback(GLFWwindow* window, double cursorX, double cursorY);
@@ -22,3 +23,4 @@ void windowResizeCallback(GLFWwindow* window, int width, int height);
 
 // Callback Setup
 void setCallbacks(GLFWwindow* window);
+void setRenderPointer(render* p_renderAP);

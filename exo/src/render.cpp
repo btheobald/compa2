@@ -45,8 +45,6 @@ void render::drawBody(body* p_b) {
   glEnd();
 }
 
-
-
 void render::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass, double p_cRadius, double p_oRadius, double p_cPosX, double p_cPosY, double p_cVelX, double p_cVelY, double p_coSpacing, double p_sRadius) {
   // Create a Pseudo-random circular distribution of bodies around a central body.
 

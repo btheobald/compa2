@@ -1,6 +1,8 @@
 #include "ui.hpp"
 using namespace std;
 
+static render* renderAP;
+
 double vectX = 0, vectY = 0;
 double scaleFactor = 1;
 double responsiveness = 2;
@@ -61,21 +63,27 @@ void zoomCamera(double change){
 }
 
 // Transforms window system coordinates to world space
-void getCoord(double cX, double cY, double &aX, double &aY) {
+void getCoord(GLFWwindow* window, double &aX, double &aY) {
+  double mX, mY; // Window system mouse
+  glfwGetCursorPos(window, &mX, &mY);
+
+  // Initialise local display matrix storage
   GLint viewport[4];
   GLdouble modelview[16];
   GLdouble projection[16];
-
-  // Z is not important here
-  GLdouble ignoreZ;
-
+  // Get current display matricies
   glGetDoublev(GL_MODELVIEW_MATRIX, modelview);
   glGetDoublev(GL_PROJECTION_MATRIX, projection);
   glGetIntegerv(GL_VIEWPORT, viewport);
 
-  cY = viewport[3] - cY;
+  // Flip window y
+  mY = viewport[3] - mY;
 
-  gluUnProject(cX, cY, 0, modelview, projection, viewport, &aX, &aY, &ignoreZ);
+  // Z is not important here, variable is required
+  GLdouble ignoreZ;
+
+  // Project mouse to world
+  gluUnProject(mX, mY, 0, modelview, projection, viewport, &aX, &aY, &ignoreZ);
 }
 
 // Applys camera transform and scale
@@ -96,10 +104,13 @@ void cursorPosCallback(GLFWwindow* window, double cursorX, double cursorY) {
     moveCamera(window, cursorX, cursorY);
   }
 }
+
 void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
   if(!TwEventMouseButtonGLFW(button, action)) {
     if((action == GLFW_PRESS) & (button == 0)) {
-
+      double aX, aY;
+      getCoord(window, aX, aY);
+      std::cerr << renderAP->checkCoord(aX, aY, (1/scaleFactor)*10) << std::endl;
     }
   }
 }
@@ -132,4 +143,8 @@ void setCallbacks(GLFWwindow* window) {
 
   // Resize Window
   glfwSetWindowSizeCallback(window, windowResizeCallback);
+}
+
+void setRenderPointer(render* p_renderAP) {
+  renderAP = p_renderAP;
 }
