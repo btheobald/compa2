@@ -1,9 +1,16 @@
 #include "ui.hpp"
 using namespace std;
 
+// GUI Pointers
+TwBar* simGUI;
+TwBar* bodyGUI;
 // Used by GUI
-static render* renderAP;
-static gui* guiAP;
+static render* g_renderAP;
+// Render Data Access Pointers
+control ifControl;
+std::vector<body*> ifBodies;
+// Active Body
+int activeBody = 1;
 
 double vectX = 0, vectY = 0;
 double scaleFactor = 1;
@@ -112,9 +119,9 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
     if((action == GLFW_PRESS) & (button == 0)) {
       double aX, aY;
       getCoord(window, aX, aY);
-      int id = renderAP->checkCoord(aX, aY, (1/scaleFactor)*10);
+      int id = g_renderAP->checkCoord(aX, aY, (1/scaleFactor)*10);
       if(id != -1) {
-
+        activeBody = id;
       }
     }
   }
@@ -150,27 +157,26 @@ void setCallbacks(GLFWwindow* window) {
   glfwSetWindowSizeCallback(window, windowResizeCallback);
 }
 
-void setRenderPointer(render* p_renderAP) {
-  renderAP = p_renderAP;
-}
+void setupGUI(GLFWwindow* window, render* renderAP) {
+  // Get GLFW window size
+  int wX, wY;
+  glfwGetWindowSize(window, &wX, &wY);
 
-gui::gui(render* renderAP, int p_wXRes, int p_wYRes) {
+  // Set global render access pointer
+  g_renderAP = renderAP;
+
   // Init AntTweakBar
   TwInit(TW_OPENGL, NULL);
-  TwWindowSize(p_wXRes, p_wYRes);
+  TwWindowSize(wX, wY);
 
-  controlPointer = renderAP->returnControlPointer();
-  bodiesPointer = renderAP->returnBodiesPointer();
+  ifControl = g_renderAP->getControl();
+  ifBodies = g_renderAP->getBodies();
 
   simGUI = TwNewBar("Simulation");
   bodyGUI = TwNewBar("Body");
-  systemGUI = TwNewBar("System");
 
   setupSimGUI();
-  setupBodyGUI(0);
-  setupSystemGUI();
-
-  guiAP = this; // eh.
+  setupBodyGUI();
 
   // Set Globals
   TwDefine(" GLOBAL contained=true ");
@@ -179,7 +185,7 @@ gui::gui(render* renderAP, int p_wXRes, int p_wYRes) {
   TwDefine(" GLOBAL buttonalign=center");
 }
 
-void gui::setupSimGUI() {
+void setupSimGUI() {
   // Color
   TwDefine(" 'Simulation' color='255 255 255' alpha=150 text=dark");
 
@@ -192,17 +198,17 @@ void gui::setupSimGUI() {
   TwDefine(" 'Simulation' refresh=0.01");
 
   // Control
-  TwAddVarRW(simGUI, "ugcvar", TW_TYPE_DOUBLE,  &controlPointer->UGC,        " min=1E-12  max=10   step=0.01  precision=7   label='Gravitational Constant'  group=Control ");
-  TwAddVarRW(simGUI, "idtvar", TW_TYPE_DOUBLE,  &controlPointer->IDT,        " max=-1E9   max=1E15  step=0.01  precision=7   label='Itteration Delta Time'   group=Control ");
-  TwAddVarRW(simGUI, "collid", TW_TYPE_BOOLCPP, &controlPointer->collide,"true=On      false=Off                       label='Simulate Collisions'     group=Control ");
+  TwAddVarRW(simGUI, "ugcvar", TW_TYPE_DOUBLE,  &ifControl.UGC,        " min=1E-12  max=10   step=0.01  precision=7   label='Gravitational Constant'  group=Control ");
+  TwAddVarRW(simGUI, "idtvar", TW_TYPE_DOUBLE,  &ifControl.IDT,        " max=-1E9   max=1E15  step=0.01  precision=7   label='Itteration Delta Time'   group=Control ");
+  TwAddVarRW(simGUI, "collid", TW_TYPE_BOOLCPP, &ifControl.collide,"true=On      false=Off                       label='Simulate Collisions'     group=Control ");
   // Runtime
-  TwAddVarRW(simGUI, "paused", TW_TYPE_BOOLCPP, &controlPointer->paused,     " true=Paused  false=Running                   label='Run/Pause'               group=Runtime ");
-  TwAddVarRW(simGUI, "ipfvar", TW_TYPE_INT32,   &controlPointer->IPF,        " min=1      max=10000  step=1                 label='Itterations Per Frame'   group=Runtime ");
+  TwAddVarRW(simGUI, "paused", TW_TYPE_BOOLCPP, &ifControl.paused,     " true=Paused  false=Running                   label='Run/Pause'               group=Runtime ");
+  TwAddVarRW(simGUI, "ipfvar", TW_TYPE_INT32,   &ifControl.IPF,        " min=1      max=10000  step=1                 label='Itterations Per Frame'   group=Runtime ");
   // Statistics
 //  TwAddVarRO(simGUI, "numbod", TW_TYPE_INT32,   &bodies.size(),  "                                              label='Number of Bodies'        group=Statistics ");
 }
 
-void gui::setupBodyGUI(int id) {
+void setupBodyGUI() {
   // Color
   TwDefine(" 'Body' color='255 255 255' alpha=150 text=dark");
 
@@ -214,69 +220,24 @@ void gui::setupBodyGUI(int id) {
   TwDefine(" 'Body' movable=false");
   TwDefine(" 'Body' refresh=0.01");
 
-  TwAddVarRO(bodyGUI, "bodyid", TW_TYPE_INT32, &id,        "                                              label='Selected Body ID' ");
-  TwAddVarRW(bodyGUI, "bdmass", TW_TYPE_DOUBLE,  &(*bodiesPointer)[id]->m,    " min=1E-3  max=1E40 step=1      precision=7   label='Mass'                    group=Properties ");
-  TwAddVarRW(bodyGUI, "bdradi", TW_TYPE_DOUBLE,  &(*bodiesPointer)[id]->r,  " min=1E-3  max=1E20 step=1      precision=7   label='Radius'                  group=Properties ");
-  TwAddVarRW(bodyGUI, "bdfixd", TW_TYPE_BOOLCPP, &(*bodiesPointer)[id]->fixed,   " true=Yes      false=No                       label='Fixed'                   group=Properties ");
+  TwAddVarRO(bodyGUI, "bodyid", TW_TYPE_INT32, &activeBody,        "                                              label='Selected Body ID' ");
+  TwAddVarRW(bodyGUI, "bdmass", TW_TYPE_DOUBLE,  &ifBodies[activeBody]->m,    " min=1E-3  max=1E40 step=1      precision=7   label='Mass'                    group=Properties ");
+  TwAddVarRW(bodyGUI, "bdradi", TW_TYPE_DOUBLE,  &ifBodies[activeBody]->r,  " min=1E-3  max=1E20 step=1      precision=7   label='Radius'                  group=Properties ");
+  TwAddVarRW(bodyGUI, "bdfixd", TW_TYPE_BOOLCPP, &ifBodies[activeBody]->fixed,   " true=Yes      false=No                       label='Fixed'                   group=Properties ");
 //  TwAddVarRW(bodyGUI, "bdcolr", TW_TYPE_COLOR3F, &bodies[cB]->,   " coloralpha=false                             label='Colour'                  group=Properties ");
 
-  TwAddVarRW(bodyGUI, "bdposx", TW_TYPE_DOUBLE, &(*bodiesPointer)[id]->pX,     " min=-1E15 max=1E40 step=1 precision=7   label='X'                       group=Position ");
-  TwAddVarRW(bodyGUI, "bdposy", TW_TYPE_DOUBLE, &(*bodiesPointer)[id]->pY,     " min=-1E15 max=1E15 step=1 precision=7   label='Y'                       group=Position ");
-  TwAddVarRW(bodyGUI, "bdvelx", TW_TYPE_DOUBLE, &(*bodiesPointer)[id]->vX,     " min=-3E8  max=3E8  step=1 precision=7   label='X'                       group=Velocity ");
-  TwAddVarRW(bodyGUI, "bdvely", TW_TYPE_DOUBLE, &(*bodiesPointer)[id]->vY,     " min=-3E8  max=3E8  step=1 precision=7   label='Y'                       group=Velocity ");
-  TwAddVarRO(bodyGUI, "bdaccx", TW_TYPE_DOUBLE, &(*bodiesPointer)[id]->aX, "                           precision=7   label='X'                       group=Acceleration ");
-  TwAddVarRO(bodyGUI, "bdaccy", TW_TYPE_DOUBLE, &(*bodiesPointer)[id]->aY, "                           precision=7   label='Y'                       group=Acceleration ");
+  TwAddVarRW(bodyGUI, "bdposx", TW_TYPE_DOUBLE, &ifBodies[activeBody]->pX,     " min=-1E15 max=1E40 step=1 precision=7   label='X'                       group=Position ");
+  TwAddVarRW(bodyGUI, "bdposy", TW_TYPE_DOUBLE, &ifBodies[activeBody]->pY,     " min=-1E15 max=1E15 step=1 precision=7   label='Y'                       group=Position ");
+  TwAddVarRW(bodyGUI, "bdvelx", TW_TYPE_DOUBLE, &ifBodies[activeBody]->vX,     " min=-3E8  max=3E8  step=1 precision=7   label='X'                       group=Velocity ");
+  TwAddVarRW(bodyGUI, "bdvely", TW_TYPE_DOUBLE, &ifBodies[activeBody]->vY,     " min=-3E8  max=3E8  step=1 precision=7   label='Y'                       group=Velocity ");
+  TwAddVarRO(bodyGUI, "bdaccx", TW_TYPE_DOUBLE, &ifBodies[activeBody]->aX, "                           precision=7   label='X'                       group=Acceleration ");
+  TwAddVarRO(bodyGUI, "bdaccy", TW_TYPE_DOUBLE, &ifBodies[activeBody]->aY, "                           precision=7   label='Y'                       group=Acceleration ");
 
-  TwAddButton(bodyGUI,"delbody", deleteBodyButton, this, " label='Delete Body' ");
-}
-void gui::setupSystemGUI() {
-  // Color
-  TwDefine(" 'System' color='255 255 255' alpha=150 text=dark");
-
-  // Size
-  TwDefine(" 'System' size='300 90'");
-  TwDefine(" 'System' position='0 514'");
-  TwDefine(" 'System' resizable=false ");
-  TwDefine(" 'System' valueswidth=100 ");
-  TwDefine(" 'System' movable=false");
-  TwDefine(" 'System' refresh=0.01");
-
-  TwCopyStdStringToClientFunc(handleFilename);
-  TwAddVarRW(systemGUI, "filenm", TW_TYPE_STDSTRING, &fileName,  " label='File Name' ");
-  TwAddButton(systemGUI,"savebn", saveFileButton, this, " label='Save Scenario' ");
-  TwAddButton(systemGUI,"loadbn", loadFileButton, this, " label='Load Scenario' ");
-}
-
-// Class External Callbacks
-void TW_CALL saveFileButton(void *cData) {
-  gui *iface = static_cast<gui*>(cData); // scene pointer is stored in clientData
-  std::cerr << "Saving File: " << iface->fileName << std::endl;
-}
-
-void TW_CALL loadFileButton(void *cData) {
-  gui *iface = static_cast<gui*>(cData); // scene pointer is stored in clientData
-  std::cerr << "Loading File: " << iface->fileName << std::endl;
-}
-
-void TW_CALL handleFilename(std::string& destinationClientString, const std::string& sourceLibraryString) {
-  // Copy the content of souceString handled by the AntTweakBar library
-  destinationClientString = sourceLibraryString;
-
-  if(sourceLibraryString == "") {
-    destinationClientString = "Default.sav";
-  } else {
-    for(int itr = destinationClientString.size(); itr > 0; itr--) {
-      if(sourceLibraryString[itr] == '.') {
-        destinationClientString = destinationClientString.erase(itr, destinationClientString.size());
-        itr = 0;
-      }
-    }
-    destinationClientString = destinationClientString+".sav";
-  }
+  //TwAddButton(bodyGUI,"delbody", deleteBodyButton, this, " label='Delete Body' ");
 }
 
 void TW_CALL deleteBodyButton(void *cData) {
-  gui *iface = static_cast<gui*>(cData);
+
 }
 
 void TW_CALL newBodyButton(void *cData) {

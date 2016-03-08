@@ -26,39 +26,15 @@ void windowResizeCallback(GLFWwindow* window, int width, int height);
 
 // Callback Setup
 void setCallbacks(GLFWwindow* window);
-void setRenderPointer(render* p_renderAP);
 
-// AntTweakBar
-class gui {
-  private:
-    // Windows
-    TwBar* simGUI;
-    TwBar* bodyGUI;
-    TwBar* systemGUI;
-
-    // Render Access Pointers
-    control* controlPointer;
-    std::vector<body*>* bodiesPointer;
-
-    // Sim and System gui Setup, Will be called once at start.
-    void setupSimGUI();
-    void setupSystemGUI();
-
-  public:
-    gui(render* renderAP, int p_wXRes, int p_wYRes);
-
-    void setupBodyGUI(int id);
-
-    std::string fileName = "Default.sav";
-};
+// Sim and System gui Setup, Will be called once at start.
+void setupGUI(GLFWwindow* window, render* renderAP);
+void setupSimGUI();
+void setupBodyGUI();
 
 // Class External Callbacks
-void TW_CALL saveFileButton(void *cData);
-void TW_CALL loadFileButton(void *cData);
-
-// Filename should always have a string and must have a .sav file extension.
-void TW_CALL handleFilename(std::string& destinationClientString, const std::string& sourceLibraryString);
+void TW_CALL saveFileButton();
+void TW_CALL loadFileButton();
 
 void TW_CALL deleteBodyButton(void *cData);
 void TW_CALL newBodyButton(void *cData);
-void TW_CALL newSuperStructureButton(void *cData);
