@@ -1,6 +1,9 @@
 #include "ui.hpp"
 using namespace std;
 
+// Render access pointer
+render* g_RenderAP;
+
 // GUI pointers
 TwBar* simGUI;
 TwBar* bodyGUI;
@@ -115,9 +118,10 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
     if((action == GLFW_PRESS) & (button == 0)) {
       double aX, aY;
       getCoord(window, aX, aY);
-      int id = 0;//= g_renderAP->checkCoord(aX, aY, (1/scaleFactor)*10);
+      int id = g_RenderAP->checkCoord(aX, aY, (1/scaleFactor)*10);
       if(id != -1) {
         activeID = id;
+        updateUI(g_RenderAP);
       }
     }
   }
@@ -154,6 +158,9 @@ void setCallbacks(GLFWwindow* window) {
 }
 
 void setupGUI(GLFWwindow* window, render* renderAP) {
+  // Set global render pointer
+  g_RenderAP = renderAP;
+
   // Get GLFW window size
   int wX, wY;
   glfwGetWindowSize(window, &wX, &wY);
@@ -198,7 +205,7 @@ void setupSimGUI(render* renderAP) {
   //TwAddVarRO(simGUI, "numbod", TW_TYPE_INT32,   &numberOfBodies,  "                                         label='Number of Bodies'        group=Statistics ");
 }
 
-void updateUI(render* renderAP, int abID) {
+void updateUI(render* renderAP) {
   delete activeBody;
   // Update Body Interface
   activeBody = new body(renderAP->pBodies[activeID]);
@@ -207,7 +214,7 @@ void updateUI(render* renderAP, int abID) {
 void setupBodyGUI(render* renderAP) {
   // Set Default Body
   activeID = 0;
-  updateUI(renderAP, activeID);
+  updateUI(renderAP);
 
   // Color
   TwDefine(" 'Body' color='255 255 255' alpha=150 text=dark");

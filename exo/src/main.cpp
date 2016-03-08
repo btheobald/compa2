@@ -41,10 +41,17 @@ int main() {
 
     sharedAP->updateControl(renderAP->getControl());
 
-    updateUI(renderAP, 0);
+    updateUI(renderAP);
 
-    // Get update from shared
-    renderAP->updateBodies(sharedAP->getBodies());
+    if(renderAP->getPaused()) {
+      // Send update to shared
+      sharedAP->updateBodies(renderAP->getBodies());
+    } else {
+      // Get update from shared
+      renderAP->updateBodies(sharedAP->getBodies());
+    }
+
+    // Wake sim thread
     sharedAP->simWait.notify_all();
 
     // Render scene
@@ -131,8 +138,8 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
 
   // Update local
   renderAP->updateControl(temp);
-  //renderAP->createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 100.0, 500.0);
-  renderAP->addBody(new body(10, 1, 0, 0, 0, 0.1));
+  renderAP->createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 100.0, 500.0);
+  //renderAP->addBody(new body(10, 1, 0, 0, 0, 0.1));
 
   // Update shared area
   sharedAP->updateControl(renderAP->getControl());
