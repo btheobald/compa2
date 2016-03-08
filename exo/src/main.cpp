@@ -39,6 +39,10 @@ int main() {
     // Clear screen before drawing
     glClear(GL_COLOR_BUFFER_BIT);
 
+    sharedAP->updateControl(renderAP->getControl());
+
+    updateUI(renderAP, 0);
+
     // Get update from shared
     renderAP->updateBodies(sharedAP->getBodies());
     sharedAP->simWait.notify_all();
@@ -127,7 +131,8 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
 
   // Update local
   renderAP->updateControl(temp);
-  renderAP->createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 100.0, 500.0);
+  //renderAP->createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 100.0, 500.0);
+  renderAP->addBody(new body(10, 1, 0, 0, 0, 0.1));
 
   // Update shared area
   sharedAP->updateControl(renderAP->getControl());
@@ -151,8 +156,6 @@ void startup(shared* sharedAP) {
     // Wait for data change
     std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
     sharedAP->simWait.wait(uniqueSimWaitMTX);
-
-    updateUI();
 
     // Update local control structure
     simAP->updateControl(sharedAP->getControl());

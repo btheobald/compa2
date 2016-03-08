@@ -27,12 +27,12 @@ void windowResizeCallback(GLFWwindow* window, int width, int height);
 // Callback Setup
 void setCallbacks(GLFWwindow* window);
 
-void updateUI();
+void updateUI(render* renderAP, int abID);
 
 // Sim and System gui Setup, Will be called once at start.
 void setupGUI(GLFWwindow* window, render* renderAP);
-void setupSimGUI();
-void setupBodyGUI();
+void setupSimGUI(render* renderAP);
+void setupBodyGUI(render* renderAP);
 
 // Class External Callbacks
 void TW_CALL saveFileButton();
