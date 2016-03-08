@@ -152,6 +152,8 @@ void startup(shared* sharedAP) {
     std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
     sharedAP->simWait.wait(uniqueSimWaitMTX);
 
+    updateUI();
+
     // Update local control structure
     simAP->updateControl(sharedAP->getControl());
 

@@ -27,6 +27,8 @@ void windowResizeCallback(GLFWwindow* window, int width, int height);
 // Callback Setup
 void setCallbacks(GLFWwindow* window);
 
+void updateUI();
+
 // Sim and System gui Setup, Will be called once at start.
 void setupGUI(GLFWwindow* window, render* renderAP);
 void setupSimGUI();

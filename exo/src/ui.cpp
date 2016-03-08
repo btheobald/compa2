@@ -1,16 +1,9 @@
 #include "ui.hpp"
 using namespace std;
 
-// GUI Pointers
+// GUI pointers
 TwBar* simGUI;
 TwBar* bodyGUI;
-// Used by GUI
-static render* g_renderAP;
-// Render Data Access Pointers
-control ifControl;
-std::vector<body*> ifBodies;
-// Active Body
-int activeBody = 1;
 
 double vectX = 0, vectY = 0;
 double scaleFactor = 1;
@@ -70,7 +63,6 @@ void zoomCamera(double change){
   }
   //std::cerr << scaleFactor << std::endl;
 }
-
 // Transforms window system coordinates to world space
 void getCoord(GLFWwindow* window, double &aX, double &aY) {
   double mX, mY; // Window system mouse
@@ -119,9 +111,9 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
     if((action == GLFW_PRESS) & (button == 0)) {
       double aX, aY;
       getCoord(window, aX, aY);
-      int id = g_renderAP->checkCoord(aX, aY, (1/scaleFactor)*10);
+      int id = 0;//= g_renderAP->checkCoord(aX, aY, (1/scaleFactor)*10);
       if(id != -1) {
-        activeBody = id;
+
       }
     }
   }
@@ -162,15 +154,9 @@ void setupGUI(GLFWwindow* window, render* renderAP) {
   int wX, wY;
   glfwGetWindowSize(window, &wX, &wY);
 
-  // Set global render access pointer
-  g_renderAP = renderAP;
-
   // Init AntTweakBar
   TwInit(TW_OPENGL, NULL);
   TwWindowSize(wX, wY);
-
-  ifControl = g_renderAP->getControl();
-  ifBodies = g_renderAP->getBodies();
 
   simGUI = TwNewBar("Simulation");
   bodyGUI = TwNewBar("Body");
@@ -197,16 +183,16 @@ void setupSimGUI() {
   TwDefine(" 'Simulation' movable=false");
   TwDefine(" 'Simulation' refresh=0.01");
 
-  // Control
-  TwAddVarRW(simGUI, "ugcvar", TW_TYPE_DOUBLE,  &ifControl.UGC,        " min=1E-12  max=10   step=0.01  precision=7   label='Gravitational Constant'  group=Control ");
-  TwAddVarRW(simGUI, "idtvar", TW_TYPE_DOUBLE,  &ifControl.IDT,        " max=-1E9   max=1E15  step=0.01  precision=7   label='Itteration Delta Time'   group=Control ");
-  TwAddVarRW(simGUI, "collid", TW_TYPE_BOOLCPP, &ifControl.collide,"true=On      false=Off                       label='Simulate Collisions'     group=Control ");
+/*  // Control
+  TwAddVarRW(simGUI, "ugcvar", TW_TYPE_DOUBLE,  ifControl.UGC,        " min=1E-12  max=10   step=0.01  precision=7   label='Gravitational Constant'  group=Control ");
+  TwAddVarRW(simGUI, "idtvar", TW_TYPE_DOUBLE,  .IDT,        " max=-1E9   max=1E15  step=0.01  precision=7  label='Itteration Delta Time'   group=Control ");
+  TwAddVarRW(simGUI, "collid", TW_TYPE_BOOLCPP, .collide,    " true=On      false=Off                       label='Simulate Collisions'     group=Control ");
   // Runtime
-  TwAddVarRW(simGUI, "paused", TW_TYPE_BOOLCPP, &ifControl.paused,     " true=Paused  false=Running                   label='Run/Pause'               group=Runtime ");
-  TwAddVarRW(simGUI, "ipfvar", TW_TYPE_INT32,   &ifControl.IPF,        " min=1      max=10000  step=1                 label='Itterations Per Frame'   group=Runtime ");
+  TwAddVarRW(simGUI, "paused", TW_TYPE_BOOLCPP, .paused,     " true=Paused  false=Running                   label='Run/Pause'               group=Runtime ");
+  TwAddVarRW(simGUI, "ipfvar", TW_TYPE_INT32,   .IPF,        " min=1      max=10000  step=1                 label='Itterations Per Frame'   group=Runtime ");
   // Statistics
-//  TwAddVarRO(simGUI, "numbod", TW_TYPE_INT32,   &bodies.size(),  "                                              label='Number of Bodies'        group=Statistics ");
-}
+  //TwAddVarRO(simGUI, "numbod", TW_TYPE_INT32,   &numberOfBodies,  "                                         label='Number of Bodies'        group=Statistics ");
+*/}
 
 void setupBodyGUI() {
   // Color
@@ -219,21 +205,25 @@ void setupBodyGUI() {
   TwDefine(" 'Body' valueswidth=100 ");
   TwDefine(" 'Body' movable=false");
   TwDefine(" 'Body' refresh=0.01");
-
+/*
   TwAddVarRO(bodyGUI, "bodyid", TW_TYPE_INT32, &activeBody,        "                                              label='Selected Body ID' ");
-  TwAddVarRW(bodyGUI, "bdmass", TW_TYPE_DOUBLE,  &ifBodies[activeBody]->m,    " min=1E-3  max=1E40 step=1      precision=7   label='Mass'                    group=Properties ");
-  TwAddVarRW(bodyGUI, "bdradi", TW_TYPE_DOUBLE,  &ifBodies[activeBody]->r,  " min=1E-3  max=1E20 step=1      precision=7   label='Radius'                  group=Properties ");
-  TwAddVarRW(bodyGUI, "bdfixd", TW_TYPE_BOOLCPP, &ifBodies[activeBody]->fixed,   " true=Yes      false=No                       label='Fixed'                   group=Properties ");
-//  TwAddVarRW(bodyGUI, "bdcolr", TW_TYPE_COLOR3F, &bodies[cB]->,   " coloralpha=false                             label='Colour'                  group=Properties ");
+  TwAddVarRW(bodyGUI, "bdmass", TW_TYPE_DOUBLE,  ifBody.m,     " min=1E-3  max=1E40 step=1      precision=7   label='Mass'                    group=Properties ");
+  TwAddVarRW(bodyGUI, "bdradi", TW_TYPE_DOUBLE,  ifBody.r,     " min=1E-3  max=1E20 step=1      precision=7   label='Radius'                  group=Properties ");
+  TwAddVarRW(bodyGUI, "bdfixd", TW_TYPE_BOOLCPP, ifBody.fixed, " true=Yes      false=No                       label='Fixed'                   group=Properties ");
+  //TwAddVarRW(bodyGUI, "bdcolr", TW_TYPE_COLOR3F, &,   " coloralpha=false                             label='Colour'                  group=Properties ");
 
-  TwAddVarRW(bodyGUI, "bdposx", TW_TYPE_DOUBLE, &ifBodies[activeBody]->pX,     " min=-1E15 max=1E40 step=1 precision=7   label='X'                       group=Position ");
-  TwAddVarRW(bodyGUI, "bdposy", TW_TYPE_DOUBLE, &ifBodies[activeBody]->pY,     " min=-1E15 max=1E15 step=1 precision=7   label='Y'                       group=Position ");
-  TwAddVarRW(bodyGUI, "bdvelx", TW_TYPE_DOUBLE, &ifBodies[activeBody]->vX,     " min=-3E8  max=3E8  step=1 precision=7   label='X'                       group=Velocity ");
-  TwAddVarRW(bodyGUI, "bdvely", TW_TYPE_DOUBLE, &ifBodies[activeBody]->vY,     " min=-3E8  max=3E8  step=1 precision=7   label='Y'                       group=Velocity ");
-  TwAddVarRO(bodyGUI, "bdaccx", TW_TYPE_DOUBLE, &ifBodies[activeBody]->aX, "                           precision=7   label='X'                       group=Acceleration ");
-  TwAddVarRO(bodyGUI, "bdaccy", TW_TYPE_DOUBLE, &ifBodies[activeBody]->aY, "                           precision=7   label='Y'                       group=Acceleration ");
+  TwAddVarRW(bodyGUI, "bdposx", TW_TYPE_DOUBLE,  ifBody.pX,    " min=-1E15 max=1E40 step=1 precision=7        label='X'                       group=Position ");
+  TwAddVarRW(bodyGUI, "bdposy", TW_TYPE_DOUBLE,  ifBody.pY,    " min=-1E15 max=1E15 step=1 precision=7        label='Y'                       group=Position ");
+  TwAddVarRW(bodyGUI, "bdvelx", TW_TYPE_DOUBLE,  ifBody.vX,    " min=-3E8  max=3E8  step=1 precision=7        label='X'                       group=Velocity ");
+  TwAddVarRW(bodyGUI, "bdvely", TW_TYPE_DOUBLE,  ifBody.vY,    " min=-3E8  max=3E8  step=1 precision=7        label='Y'                       group=Velocity ");
+  TwAddVarRO(bodyGUI, "bdaccx", TW_TYPE_DOUBLE,  ifBody.aX,    "                           precision=7        label='X'                       group=Acceleration ");
+  TwAddVarRO(bodyGUI, "bdaccy", TW_TYPE_DOUBLE,  ifBody.aY,    "                           precision=7        label='Y'                       group=Acceleration ");
 
   //TwAddButton(bodyGUI,"delbody", deleteBodyButton, this, " label='Delete Body' ");
+*/}
+
+void updateUI() {
+
 }
 
 void TW_CALL deleteBodyButton(void *cData) {
