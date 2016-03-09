@@ -8,7 +8,6 @@
 #include "shared.hpp"
 #include "simulation.hpp"
 #include "render.hpp"
-#include "screen.hpp"
 #include "body.hpp"
 #include "ui.hpp"
 
