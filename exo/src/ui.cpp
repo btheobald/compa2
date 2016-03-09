@@ -203,20 +203,30 @@ void setupSimGUI(render* renderAP) {
   TwAddVarRW(simGUI, "paused", TW_TYPE_BOOLCPP, &renderAP->pControl.paused,     " true=Paused  false=Running                   label='Run/Pause'               group=Runtime ");
   TwAddVarRW(simGUI, "ipfvar", TW_TYPE_INT32,   &renderAP->pControl.IPF,        " min=1      max=10000  step=1                 label='Itterations Per Frame'   group=Runtime ");
   // Statistics
-  TwAddVarRO(simGUI, "numbod", TW_TYPE_INT32,   &bodyCount                   ,  "                                              label='Number of Bodies'        group=Statistics ");
+  TwAddVarRO(simGUI, "numbod", TW_TYPE_INT32,   &bodyCount,                     "                                              label='Number of Bodies'        group=Statistics ");
 }
 
 void updateUI(render* renderAP) {
   // Free memory used by previous
   delete activeBody;
-  // Update Body Interface
-  activeBody = new body(renderAP->pBodies[activeID]);
+
   // Update Body Count
   bodyCount = renderAP->pBodies.size();
+
+  if(bodyCount != 0) {
+    // Update Body Interface
+    activeBody = new body(renderAP->pBodies[activeID]);
+  } else {
+    // Generate Null Body
+    activeBody = new body(0, 0, 0, 0, 0, 0);
+    activeID = 0;
+  }
 }
 
 void updateBody(render* renderAP) {
-  renderAP->updateBody(activeBody, activeID);
+  if(bodyCount != 0) {
+    renderAP->updateBody(activeBody, activeID);
+  }
 }
 
 void setupBodyGUI(render* renderAP) {
@@ -248,16 +258,40 @@ void setupBodyGUI(render* renderAP) {
   TwAddVarRO(bodyGUI, "bdaccx", TW_TYPE_DOUBLE,  &activeBody->aX,    "                           precision=7        label='X'                       group=Acceleration ");
   TwAddVarRO(bodyGUI, "bdaccy", TW_TYPE_DOUBLE,  &activeBody->aY,    "                           precision=7        label='Y'                       group=Acceleration ");
 
-  TwAddButton(bodyGUI,"delbody", deleteBodyButton, renderAP,         " label='Delete Body' ");
+  TwAddButton(bodyGUI,"newbody", newBodyButton, renderAP,            " label='New Body'          group=Management ");
+  TwAddButton(bodyGUI,"delbody", deleteBodyButton, renderAP,         " label='Delete Body'       group=Management ");
+  TwAddButton(bodyGUI,"delallb", deleteAllBodiesButton, renderAP,    " label='Delete All'        group=Management ");
 }
 
 void TW_CALL deleteBodyButton(void *cData) {
-  render *renderContainer = static_cast<render*>(cData);
-  renderContainer->delBody(activeID);
+  // Only delete body if there are bodies to delete
+  if(bodyCount != 0) {
+    // Retrieve pointer from clientData container.
+    render *renderContainer = static_cast<render*>(cData);
+    // Call Delete of selected body
+    renderContainer->delBody(activeID);
+    // Update render container to next or null body.
+    updateUI(renderContainer);
+  }
 }
 
-void TW_CALL newBodyButton(void *cData) {
+void TW_CALL deleteAllBodiesButton(void *cData) {
+  // Retrieve pointer from clientData container.
+  render *renderContainer = static_cast<render*>(cData);
+  // Call Delete All Bodies
+  renderContainer->deleteAllBodies();
+  // Update render container to populate initial null body.
+  updateUI(renderContainer);
+}
 
+
+void TW_CALL newBodyButton(void *cData) {
+  // Retrieve pointer from clientData container.
+  render *renderContainer = static_cast<render*>(cData);
+  // Create new body in render.
+  renderContainer->addBody(new body(1, 1, 0, 0, 0, 0));
+  // Update UI to update body count.
+  updateUI(renderContainer);
 }
 
 void TW_CALL newSuperStructureButton(void *cData) {

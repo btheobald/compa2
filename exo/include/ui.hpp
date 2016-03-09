@@ -40,4 +40,5 @@ void TW_CALL saveFileButton();
 void TW_CALL loadFileButton();
 
 void TW_CALL deleteBodyButton(void *cData);
+void TW_CALL deleteAllBodiesButton(void *cData);
 void TW_CALL newBodyButton(void *cData);

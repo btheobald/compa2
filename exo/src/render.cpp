@@ -4,7 +4,7 @@
 #include <random>
 
 void render::drawBody(body* p_b) {
-  const int segments = 32;
+  const int segments = 64;
 
   double posX = p_b->pX;
   double posY = p_b->pY;

@@ -11,7 +11,7 @@ public:
   double vX, vY;  // Velocity - First Derrirative - ms^-1
   double aX, aY;  // Acceleration - Second Derrative ms^-2
 
-  // Memory ineffcient - minimum allocation is 1 byte, not 1 bit.
+  // Memory ineffcient - minimum allocation is 1 byte, not 1 bit, not much can be done about this.
   bool fixed;     // Fixed
 
   // Constructors

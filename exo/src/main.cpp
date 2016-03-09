@@ -14,7 +14,10 @@
 
 // Sim thread startup function
 void startup(shared* sharedAP);
+// GLFW and OpenGL startup Functions
+void initDisplay(int lXRes, int lYRes);
 GLFWwindow* windowSetup();
+// Default Scenario startup
 void setupDefaultScenario(render* renderAP, shared* sharedAP);
 
 int main() {
@@ -30,9 +33,6 @@ int main() {
 
   // Create simulation thread
   std::thread simThread(startup, sharedAP);
-
-  // Control structure for interface
-  control main = renderAP->getControl();
 
   // Main Runtime Loop
   while(!glfwWindowShouldClose(window)) {
@@ -70,11 +70,9 @@ int main() {
     glfwPollEvents();
   }
 
-  // Unpause and Exit
-  main.paused = false;
-  main.exit = true;
-  // Control direct to shared
-  sharedAP->updateControl(main);
+  // Unpause and Exit, direct to shared
+  sharedAP->setPaused(0);
+  sharedAP->setExit(1);
 
   // Repeat sim wait notify until exit is acknowleged, directly check shared
   while(sharedAP->getExit()) {
@@ -92,6 +90,21 @@ int main() {
   glfwTerminate();
 
   return 0;
+}
+
+void initDisplay(int lXRes, int lYRes) {
+  // Init Projection
+  glMatrixMode(GL_PROJECTION);
+  glLoadIdentity();
+  glOrtho(-lXRes, lXRes, -lYRes, lYRes, 1.0f, -1.0f);
+
+  // Init Modelview
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+
+  // Set Viewport Extents
+  glViewport(0, 0, lXRes, lYRes);
+  glClearColor(0.0f, 0.0f, 0.0f, 1);
 }
 
 GLFWwindow* windowSetup() {
@@ -142,8 +155,7 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
 
   // Update local
   renderAP->updateControl(temp);
-  renderAP->createSuperstructure(2000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 100.0, 500.0);
-  //renderAP->addBody(new body(10, 1, 0, 0, 0, 0.1));
+  renderAP->createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 50.0, 2000.0);
 
   // Update shared area
   sharedAP->updateControl(renderAP->getControl());
@@ -172,8 +184,12 @@ void startup(shared* sharedAP) {
     simAP->updateControl(sharedAP->getControl());
 
     if(!simAP->getPaused()) {
-      // Do itteration
-      simAP->itteration();
+      for(int iter = 0; iter < simAP->getIPF(); iter++) {
+        // Do itteration
+        simAP->itteration();
+        // Break out of ipf loop if paused or exit.
+        if(sharedAP->getPaused() | sharedAP->getExit()) break;
+      }
       // Update shared bodies
       sharedAP->updateBodies(simAP->getBodies());
     } else {

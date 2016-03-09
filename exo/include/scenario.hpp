@@ -42,5 +42,6 @@ public:
 
   inline bool getPaused(void) { return lControl.paused; };
   inline bool getExit(void) { return lControl.exit; };
+  inline void setPaused(bool tf) { lControl.paused = tf; };
   inline void setExit(bool tf) { lControl.exit = tf; };
 };
