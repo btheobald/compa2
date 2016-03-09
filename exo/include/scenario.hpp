@@ -8,7 +8,7 @@ typedef struct {
   // Simulation control
   double UGC;   // Gravitational constant
   double IDT;   // Itteration Δ time
-  double IPF;   // Itterations per frame
+  int IPF;   // Itterations per frame
 
   bool collide; // Simulate collisions
   bool paused;  // Simulation paused
@@ -44,4 +44,6 @@ public:
   inline bool getExit(void) { return lControl.exit; };
   inline void setPaused(bool tf) { lControl.paused = tf; };
   inline void setExit(bool tf) { lControl.exit = tf; };
+
+  inline int getIPF() { return lControl.IPF; };
 };

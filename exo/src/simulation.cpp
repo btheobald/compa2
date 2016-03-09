@@ -83,6 +83,9 @@ void simulation::calcAllCollisions(void) {
         bodies[bA]->vY = ((bodies[bA]->calcMomentum(1)) + bodies[bB]->calcMomentum(1)) / totalMass;
         bodies[bA]->m = totalMass;
 
+        // If either body is originally fixed, the resulting body should be fixed.
+        if(bodies[bA]->fixed | bodies[bB]->fixed) bodies[bA]->fixed = true;
+
         // Delete Body B
         delBody(bB);
       }
