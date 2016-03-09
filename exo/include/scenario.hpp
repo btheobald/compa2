@@ -9,7 +9,7 @@ typedef struct {
   double UGC;   // Gravitational constant
   double IDT;   // Itteration Δ time
   double IPF;   // Itterations per frame
-  
+
   bool collide; // Simulate collisions
   bool paused;  // Simulation paused
   bool exit;    // Exit Management
@@ -28,6 +28,7 @@ public:
   void addBody(body* p_nb); // Add body pointer to vector
   void delBody(int p_bdID); // Free body pointer from vector
   void deleteAllBodies();   // Free all bodies in vector
+  void updateBody(body* p_nb, int bodyID); // Update body in store
 
   // Data management
   // Update local body storage

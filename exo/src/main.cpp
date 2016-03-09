@@ -41,12 +41,12 @@ int main() {
 
     sharedAP->updateControl(renderAP->getControl());
 
-    updateUI(renderAP);
-
     if(renderAP->getPaused()) {
+      updateBody(renderAP); // Update body storage from interface
       // Send update to shared
       sharedAP->updateBodies(renderAP->getBodies());
     } else {
+      updateUI(renderAP); // Update interface from body store
       // Get update from shared
       renderAP->updateBodies(sharedAP->getBodies());
     }

@@ -28,3 +28,20 @@ void scenario::deleteAllBodies() {
   }
   bodies.clear(); // Reset vector
 }
+
+void scenario::updateBody(body* p_nb, int bodyID) {
+  bodies[bodyID]->m = p_nb->m;
+
+  bodies[bodyID]->r = p_nb->r;
+
+  bodies[bodyID]->pX = p_nb->pX;
+  bodies[bodyID]->pY = p_nb->pY;
+
+  bodies[bodyID]->vX = p_nb->vX;
+  bodies[bodyID]->vY = p_nb->vY;
+
+  bodies[bodyID]->aX = p_nb->aX;
+  bodies[bodyID]->aY = p_nb->aY;
+
+  bodies[bodyID]->fixed = p_nb->fixed;
+}

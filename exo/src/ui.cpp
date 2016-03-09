@@ -211,6 +211,10 @@ void updateUI(render* renderAP) {
   activeBody = new body(renderAP->pBodies[activeID]);
 }
 
+void updateBody(render* renderAP) {
+  renderAP->updateBody(activeBody, activeID);
+}
+
 void setupBodyGUI(render* renderAP) {
   // Set Default Body
   activeID = 0;
