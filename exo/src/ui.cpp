@@ -11,6 +11,7 @@ TwBar* bodyGUI;
 // Active Body
 body* activeBody;
 int activeID;
+int bodyCount;
 
 double vectX = 0, vectY = 0;
 double scaleFactor = 1;
@@ -202,13 +203,16 @@ void setupSimGUI(render* renderAP) {
   TwAddVarRW(simGUI, "paused", TW_TYPE_BOOLCPP, &renderAP->pControl.paused,     " true=Paused  false=Running                   label='Run/Pause'               group=Runtime ");
   TwAddVarRW(simGUI, "ipfvar", TW_TYPE_INT32,   &renderAP->pControl.IPF,        " min=1      max=10000  step=1                 label='Itterations Per Frame'   group=Runtime ");
   // Statistics
-  //TwAddVarRO(simGUI, "numbod", TW_TYPE_INT32,   &numberOfBodies,  "                                         label='Number of Bodies'        group=Statistics ");
+  TwAddVarRO(simGUI, "numbod", TW_TYPE_INT32,   &bodyCount                   ,  "                                              label='Number of Bodies'        group=Statistics ");
 }
 
 void updateUI(render* renderAP) {
+  // Free memory used by previous
   delete activeBody;
   // Update Body Interface
   activeBody = new body(renderAP->pBodies[activeID]);
+  // Update Body Count
+  bodyCount = renderAP->pBodies.size();
 }
 
 void updateBody(render* renderAP) {

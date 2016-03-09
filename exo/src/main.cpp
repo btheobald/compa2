@@ -75,7 +75,11 @@ int main() {
   main.exit = true;
   // Control direct to shared
   sharedAP->updateControl(main);
-  sharedAP->simWait.notify_all();
+
+  // Repeat sim wait notify until exit is acknowleged, directly check shared
+  while(sharedAP->getExit()) {
+    sharedAP->simWait.notify_all();
+  }
 
   // Program exit
   simThread.join();
@@ -138,7 +142,7 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
 
   // Update local
   renderAP->updateControl(temp);
-  renderAP->createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 100.0, 500.0);
+  renderAP->createSuperstructure(2000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 100.0, 500.0);
   //renderAP->addBody(new body(10, 1, 0, 0, 0, 0.1));
 
   // Update shared area
@@ -177,6 +181,9 @@ void startup(shared* sharedAP) {
       simAP->updateBodies(sharedAP->getBodies());
     }
   }
+  // Directly unset shared exit variable to confirm sim exit.
+  sharedAP->setExit(0);
+
   // Delete heap objects
   delete simAP;
 }
