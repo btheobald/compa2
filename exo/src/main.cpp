@@ -15,11 +15,11 @@
 void startup(shared* sharedAP);
 // GLFW and OpenGL startup Functions
 void initDisplay(int lXRes, int lYRes);
-GLFWwindow* windowSetup();
+GLFWwindow* windowSetup(void);
 // Default Scenario startup
 void setupDefaultScenario(render* renderAP, shared* sharedAP);
 
-int main() {
+int main(void) {
   // Setup window and give pointer
   GLFWwindow* window = windowSetup();
 

@@ -34,4 +34,6 @@ private:
 
 public:
   void itteration(void);
+
+  virtual inline int getIPF() { return lControl.IPF; };
 };

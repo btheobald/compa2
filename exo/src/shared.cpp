@@ -34,7 +34,31 @@ std::vector<body*> shared::getBodies(void) {
 }
 
 control shared::getControl(void) {
-  // Lock access to body store
+  // Lock access to control store
   std::lock_guard<std::mutex> lock(controlLock);
   return lControl;
+}
+
+bool shared::getPaused(void) {
+  // Lock access to control store
+  std::lock_guard<std::mutex> lock(controlLock);
+  return lControl.paused;
+}
+
+bool shared::getExit(void) {
+  // Lock access to control store
+  std::lock_guard<std::mutex> lock(controlLock);
+  return lControl.exit;
+}
+
+void shared::setPaused(bool tf) {
+  // Lock access to control store
+  std::lock_guard<std::mutex> lock(controlLock);
+  lControl.paused = tf;
+}
+
+void shared::setExit(bool tf) {
+  // Lock access to control store
+  std::lock_guard<std::mutex> lock(controlLock);
+  lControl.exit = tf;
 }

@@ -16,6 +16,11 @@ public:
   std::vector<body*> getBodies(void) override;
   control getControl(void) override;
 
+  bool getPaused(void) override;
+  bool getExit(void) override;
+  void setPaused(bool tf) override;
+  void setExit(bool tf) override;
+
   // Condition variable, makes sim wait till unlocked
   std::condition_variable simWait;
 };
