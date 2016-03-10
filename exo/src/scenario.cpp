@@ -30,7 +30,8 @@ void scenario::deleteAllBodies() {
 }
 
 void scenario::updateBody(body* p_nb, int bodyID) {
-  bodies[bodyID]->m = p_nb->m;
+  *bodies[bodyID] = *p_nb;
+  /*bodies[bodyID]->m = p_nb->m;
 
   bodies[bodyID]->r = p_nb->r;
 
@@ -43,5 +44,5 @@ void scenario::updateBody(body* p_nb, int bodyID) {
   bodies[bodyID]->aX = p_nb->aX;
   bodies[bodyID]->aY = p_nb->aY;
 
-  bodies[bodyID]->fixed = p_nb->fixed;
+  bodies[bodyID]->fixed = p_nb->fixed;*/
 }

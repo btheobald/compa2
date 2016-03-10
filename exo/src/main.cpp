@@ -156,7 +156,7 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
 
   // Update local
   renderAP->updateControl(temp);
-  renderAP->createSuperstructure(100, 10000, 0.1, 10, 1, 0, 0, 0, 0, 50.0, 2000.0);
+  renderAP->createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 50.0, 500.0);
 
   // Update shared area
   sharedAP->updateControl(renderAP->getControl());

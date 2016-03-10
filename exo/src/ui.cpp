@@ -7,6 +7,7 @@ render* g_RenderAP;
 // GUI pointers
 TwBar* simGUI;
 TwBar* bodyGUI;
+TwBar* ssGUI;
 
 // Active Body
 body* activeBody;
@@ -133,6 +134,14 @@ void mouseScrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
   }
 }
 
+void keyboardKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
+  if(!TwEventKeyGLFW(key, action)) {}
+}
+
+void keyboardCharCallback(GLFWwindow* window, unsigned int codepoint) {
+  if(!TwEventCharGLFW(codepoint, GLFW_PRESS)) {}
+}
+
 // Window
 void windowResizeCallback(GLFWwindow* window, int width, int height) {
   glMatrixMode(GL_PROJECTION);
@@ -153,6 +162,8 @@ void setCallbacks(GLFWwindow* window) {
   glfwSetCursorPosCallback(window, cursorPosCallback);
   glfwSetMouseButtonCallback(window, mouseButtonCallback);
   glfwSetScrollCallback(window, mouseScrollCallback);
+  glfwSetKeyCallback(window, keyboardKeyCallback);
+  glfwSetCharCallback(window, keyboardCharCallback);
 
   // Resize Window
   glfwSetWindowSizeCallback(window, windowResizeCallback);
@@ -172,9 +183,11 @@ void setupGUI(GLFWwindow* window, render* renderAP) {
 
   simGUI = TwNewBar("Simulation");
   bodyGUI = TwNewBar("Body");
+  ssGUI = TwNewBar("Superstructure");
 
   setupSimGUI(renderAP);
   setupBodyGUI(renderAP);
+  setupSuperStructGUI(renderAP);
 
   // Set Globals
   TwDefine(" GLOBAL contained=true ");
@@ -190,9 +203,9 @@ void setupSimGUI(render* renderAP) {
   // Size
   TwDefine(" 'Simulation' size='300 180'");
   TwDefine(" 'Simulation' position='0 0'");
-  TwDefine(" 'Simulation' resizable=false ");
+  TwDefine(" 'Simulation' resizable=true ");
   TwDefine(" 'Simulation' valueswidth=100 ");
-  TwDefine(" 'Simulation' movable=false");
+  TwDefine(" 'Simulation' movable=true");
   TwDefine(" 'Simulation' refresh=0.01");
 
   // Control
@@ -218,7 +231,7 @@ void updateUI(render* renderAP) {
     activeBody = new body(renderAP->pBodies[activeID]);
   } else {
     // Generate Null Body
-    activeBody = new body(0, 0, 0, 0, 0, 0);
+    activeBody = new body();
     activeID = 0;
   }
 }
@@ -238,29 +251,79 @@ void setupBodyGUI(render* renderAP) {
   TwDefine(" 'Body' color='255 255 255' alpha=150 text=dark");
 
   // Size
-  TwDefine(" 'Body' size='300 330'");
+  TwDefine(" 'Body' size='300 400'");
   TwDefine(" 'Body' position='0 182'");
-  TwDefine(" 'Body' resizable=false ");
+  TwDefine(" 'Body' resizable=true ");
   TwDefine(" 'Body' valueswidth=100 ");
-  TwDefine(" 'Body' movable=false");
+  TwDefine(" 'Body' movable=true");
   TwDefine(" 'Body' refresh=0.01");
 
   TwAddVarRO(bodyGUI, "bodyid", TW_TYPE_INT32,   &activeID,          "                                              label='Selected Body ID' ");
-  TwAddVarRW(bodyGUI, "bdmass", TW_TYPE_DOUBLE,  &activeBody->m,     " min=1E-3  max=1E40 step=1      precision=7   label='Mass'                    group=Properties ");
-  TwAddVarRW(bodyGUI, "bdradi", TW_TYPE_DOUBLE,  &activeBody->r,     " min=1E-3  max=1E20 step=1      precision=7   label='Radius'                  group=Properties ");
+  TwAddVarRW(bodyGUI, "bdmass", TW_TYPE_DOUBLE,  &activeBody->m,     " min=1E-3  max=1E40 step=1      precision=4   label='Mass'                    group=Properties ");
+  TwAddVarRW(bodyGUI, "bdradi", TW_TYPE_DOUBLE,  &activeBody->r,     " min=1E-3  max=1E14 step=1      precision=4   label='Radius'                  group=Properties ");
   TwAddVarRW(bodyGUI, "bdfixd", TW_TYPE_BOOLCPP, &activeBody->fixed, " true=Yes      false=No                       label='Fixed'                   group=Properties ");
   TwAddVarRW(bodyGUI, "bdcolr", TW_TYPE_COLOR3F, &activeBody->color, " coloralpha=false                             label='Colour'                  group=Properties ");
 
-  TwAddVarRW(bodyGUI, "bdposx", TW_TYPE_DOUBLE,  &activeBody->pX,    " min=-1E15 max=1E40 step=1 precision=7        label='X'                       group=Position ");
-  TwAddVarRW(bodyGUI, "bdposy", TW_TYPE_DOUBLE,  &activeBody->pY,    " min=-1E15 max=1E15 step=1 precision=7        label='Y'                       group=Position ");
-  TwAddVarRW(bodyGUI, "bdvelx", TW_TYPE_DOUBLE,  &activeBody->vX,    " min=-3E8  max=3E8  step=1 precision=7        label='X'                       group=Velocity ");
-  TwAddVarRW(bodyGUI, "bdvely", TW_TYPE_DOUBLE,  &activeBody->vY,    " min=-3E8  max=3E8  step=1 precision=7        label='Y'                       group=Velocity ");
-  TwAddVarRO(bodyGUI, "bdaccx", TW_TYPE_DOUBLE,  &activeBody->aX,    "                           precision=7        label='X'                       group=Acceleration ");
-  TwAddVarRO(bodyGUI, "bdaccy", TW_TYPE_DOUBLE,  &activeBody->aY,    "                           precision=7        label='Y'                       group=Acceleration ");
+  TwAddVarRW(bodyGUI, "bdposx", TW_TYPE_DOUBLE,  &activeBody->pX,    " min=-1E15 max=1E15 step=0.01 precision=5     label='X'                       group=Position ");
+  TwAddVarRW(bodyGUI, "bdposy", TW_TYPE_DOUBLE,  &activeBody->pY,    " min=-1E15 max=1E15 step=0.01 precision=5     label='Y'                       group=Position ");
+  TwAddVarRW(bodyGUI, "bdvelx", TW_TYPE_DOUBLE,  &activeBody->vX,    " min=-3E8  max=3E8  step=0.01 precision=5     label='X'                       group=Velocity ");
+  TwAddVarRW(bodyGUI, "bdvely", TW_TYPE_DOUBLE,  &activeBody->vY,    " min=-3E8  max=3E8  step=0.01 precision=5     label='Y'                       group=Velocity ");
+  TwAddVarRO(bodyGUI, "bdaccx", TW_TYPE_DOUBLE,  &activeBody->aX,    "                              precision=5     label='X'                       group=Acceleration ");
+  TwAddVarRO(bodyGUI, "bdaccy", TW_TYPE_DOUBLE,  &activeBody->aY,    "                              precision=5     label='Y'                       group=Acceleration ");
 
   TwAddButton(bodyGUI,"newbody", newBodyButton, renderAP,            " label='New Body'          group=Management ");
   TwAddButton(bodyGUI,"delbody", deleteBodyButton, renderAP,         " label='Delete Body'       group=Management ");
   TwAddButton(bodyGUI,"delallb", deleteAllBodiesButton, renderAP,    " label='Delete All'        group=Management ");
+}
+
+// global superstructure creation gui - this file only
+struct ss {
+  int bodies = 100;
+  double cMass = 10000;
+  double oMass = 0.1;
+  double cRadius = 5;
+  double oRadius = 0.1;
+
+  double cPX = 0;
+  double cPY = 0;
+
+  double cVX = 0;
+  double cVY = 0;
+
+  double spacing = 50;
+  double radius = 200;
+} ss;
+
+void setupSuperStructGUI(render* renderAP) {
+  // Color
+  TwDefine(" 'Superstructure' color='255 255 255' alpha=150 text=dark");
+
+  // Size
+  TwDefine(" 'Superstructure' iconified=true");
+  TwDefine(" 'Superstructure' size='300 300'");
+  TwDefine(" 'Superstructure' position='0 0'");
+  TwDefine(" 'Superstructure' resizable=true ");
+  TwDefine(" 'Superstructure' valueswidth=100 ");
+  TwDefine(" 'Superstructure' movable=true");
+  TwDefine(" 'Superstructure' refresh=0.01");
+
+  TwAddVarRW(ssGUI, "nbodies", TW_TYPE_INT32,  &ss.bodies,  " min=1     max=4000   step=1     precision=4   label='# of Outer Bodies' group='System' ");
+  TwAddVarRW(ssGUI, "sradius",  TW_TYPE_DOUBLE,  &ss.radius,  " min=-3E8  max=3E8    step=0.01  precision=4   label='System Radius' group='System'");
+  TwAddVarRW(ssGUI, "cospace",  TW_TYPE_DOUBLE,  &ss.spacing, " min=-3E8  max=3E8    step=0.01  precision=4   label='Central/Outer Spacing' group='System'");
+
+  TwAddVarRW(ssGUI, "cmass",  TW_TYPE_DOUBLE,  &ss.cMass,   " min=1E-3  max=1E40   step=0.01  precision=4   label='Mass'   group='Central Body' ");
+  TwAddVarRW(ssGUI, "cradi",  TW_TYPE_DOUBLE,  &ss.cRadius, " min=1E-3  max=1E14   step=0.01  precision=4   label='Radius' group='Central Body'");
+
+  TwAddVarRW(ssGUI, "omass",  TW_TYPE_DOUBLE,  &ss.oMass,   " min=1E-3  max=1E40   step=0.01  precision=4   label='Mass'   group='Outer Body'");
+  TwAddVarRW(ssGUI, "oradi",  TW_TYPE_DOUBLE,  &ss.oRadius, " min=1E-3  max=1E14   step=0.01  precision=4   label='Radius' group='Outer Body'");
+
+  TwAddVarRW(ssGUI, "cposx",  TW_TYPE_DOUBLE,  &ss.cPX,     " min=-1E15 max=1E15   step=0.01  precision=4   label='X' group='Central Position' ");
+  TwAddVarRW(ssGUI, "cposy",  TW_TYPE_DOUBLE,  &ss.cPY,     " min=-1E15 max=1E15   step=0.01  precision=4   label='Y' group='Central Position'");
+
+  TwAddVarRW(ssGUI, "cvelx",  TW_TYPE_DOUBLE,  &ss.cVX,     " min=-3E8  max=3E8    step=0.01  precision=4   label='X' group='Central Velocity'");
+  TwAddVarRW(ssGUI, "cvely",  TW_TYPE_DOUBLE,  &ss.cVY,     " min=-3E8  max=3E8    step=0.01  precision=4   label='Y' group='Central Velocity'");
+
+  TwAddButton(ssGUI,"css", newSuperStructureButton, renderAP, " label='Create Superstructure'");
 }
 
 void TW_CALL deleteBodyButton(void *cData) {
@@ -295,5 +358,10 @@ void TW_CALL newBodyButton(void *cData) {
 }
 
 void TW_CALL newSuperStructureButton(void *cData) {
-
+  // Retrieve pointer from clientData container.
+  render *renderContainer = static_cast<render*>(cData);
+  // Create superstructure
+  renderContainer->createSuperstructure(ss.bodies, ss.cMass, ss.oMass, ss.cRadius, ss.oRadius, ss.cPX, ss.cPY, ss.cVX, ss.cVY, ss.spacing, ss.radius);
+  // Update UI to update body count.
+  updateUI(renderContainer);
 }

@@ -66,6 +66,7 @@ void simulation::calcAllCollisions(void) {
       double yDist = getComponentDistance(bodies[bA], bodies[bB], 1);
       double vDist = getVectorDistance(xDist, yDist);
 
+      // TODO: Implement this as an overloaded operator?
       if(bodies[bA]->r+bodies[bB]->r > vDist) {
         // Body A Becomes New Body
         // Add Together Areas
@@ -85,6 +86,11 @@ void simulation::calcAllCollisions(void) {
 
         // If either body is originally fixed, the resulting body should be fixed.
         if(bodies[bA]->fixed | bodies[bB]->fixed) bodies[bA]->fixed = true;
+
+        // Get average of colours of both bodies
+        for(int c = 0; c < 3; c++) {
+          bodies[bA]->color[c] = (bodies[bA]->color[c] + bodies[bB]->color[c]) / 2;
+        }
 
         // Delete Body B
         delBody(bB);
@@ -115,7 +121,8 @@ void simulation::itteration(void) {
   // Position
   calcAllPosition();
   // Collisions
-  calcAllCollisions();
+  if(lControl.collide)
+    calcAllCollisions();
   // Acceleration
   calcAllAcceleration();
   // 1/2 Velocity
