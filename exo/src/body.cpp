@@ -15,6 +15,10 @@ body::body(body* p_b) { // Creates a copy of body at pointer
 
   aX = 0;
   aY = 0;
+
+  color[0] = 1.0f;
+  color[1] = 1.0f;
+  color[2] = 1.0f;
 }
 
 body::body(double p_m, double p_r, double p_pX, double p_pY, bool p_fixed) {
@@ -32,6 +36,10 @@ body::body(double p_m, double p_r, double p_pX, double p_pY, bool p_fixed) {
 
   aX = 0;
   aY = 0;
+
+  color[0] = 1.0f;
+  color[1] = 1.0f;
+  color[2] = 1.0f;
 }
 
 body::body(double p_m, double p_r, double p_pX, double p_pY, double p_vX, double p_vY) {
@@ -49,6 +57,10 @@ body::body(double p_m, double p_r, double p_pX, double p_pY, double p_vX, double
 
   aX = 0;
   aY = 0;
+
+  color[0] = 1.0f;
+  color[1] = 1.0f;
+  color[2] = 1.0f;
 }
 
 body::~body() {

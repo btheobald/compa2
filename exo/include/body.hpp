@@ -14,6 +14,9 @@ public:
   // Memory ineffcient - minimum allocation is 1 byte, not 1 bit, not much can be done about this.
   bool fixed;     // Fixed
 
+  // Colour array
+  float color[3];
+
   // Constructors
   body(body* p_b); // Creates a copy of body at pointer
   body(double p_m, double p_r, double p_pX, double p_pY, bool p_fixed);

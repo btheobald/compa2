@@ -21,6 +21,7 @@ void render::drawBody(body* p_b) {
   float y = 0;
 
   // Plot Minimum Point.
+  glColor3f(p_b->color[0], p_b->color[1], p_b->color[2]);
   glBegin(GL_POINTS);
     glVertex2f(posX, posY);
   glEnd();
