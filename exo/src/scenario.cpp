@@ -24,7 +24,7 @@ void scenario::delBody(int p_bdID) {
 
 void scenario::deleteAllBodies() {
   for(unsigned int i = 0; i < bodies.size(); i++) {
-    delete(bodies[i]); // Free all memory in vector
+    delete(bodies[i]); // Free all memory in vector pointers
   }
   bodies.clear(); // Reset vector
 }

@@ -23,9 +23,14 @@ int main() {
   // Setup window and give pointer
   GLFWwindow* window = windowSetup();
 
+  // Create objects
+  render renderMain;
+  shared sharedMain;
+
   // Create access pointers
-  render* renderAP = new render;
-  shared* sharedAP = new shared;
+  render* renderAP = &renderMain;
+  shared* sharedAP = &sharedMain;
+
   setupDefaultScenario(renderAP, sharedAP);
 
   setupGUI(window, renderAP);
@@ -80,9 +85,6 @@ int main() {
 
   // Program exit
   simThread.join();
-  // Delete heap objects
-  delete renderAP;
-  delete sharedAP;
 
   // Terminate Libraries
   glfwDestroyWindow(window);
@@ -167,15 +169,18 @@ void startup(shared* sharedAP) {
   // Sim wait control mutex
   std::mutex simWaitMTX;
 
+  // Create sim object
+  simulation simMain;
+
   // Create access pointer
-  simulation* simAP = new simulation;
+  simulation* simAP = &simMain;
 
   // Get new data from shared
   simAP->updateBodies(sharedAP->getBodies());
   simAP->updateControl(sharedAP->getControl());
 
   while(!simAP->getExit()) {
-    // Wait for data change
+    // Wait for data change - Thread Sync
     std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
     sharedAP->simWait.wait(uniqueSimWaitMTX);
 
@@ -199,7 +204,4 @@ void startup(shared* sharedAP) {
   }
   // Directly unset shared exit variable to confirm sim exit.
   sharedAP->setExit(0);
-
-  // Delete heap objects
-  delete simAP;
 }
