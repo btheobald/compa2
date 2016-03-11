@@ -262,7 +262,7 @@ void setupBodyGUI(render* renderAP) {
   TwAddVarRW(bodyGUI, "bdmass", TW_TYPE_DOUBLE,  &activeBody->m,     " min=1E-3  max=1E40 step=1      precision=4   label='Mass'                    group=Properties ");
   TwAddVarRW(bodyGUI, "bdradi", TW_TYPE_DOUBLE,  &activeBody->r,     " min=1E-3  max=1E14 step=1      precision=4   label='Radius'                  group=Properties ");
   TwAddVarRW(bodyGUI, "bdfixd", TW_TYPE_BOOLCPP, &activeBody->fixed, " true=Yes      false=No                       label='Fixed'                   group=Properties ");
-  TwAddVarRW(bodyGUI, "bdcolr", TW_TYPE_COLOR3Fa, &activeBody->color, " coloralpha=false                             label='Colour'                  group=Properties ");
+  TwAddVarRW(bodyGUI, "bdcolr", TW_TYPE_COLOR3F, &activeBody->color, " coloralpha=false                             label='Colour'                  group=Properties ");
 
   TwAddVarRW(bodyGUI, "bdposx", TW_TYPE_DOUBLE,  &activeBody->pX,    " min=-1E15 max=1E15 step=0.01 precision=5     label='X'                       group=Position ");
   TwAddVarRW(bodyGUI, "bdposy", TW_TYPE_DOUBLE,  &activeBody->pY,    " min=-1E15 max=1E15 step=0.01 precision=5     label='Y'                       group=Position ");
@@ -301,7 +301,7 @@ void setupSuperStructGUI(render* renderAP) {
   // Size
   TwDefine(" 'Superstructure' iconified=true");
   TwDefine(" 'Superstructure' size='300 300'");
-  TwDefine(" 'Superstructure' position='0 0'");
+  TwDefine(" 'Superstructure' position='300 0'");
   TwDefine(" 'Superstructure' resizable=true ");
   TwDefine(" 'Superstructure' valueswidth=100 ");
   TwDefine(" 'Superstructure' movable=true");
