@@ -22,6 +22,7 @@ bool getMouseHeld(GLFWwindow* window, int button) {
     if(checking & (glfwGetTime() - startTime > 0.15)) {
       held = true;
     }
+      held = true;
   }
 
   if((glfwGetMouseButton(window, button) == GLFW_RELEASE)){

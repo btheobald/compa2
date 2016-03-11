@@ -1,66 +1,37 @@
 #include "body.hpp"
 
+body::body() { // Creates a copy of body at pointer
+
+}
+
 body::body(body* p_b) { // Creates a copy of body at pointer
-  m = p_b->m;
-
-  r = p_b->r;
-
-  pX = p_b->pX;
-  pY = p_b->pY;
-
-  vX = p_b->vX;
-  vY = p_b->vY;
-
-  fixed = p_b->fixed;
-
-  aX = 0;
-  aY = 0;
-
-  color[0] = 1.0f;
-  color[1] = 1.0f;
-  color[2] = 1.0f;
+  // Copy contents of p_b to this object.
+  *this = *p_b;
 }
 
 body::body(double p_m, double p_r, double p_pX, double p_pY, bool p_fixed) {
+  // Mass
   m = p_m;
-
+  // Radius
   r = p_r;
-
+  // Position
   pX = p_pX;
   pY = p_pY;
-
-  vX = 0;
-  vY = 0;
-
+  // Fixed
   fixed = p_fixed;
-
-  aX = 0;
-  aY = 0;
-
-  color[0] = 1.0f;
-  color[1] = 1.0f;
-  color[2] = 1.0f;
 }
 
 body::body(double p_m, double p_r, double p_pX, double p_pY, double p_vX, double p_vY) {
+  // Mass
   m = p_m;
-
+  // Radius
   r = p_r;
-
+  // Position
   pX = p_pX;
   pY = p_pY;
-
+  // Velocity
   vX = p_vX;
   vY = p_vY;
-
-  fixed = false;
-
-  aX = 0;
-  aY = 0;
-
-  color[0] = 1.0f;
-  color[1] = 1.0f;
-  color[2] = 1.0f;
 }
 
 body::~body() {

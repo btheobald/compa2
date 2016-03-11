@@ -4,20 +4,21 @@ class body {
 private:
 
 public:
-  // Parameters - Not encapsulated, makes interface and use easier
-  double m;       // Mass - kg
-  double r;       // Radius - m
-  double pX, pY;  // Position - Base Unit - m
-  double vX, vY;  // Velocity - First Derrirative - ms^-1
-  double aX, aY;  // Acceleration - Second Derrative ms^-2
+  // Parameters - Not encapsulated, code is neater, encapsulation makes interface difficult.
+  double m = 0;       // Mass - kg
+  double r = 0;       // Radius - m
+  double pX = 0, pY = 0;  // Position - Base Unit - m
+  double vX = 0, vY = 0;  // Velocity - First Derrirative - ms^-1
+  double aX = 0, aY = 0;  // Acceleration - Second Derrative ms^-2
 
   // Memory ineffcient - minimum allocation is 1 byte, not 1 bit, not much can be done about this.
-  bool fixed;     // Fixed
+  bool fixed = false;     // Fixed
 
   // Colour array
-  float color[3];
+  float color[3] = { 1.0f, 1.0f, 1.0f };
 
   // Constructors
+  body(); // Null body
   body(body* p_b); // Creates a copy of body at pointer
   body(double p_m, double p_r, double p_pX, double p_pY, bool p_fixed);
   body(double p_m, double p_r, double p_pX, double p_pY, double p_vX, double p_vY);

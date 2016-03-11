@@ -15,11 +15,11 @@
 void startup(shared* sharedAP);
 // GLFW and OpenGL startup Functions
 void initDisplay(int lXRes, int lYRes);
-GLFWwindow* windowSetup();
+GLFWwindow* windowSetup(void);
 // Default Scenario startup
 void setupDefaultScenario(render* renderAP, shared* sharedAP);
 
-int main() {
+int main(void) {
   // Setup window and give pointer
   GLFWwindow* window = windowSetup();
 
@@ -156,7 +156,7 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
 
   // Update local
   renderAP->updateControl(temp);
-  renderAP->createSuperstructure(100, 10000, 0.1, 10, 1, 0, 0, 0, 0, 50.0, 2000.0);
+  renderAP->createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 50.0, 500.0);
 
   // Update shared area
   sharedAP->updateControl(renderAP->getControl());
