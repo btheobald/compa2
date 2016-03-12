@@ -118,7 +118,7 @@ void simulation::itteration(void) {
   if(lControl.collide)
     calcAllCollisions();
   // Acceleration
-  calcAllAcceleration();
+  //calcAllAcceleration();
   // 1/2 Velocity
   calcAllHalfVelocity();
   // Position

@@ -5,6 +5,7 @@ private:
 
 public:
   // Parameters - Not encapsulated, code is neater, encapsulation makes interface difficult.
+  // Checks would be difficult to implement, due to the nature of the simulation
   double m = 0;       // Mass - kg
   double r = 0;       // Radius - m
   double pX = 0, pY = 0;  // Position - Base Unit - m

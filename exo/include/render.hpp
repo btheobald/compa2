@@ -12,10 +12,6 @@ public:
   void drawScene(void);
   int checkCoord(double x, double y, double ad);
 
-  // Return a pointer of storage for interface
-  inline control* returnControlPointer() { return &lControl; }
-  inline std::vector<body*>* returnBodiesPointer() { return &bodies; }
-
   // Provides public interface to base class private variables
   control& pControl = this->lControl;
   std::vector<body*>& pBodies = this->bodies;

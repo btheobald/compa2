@@ -24,7 +24,7 @@ private:
   */
   void resetAllAcceleration(void);
   void calcAcceleration(body* bA, body* bB);
-  void calcAllAcceleration();
+  void calcAllAcceleration(void);
 
   void calcAllCollisions(void);
 
@@ -35,5 +35,5 @@ private:
 public:
   void itteration(void);
 
-  virtual inline int getIPF() { return lControl.IPF; };
+  virtual inline int getIPF(void) { return lControl.IPF; };
 };
