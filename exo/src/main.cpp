@@ -1,4 +1,5 @@
 // Standard library includes
+#include <iostream>
 #include <thread>
 // External library includes
 #include <GLFW/glfw3.h>
