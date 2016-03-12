@@ -19,6 +19,36 @@ double scaleFactor = 1;
 double responsiveness = 2;
 double oldaX = 0, oldaY = 0;
 
+// global superstructure creation gui - this file only
+struct ss {
+  int bodies = 100;
+  double cMass = 10000;
+  double oMass = 0.1;
+  double cRadius = 5;
+  double oRadius = 0.1;
+
+  double cPX = 0;
+  double cPY = 0;
+
+  double cVX = 0;
+  double cVY = 0;
+
+  double spacing = 50;
+  double radius = 200;
+} ss;
+
+// Applys camera transform and scale
+void applyCamera(GLFWwindow* window) {
+  glMatrixMode(GL_MODELVIEW);
+  glLoadIdentity();
+
+  glScaled(scaleFactor, scaleFactor, 1);
+
+  glTranslated(-vectX, vectY, 0);
+
+  glPushMatrix();
+}
+
 // Custom Inputs
 // Returns true if mouse button held.
 bool getMouseHeld(GLFWwindow* window, int button) {
@@ -96,18 +126,6 @@ void getCoord(GLFWwindow* window, double &aX, double &aY) {
   gluUnProject(mX, mY, 0, modelview, projection, viewport, &aX, &aY, &ignoreZ);
 }
 
-// Applys camera transform and scale
-void applyCamera(GLFWwindow* window) {
-  glMatrixMode(GL_MODELVIEW);
-  glLoadIdentity();
-
-  glScaled(scaleFactor, scaleFactor, 1);
-
-  glTranslated(-vectX, vectY, 0);
-
-  glPushMatrix();
-}
-
 // Input
 void cursorPosCallback(GLFWwindow* window, double cursorX, double cursorY) {
   if(!TwEventMousePosGLFW(cursorX, cursorY)) {
@@ -128,6 +146,7 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
     }
   }
 }
+
 void mouseScrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
   if(!TwEventMouseWheelGLFW(yoffset)) {
     zoomCamera(yoffset);
@@ -169,31 +188,67 @@ void setCallbacks(GLFWwindow* window) {
   glfwSetWindowSizeCallback(window, windowResizeCallback);
 }
 
-void setupGUI(GLFWwindow* window, render* renderAP) {
-  // Set global render pointer
-  g_RenderAP = renderAP;
+void updateUI(render* renderAP) {
+  // Free memory used by previous
+  delete activeBody;
 
-  // Get GLFW window size
-  int wX, wY;
-  glfwGetWindowSize(window, &wX, &wY);
+  // Update Body Count
+  bodyCount = renderAP->pBodies.size();
 
-  // Init AntTweakBar
-  TwInit(TW_OPENGL, NULL);
-  TwWindowSize(wX, wY);
+  if(bodyCount != 0) {
+    // Update Body Interface
+    activeBody = new body(renderAP->pBodies[activeID]);
+  } else {
+    // Generate Null Body
+    activeBody = new body();
+    activeID = 0;
+  }
+}
 
-  simGUI = TwNewBar("Simulation");
-  bodyGUI = TwNewBar("Body");
-  ssGUI = TwNewBar("Superstructure");
+void updateBody(render* renderAP) {
+  if(bodyCount != 0) {
+    renderAP->updateBody(activeBody, activeID);
+  }
+}
 
-  setupSimGUI(renderAP);
-  setupBodyGUI(renderAP);
-  setupSuperStructGUI(renderAP);
+// AntTweakBar functions
+void TW_CALL deleteBodyButton(void *cData) {
+  // Only delete body if there are bodies to delete
+  if(bodyCount != 0) {
+    // Retrieve pointer from clientData container.
+    render *renderContainer = static_cast<render*>(cData);
+    // Call Delete of selected body
+    renderContainer->delBody(activeID);
+    // Update render container to next or null body.
+    updateUI(renderContainer);
+  }
+}
 
-  // Set Globals
-  TwDefine(" GLOBAL contained=true ");
-  TwDefine(" GLOBAL fontresizable=false ");
-  TwDefine(" GLOBAL fontstyle=default ");
-  TwDefine(" GLOBAL buttonalign=center");
+void TW_CALL deleteAllBodiesButton(void *cData) {
+  // Retrieve pointer from clientData container.
+  render *renderContainer = static_cast<render*>(cData);
+  // Call Delete All Bodies
+  renderContainer->deleteAllBodies();
+  // Update render container to populate initial null body.
+  updateUI(renderContainer);
+}
+
+void TW_CALL newBodyButton(void *cData) {
+  // Retrieve pointer from clientData container.
+  render *renderContainer = static_cast<render*>(cData);
+  // Create new body in render.
+  renderContainer->addBody(new body(1, 1, 0, 0, 0, 0));
+  // Update UI to update body count.
+  updateUI(renderContainer);
+}
+
+void TW_CALL newSuperStructureButton(void *cData) {
+  // Retrieve pointer from clientData container.
+  render *renderContainer = static_cast<render*>(cData);
+  // Create superstructure
+  renderContainer->createSuperstructure(ss.bodies, ss.cMass, ss.oMass, ss.cRadius, ss.oRadius, ss.cPX, ss.cPY, ss.cVX, ss.cVY, ss.spacing, ss.radius);
+  // Update UI to update body count.
+  updateUI(renderContainer);
 }
 
 void setupSimGUI(render* renderAP) {
@@ -217,29 +272,6 @@ void setupSimGUI(render* renderAP) {
   TwAddVarRW(simGUI, "ipfvar", TW_TYPE_INT32,   &renderAP->pControl.IPF,        " min=1      max=10000  step=1                 label='Itterations Per Frame'   group=Runtime ");
   // Statistics
   TwAddVarRO(simGUI, "numbod", TW_TYPE_INT32,   &bodyCount,                     "                                              label='Number of Bodies'        group=Statistics ");
-}
-
-void updateUI(render* renderAP) {
-  // Free memory used by previous
-  delete activeBody;
-
-  // Update Body Count
-  bodyCount = renderAP->pBodies.size();
-
-  if(bodyCount != 0) {
-    // Update Body Interface
-    activeBody = new body(renderAP->pBodies[activeID]);
-  } else {
-    // Generate Null Body
-    activeBody = new body();
-    activeID = 0;
-  }
-}
-
-void updateBody(render* renderAP) {
-  if(bodyCount != 0) {
-    renderAP->updateBody(activeBody, activeID);
-  }
 }
 
 void setupBodyGUI(render* renderAP) {
@@ -276,24 +308,6 @@ void setupBodyGUI(render* renderAP) {
   TwAddButton(bodyGUI,"delallb", deleteAllBodiesButton, renderAP,    " label='Delete All'        group=Management ");
 }
 
-// global superstructure creation gui - this file only
-struct ss {
-  int bodies = 100;
-  double cMass = 10000;
-  double oMass = 0.1;
-  double cRadius = 5;
-  double oRadius = 0.1;
-
-  double cPX = 0;
-  double cPY = 0;
-
-  double cVX = 0;
-  double cVY = 0;
-
-  double spacing = 50;
-  double radius = 200;
-} ss;
-
 void setupSuperStructGUI(render* renderAP) {
   // Color
   TwDefine(" 'Superstructure' color='255 255 255' alpha=150 text=dark");
@@ -326,42 +340,29 @@ void setupSuperStructGUI(render* renderAP) {
   TwAddButton(ssGUI,"css", newSuperStructureButton, renderAP, " label='Create Superstructure'");
 }
 
-void TW_CALL deleteBodyButton(void *cData) {
-  // Only delete body if there are bodies to delete
-  if(bodyCount != 0) {
-    // Retrieve pointer from clientData container.
-    render *renderContainer = static_cast<render*>(cData);
-    // Call Delete of selected body
-    renderContainer->delBody(activeID);
-    // Update render container to next or null body.
-    updateUI(renderContainer);
-  }
-}
+void setupGUI(GLFWwindow* window, render* renderAP) {
+  // Set global render pointer
+  g_RenderAP = renderAP;
 
-void TW_CALL deleteAllBodiesButton(void *cData) {
-  // Retrieve pointer from clientData container.
-  render *renderContainer = static_cast<render*>(cData);
-  // Call Delete All Bodies
-  renderContainer->deleteAllBodies();
-  // Update render container to populate initial null body.
-  updateUI(renderContainer);
-}
+  // Get GLFW window size
+  int wX, wY;
+  glfwGetWindowSize(window, &wX, &wY);
 
+  // Init AntTweakBar
+  TwInit(TW_OPENGL, NULL);
+  TwWindowSize(wX, wY);
 
-void TW_CALL newBodyButton(void *cData) {
-  // Retrieve pointer from clientData container.
-  render *renderContainer = static_cast<render*>(cData);
-  // Create new body in render.
-  renderContainer->addBody(new body(1, 1, 0, 0, 0, 0));
-  // Update UI to update body count.
-  updateUI(renderContainer);
-}
+  simGUI = TwNewBar("Simulation");
+  bodyGUI = TwNewBar("Body");
+  ssGUI = TwNewBar("Superstructure");
 
-void TW_CALL newSuperStructureButton(void *cData) {
-  // Retrieve pointer from clientData container.
-  render *renderContainer = static_cast<render*>(cData);
-  // Create superstructure
-  renderContainer->createSuperstructure(ss.bodies, ss.cMass, ss.oMass, ss.cRadius, ss.oRadius, ss.cPX, ss.cPY, ss.cVX, ss.cVY, ss.spacing, ss.radius);
-  // Update UI to update body count.
-  updateUI(renderContainer);
+  setupSimGUI(renderAP);
+  setupBodyGUI(renderAP);
+  setupSuperStructGUI(renderAP);
+
+  // Set Globals
+  TwDefine(" GLOBAL contained=true ");
+  TwDefine(" GLOBAL fontresizable=false ");
+  TwDefine(" GLOBAL fontstyle=default ");
+  TwDefine(" GLOBAL buttonalign=center");
 }
