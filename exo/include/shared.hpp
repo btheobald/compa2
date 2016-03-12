@@ -1,6 +1,7 @@
 #pragma once
-
+// Base class include
 #include "scenario.hpp"
+// Standard library includes
 #include <mutex>
 #include <condition_variable>
 

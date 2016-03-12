@@ -1,7 +1,8 @@
 #pragma once
-
-#include "body.hpp"
+// Standard library includes
 #include <vector>
+// Custom Header includes
+#include "body.hpp"
 
 // Control structure
 typedef struct {

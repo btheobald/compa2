@@ -1,5 +1,8 @@
+// Interface include
 #include "render.hpp"
+// Custom library includes
 #include <GLFW/glfw3.h>
+// Standard library includes
 #include <cmath>
 #include <random>
 
@@ -54,7 +57,7 @@ void render::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass
    // Use random device for seed value
   std::random_device r;
   std::mt19937 gen(r());
-  //std::mt19937 gen;
+  //std::mt19937 gen; // Use for desktop valgrind - random_device causes segfault
 
   // Temporary Variables
   double tempRand, tempCirX, tempCirY, tempDist, tempVelX, tempVelY;

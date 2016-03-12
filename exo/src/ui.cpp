@@ -1,5 +1,8 @@
+// Interface include
 #include "ui.hpp"
-using namespace std;
+// External library includes
+#include <AntTweakBar.h>  // AntTweakBar
+#include <GL/glu.h>       // GLU
 
 // Render access pointer
 render* g_RenderAP;
@@ -57,7 +60,6 @@ bool getMouseHeld(GLFWwindow* window, int button) {
   static double startTime;
 
   if((glfwGetMouseButton(window, button) == GLFW_PRESS)) {
-    //std::cerr << "Mouse Clicked : " << glfwGetTime() << std::endl;
     if(!checking) {
       startTime = glfwGetTime();
     }
@@ -100,7 +102,6 @@ void zoomCamera(double change){
   if(scaleFactor > 1E3) {
     scaleFactor = 1E3;
   }
-  //std::cerr << scaleFactor << std::endl;
 }
 // Transforms window system coordinates to world space
 void getCoord(GLFWwindow* window, double &aX, double &aY) {

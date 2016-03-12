@@ -1,9 +1,8 @@
 #pragma once
+
+// External library includes
 #include <GLFW/glfw3.h>   // GLFW
-#include "AntTweakBar.h"  // AntTweakBar
-#include <iostream>
-#include <cmath>
-#include <GL/glu.h>
+// Custom header includes
 #include "render.hpp"
 #include "body.hpp"
 #include "scenario.hpp"
@@ -18,4 +17,5 @@ void setCallbacks(GLFWwindow* window);
 void updateUI(render* renderAP);
 void updateBody(render* renderAP);
 
+// Setup GUI Windows
 void setupGUI(GLFWwindow* window, render* renderAP);

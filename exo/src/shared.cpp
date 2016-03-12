@@ -1,5 +1,5 @@
+// Interface include
 #include "shared.hpp"
-#include <iostream>
 
 void shared::updateBodies(std::vector<body*> p_bodies) {
   // Must create a copy of objects at pointers, not just copy pointers

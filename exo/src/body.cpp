@@ -1,3 +1,4 @@
+// Interface include
 #include "body.hpp"
 
 body::body() { // Creates a copy of body at pointer

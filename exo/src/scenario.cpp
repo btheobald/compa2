@@ -1,5 +1,6 @@
+// Interface include
 #include "scenario.hpp"
-#include <iostream>
+
 scenario::scenario() {
   lControl.UGC = 0.1;
   lControl.IDT = 1;

@@ -1,7 +1,6 @@
 #pragma once
-
+// Base class include
 #include "scenario.hpp"
-#include <vector>
 
 class render: public scenario {
 private:

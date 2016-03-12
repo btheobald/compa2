@@ -1,10 +1,9 @@
-// Standard Library
-#include <iostream>
+// Standard library includes
 #include <thread>
-// External Libraries
+// External library includes
 #include <GLFW/glfw3.h>
 #include <AntTweakBar.h>
-// Program Includes
+// Custom header includes
 #include "shared.hpp"
 #include "simulation.hpp"
 #include "render.hpp"

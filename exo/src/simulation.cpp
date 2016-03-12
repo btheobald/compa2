@@ -1,6 +1,7 @@
+// Interface include
 #include "simulation.hpp"
+// Standard library includes
 #include <cmath>
-#include <iostream>
 
 double simulation::getComponentDistance(body* bA, body* bB, int xy) {
   if(xy)
@@ -50,9 +51,7 @@ void simulation::calcAllAcceleration(void) {
   for(unsigned int x = 0; x < bodies.size(); x++) {
     // Evaluate bottom left of calculation matrix
     for(unsigned int y = x+1; y < bodies.size(); y++) {
-      // Ignore same body relationship
-      //if(x != y) {
-      //std::cerr << x << " " << y << std::endl;
+      // Same body relationships do not occur
       calcAcceleration(bodies[x], bodies[y]);
       //}
     }
@@ -108,17 +107,13 @@ void simulation::calcAllHalfVelocity(void) {
 void simulation::calcAllPosition(void) {
   for(unsigned int i = 0; i < bodies.size(); i++) {
     bodies[i]->calcPosition(lControl.IDT);
-    //std::cout << bodies[i]->pX << " " << bodies[i]->pY << " ";
   }
-  //std::cout << std::endl;
 }
 
 void simulation::itteration(void) {
   // Collisions
   if(lControl.collide)
     calcAllCollisions();
-  // Acceleration
-  // calcAllAcceleration();
   // 1/2 Velocity
   calcAllHalfVelocity();
   // Position
