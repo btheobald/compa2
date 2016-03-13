@@ -168,7 +168,7 @@ void windowResizeCallback(GLFWwindow* window, int width, int height) {
   glLoadIdentity();
   glOrtho(-width, width, -height, height, 1.0f, -1.0f);
 
-  applyCamera(window);
+  applyCamera();
 
   TwWindowSize(width, height);
 
