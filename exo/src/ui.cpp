@@ -129,13 +129,17 @@ void getCoord(GLFWwindow* window, double &aX, double &aY) {
 
 // Input
 void cursorPosCallback(GLFWwindow* window, double cursorX, double cursorY) {
+  // Pass event to AntTweakBar
   if(!TwEventMousePosGLFW(cursorX, cursorY)) {
+    // If not handled by AntTweakBar
     moveCamera(window, cursorX, cursorY);
   }
 }
 
 void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
+  // Pass event to AntTweakBar
   if(!TwEventMouseButtonGLFW(button, action)) {
+    // If not handled by AntTweakBar
     if((action == GLFW_PRESS) & (button == 0)) {
       double aX, aY;
       getCoord(window, aX, aY);
@@ -149,17 +153,27 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
 }
 
 void mouseScrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
+  // Pass event to AntTweakBar
   if(!TwEventMouseWheelGLFW(yoffset)) {
+    // If not handled by AntTweakBar
     zoomCamera(yoffset);
   }
 }
 
 void keyboardKeyCallback(GLFWwindow* window, int key, int scancode, int action, int mods) {
-  if(!TwEventKeyGLFW(key, action)) {}
+  // Pass event to AntTweakBar
+  if(!TwEventKeyGLFW(key, action)) {
+    // If not handled by AntTweakBar
+    //TODO: Add keyboard shortcuts
+  }
 }
 
 void keyboardCharCallback(GLFWwindow* window, unsigned int codepoint) {
-  if(!TwEventCharGLFW(codepoint, GLFW_PRESS)) {}
+  // Pass event to AntTweakBar
+  if(!TwEventCharGLFW(codepoint, GLFW_PRESS)) {
+    // If not handled by AntTweakBar
+    //TODO: Add keyboard shortcuts
+  }
 }
 
 // Window
