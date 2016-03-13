@@ -61,7 +61,7 @@ int main(void) {
     renderAP->drawScene();
 
     // Apply camera transform and scale
-    applyCamera(window);
+    applyCamera();
 
     // Draw GUI
     TwDraw();

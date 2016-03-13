@@ -41,7 +41,7 @@ struct ss {
 } ss;
 
 // Applys camera transform and scale
-void applyCamera(GLFWwindow* window) {
+void applyCamera(void) {
   glMatrixMode(GL_MODELVIEW);
   glLoadIdentity();
 

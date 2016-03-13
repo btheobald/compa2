@@ -8,7 +8,7 @@
 #include "scenario.hpp"
 
 // Applys camera transform and scale
-void applyCamera(GLFWwindow* window);
+void applyCamera(void);
 
 // Callback setup
 void setCallbacks(GLFWwindow* window);
