@@ -20,7 +20,6 @@ int bodyCount;
 double vectX = 0, vectY = 0;
 double scaleFactor = 1;
 double responsiveness = 2;
-double oldaX = 0, oldaY = 0;
 
 // global superstructure creation gui - this file only
 struct ss {
