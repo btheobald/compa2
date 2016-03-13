@@ -151,11 +151,11 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
   }
 }
 
-void mouseScrollCallback(GLFWwindow* window, double xoffset, double yoffset) {
+void mouseScrollCallback(GLFWwindow* window, double xOffset, double yOffset) {
   // Pass event to AntTweakBar
-  if(!TwEventMouseWheelGLFW(yoffset)) {
+  if(!TwEventMouseWheelGLFW(yOffset)) {
     // If not handled by AntTweakBar
-    zoomCamera(yoffset);
+    zoomCamera(yOffset);
   }
 }
 
