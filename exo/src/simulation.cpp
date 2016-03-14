@@ -110,7 +110,21 @@ void simulation::calcAllPosition(void) {
   }
 }
 
+void simulation::lawsOfPhysicsCheck(void) {
+  // Loop all bodies in store
+  for(unsigned int i = 0; i < bodies.size(); i++) {
+    // Check bodies do not breach speed of light
+    if((bodies[i]->vX > 3E8) | (bodies[i]->vX < -3E8) | (bodies[i]->vY > 3E8) | (bodies[i]->vY < -3E8))
+      delBody(i);
+    // Check bodies do not breach simulation boundary
+    if((bodies[i]->pX > 1E16) | (bodies[i]->vX < -1E16) | (bodies[i]->vY > 1E16) | (bodies[i]->vY < -1E16))
+      delBody(i);
+  }
+}
+
 void simulation::itteration(void) {
+  // Check laws of physics
+  lawsOfPhysicsCheck();
   // Collisions
   if(lControl.collide)
     calcAllCollisions();
