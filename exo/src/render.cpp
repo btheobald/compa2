@@ -88,6 +88,21 @@ void render::drawScene(void) {
   for(unsigned int i = 0; i < bodies.size(); i++) {
     drawBody(bodies[i]);
   }
+  // Render static origin point
+  glColor3f(1.0f, 0.0f, 0.0f);
+  glBegin(GL_LINES);
+    glVertex2f( 4, 0);
+    glVertex2f( 1, 0);
+    glVertex2f(-4, 0);
+    glVertex2f(-1, 0);
+    glVertex2f( 0, 4);
+    glVertex2f( 0, 1);
+    glVertex2f( 0,-4);
+    glVertex2f( 0,-1);
+  glEnd();
+  glBegin(GL_POINTS);
+    glVertex2f( 0, 0);
+  glEnd();
 }
 
 int render::checkCoord(double x, double y, double ad) {
