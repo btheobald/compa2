@@ -19,19 +19,18 @@ private:
     3 x x x -
     4 x x x x -
     - Each calculation done is applied to both bodies for x and y.
-    - The other body has the sign of the forces flipped.
+    - The other body has the sign of the forces flipped. (The relationship is flipped.)
   */
   void resetAllAcceleration(void);
   void calcAcceleration(body* bA, body* bB);
   void calcAllAcceleration(void);
 
   void calcAllCollisions(void);
+  void lawsOfPhysicsCheck(void);
 
   // Calls functions in individual bodies
   void calcAllHalfVelocity(void);
   void calcAllPosition(void);
-
-  void lawsOfPhysicsCheck(void);
 
 public:
   void itteration(void);

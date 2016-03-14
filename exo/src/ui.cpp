@@ -335,23 +335,23 @@ void setupSuperStructGUI(render* renderAP) {
   TwDefine(" 'Superstructure' movable=true");
   TwDefine(" 'Superstructure' refresh=0.01");
 
-  TwAddVarRW(ssGUI, "nbodies", TW_TYPE_INT32,  &ss.bodies,  " min=1     max=4000   step=1     precision=4   label='# of Outer Bodies' group='System' ");
-  TwAddVarRW(ssGUI, "sradius",  TW_TYPE_DOUBLE,  &ss.radius,  " min=-3E8  max=3E8    step=0.01  precision=4   label='System Radius' group='System'");
-  TwAddVarRW(ssGUI, "cospace",  TW_TYPE_DOUBLE,  &ss.spacing, " min=-3E8  max=3E8    step=0.01  precision=4   label='Central/Outer Spacing' group='System'");
+  TwAddVarRW(ssGUI, "nbodies", TW_TYPE_INT32,  &ss.bodies,  " min=1     max=8000  step=1     precision=4   label='# of Outer Bodies' group='System'");
+  TwAddVarRW(ssGUI, "sradius", TW_TYPE_DOUBLE, &ss.radius,  " min=1E-4  max=1E14  step=0.1   precision=4   label='System Radius' group='System'");
+  TwAddVarRW(ssGUI, "cospace", TW_TYPE_DOUBLE, &ss.spacing, " min=0     max=3E8   step=0.1   precision=4   label='Central/Outer Spacing' group='System'");
 
-  TwAddVarRW(ssGUI, "cmass",  TW_TYPE_DOUBLE,  &ss.cMass,   " min=1E-3  max=1E40   step=0.01  precision=4   label='Mass'   group='Central Body' ");
-  TwAddVarRW(ssGUI, "cradi",  TW_TYPE_DOUBLE,  &ss.cRadius, " min=1E-3  max=1E14   step=0.01  precision=4   label='Radius' group='Central Body'");
+  TwAddVarRW(ssGUI, "cmass",   TW_TYPE_DOUBLE, &ss.cMass,   " min=1E-4  max=1E40  step=0.01  precision=4   label='Mass'   group='Central Body'");
+  TwAddVarRW(ssGUI, "cradi",   TW_TYPE_DOUBLE, &ss.cRadius, " min=1E-4  max=1E14  step=0.01  precision=4   label='Radius' group='Central Body'");
 
-  TwAddVarRW(ssGUI, "omass",  TW_TYPE_DOUBLE,  &ss.oMass,   " min=1E-3  max=1E40   step=0.01  precision=4   label='Mass'   group='Outer Body'");
-  TwAddVarRW(ssGUI, "oradi",  TW_TYPE_DOUBLE,  &ss.oRadius, " min=1E-3  max=1E14   step=0.01  precision=4   label='Radius' group='Outer Body'");
+  TwAddVarRW(ssGUI, "omass",   TW_TYPE_DOUBLE, &ss.oMass,   " min=1E-4  max=1E40  step=0.01  precision=4   label='Mass'   group='Outer Body'");
+  TwAddVarRW(ssGUI, "oradi",   TW_TYPE_DOUBLE, &ss.oRadius, " min=1E-4  max=1E14  step=0.01  precision=4   label='Radius' group='Outer Body'");
 
-  TwAddVarRW(ssGUI, "cposx",  TW_TYPE_DOUBLE,  &ss.cPX,     " min=-1E15 max=1E15   step=0.01  precision=4   label='X' group='Central Position' ");
-  TwAddVarRW(ssGUI, "cposy",  TW_TYPE_DOUBLE,  &ss.cPY,     " min=-1E15 max=1E15   step=0.01  precision=4   label='Y' group='Central Position'");
+  TwAddVarRW(ssGUI, "cposx",   TW_TYPE_DOUBLE, &ss.cPX,     " min=-1E16 max=1E16  step=0.01  precision=4   label='X' group='Central Position'");
+  TwAddVarRW(ssGUI, "cposy",   TW_TYPE_DOUBLE, &ss.cPY,     " min=-1E16 max=1E16  step=0.01  precision=4   label='Y' group='Central Position'");
 
-  TwAddVarRW(ssGUI, "cvelx",  TW_TYPE_DOUBLE,  &ss.cVX,     " min=-3E8  max=3E8    step=0.01  precision=4   label='X' group='Central Velocity'");
-  TwAddVarRW(ssGUI, "cvely",  TW_TYPE_DOUBLE,  &ss.cVY,     " min=-3E8  max=3E8    step=0.01  precision=4   label='Y' group='Central Velocity'");
+  TwAddVarRW(ssGUI, "cvelx",   TW_TYPE_DOUBLE, &ss.cVX,     " min=-3E8  max=3E8   step=0.01  precision=4   label='X' group='Central Velocity'");
+  TwAddVarRW(ssGUI, "cvely",   TW_TYPE_DOUBLE, &ss.cVY,     " min=-3E8  max=3E8   step=0.01  precision=4   label='Y' group='Central Velocity'");
 
-  TwAddButton(ssGUI,"css", newSuperStructureButton, renderAP, " label='Create Superstructure'");
+  TwAddButton(ssGUI,"cssbt", newSuperStructureButton, renderAP, " label='Create Superstructure'");
 }
 
 void setupGUI(GLFWwindow* window, render* renderAP) {
@@ -366,10 +366,10 @@ void setupGUI(GLFWwindow* window, render* renderAP) {
   TwInit(TW_OPENGL, NULL);
   TwWindowSize(wX, wY);
 
+  // Setup GUIs
   simGUI = TwNewBar("Simulation");
   bodyGUI = TwNewBar("Body");
   ssGUI = TwNewBar("Superstructure");
-
   setupSimGUI(renderAP);
   setupBodyGUI(renderAP);
   setupSuperStructGUI(renderAP);
