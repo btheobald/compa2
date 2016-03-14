@@ -17,18 +17,18 @@ INCLUDES   := $(wildcard $(INCLUDE_DIR)/*.hpp)
 OBJECTS    := $(SOURCES:$(SOURCE_DIR)/%.cpp=$(BINARY_DIR)/%.o)
 
 # Libraries
-LIBS  = `pkg-config --static --libs glfw3` -lAntTweakBar -lGLU
+LIBS  = `pkg-config --static --libs glfw3` -lGLU
 # Debugger
 DB    = gdb
 DBOPT =
 # Compiler Flags
-CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) `pkg-config --cflags glfw3` -lGLU -g -Ofast
+CPPFLAGS = -std=c++11 -Wall -I$(INCLUDE_DIR) `pkg-config --cflags glfw3` -lGLU -g -Ofast 
 # Linker Flags
 LFLAGS = -Wall $(LIBS)
 
 # Link
 $(TARGET): $(OBJECTS)
-	@$(LINKER) $@ $(LFLAGS) $(OBJECTS)
+	@$(LINKER) $@ $(LFLAGS) $(OBJECTS) -static $(BINARY_DIR)/libAntTweakBar.a
 	@echo "Linking Complete"
 
 # Compile
