@@ -28,7 +28,7 @@ LFLAGS = -Wall $(LIBS)
 
 # Link
 $(TARGET): $(OBJECTS)
-	@$(LINKER) $@ $(LFLAGS) $(OBJECTS) -static $(BINARY_DIR)/libAntTweakBar.a
+	@$(LINKER) $@ $(LFLAGS) $(OBJECTS) $(BINARY_DIR)/libAntTweakBar.a
 	@echo "Linking Complete"
 
 # Compile
