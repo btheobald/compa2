@@ -139,12 +139,23 @@ void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
   // Pass event to AntTweakBar
   if(!TwEventMouseButtonGLFW(button, action)) {
     // If not handled by AntTweakBar
+    // If left mouse pressed (Select Body)
     if((action == GLFW_PRESS) & (button == 0)) {
       double aX, aY;
       getCoord(window, aX, aY);
       int id = g_RenderAP->checkCoord(aX, aY, (1/scaleFactor)*10);
       if(id != -1) {
         activeID = id;
+        updateUI(g_RenderAP);
+      }
+    }
+    // If left mouse pressed (Select Body)
+    if((action == GLFW_PRESS) & (button == 1)) {
+      double aX, aY;
+      getCoord(window, aX, aY);
+      if(g_RenderAP->getPaused()) {
+        g_RenderAP->addBody(new body(1, 1, aX, aY, 0, 0));
+        activeID = g_RenderAP->pBodies.size()-1;
         updateUI(g_RenderAP);
       }
     }
