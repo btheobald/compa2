@@ -203,16 +203,19 @@ void setCallbacks(GLFWwindow* window) {
 }
 
 void updateUI(render* renderAP) {
-  // Free memory used by previous
-  delete activeBody;
-
   // Update Body Count
   bodyCount = renderAP->pBodies.size();
 
+  if(activeID >= bodyCount) activeID = bodyCount-1;
+
   if(bodyCount != 0) {
+    // Free memory used by previous
+    delete activeBody;
     // Update Body Interface
     activeBody = new body(renderAP->pBodies[activeID]);
   } else {
+    // Free memory used by previous
+    delete activeBody;
     // Generate Null Body
     activeBody = new body();
     activeID = 0;
@@ -233,6 +236,8 @@ void TW_CALL deleteBodyButton(void *cData) {
     render *renderContainer = static_cast<render*>(cData);
     // Call Delete of selected body
     renderContainer->delBody(activeID);
+    // Reduce Active ID
+    if(activeID != 0) activeID--;
     // Update render container to next or null body.
     updateUI(renderContainer);
   }
@@ -252,6 +257,8 @@ void TW_CALL newBodyButton(void *cData) {
   render *renderContainer = static_cast<render*>(cData);
   // Create new body in render.
   renderContainer->addBody(new body(1, 1, 0, 0, 0, 0));
+  // Set activeID to newest object
+  activeID = renderContainer->pBodies.size()-1;
   // Update UI to update body count.
   updateUI(renderContainer);
 }
