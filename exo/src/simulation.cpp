@@ -81,15 +81,17 @@ void simulation::calcAllCollisions(void) {
         // Calculate New Velocity through Inelastic Collision (mv+Mv)/(m+M) = v XY
         bodies[bA]->vX = ((bodies[bA]->calcMomentum(0)) + bodies[bB]->calcMomentum(0)) / totalMass;
         bodies[bA]->vY = ((bodies[bA]->calcMomentum(1)) + bodies[bB]->calcMomentum(1)) / totalMass;
-        bodies[bA]->m = totalMass;
 
         // If either body is originally fixed, the resulting body should be fixed.
         if(bodies[bA]->fixed | bodies[bB]->fixed) bodies[bA]->fixed = true;
 
-        // Get average of colours of both bodies
+        // Get average of colours of both bodies - weighted mean.
         for(int c = 0; c < 3; c++) {
-          bodies[bA]->color[c] = (bodies[bA]->color[c] + bodies[bB]->color[c]) / 2;
+          bodies[bA]->color[c] = ((bodies[bA]->color[c]*bodies[bA]->m) + (bodies[bB]->color[c]*bodies[bB]->m)) / totalMass;
         }
+
+        // Set new mass
+        bodies[bA]->m = totalMass;
 
         // Delete Body B
         delBody(bB);
@@ -114,7 +116,7 @@ void simulation::lawsOfPhysicsCheck(void) {
   // Loop all bodies in store
   for(unsigned int i = 0; i < bodies.size(); i++) {
     // Check bodies do not breach speed of light
-    if((bodies[i]->vX > 3E8) | (bodies[i]->vX < -3E8) | (bodies[i]->vY > 3E8) | (bodies[i]->vY < -3E8))
+    if((bodies[i]->vX >= 3E8) | (bodies[i]->vX <= -3E8) | (bodies[i]->vY >= 3E8) | (bodies[i]->vY <= -3E8))
       delBody(i);
     // Check bodies do not breach simulation boundary
     if((bodies[i]->pX > 1E16) | (bodies[i]->vX < -1E16) | (bodies[i]->vY > 1E16) | (bodies[i]->vY < -1E16))

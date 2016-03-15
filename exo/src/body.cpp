@@ -35,6 +35,23 @@ body::body(double p_m, double p_r, double p_pX, double p_pY, double p_vX, double
   vY = p_vY;
 }
 
+body::body(double p_m, double p_r, double p_pX, double p_pY, double p_vX, double p_vY, float p_color[3]) {
+  // Mass
+  m = p_m;
+  // Radius
+  r = p_r;
+  // Position
+  pX = p_pX;
+  pY = p_pY;
+  // Velocity
+  vX = p_vX;
+  vY = p_vY;
+  // Color
+  color[0] = p_color[0];
+  color[1] = p_color[1];
+  color[2] = p_color[2];
+}
+
 body::~body() {
 
 }

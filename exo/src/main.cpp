@@ -156,8 +156,61 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
 
   // Update local
   renderAP->updateControl(temp);
-  renderAP->createSuperstructure(1000, 10000, 0.1, 10, 1, 0, 0, 0, 0, 50.0, 500.0);
+  #ifdef default
+    float cWhite[3] = { 1.0f, 1.0f, 1.0f };
+    renderAP->createSuperstructure(1000, 10000, 0.1, 5, 0.1, 0, 0, 0, 0, 20.0, 500.0, cWhite);
+  #endif
 
+  // Default Scenario - Compile-Time Selection CS=-DTSx
+  #ifdef TS1
+    renderAP->addBody(new body(1, 1, 0, 0, 0, 0));
+  #endif
+  #ifdef TS2
+    renderAP->addBody(new body(1000, 10, 0, 0, 0, 0));
+    renderAP->addBody(new body(0.1, 1, 100, 0, 0, 1.00005));
+  #endif
+  #ifdef TS3
+    renderAP->addBody(new body(1, 1, 10, 0, 0, 0));
+    renderAP->addBody(new body(1, 1, -10, 0, 0, 0));
+  #endif
+  #ifdef TS4
+    float cWhite[3] = { 1.0f, 1.0f, 1.0f };
+    renderAP->createSuperstructure(9, 1000, 0.1, 10, 0.1, 0, 0, 0, 0, 50.0, 200.0, cWhite);
+  #endif
+  #ifdef TS5
+    renderAP->addBody(new body(1, 1, 9.99E15, 0, 1E5, 0));
+  #endif
+  #ifdef TS6
+    renderAP->addBody(new body(1, 1, -9.99E15, 0, 3E9, 0));
+  #endif
+  #ifdef TS7
+    // Body Reference Grid
+    renderAP->addBody(new body(0.001, 1,  10,   0, true));
+    renderAP->addBody(new body(0.001, 1, -10,   0, true));
+    renderAP->addBody(new body(0.001, 1,   0,  10, true));
+    renderAP->addBody(new body(0.001, 1,   0, -10, true));
+    renderAP->addBody(new body(0.001, 1, -10, -10, true));
+    renderAP->addBody(new body(0.001, 1,  10, -10, true));
+    renderAP->addBody(new body(0.001, 1, -10,  10, true));
+    renderAP->addBody(new body(0.001, 1,  10,  10, true));
+    renderAP->addBody(new body(0.001, 1, 100,   0, true));
+    renderAP->addBody(new body(0.001, 1,-100,   0, true));
+    renderAP->addBody(new body(0.001, 1,   0, 100, true));
+    renderAP->addBody(new body(0.001, 1,   0,-100, true));
+    renderAP->addBody(new body(0.001, 1,-100,-100, true));
+    renderAP->addBody(new body(0.001, 1, 100,-100, true));
+    renderAP->addBody(new body(0.001, 1,-100, 100, true));
+    renderAP->addBody(new body(0.001, 1, 100, 100, true));
+    renderAP->addBody(new body(0.001, 1, 1E5,   0, true));
+    renderAP->addBody(new body(0.001, 1, 1E6,   0, true));
+    renderAP->addBody(new body(0.001, 1, 1E7,   0, true));
+    renderAP->addBody(new body(0.001, 1, 1E8,   0, true));
+  #endif
+  #ifdef TS8
+    renderAP->addBody(new body(10000, 10,   0,    0,  0,      0));
+    renderAP->addBody(new body(1,     1,    1000, 0,  0,      1.00005));
+    renderAP->addBody(new body(0.01,  0.01, 1000, 10, 0.1005, 1.00005));
+  #endif
   // Update shared area
   sharedAP->updateControl(renderAP->getControl());
   sharedAP->updateBodies(renderAP->getBodies());
@@ -179,7 +232,15 @@ void startup(shared* sharedAP) {
   simAP->updateBodies(sharedAP->getBodies());
   simAP->updateControl(sharedAP->getControl());
 
-  while(!simAP->getExit()) {
+  int iCount = 0;
+  #ifdef SP
+  while((!simAP->getExit()) & (iCount < SIMITRS))
+  #endif
+  #ifndef SP
+  while(!simAP->getExit())
+  #endif
+    {
+
     // Wait for data change - Thread Sync
     std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
     sharedAP->simWait.wait(uniqueSimWaitMTX);
@@ -191,13 +252,20 @@ void startup(shared* sharedAP) {
       for(int iter = 0; iter < simAP->getIPF(); iter++) {
         // Do itteration
         simAP->itteration();
+        iCount++;
+        #ifdef SIPF
+          std::cerr << "i";
+        #endif
         // Break out of ipf loop if paused or exit.
         if(sharedAP->getPaused() | sharedAP->getExit()) break;
       }
-
+      std::cerr << std::endl;
       // Update shared bodies
       sharedAP->updateBodies(simAP->getBodies());
     } else {
+      #ifdef SCI
+        std::cerr << "Current Iteration: " << iCount << std::endl;
+      #endif
       // Get from shared if paused
       simAP->updateBodies(sharedAP->getBodies());
     }

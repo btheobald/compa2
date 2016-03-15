@@ -49,7 +49,7 @@ void render::drawBody(body* p_b) {
   glEnd();
 }
 
-void render::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass, double p_cRadius, double p_oRadius, double p_cPosX, double p_cPosY, double p_cVelX, double p_cVelY, double p_coSpacing, double p_sRadius) {
+void render::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass, double p_cRadius, double p_oRadius, double p_cPosX, double p_cPosY, double p_cVelX, double p_cVelY, double p_coSpacing, double p_sRadius, float p_color[3]) {
   // Create a Pseudo-random circular distribution of bodies around a central body.
 
   // Use Mersenne Twister for RNE within range.
@@ -62,7 +62,7 @@ void render::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass
   // Temporary Variables
   double tempRand, tempCirX, tempCirY, tempDist, tempVelX, tempVelY;
   // Add Central Body
-  addBody(new body(p_cMass, p_cRadius, p_cPosX, p_cPosY, p_cVelX, p_cVelY));
+  addBody(new body(p_cMass, p_cRadius, p_cPosX, p_cPosY, p_cVelX, p_cVelY, p_color));
   //int bodyOffset = bodyStore.size() - 1;
   for(int bIDC = 0; bIDC < p_soBodies; bIDC++) {
     // Ensure that bodies are not too close to center.
@@ -80,7 +80,7 @@ void render::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass
     tempVelX = copysign(std::sqrt((lControl.UGC*(p_cMass+p_oMass)) / std::pow(tempDist,3)) * (tempCirY-p_cPosY), (tempCirY-p_cPosY)) + p_cVelX;
     tempVelY = copysign(std::sqrt((lControl.UGC*(p_cMass+p_oMass)) / std::pow(tempDist,3)) * (tempCirX-p_cPosX), -(tempCirX-p_cPosX)) + p_cVelY;
 
-    addBody(new body(p_oMass, p_oRadius, tempCirX, tempCirY, tempVelX, tempVelY));
+    addBody(new body(p_oMass, p_oRadius, tempCirX, tempCirY, tempVelX, tempVelY, p_color));
   }
 }
 
