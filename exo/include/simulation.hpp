@@ -33,6 +33,7 @@ private:
   void calcAllPosition(void);
 
 public:
+  void initialCalc(void);
   void itteration(void);
 
   virtual inline int getIPF(void) { return lControl.IPF; };

@@ -148,7 +148,7 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
   // Tempoary control structure for setup
   control temp;
   temp.UGC = 0.1;
-  temp.IDT = 0.1;
+  temp.IDT = 1;
   temp.IPF = 1;
   temp.paused = false;
   temp.exit = false;
@@ -175,7 +175,7 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
   #endif
   #ifdef TS4
     float cWhite[3] = { 1.0f, 1.0f, 1.0f };
-    renderAP->createSuperstructure(9, 1000, 0.1, 10, 0.1, 0, 0, 0, 0, 50.0, 200.0, cWhite);
+    renderAP->createSuperstructure(9, 10000, 0.1, 10, 0.1, 0, 0, 0, 0, 50.0, 1000.0, cWhite);
   #endif
   #ifdef TS5
     renderAP->addBody(new body(1, 1, 9.99E15, 0, 1E5, 0));
@@ -211,6 +211,10 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
     renderAP->addBody(new body(1,     1,    1000, 0,  0,      1.00005));
     renderAP->addBody(new body(0.01,  0.01, 1000, 10, 0.1005, 1.00005));
   #endif
+  #ifdef TS9
+    renderAP->addBody(new body(99, 1, 0, 0, true));
+    renderAP->addBody(new body(1, 1, 10, 0, 0, 1));
+  #endif
   // Update shared area
   sharedAP->updateControl(renderAP->getControl());
   sharedAP->updateBodies(renderAP->getBodies());
@@ -231,6 +235,8 @@ void startup(shared* sharedAP) {
   // Get new data from shared
   simAP->updateBodies(sharedAP->getBodies());
   simAP->updateControl(sharedAP->getControl());
+
+  simAP->initialCalc();
 
   int iCount = 0;
   #ifdef SP
@@ -254,17 +260,19 @@ void startup(shared* sharedAP) {
         simAP->itteration();
         iCount++;
         #ifdef SIPF
-          std::cerr << "i";
+        std::cerr << "i";
         #endif
         // Break out of ipf loop if paused or exit.
         if(sharedAP->getPaused() | sharedAP->getExit()) break;
       }
+      #ifdef SIPF
       std::cerr << std::endl;
+      #endif
       // Update shared bodies
       sharedAP->updateBodies(simAP->getBodies());
     } else {
       #ifdef SCI
-        std::cerr << "Current Iteration: " << iCount << std::endl;
+      std::cerr << "Current Iteration: " << iCount << std::endl;
       #endif
       // Get from shared if paused
       simAP->updateBodies(sharedAP->getBodies());

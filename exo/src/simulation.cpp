@@ -124,6 +124,14 @@ void simulation::lawsOfPhysicsCheck(void) {
   }
 }
 
+void simulation::initialCalc(void) {
+  // Calculate collisions to remove bodies that are too close together.
+  calcAllCollisions();
+  // Initially calculate accelerations for leapfrog.
+  calcAllAcceleration();
+}
+
+
 void simulation::itteration(void) {
   // Check laws of physics
   lawsOfPhysicsCheck();
