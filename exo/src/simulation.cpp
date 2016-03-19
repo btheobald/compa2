@@ -109,7 +109,9 @@ void simulation::calcAllHalfVelocity(void) {
       cout << i << " vX: " << bodies[i]->vX << " vY: " << bodies[i]->vY << " | ";
     #endif
   }
-  std::cout << std::endl;
+  #ifdef PRINTP
+    std::cout << std::endl;
+  #endif
 }
 
 void simulation::calcAllPosition(void) {
@@ -120,7 +122,9 @@ void simulation::calcAllPosition(void) {
       cout << i << " pX: " << bodies[i]->pX << " pY: " << bodies[i]->pY << " | ";
     #endif
   }
-  std::cout << std::endl;
+  #ifdef PRINTP
+    std::cout << std::endl;
+  #endif
 }
 
 void simulation::lawsOfPhysicsCheck(void) {
