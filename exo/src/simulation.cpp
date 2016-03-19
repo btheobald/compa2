@@ -54,7 +54,6 @@ void simulation::calcAllAcceleration(void) {
     for(unsigned int y = x+1; y < bodies.size(); y++) {
       // Same body relationships do not occur
       calcAcceleration(bodies[x], bodies[y]);
-      //}
     }
   }
 }
