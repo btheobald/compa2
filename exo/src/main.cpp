@@ -158,10 +158,16 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
   temp.exit = false;
   temp.collide = true;
 
-  #ifdef CUSTOMCTRL
+  #ifdef C_UGC
     temp.UGC = C_UGC;
+  #endif
+  #ifdef C_IDT
     temp.IDT = C_IDT;
+  #endif
+  #ifdef C_PAUSED
     temp.paused = C_PAUSED;
+  #endif
+  #ifdef C_COLLIDE
     temp.collide = C_COLLIDE;
   #endif
 
@@ -169,7 +175,7 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
   renderAP->updateControl(temp);
   #ifdef DEFAULT
     float cWhite[3] = { 1.0f, 1.0f, 1.0f };
-    renderAP->createSuperstructure(1000, 10000, 0.1, 5, 0.1, 0, 0, 0, 0, 20.0, 500.0, cWhite);
+    renderAP->createSuperstructure(100, 10000, 0.1, 5, 0.1, 0, 0, 0, 0, 20.0, 200.0, cWhite);
   #endif
 
   // Default Scenario - Compile-Time Selection CS=-DTSx
@@ -186,7 +192,7 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
   #endif
   #ifdef TS4
     float cWhite[3] = { 1.0f, 1.0f, 1.0f };
-    renderAP->createSuperstructure(9, 10000, 0.1, 10, 0.1, 0, 0, 0, 0, 50.0, 1000.0, cWhite);
+    renderAP->createSuperstructure(TS4BODIES, 10000, 0.1, 10, 0.1, 0, 0, 0, 0, 50.0, 1000.0, cWhite);
   #endif
   #ifdef TS5
     renderAP->addBody(new body(1, 1, 9.99E15, 0, 1E5, 0));
@@ -263,13 +269,14 @@ void startup(shared* sharedAP) {
     while((!simAP->getExit()) & (iCount < SIMITRS)) {
   #endif
   #ifndef SP
-    while(!simAP->getExit())     {
+  while(!simAP->getExit())     {
   #endif
 
-
+    #ifndef NOSYNC
     // Wait for data change - Thread Sync
     std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
     sharedAP->simWait.wait(uniqueSimWaitMTX);
+    #endif
 
     // Update local control structure
     simAP->updateControl(sharedAP->getControl());
