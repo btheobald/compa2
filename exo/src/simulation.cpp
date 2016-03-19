@@ -2,6 +2,7 @@
 #include "simulation.hpp"
 // Standard library includes
 #include <cmath>
+#include <iostream>
 
 double simulation::getComponentDistance(body* bA, body* bB, int xy) {
   if(xy)
@@ -103,13 +104,23 @@ void simulation::calcAllCollisions(void) {
 void simulation::calcAllHalfVelocity(void) {
   for(unsigned int i = 0; i < bodies.size(); i++) {
     bodies[i]->calcHalfVelocity(lControl.IDT);
+
+    #ifdef PRINTV
+      cout << i << " vX: " << bodies[i]->vX << " vY: " << bodies[i]->vY << " | ";
+    #endif
   }
+  std::cout << std::endl;
 }
 
 void simulation::calcAllPosition(void) {
   for(unsigned int i = 0; i < bodies.size(); i++) {
     bodies[i]->calcPosition(lControl.IDT);
+
+    #ifdef PRINTP
+      cout << i << " pX: " << bodies[i]->pX << " pY: " << bodies[i]->pY << " | ";
+    #endif
   }
+  std::cout << std::endl;
 }
 
 void simulation::lawsOfPhysicsCheck(void) {

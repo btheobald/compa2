@@ -3,6 +3,8 @@
 // External library includes
 #include <AntTweakBar.h>  // AntTweakBar
 #include <GL/glu.h>       // GLU
+// Standard library includes
+#include <iostream>
 
 // Render access pointer
 render* g_RenderAP;
@@ -125,6 +127,10 @@ void getCoord(GLFWwindow* window, double &aX, double &aY) {
 
   // Project mouse to world
   gluUnProject(mX, mY, 0, modelview, projection, viewport, &aX, &aY, &ignoreZ);
+
+  #ifdef PRINTMACT
+    std::cerr << "mAX: " << aX << " mAY: " << aY << std::endl;
+  #endif
 }
 
 // Input
@@ -134,6 +140,10 @@ void cursorPosCallback(GLFWwindow* window, double cursorX, double cursorY) {
     // If not handled by AntTweakBar
     moveCamera(window, cursorX, cursorY);
   }
+
+  #ifdef PRINTMXY
+    std::cerr << "mX: " << cursorX << " mY: " << cursorY << std::endl;
+  #endif
 }
 
 void mouseButtonCallback(GLFWwindow* window, int button, int action, int mods) {
@@ -335,7 +345,7 @@ void setupBodyGUI(render* renderAP) {
   TwAddVarRW(bodyGUI, "bdvely", TW_TYPE_DOUBLE,  &activeBody->vY,    " min=-3E8  max=3E8  step=0.01 precision=4     label='Y'                       group=Velocity ");
   TwAddVarRO(bodyGUI, "bdaccx", TW_TYPE_DOUBLE,  &activeBody->aX,    "                              precision=4     label='X'                       group=Acceleration ");
   TwAddVarRO(bodyGUI, "bdaccy", TW_TYPE_DOUBLE,  &activeBody->aY,    "                              precision=4     label='Y'                       group=Acceleration ");
-  
+
   TwAddButton(bodyGUI,"newbody", newBodyButton, renderAP,            " label='New Body'          group=Management ");
   TwAddButton(bodyGUI,"delbody", deleteBodyButton, renderAP,         " label='Delete Body'       group=Management ");
   TwAddButton(bodyGUI,"delallb", deleteAllBodiesButton, renderAP,    " label='Delete All'        group=Management ");

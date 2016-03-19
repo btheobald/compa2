@@ -90,6 +90,10 @@ int main(void) {
   glfwDestroyWindow(window);
   glfwTerminate();
 
+  #ifdef EXITNOTE
+    std::cerr << "Main Exit" << std::endl;
+  #endif
+
   return 0;
 }
 
@@ -150,9 +154,16 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
   temp.UGC = 0.1;
   temp.IDT = 0.1;
   temp.IPF = 1;
-  temp.paused = true;
+  temp.paused = false;
   temp.exit = false;
   temp.collide = true;
+
+  #ifdef CUSTOMCTRL
+    temp.UGC = C_UGC;
+    temp.IDT = C_IDT;
+    temp.paused = C_PAUSED;
+    temp.collide = C_COLLIDE;
+  #endif
 
   // Update local
   renderAP->updateControl(temp);
@@ -302,4 +313,8 @@ void startup(shared* sharedAP) {
   }
   // Directly unset shared exit variable to confirm sim exit.
   sharedAP->setExit(0);
+
+  #ifdef EXITNOTE
+    std::cerr << "Simulation Thread Exit" << std::endl;
+  #endif
 }
