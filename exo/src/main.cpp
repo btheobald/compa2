@@ -148,15 +148,15 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
   // Tempoary control structure for setup
   control temp;
   temp.UGC = 0.1;
-  temp.IDT = 1;
+  temp.IDT = 0.1;
   temp.IPF = 1;
-  temp.paused = false;
+  temp.paused = true;
   temp.exit = false;
   temp.collide = true;
 
   // Update local
   renderAP->updateControl(temp);
-  #ifdef default
+  #ifdef DEFAULT
     float cWhite[3] = { 1.0f, 1.0f, 1.0f };
     renderAP->createSuperstructure(1000, 10000, 0.1, 5, 0.1, 0, 0, 0, 0, 20.0, 500.0, cWhite);
   #endif
@@ -212,8 +212,17 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
     renderAP->addBody(new body(0.01,  0.01, 1000, 10, 0.1005, 1.00005));
   #endif
   #ifdef TS9
-    renderAP->addBody(new body(99, 1, 0, 0, true));
+    renderAP->addBody(new body(100, 1, 0, 0, true));
     renderAP->addBody(new body(1, 1, 10, 0, 0, 1));
+  #endif
+  #ifdef TS10
+    float cWhite[3] = { 1.0f, 1.0f, 1.0f };
+    renderAP->createSuperstructure(1, 10000, 0.1, 5, 0.1, 0, 0, 0, 0, 100.0, 100.001, cWhite);
+  #endif
+  #ifdef TS11
+    renderAP->addBody(new body(1, 1, 0, 0, 0, 0));
+    renderAP->addBody(new body(1, 1, 10, 0, 0, 0.11));
+    renderAP->addBody(new body(1, 1, -10, 0, 0, -0.11));
   #endif
   // Update shared area
   sharedAP->updateControl(renderAP->getControl());
@@ -236,16 +245,16 @@ void startup(shared* sharedAP) {
   simAP->updateBodies(sharedAP->getBodies());
   simAP->updateControl(sharedAP->getControl());
 
-  simAP->initialCalc();
-
+  bool initCalc = true;
   int iCount = 0;
+
   #ifdef SP
-  while((!simAP->getExit()) & (iCount < SIMITRS))
+    while((!simAP->getExit()) & (iCount < SIMITRS)) {
   #endif
   #ifndef SP
-  while(!simAP->getExit())
+    while(!simAP->getExit())     {
   #endif
-    {
+
 
     // Wait for data change - Thread Sync
     std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
@@ -255,27 +264,40 @@ void startup(shared* sharedAP) {
     simAP->updateControl(sharedAP->getControl());
 
     if(!simAP->getPaused()) {
+      if(initCalc) {
+        // Do initial calculations.
+        simAP->initialCalc();
+        initCalc = false;
+      }
       for(int iter = 0; iter < simAP->getIPF(); iter++) {
         // Do itteration
-        simAP->itteration();
+        simAP->iteration();
         iCount++;
+
         #ifdef SIPF
-        std::cerr << "i";
+          std::cerr << "i";
         #endif
+
         // Break out of ipf loop if paused or exit.
         if(sharedAP->getPaused() | sharedAP->getExit()) break;
       }
+
       #ifdef SIPF
-      std::cerr << std::endl;
+        std::cerr << std::endl;
       #endif
+
       // Update shared bodies
       sharedAP->updateBodies(simAP->getBodies());
     } else {
+
       #ifdef SCI
-      std::cerr << "Current Iteration: " << iCount << std::endl;
+        std::cerr << "Current Iteration: " << iCount << std::endl;
       #endif
+
       // Get from shared if paused
       simAP->updateBodies(sharedAP->getBodies());
+      // Request recalculation of initial calculations once unpaused.
+      initCalc = true;
     }
   }
   // Directly unset shared exit variable to confirm sim exit.

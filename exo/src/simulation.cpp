@@ -125,6 +125,8 @@ void simulation::lawsOfPhysicsCheck(void) {
 }
 
 void simulation::initialCalc(void) {
+  // Check scenario against the 'laws of physics'.
+  lawsOfPhysicsCheck();
   // Calculate collisions to remove bodies that are too close together.
   calcAllCollisions();
   // Initially calculate accelerations for leapfrog.
@@ -132,16 +134,16 @@ void simulation::initialCalc(void) {
 }
 
 
-void simulation::itteration(void) {
+void simulation::iteration(void) {
   // Check laws of physics
   lawsOfPhysicsCheck();
-  // Collisions
-  if(lControl.collide)
-    calcAllCollisions();
   // 1/2 Velocity
   calcAllHalfVelocity();
   // Position
   calcAllPosition();
+  // Collisions
+  if(lControl.collide)
+    calcAllCollisions();
   // Acceleration
   calcAllAcceleration();
   // 1/2 Velocity
