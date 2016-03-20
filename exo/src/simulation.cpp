@@ -105,7 +105,7 @@ void simulation::calcAllHalfVelocity(void) {
     bodies[i]->calcHalfVelocity(lControl.IDT);
 
     #ifdef PRINTV
-      cout << i << " vX: " << bodies[i]->vX << " vY: " << bodies[i]->vY << " | ";
+      std::cout << i << " vX: " << bodies[i]->vX << " vY: " << bodies[i]->vY;
     #endif
   }
   #ifdef PRINTP
@@ -118,7 +118,7 @@ void simulation::calcAllPosition(void) {
     bodies[i]->calcPosition(lControl.IDT);
 
     #ifdef PRINTP
-      cout << i << " pX: " << bodies[i]->pX << " pY: " << bodies[i]->pY << " | ";
+      std::cout << i << " pX: " << bodies[i]->pX << " pY: " << bodies[i]->pY;
     #endif
   }
   #ifdef PRINTP

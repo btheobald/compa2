@@ -1,0 +1,12 @@
+default: 1, 1
+a=pi*r^2
+pi*1^2 = pi
+pi+pi = 2pi
+
+sqrt(a/pi)=r
+sqrt(2pi/pi)=1.4142 PASS
+
+alt:
+- 1, 10 = 100.050 PASS
+- 2, 10 = 10.198  PASS
+- 5,  5 = 7.071   PASS

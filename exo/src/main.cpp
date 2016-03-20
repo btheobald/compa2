@@ -187,18 +187,18 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
     renderAP->addBody(new body(0.1, 1, 100, 0, 0, 1.00005));
   #endif
   #ifdef TS3
-    renderAP->addBody(new body(1, 1, 10, 0, 0, 0));
-    renderAP->addBody(new body(1, 1, -10, 0, 0, 0));
+    renderAP->addBody(new body(1, 5,  10, 0, -1, 0));
+    renderAP->addBody(new body(1, 5, -10, 0,  1, 0));
   #endif
   #ifdef TS4
     float cWhite[3] = { 1.0f, 1.0f, 1.0f };
     renderAP->createSuperstructure(TS4BODIES, 10000, 0.1, 10, 0.1, 0, 0, 0, 0, 50.0, 1000.0, cWhite);
   #endif
   #ifdef TS5
-    renderAP->addBody(new body(1, 1, 9.99E15, 0, 1E5, 0));
+    renderAP->addBody(new body(1, 1, 9.99999E15, 0, 1E8, 0));
   #endif
   #ifdef TS6
-    renderAP->addBody(new body(1, 1, -9.99E15, 0, 3E9, 0));
+    renderAP->addBody(new body(1, 1, -9.99E15, 0, 3E8, 0));
   #endif
   #ifdef TS7
     // Body Reference Grid
@@ -224,9 +224,9 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
     renderAP->addBody(new body(0.001, 1, 1E8,   0, true));
   #endif
   #ifdef TS8
-    renderAP->addBody(new body(10000, 10,   0,    0,  0,      0));
-    renderAP->addBody(new body(1,     1,    1000, 0,  0,      1.00005));
-    renderAP->addBody(new body(0.01,  0.01, 1000, 10, 0.1005, 1.00005));
+    renderAP->addBody(new body(200, 5,   0,    0,   true));
+    renderAP->addBody(new body(1,     0.5,    20, 0,   0, 1.00005));
+    renderAP->addBody(new body(0.001,  0.1, 20, 1,  0.316, 1.00005));
   #endif
   #ifdef TS9
     renderAP->addBody(new body(100, 1, 0, 0, true));
