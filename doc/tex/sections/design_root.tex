@@ -72,7 +72,7 @@ The main reason for this is that setting up windows for displaying OpenGL contex
 Another library that will be used is AntTweakBar, this library provides a quick and simple to use utility for exposing certain variables and information to the user through a variety of control methods such as buttons and sliders for setting variables to particular values. It also provides a good way of displaying textual information to the user such as a basic help screen.
 
 \paragraph{}
-The C and C++ standard libraries will also be used in this program; these contain functions that allow the use of input and output streams as well as some higher level features such as string handling, threading and vectors, the main two here are threading and vectors. The threading library provides an object orientated implementation for threads, while vector provides an object orientated implementation of a dynamic collection, or array that can change size during program runtime.
+The C and C++ standard libraries will also be used in this program; these contain functions that allow the use of input and output streams as well as some higher level features such as string handling, threading and vectors, the main two here are threading and vectors. The threading library provides an object orientated implementation for threads, while vector provides an object orientated implementation of a dynamic collection, or array that can change size during program runtime. The benefit of using the standard template libraries is that they have been optimized over a long period of time by the maintainers of the particular compiler, in this case GCC, which is open source and has thousands of contributors.
 
 \paragraph{}
 The library structure can also be used for my own code in order to split it up, code can be split into separate code files (.c / .cpp) and linked together using header files (.h / .hpp), these files contain function prototypes for functions that reside inside the code file that it describes. The benefit of this is that the function prototypes are not required inside the code file. It also means that header 'guards' can be used in order to prevent the code being duplicated at the link stage.  The result of this is much cleaner code that is much easier to reuse in other projects.
@@ -94,10 +94,19 @@ This program has two main identifiable components, the simulation and graphics/i
 \import{tables/}{3_overallsystem.tex}
 
 \paragraph{}
+Due to the interactive and real-time nature of the program, the main input method will be through the mouse, relying on the user to select bodies in the current screen, then select attribute boxes and use the keyboard to change the value in those boxes. (The user is able to change both individual bodies and the simulation control constants, such as the gravitational constant.
+
+\paragraph{}
+The only data that will be put onto a secondary storage medium is any scenarios that may be saved, these will be stored in a human-readable and editable text file in a format that will be discussed in a later section. The files will contain all the information required to re-produce a scenario.
+
+\paragraph{}
+The main simulation is performed on a separate thread, handed to a shared area, the data will then be taken from the shared area by the main thread and rendered by OpenGL.
+
+\paragraph{}
 The basic layout of the program is an Input -> Simulate -> Render loop, however in order to produce an output that is actually useful a certain amount of management must be in place to control how much simulation time passes in each frame, meaning that the simulation will only calculate a number of iterations per frame.
 
 \paragraph{}
-GLFW and OpenGL are not handled using object orientation, and instead are handled in a more traditional procedural way. Input in GLFW is handled through the use of callback functions, these must be setup by calling a particular library function and passing it a programmer-defined function that can accept specific attributes that relate to that particular input. (Listed in GLFW Documentation) At the time that that particular input is received that function will be called and the variables passed to it reflect the input given. (Happens at call of GLFWPollEvents(); in render loop.)\\\
+GLFW and OpenGL are not handled using object orientation, and instead are handled in a more traditional procedural way. Input in GLFW is handled through the use of callback functions (Event-Driven Programming), these must be setup by calling a particular library function and passing it a programmer-defined function that can accept specific attributes that relate to that particular input. (Listed in GLFW Documentation) At the time that that particular input is received that function will be called and the variables passed to it reflect the input given. (Happens at call of GLFWPollEvents(); in render loop.)\\\
 
 \begin{center}
 \ttfamily{glfwSetCursorPosCallback(\color{red}window\color{black}, cursorPosCallback);}\\\
@@ -150,28 +159,28 @@ Due to the nature of a n-body system, it is impossible to predict the outcome ov
 It may make a certain degree of sense to look at the maximum distance that can be represented using a double variable yet still maintain a certain number of decimal places for the precision of the calculations (At least 2). This would mean that assuming a base unit of 1 meter, and a precision of 15 digits, the orbit of Pluto can still be represented on a centimetre scale and still have orbits further out.
 
 \paragraph{}
-Worth noting is that there will be a fair amount of error due to the way that decimals are represented in binary. For example, it is generally not possible to exactly represent …0.01, and it will instead be represented as …0.00996, the rest of the digits are due to the implementation that is used both by the compiler and the hardware being used. This will result in an error that can accumulate, adding to the potential for chaos and other miscalculation errors in the simulation. 
+Worth noting is that there will be a fair amount of error due to the way that decimals are represented in binary. For example, it is generally not possible to exactly represent $...0.01$, and it will instead be represented as $...0.00996$, the rest of the digits are due to the implementation that is used both by the compiler and the hardware being used. This will result in an error that can accumulate, adding to the potential for chaos and other miscalculation errors in the simulation. 
 
 \paragraph{}
 While this would work as detached simulation engine without a rendering counterpart, the inclusion and requirement of a graphical front-end and display for the results of the simulation places another limitation on the available range. This is because rendering at a hardware level, handled by a GPU is carried out using single precision floating point, with only high-end GPUs having any kind of FP64 capability and these are generally suited to raw compute rather than actual graphical rendering.
 
 \paragraph{}
-When taking this into account, standard float has only 7 digits of precision, meaning that when representing the orbit of Pluto, you only end up with a precision in the range of 1000 km which is a considerable distance on a smaller scale, it also makes things like rendering an accurate circle of smaller radius somewhat difficult, especially when you consider that the radius of Pluto is only 1186 km. (The circle drawing algorithm discussed later on will end up drawing a square.)
+When taking this into account, standard float has only 7 digits of precision, meaning that when representing the orbit of Pluto, you only end up with a precision in the range of $1000 km$ which is a considerable distance on a smaller scale, it also makes things like rendering an accurate circle of smaller radius somewhat difficult, especially when you consider that the radius of Pluto is only $1186 km$. (The circle drawing algorithm discussed later on will end up drawing a square.)
 
 \paragraph{}
-In order to improve the minimum precision that the renderer will encounter in order to preserve accuracy, the maximum distance that a body can be from the origin must be reduced, reducing by an order of magnitude will reduce the absolute maximum to $\num{9.99E11}$ m, which is only enough to represent out to past the orbit of Jupiter, while this is quite a drop in the maximum distance, it will make the precision of the simulation much higher at its maximum extremes and also reduces the minimum render distance down to 100km, this makes a body the size of Pluto possible to render at the extremes. Because of the nature of floating point, smaller bodies can still be rendered, however they will not be visible after a certain distance due to the loss in precision. (They will however still be simulated; it could be a good idea to delete bodies that are smaller than a certain size after they travel too far or specify a minimum render size at the extents so that the body can still be selected by the user.)
+While this would be an issue for rendering full circles at close up distances, it will still be possible to render singular points, GL_POINTS will always render, regardless of how small the body itself it, and is far more tolerant to the loss in precision, because of this, the limit for distance will be set at $\num{1e15} (m)$
 
 \paragraph{}
 Other more definite limitations include mass, which cannot be 0 or negative, while hypothetically possible, this would result in complications and odd behaviour in the simulation, something that is best to avoid. It makes little sense to implement any maximum for mass, as on a stellar scale, masses are extremely variable due to composition, type and size of bodies. (A good example of this are black holes, these are relatively small in size but super-massive.)
 
 \paragraph{}
-Maximum radius should also be limited, however it does once again bring up the issue of what makes sense, the sun in our solar system has a radius 696,000 km, while the largest known star, VY Canis Majoris reaches a staggering 1 billion km in radius (About 1420 Sol Radii), this actually be near the limit of the size of the simulation, making a body of this size quite pointless, a much more reasonable maximum would be 1 million km , allowing for representation of bodies somewhat larger than our own sun.
+Maximum radius should also be limited, however it does once again bring up the issue of what makes sense, the sun in our solar system has a radius $696,000 km$, while the largest known star, VY Canis Majoris reaches a staggering 1 billion km in radius (About 1420 Sol Radii), this actually be near the limit of the size of the simulation, making a body of this size quite pointless, a much more reasonable maximum would be 1 million km , allowing for representation of bodies somewhat larger than our own sun.
 
 \paragraph{}
 Other variables, such as time step, should be limited to being positive (It is however worth noting that the leapfrog integration method allows for time reversal, this requires some modification however.) so that time can only move forward. The number of iterations per frame should be limited to a range of 1 to 10000, while the upper range will likely be only run at target frame rate on extremely high end systems or with low numbers of bodies, this value will be the main control the user has for increasing the speed of the simulation without sacrificing on accuracy.
 
 \paragraph{}
-Gravitational constant should be constrained to being a positive number as a negative number would reverse the effects of gravity, the upper limit of the gravitational constant will be 10, with a lower limit of $\num{1E12}$.
+Gravitational constant should be constrained to being a positive number as a negative number would reverse the effects of gravity, the upper limit of the gravitational constant will be 10, with a lower limit of $\num{1E-12}$.
 Other values involved primarily in calculation, such as velocity and acceleration will not have the limitation set to the speed of light in vacuum, or $\num{3E8} ms^{-1}$. This is a law of the universe and cannot be bypassed. In reality it cannot be reached, as at relativistic speeds the mass of the approaching body will increase, this simulation does not cover relativistic effects. (Because these are vector quantities, the same limit exists for the negative range.) If a body reaches or exceeds this velocity it will be deleted.
 
 \paragraph{}
@@ -185,6 +194,9 @@ None of the data handled by the application is considered sensitive from a user 
 
 \paragraph{}
 When it comes to the saving of scenarios, these files will be by default outputted to a directory alongside the main executable. The user will be able to choose the name of the saved file, if the file already exists, the user should be prompted to if they want to overwrite the existing data. On an expected exit of the program, the simulation data should be saved to a default storage file that keeps a backup of the last data in the program, this will be opened on start-up without prompt.
+
+\paragraph{}
+Because these saves are files normal text files, they can be moved around by users at will, meaning that if required they can be stored on a distributed storage medium such as the school server, for backup and sharing with other students and teachers. The main application will also just be an executable, requiring no external files to run and no installer, meaning that this could also be stored on a shared drive and copied to a users local machine in order to run it.
 
 \paragraph{}
 It is important that thread shared data is managed effectively so that there are no concurrent reads or writes as this will cause the corruption of data and potential issues further down the line in the event that a variable changes while another thread is reading the data. This can be managed via the use of \textit{Mutex} lock objects, if one of these are locked and another thread attempts to lock the same mutex it will pause until the locking thread unlocks the mutex, thus preventing concurrent read/write access.

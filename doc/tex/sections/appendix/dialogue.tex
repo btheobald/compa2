@@ -62,6 +62,29 @@ SDS
 
 TO: Mr Snowden
 
+I have attached a copy of the objectives that I will be adheering to during the development and implementation of the current system.
+
+If you could review these and let me know your thoughts.
+
+Many Thanks
+
+Byron Theobald
+
+\vspace{8pt}
+\hrule
+
+TO: Byron
+
+All of these look good, nothing that I can think of that isn't on the list.
+
+Best wishes,
+SDS
+
+\vspace{8pt}
+\hrule
+
+TO: Mr Snowden
+
 I wanted to update you on the current progress of the orbital simulator, apologies for infrequency in that regard.
 
 In its current state the code is sitting at just over 850 lines total.
@@ -78,9 +101,9 @@ After the renderer is implemented I will then focus on the UI and other utilitie
 
 Attached is an animation of the raw simulation output showing a model sun-planet-moon system
 
-\begin{figure}[!ht]
+\begin{figure}[H]
   \centering
-  \includegraphics[width=0.7\textwidth]{img/still.png}
+  \includegraphics[width=0.6\textwidth]{img/still.png}
   \caption{Three Body Sun-Planet-Moon System}
 \end{figure}
 
@@ -93,7 +116,7 @@ I implemented a basic version of the rendering module that i will be developing 
 
 Here is a preview:
 
-\begin{figure}[!ht]
+\begin{figure}[H]
   \centering
   \includegraphics[width=0.9\textwidth]{img/pEcho.png}
   \caption{N-Body Graphics Test}
@@ -128,7 +151,26 @@ This could allow the software to be used to simulate a very low body count galax
 
 Something that we also decided on was the ability to turn on and off body collisions and combinations, as not having collisions results in the simulation staying more stable for longer.
 
-While the earlier intention was to only consider the simulation for a few bodies, I will now consider the simulation for upto 1000 bodies, the benefit is that if the simulation is correct for 3 bodies, it will be correct for 1000.
+While the earlier intention was to only consider the simulation for a few bodies, I will now consider the simulation for larger numbers of bodies, the benefit is that if the simulation is correct for 3 bodies, it will be correct for any number.
 
 The other benefit that this brings is the showcase aspect of it, something like this 'looks' really good to anybody who is is studying or considering studying Physics, It is also far more likely to move into the area of inspiration for younger people, increasing their interest in Physics and academia in general. Spectacle is something that can easily affect the way that people think.
+
+\vspace{8pt}
+\pagebreak
+
+TO Mr Snowden
+
+As of the week before last I have put a freeze on major programming for the project.
+
+During the weekend (week before last) I decided to rewrite the entire program from scratch, as the way that certain core functions of the program were written made it extremely difficult to add critical user interface controls for adding and deleting bodies, among other things.
+
+I also rewrote major algorithms that stored the forces for each relationship and then summed them on the individual bodies after they had all been calculated, the issue with this is that it was a relatively large memory hog in the program, while it wasn't going to affect its normal use, I still felt that it was worth doing differently.
+
+The current system is now much more efficient, as forces are no longer directly stored in the bodies themselves and instead, each relationship is calculated, converted to acceleration and then summed onto the body object, this is done for both axis and for both bodies in the relationship.
+
+After the full rewrite there where substantial performance gains to the simulation, a 2000 body simulation runs about as well as a 1000 body simulation did previously.
+
+Unfortunately, due to time constraints several features have not been included in the project at this current time, the main omission is the ability to save and load pre-made scenarios.
+
+Regardless of that fact, I feel that in its current state the program is more than usable, I still do need to compile a version that can run on Windows, however that is not priority at the moment.
 }

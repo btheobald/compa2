@@ -10,9 +10,25 @@ Mr Snowden requires a teaching tool that can provide a graphical sandbox to crea
 \paragraph{}
 While Mr Snowden is intended to be the primary user, other teachers could also have access to the tool as it could be put on the shared network drive, making the tool easy to access and used as a teaching aid in lessons, the tool will also be accessed by students, allowing the tool to be used as a revision resource for individual students on the school computers or at home. Because of this special attention should be paid to make sure that the program is as compatible as possible 
 
+Because the users of the program are teachers and students (most likely A-Level) a good amount of technical knowledge in the field can be presumed, the tool will be used as a teaching aide, so it is not a requirement to explain the Physics in the program itself. It will be clear to anybody that studies Physics to a basic level what all the adjustment factors are.
+
+\subsection{Current System}
+\paragraph{}
+The current system that is in place for teaching of orbital mechanics and in particular, newtons law of gravitation is mainly through the use of straight mathematical teaching, using the equations. Teachers will often write notes and examples for students to work through, past exam questions are also a popular choice.
+
+\paragraph{}
+Currently, simulation applets such as those found on the phET website are quite commonly used, these are mostly predefined animations with very few of them actually being true simulations.
+Even the ones that are actual simulations are extremely limited and not particularly visually appealing. It is these tools that this project will aim to replace.
+
+\paragraph{}
+The main disadvantage with the phET tools is that their simulation is often not particularly accurate, one tool has a maximum of 4 bodies that it is able to simulate.
+
+\paragraph{}
+By having a application that has a very basic visual style, it will be a lot easier for a teacher to pause the simulation and annotate the board with extra information for students, such as going through a calculation in the current simulation state to prove the maths.
+
 \subsection{Requirements and Processes}
 \paragraph{}
-The interface must be intuitive and self-explanatory in order to ensure that it is easy for teachers to understand, meaning that keyboard short-cuts should be commonly known and any buttons should be clearly labelled. It must also be able to run well on the school computers, most of which are running on low end hardware (Dual-Core HT Intel i3 / Quad-Core Intel i5, ~2-4GB RAM) using a 32-Bit Windows operating system, as this is what all computers in the school are running for internal compatibility reasons. This applies a limit of 4GB to the total system RAM but a maximum per program usage of 2GB, meaning that the program will need to handle memory efficiently and potentially have a limit on the number of bodies (In the range of 1000s) to avoid using too much memory and causing the system to crash, a sensible limit would be 500MB. The number of bodies that this would support can be estimated however actual memory usage will likely be higher due to graphics library overhead, meaning that memory profiling should be used. The program must not require installation on the system or any secondary redistributes to be installed containing dynamic libraries.
+The interface must be intuitive and self-explanatory in order to ensure that it is easy for teachers to understand, meaning that keyboard short-cuts should be ones that are commonly used in software (Such as $Ctrl-S$ for save) and any buttons should be clearly labelled. It must also be able to run well on the school computers, most of which are running on low end hardware (Dual-Core HT Intel i3 / Quad-Core Intel i5, ~2-4GB RAM) using a 32-Bit Windows operating system, as this is what all computers in the school are running for internal compatibility reasons. This applies a limit of 4GB to the total system RAM but a maximum per program usage of 2GB, meaning that the program will need to handle memory efficiently and potentially have a limit on the number of bodies (In the range of 1000s) to avoid using too much memory and causing the system to crash, a sensible limit would be 500MB. The number of bodies that this would support can be estimated however actual memory usage will likely be higher due to graphics library overhead, meaning that memory profiling should be used. The program must not require installation on the system or any secondary redistributes to be installed containing dynamic libraries.
 
 \subsubsection{Graphics Processing}
 
@@ -58,7 +74,7 @@ Because of these difficulties, it is worth investigating alternative methods for
 Mutli-threading leads to is the potential to speed up the execution of the program by computing multiple parts of it at the same time. All of the computers in the school are new enough to have at a minimum dual core Intel i3 with hyper-threading, giving them a total of 4 'logical cores', this means that there is definitely some potential to improve the execution speed of the program.
 
 \paragraph{} 
-This opens up new challenges in the form of ensuring that the programming is \textit{'thread safe'}, this means that the program is not going to \textit{‘step on its own toes’}, for example modifying data while another thread is reading it causing lock-ups, or race conditions where one thread completes a task before another and the program fails. When done properly the improvements to performance can be quite impressive.
+This opens up new challenges in the form of ensuring that the programming is \textit{'thread safe'}, this means that the program is not going to \textit{'step on its own toes'}, for example modifying data while another thread is reading it causing lock-ups, or race conditions where one thread completes a task before another and the program fails. When done properly the improvements to performance can be quite impressive.
 
 \subsubsection{Saving of Scenarios}
 
@@ -69,20 +85,6 @@ The system will also need the ability to save the current scenario to a file, mo
 
 \paragraph{}
 It is unlikely that true scale would translate particularly well to a program like this without visual aids added to the program, as distances are extremely massive, and planets are extremely small small in comparison to the sun, let alone the distances involved, for example, Earth has a diameter of only 12700 km, however it orbits the sun at a height of 150 Million km. At a zoom where both the sun and earth will be visible, the earth will be too small to make out, even on extremely high resolution monitors.
-
-\subsubsection{Summary: Requirements and Processes}
-\begin{itemize}
-\item Intuitive and clean interface making use of common keyboard short-cuts.
-\item The program must be compatible with as many computers as possible, as it must be able to be run by students outside of school as well as on the school computers. Care must be made to ensure that code is portable and can be easily recompiled for other operating systems, such as Linux or Mac OSX.
-\item It must run on 32-bit computers and operating systems.
-\item The program must be able to simulate n-bodies, with the only limit being acceptable performance and the amount of memory being used. The body limit will be based on the amount of memory being used. (Max 500MB)
-\item The user should be able to set up a scenario to save and then use at a later date.
-\item The user will have complete freedom to change to scale the scenario how they please and will be given complete control of constants such as the gravitational constant, as this would make smaller scale simulations more feasible.
-\item The program will make use of simple 2D graphics to keep system resource requirements low and boost performance. (3D is not in scope for this project)
-\item A graphics library should be used that allows efficient usage of a computer's GPU in order to accelerate the rendering of the simulation.
-\item Multi-threading could be investigated in order to improve the performance of simulation and handling of rendering.
-\item Some limitations will be required on variables such as position and velocity in order to ensure that a minimum precision is kept and that the laws of physics are not violated. (Speed of Light)
-\end{itemize}
 
 \subsection{Data Management}
 \subsubsection{Data Sources and Destinations}
@@ -134,7 +136,7 @@ The variables written in the table below are likely to change as this project de
   \caption{Current System, Level 1}
 \end{figure}
 
-\begin{figure}[!ht]
+\begin{figure}[H]
   \centering
   \includegraphics[width=\textwidth]{img/nsl0.png}
   \caption{New System, Level 0}
@@ -146,8 +148,22 @@ The variables written in the table below are likely to change as this project de
   \caption{New System, Level 1}
 \end{figure}
 
+\subsection{Limitations}
+\paragraph{}
+When it comes to limitations, the main one to consider will be the dimensions of the simulation, while it would be relatively straightforward to program a 3D simulation, it would increase the computational requirement for the program as well as make the rendering far more complex, requiring some form of lighting and shading calculations to make the display useful in any way.
+
+\paragraph{}
+The disadvantage of having a more complicated visual display is that it will be much easier to miss displayed information on the screen, particularly from the view of students. This is because the teacher will likely be projecting the application onto the whiteboard, due to the nature of the projectors they don't produce the best quality image and often struggle with contrast, having complex shading would just serve to make matters worse.
+
+\paragraph{}
+The system being used is as mentioned previously something of a brute force method, while more efficient algorithms exist, such as Barnes-Hut I do not plan on implementing these, as they are more suited to extremely large simulations with hundreds of thousands to hundreds of billions of bodies over galactic scales. Often these are implemented on supercomputer clusters.
+
 \subsection{Objectives}
 \import{sections/analysis/}{objectives.tex}
+
+\subsection{User Dialogue}
+\paragraph{}
+Email correspondence with the user can be found in Appendix A.
 
 \pagebreak
 \subsection{Potential Solutions}
@@ -230,14 +246,6 @@ The tool will print errors to a terminal in the case that it detects programming
 
 \footnotetext[1]{Will Use}
 \footnotetext[2]{May Use}
-
-\pagebreak
-\subsubsection{\LaTeX - Document Authoring}
-\paragraph{}
-Both this document and the manual for the application will be typeset using the \LaTeX word processor, Documents are written in comprehensive mark-up language which can then be compiled into a variety of formats, such as .pdf.
-
-\paragraph{}
-The system allows for extremely complex documents to be created, while keeping simple documents relatively easy to produce but keep the whole document to a consistent style, with automatic generation of a contents page. It also makes it easy to manage things like sources and references.
 
 
 

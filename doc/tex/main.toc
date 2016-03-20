@@ -2,81 +2,81 @@
 \contentsline {subsection}{\numberline {1.1}Background}{4}{subsection.1.1}
 \contentsline {subsubsection}{\numberline {1.1.1}Project Objective}{4}{subsubsection.1.1.1}
 \contentsline {subsubsection}{\numberline {1.1.2}Prospective Users}{4}{subsubsection.1.1.2}
-\contentsline {subsection}{\numberline {1.2}Requirements and Processes}{4}{subsection.1.2}
-\contentsline {subsubsection}{\numberline {1.2.1}Graphics Processing}{5}{subsubsection.1.2.1}
-\contentsline {subsubsection}{\numberline {1.2.2}Calculations and Trigonometry}{5}{subsubsection.1.2.2}
-\contentsline {subsubsection}{\numberline {1.2.3}Performance and Multithreading}{6}{subsubsection.1.2.3}
-\contentsline {subsubsection}{\numberline {1.2.4}Saving of Scenarios}{7}{subsubsection.1.2.4}
-\contentsline {subsubsection}{\numberline {1.2.5}Scale}{8}{subsubsection.1.2.5}
-\contentsline {subsubsection}{\numberline {1.2.6}Summary: Requirements and Processes}{8}{subsubsection.1.2.6}
-\contentsline {subsection}{\numberline {1.3}Data Management}{9}{subsection.1.3}
-\contentsline {subsubsection}{\numberline {1.3.1}Data Sources and Destinations}{9}{subsubsection.1.3.1}
-\contentsline {subsubsection}{\numberline {1.3.2}Data Dictionary}{10}{subsubsection.1.3.2}
-\contentsline {subsubsection}{\numberline {1.3.3}Data Flow Diagrams}{13}{subsubsection.1.3.3}
-\contentsline {subsection}{\numberline {1.4}Objectives}{13}{subsection.1.4}
-\contentsline {subsubsection}{\numberline {1.4.1}System}{13}{subsubsection.1.4.1}
-\contentsline {subsubsection}{\numberline {1.4.2}Processing}{14}{subsubsection.1.4.2}
-\contentsline {subsubsection}{\numberline {1.4.3}User}{16}{subsubsection.1.4.3}
-\contentsline {subsection}{\numberline {1.5}Potential Solutions}{17}{subsection.1.5}
-\contentsline {subsubsection}{\numberline {1.5.1}C++, OpenGL, GLFW}{17}{subsubsection.1.5.1}
-\contentsline {subsubsection}{\numberline {1.5.2}Pascal, Graph, Forms}{19}{subsubsection.1.5.2}
-\contentsline {subsubsection}{\numberline {1.5.3}C++, OpenGL, SFML}{21}{subsubsection.1.5.3}
-\contentsline {subsubsection}{\numberline {1.5.4}Conclusion}{22}{subsubsection.1.5.4}
-\contentsline {subsection}{\numberline {1.6}Management and Tools}{23}{subsection.1.6}
-\contentsline {subsubsection}{\numberline {1.6.1}Linux and Development Environment}{23}{subsubsection.1.6.1}
-\contentsline {subsubsection}{\numberline {1.6.2}Git - Version Control}{23}{subsubsection.1.6.2}
-\contentsline {subsubsection}{\numberline {1.6.3}GDB - Debugging}{24}{subsubsection.1.6.3}
-\contentsline {subsubsection}{\numberline {1.6.4}Valgrind - Profiling and Memory Analysis}{24}{subsubsection.1.6.4}
-\contentsline {paragraph}{\nonumberline Included Tools}{25}{section*.50}
-\contentsline {subsubsection}{\numberline {1.6.5}\LaTeX - Document Authoring}{26}{subsubsection.1.6.5}
-\contentsline {section}{\numberline {2}Prototyping}{27}{section.2}
+\contentsline {subsection}{\numberline {1.2}Current System}{5}{subsection.1.2}
+\contentsline {subsection}{\numberline {1.3}Requirements and Processes}{5}{subsection.1.3}
+\contentsline {subsubsection}{\numberline {1.3.1}Graphics Processing}{6}{subsubsection.1.3.1}
+\contentsline {subsubsection}{\numberline {1.3.2}Calculations and Trigonometry}{6}{subsubsection.1.3.2}
+\contentsline {subsubsection}{\numberline {1.3.3}Performance and Multithreading}{7}{subsubsection.1.3.3}
+\contentsline {subsubsection}{\numberline {1.3.4}Saving of Scenarios}{8}{subsubsection.1.3.4}
+\contentsline {subsubsection}{\numberline {1.3.5}Scale}{8}{subsubsection.1.3.5}
+\contentsline {subsection}{\numberline {1.4}Data Management}{9}{subsection.1.4}
+\contentsline {subsubsection}{\numberline {1.4.1}Data Sources and Destinations}{9}{subsubsection.1.4.1}
+\contentsline {subsubsection}{\numberline {1.4.2}Data Dictionary}{10}{subsubsection.1.4.2}
+\contentsline {subsubsection}{\numberline {1.4.3}Data Flow Diagrams}{13}{subsubsection.1.4.3}
+\contentsline {subsection}{\numberline {1.5}Limitations}{15}{subsection.1.5}
+\contentsline {subsection}{\numberline {1.6}Objectives}{15}{subsection.1.6}
+\contentsline {subsubsection}{\numberline {1.6.1}System}{15}{subsubsection.1.6.1}
+\contentsline {subsubsection}{\numberline {1.6.2}Processing}{16}{subsubsection.1.6.2}
+\contentsline {subsubsection}{\numberline {1.6.3}User}{16}{subsubsection.1.6.3}
+\contentsline {subsection}{\numberline {1.7}User Dialogue}{17}{subsection.1.7}
+\contentsline {subsection}{\numberline {1.8}Potential Solutions}{18}{subsection.1.8}
+\contentsline {subsubsection}{\numberline {1.8.1}C++, OpenGL, GLFW}{18}{subsubsection.1.8.1}
+\contentsline {subsubsection}{\numberline {1.8.2}Pascal, Graph, Forms}{20}{subsubsection.1.8.2}
+\contentsline {subsubsection}{\numberline {1.8.3}C++, OpenGL, SFML}{22}{subsubsection.1.8.3}
+\contentsline {subsubsection}{\numberline {1.8.4}Conclusion}{23}{subsubsection.1.8.4}
+\contentsline {subsection}{\numberline {1.9}Management and Tools}{24}{subsection.1.9}
+\contentsline {subsubsection}{\numberline {1.9.1}Linux and Development Environment}{24}{subsubsection.1.9.1}
+\contentsline {subsubsection}{\numberline {1.9.2}Git - Version Control}{24}{subsubsection.1.9.2}
+\contentsline {subsubsection}{\numberline {1.9.3}GDB - Debugging}{25}{subsubsection.1.9.3}
+\contentsline {subsubsection}{\numberline {1.9.4}Valgrind - Profiling and Memory Analysis}{25}{subsubsection.1.9.4}
+\contentsline {paragraph}{\nonumberline Included Tools}{26}{section*.58}
+\contentsline {section}{\numberline {2}Design}{27}{section.2}
 \contentsline {subsection}{\numberline {2.1}Simulation Efficiency}{27}{subsection.2.1}
 \contentsline {subsection}{\numberline {2.2}Simulation Prototyping}{28}{subsection.2.2}
 \contentsline {subsubsection}{\numberline {2.2.1}Leapfrog Intergration}{30}{subsubsection.2.2.1}
 \contentsline {subsubsection}{\numberline {2.2.2}Vector Equations}{30}{subsubsection.2.2.2}
-\contentsline {section}{\numberline {3}Design}{32}{section.3}
-\contentsline {subsection}{\numberline {3.1}Threading}{32}{subsection.3.1}
-\contentsline {subsection}{\numberline {3.2}Libraries}{35}{subsection.3.2}
-\contentsline {subsection}{\numberline {3.3}Structure}{37}{subsection.3.3}
-\contentsline {subsubsection}{\numberline {3.3.1}Overall System Design}{37}{subsubsection.3.3.1}
-\contentsline {subsubsection}{\numberline {3.3.2}Program Flowchart}{39}{subsubsection.3.3.2}
-\contentsline {subsubsection}{\numberline {3.3.3}Data Range and Validation}{40}{subsubsection.3.3.3}
-\contentsline {subsubsection}{\numberline {3.3.4}Data Security and Integrity}{44}{subsubsection.3.3.4}
-\contentsline {subsubsection}{\numberline {3.3.5}Data Record Structure}{44}{subsubsection.3.3.5}
-\contentsline {subsection}{\numberline {3.4}Algorithms}{48}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}Simulation}{48}{subsubsection.3.4.1}
-\contentsline {paragraph}{\nonumberline Algorithm 1: Force Calculation Between Two Bodies}{48}{section*.129}
-\contentsline {paragraph}{\nonumberline Algorithm 2: Calculation of all Forces}{48}{section*.130}
-\contentsline {paragraph}{\nonumberline Algorithm 3: Summation of Forces on Bodies}{49}{section*.134}
-\contentsline {paragraph}{\nonumberline Algorithm 4: Integration of New Position}{50}{section*.138}
-\contentsline {paragraph}{\nonumberline Algorithm 5: Body Collision Detection and Calculation}{50}{section*.142}
-\contentsline {subsubsection}{\numberline {3.4.2}Graphics}{52}{subsubsection.3.4.2}
-\contentsline {paragraph}{\nonumberline Algorithm 6: Circle Drawing}{52}{section*.145}
-\contentsline {subsubsection}{\numberline {3.4.3}Interface}{53}{subsubsection.3.4.3}
-\contentsline {paragraph}{\nonumberline Algorithm 7: Body Selection}{53}{section*.148}
-\contentsline {paragraph}{\nonumberline Algorithm 8: Pan and Zoom}{53}{section*.151}
-\contentsline {paragraph}{\nonumberline Algorithm 9: Scenario Saving and Loading}{53}{section*.154}
-\contentsline {subsubsection}{\numberline {3.4.4}Management}{54}{subsubsection.3.4.4}
-\contentsline {paragraph}{\nonumberline Algorithm 10: Thread Synchronisation and Shared Data Management}{54}{section*.157}
-\contentsline {subsection}{\numberline {3.5}Pseudocode}{55}{subsection.3.5}
-\contentsline {subsection}{\numberline {3.6}OO Data Structure}{58}{subsection.3.6}
-\contentsline {subsubsection}{\numberline {3.6.1}body}{59}{subsubsection.3.6.1}
-\contentsline {subsubsection}{\numberline {3.6.2}scenario}{60}{subsubsection.3.6.2}
-\contentsline {subsubsection}{\numberline {3.6.3}simTLC}{61}{subsubsection.3.6.3}
-\contentsline {subsubsection}{\numberline {3.6.4}rdrTLC}{61}{subsubsection.3.6.4}
-\contentsline {subsubsection}{\numberline {3.6.5}sharedStage}{63}{subsubsection.3.6.5}
-\contentsline {subsection}{\numberline {3.7}Human-Computer Interaction}{64}{subsection.3.7}
-\contentsline {subsubsection}{\numberline {3.7.1}Frame Rate}{64}{subsubsection.3.7.1}
-\contentsline {subsubsection}{\numberline {3.7.2}Mock Interface}{65}{subsubsection.3.7.2}
-\contentsline {subsection}{\numberline {3.8}Testing Strategy}{67}{subsection.3.8}
-\contentsline {section}{\numberline {4}Implementation}{68}{section.4}
-\contentsline {section}{\numberline {5}Manual}{69}{section.5}
-\contentsline {section}{\numberline {6}Evaluation}{70}{section.6}
-\contentsline {section}{\numberline {7}Code Listing}{71}{section.7}
-\contentsline {subsection}{\numberline {7.1}Early Prototypes}{71}{subsection.7.1}
-\contentsline {subsubsection}{\numberline {7.1.1}Euler (Trig)}{71}{subsubsection.7.1.1}
-\contentsline {subsubsection}{\numberline {7.1.2}Euler (Vector) with $\Delta {} E$}{73}{subsubsection.7.1.2}
-\contentsline {subsubsection}{\numberline {7.1.3}Leapfrog (Vector) with $\Delta {} E$}{75}{subsubsection.7.1.3}
-\contentsline {section}{Appendices}{77}{section*.181}
+\contentsline {subsection}{\numberline {2.3}Threading}{32}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Libraries}{35}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Structure}{37}{subsection.2.5}
+\contentsline {subsubsection}{\numberline {2.5.1}Overall System Design}{37}{subsubsection.2.5.1}
+\contentsline {subsubsection}{\numberline {2.5.2}Program Flowchart}{39}{subsubsection.2.5.2}
+\contentsline {subsubsection}{\numberline {2.5.3}Data Range and Validation}{40}{subsubsection.2.5.3}
+\contentsline {subsubsection}{\numberline {2.5.4}Data Security and Integrity}{44}{subsubsection.2.5.4}
+\contentsline {subsubsection}{\numberline {2.5.5}Data Record Structure}{44}{subsubsection.2.5.5}
+\contentsline {subsection}{\numberline {2.6}Algorithms}{48}{subsection.2.6}
+\contentsline {subsubsection}{\numberline {2.6.1}Simulation}{48}{subsubsection.2.6.1}
+\contentsline {paragraph}{\nonumberline Algorithm 1: Force Calculation Between Two Bodies}{48}{section*.135}
+\contentsline {paragraph}{\nonumberline Algorithm 2: Calculation of all Forces}{48}{section*.136}
+\contentsline {paragraph}{\nonumberline Algorithm 3: Summation of Forces on Bodies}{49}{section*.140}
+\contentsline {paragraph}{\nonumberline Algorithm 4: Integration of New Position}{50}{section*.144}
+\contentsline {paragraph}{\nonumberline Algorithm 5: Body Collision Detection and Calculation}{50}{section*.148}
+\contentsline {subsubsection}{\numberline {2.6.2}Graphics}{52}{subsubsection.2.6.2}
+\contentsline {paragraph}{\nonumberline Algorithm 6: Circle Drawing}{52}{section*.151}
+\contentsline {subsubsection}{\numberline {2.6.3}Interface}{53}{subsubsection.2.6.3}
+\contentsline {paragraph}{\nonumberline Algorithm 7: Body Selection}{53}{section*.154}
+\contentsline {paragraph}{\nonumberline Algorithm 8: Pan and Zoom}{53}{section*.157}
+\contentsline {paragraph}{\nonumberline Algorithm 9: Scenario Saving and Loading}{53}{section*.160}
+\contentsline {subsubsection}{\numberline {2.6.4}Management}{54}{subsubsection.2.6.4}
+\contentsline {paragraph}{\nonumberline Algorithm 10: Thread Synchronisation and Shared Data Management}{54}{section*.163}
+\contentsline {subsection}{\numberline {2.7}Pseudocode}{55}{subsection.2.7}
+\contentsline {subsection}{\numberline {2.8}OO Data Structure}{58}{subsection.2.8}
+\contentsline {subsubsection}{\numberline {2.8.1}body}{59}{subsubsection.2.8.1}
+\contentsline {subsubsection}{\numberline {2.8.2}scenario}{60}{subsubsection.2.8.2}
+\contentsline {subsubsection}{\numberline {2.8.3}simTLC}{61}{subsubsection.2.8.3}
+\contentsline {subsubsection}{\numberline {2.8.4}rdrTLC}{61}{subsubsection.2.8.4}
+\contentsline {subsubsection}{\numberline {2.8.5}sharedStage}{63}{subsubsection.2.8.5}
+\contentsline {subsection}{\numberline {2.9}Human-Computer Interaction}{64}{subsection.2.9}
+\contentsline {subsubsection}{\numberline {2.9.1}Frame Rate}{64}{subsubsection.2.9.1}
+\contentsline {subsubsection}{\numberline {2.9.2}Mock Interface}{65}{subsubsection.2.9.2}
+\contentsline {subsection}{\numberline {2.10}Testing Strategy}{67}{subsection.2.10}
+\contentsline {section}{\numberline {3}Implementation}{68}{section.3}
+\contentsline {section}{\numberline {4}Manual}{69}{section.4}
+\contentsline {section}{\numberline {5}Evaluation}{70}{section.5}
+\contentsline {section}{\numberline {6}Code Listing}{71}{section.6}
+\contentsline {subsection}{\numberline {6.1}Early Prototypes}{71}{subsection.6.1}
+\contentsline {subsubsection}{\numberline {6.1.1}Euler (Trig)}{71}{subsubsection.6.1.1}
+\contentsline {subsubsection}{\numberline {6.1.2}Euler (Vector) with $\Delta {} E$}{73}{subsubsection.6.1.2}
+\contentsline {subsubsection}{\numberline {6.1.3}Leapfrog (Vector) with $\Delta {} E$}{75}{subsubsection.6.1.3}
+\contentsline {section}{Appendices}{77}{section*.187}
 \contentsline {subsection}{\numberline {A}Dialogue}{77}{subsection.Alph0.1}
-\contentsline {section}{References}{83}{figure.17}
+\contentsline {section}{References}{84}{figure.17}
