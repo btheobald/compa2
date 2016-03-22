@@ -30,6 +30,10 @@ By having a application that has a very basic visual style, it will be a lot eas
 \paragraph{}
 The interface must be intuitive and self-explanatory in order to ensure that it is easy for teachers to understand, meaning that keyboard short-cuts should be ones that are commonly used in software (Such as $Ctrl-S$ for save) and any buttons should be clearly labelled. It must also be able to run well on the school computers, most of which are running on low end hardware (Dual-Core HT Intel i3 / Quad-Core Intel i5, ~2-4GB RAM) using a 32-Bit Windows operating system, as this is what all computers in the school are running for internal compatibility reasons. This applies a limit of 4GB to the total system RAM but a maximum per program usage of 2GB, meaning that the program will need to handle memory efficiently and potentially have a limit on the number of bodies (In the range of 1000s) to avoid using too much memory and causing the system to crash, a sensible limit would be 100MB. The number of bodies that this would support can be estimated however actual memory usage will likely be higher due to graphics library overhead, meaning that memory profiling should be used. The program must not require installation on the system or any secondary redistributes to be installed containing dynamic libraries.
 
+What is not needed is a 3D simulation system, as only a simplistic 2D model needs to be explained to students. The use of 3D would require an extremely complex user interface and processing in order to implement in a usable fashion.
+
+Initially, the system will not be handling massive numbers of bodies, at most it will be handling around 1000 bodies at maximum, however no limits should be placed on the number of bodies it is possible to use, as performance will vary depending on the particular hardware the program is run on. Practically, most demonstrations will only make use of two or three bodies.
+
 \subsubsection{Graphics Processing}
 
 \paragraph{}
@@ -91,6 +95,8 @@ It is unlikely that true scale would translate particularly well to a program li
 \subsubsection{Data Sources and Destinations}
 \import{tables/}{1_datasrcdest.tex}
 % Data Sources and Destinations Table
+
+\subsubsection{Data Volumes}
 \paragraph{}
 Direct user input will be relatively low volume, taken in using keyboard short-cuts and mouse control, the user operates the program in order to place down objects, adjusting the initial size, mass and velocity of bodies in order to set-up the scenario, the user can also stop and start the program and change the speed of time within the simulation as well as other constants.
 
@@ -210,7 +216,7 @@ Because I will be developing the software using Linux, I will need to work out a
 
 \subsubsection{Git - Version Control}
 \paragraph{}
-I will make use of tools such as \textit{Git} (Originally written by Linus Torvalds, Creator of Linux) for the management and version control of the source code, this allows me to make changes to my code and upload it to a remote server. The code can be 'pulled' on other computers, changes can be 'staged' and 'committed', the resulting 'commits' can then be 'pushed to the remote server. Git provides options to split changes to code into separate branches for making experimental changes to the code without making changes to the 'master' code.
+I will make use of tools such as \textit{Git} for the management and version control of the source code, this allows me to make changes to my code and upload it to a remote server. The code can be 'pulled' on other computers, changes can be 'staged' and 'committed', the resulting 'commits' can then be 'pushed to the remote server. Git provides options to split changes to code into separate branches for making experimental changes to the code without making changes to the 'master' code.
 
 \paragraph{}
 Another feature of Git is the ability to automatically merge code, if a multiple changes are made to code on different computers (Such as forgetting to pull changes from remote.) the modified code can be staged to a commit and the previous remote commit can be pulled from the server. Git will then attempt to automatically merge the code together in a way that preserves its function. (In the case that it cannot, it presents differences to you and asks you to merge the code manually.)

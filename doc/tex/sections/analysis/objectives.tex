@@ -3,7 +3,7 @@
 \item Target performance is 60 frames per second with 500 bodies on screen at minimum.
 \item The graphics used in the program should be rudimentary 2D vector shapes and lines of varying colours in order to effectively convey the information without becoming too crowded.
 \item The program must be compiled to run under 32-bit Windows. it should also not require any external dependencies to be installed in order to run and should be able to be run from any folder on any computer.
-\item The size of the scenario should be limited so that objects the precision on the position of the far bodies is not too large, which would potentially affect the simulation.
+\item The size of the scenario should be limited so that objects the precision on the position of the far bodies is not too large, which would potentially affect the simulation. A large limit that makes full use of the precision of the double floating point used in the simulation would be preferred. (15 Digits)
 \end{enumerate}
 
 \subsubsection{Processing}
@@ -11,7 +11,7 @@
 \item The application will use the gravitational force equation to calculate the force between two bodies and newtons second law to convert to acceleration.
 \item Trigonometric functions are the currently known way to resolve vector forces to a global X and Y axis. Because of the computational cost these are likely to have an alternative should be investigated.
 \item Collisions can be simulated using basic conservation of momentum equation, in order to calculate the resultant direction of travel.
-\item The simulation should not be able to take up more than 100MB of system memory, meaning that memory usage must be profiled and a limit coded in. It is worth noting that because the algorithm being used is calculating the relationship between every single body, the number of calculations is the number of bodies squared, making massive numbers of bodies impractical to simulate.
+\item The simulation should be developed with memory usage in mind and tailor algorithms to be memory efficient, the absolute maximum the program can use is 100MB.
 \item The system should make use of dedicated hardware features such as the GPU to accelerate rendering, this will require external libraries for ease of porting.
 \item The system must be able to remain responsive even with a large number of bodies on screen, meaning there must be a degree of separation between the execution of the simulation and rendering.
 \item The system will only simulate a 2D scenario as 3D simulation would increase the computational requirement and require a much more complex user interface.
