@@ -15,7 +15,7 @@ private:
   void calcCollision();
 
 public:
-  sim_obj();
-  ~sim_obj();
+  simTLC();
+  ~simTLC();
   void itteration();
 };

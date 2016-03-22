@@ -28,8 +28,8 @@ public:
   sharedStage();
   ~sharedStage();
 
-  // Set/Get Body Store (Render -> Sim) (Locking)
-  void populateSBStore(vector<body> p_BodyStore, int p_rs);
+  // Set/Get Body Store (Render <-> Sim) (Locking)
+  void populateBStore(vector<body> p_BodyStore, int p_rs);
   vector<body> returnSBStore(int p_rs);
 
   // Set/Get Sim Control (Locking)

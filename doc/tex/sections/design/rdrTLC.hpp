@@ -1,5 +1,7 @@
 class rdrTLC : public scenario {
 public:
+  rdrTLC()
+  ~rdrTLC()
   // Render-Specific Functions Here
   void drawBody(int bodyID);
   void drawScene(void);

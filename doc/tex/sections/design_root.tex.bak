@@ -168,7 +168,7 @@ While this would work as detached simulation engine without a rendering counterp
 When taking this into account, standard float has only 7 digits of precision, meaning that when representing the orbit of Pluto, you only end up with a precision in the range of $1000 km$ which is a considerable distance on a smaller scale, it also makes things like rendering an accurate circle of smaller radius somewhat difficult, especially when you consider that the radius of Pluto is only $1186 km$. (The circle drawing algorithm discussed later on will end up drawing a square.)
 
 \paragraph{}
-While this would be an issue for rendering full circles at close up distances, it will still be possible to render singular points, GL_POINTS will always render, regardless of how small the body itself it, and is far more tolerant to the loss in precision, because of this, the limit for distance will be set at $\num{1e15} (m)$
+While this would be an issue for rendering full circles at close up distances, it will still be possible to render singular points, $GL\_POINTS$ will always render, regardless of how small the body itself it, and is far more tolerant to the loss in precision, because of this, the limit for distance will be set at $\num{1e15} (m)$
 
 \paragraph{}
 Other more definite limitations include mass, which cannot be 0 or negative, while hypothetically possible, this would result in complications and odd behaviour in the simulation, something that is best to avoid. It makes little sense to implement any maximum for mass, as on a stellar scale, masses are extremely variable due to composition, type and size of bodies. (A good example of this are black holes, these are relatively small in size but super-massive.)
@@ -260,11 +260,11 @@ If either Mass or Radius are not defined the body will be ignored and removed fr
 \subsection{OO Data Structure}
 \begin{figure}[!ht]
   \centering
-  \includegraphics[width=0.8\textwidth]{img/ofd.png}
-  \caption{Object Relationship Diagram}
+  \includegraphics[width=0.8\textwidth]{img/did.png}
+  \caption{Object Inheritance Diagram}
 \end{figure}
 
-The object/class structure for this program is extremely basic, and used primarily as the Thread-Local Storage for the separate render and simulation threads. Class Scenario contains a vector consisting of type body, as well as the functions required to manage, return and update the body storage and any other relevant variables, rdrTLC and simTLC (Thread Local Class) will the inherit the scenario class and add on specific functions that pertain to that particular thread.
+The object/class structure for this program is used primarily as the Thread-Local Storage for the separate render and simulation threads. Class Scenario contains a vector consisting of type body, as well as the functions required to manage, return and update the body storage and any other relevant variables, rdrTLC and simTLC (Thread Local Class) will the inherit the scenario class and add on specific functions that pertain to that particular thread.
 
 \paragraph{}
 The sharedStage class will contain storage variables similar to the scenario class, however no active management must be carried out in the shared area, which is why it does not inherit the scenario class as it contains functions that allow for the creation or deletion of bodies, scenarios private variables will be 'protected' which allows them to be accessed by the sub-scenario classes that inherit the scenario class.
