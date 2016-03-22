@@ -1,20 +1,3 @@
-\lstset{ 
-  backgroundcolor=\color[rgb]{0.9,0.9,0.9},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
-  language=C++,
-  basicstyle=\ttfamily\tiny,
-  keywordstyle=\color{RoyalBlue}\ttfamily,
-  stringstyle=\color{OrangeRed}\ttfamily,
-  commentstyle=\color{OliveGreen}\ttfamily,
-  numberstyle=\color{OrangeRed}\ttfamily,
-  breaklines=true  
-  frame=single,	                   % adds a frame around the code
-  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible
-  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
-  numbersep=5pt,                   % how far the line-numbers are from the code
-  numberstyle=\tiny\color{black},  % the style that is used for the line-numbers
-  tabsize=2                        % sets default tabsize to 2 spaces
-}
-
 \subsection{Early Prototypes}
 \subsubsection{Euler (Trig)}
 \texttt{\lstinputlisting{../../../proto/02/main.cpp}} 

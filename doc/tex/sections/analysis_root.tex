@@ -35,7 +35,7 @@ The interface must be intuitive and self-explanatory in order to ensure that it 
 \paragraph{}
 While the resources of these systems are limited, keeping the program to being 2D should help to improve performance as there will be less demand on the integrated GPU (Graphics Processing Unit), meaning that it requires less system resources to display the simulation. This means that an external graphics library would need to be used in order to interface with this hardware and still function across different platforms. (The two main GPU Vendors, AMD and Nvidia, both have different interfaces for using GPUs for compute applications) 
 
-\paragraph{}Having a 2D model also means that far less calculations need to be made for the simulation, making it faster, but it also reduces the load GPU in terms of rendering, As 3D would require shading and lighting to make depth perceivable. Input and camera movement would also be far more complex.
+\paragraph{}Having a 2D model also means that far fewer calculations need to be made for the simulation, making it faster, but it also reduces the load GPU in terms of rendering, As 3D would require shading and lighting to make depth perceivable. Input and camera movement would also be far more complex.
 
 \subsubsection{Calculations and Trigonometry}
 \paragraph{}
@@ -147,6 +147,16 @@ The variables written in the table below are likely to change as this project de
   \includegraphics[angle=-90, width=0.99\textwidth]{img/nsl1.png}
   \caption{New System, Level 1}
 \end{figure}
+
+\subsection{Object Orientation}
+\paragraph{}
+Because of object based nature of the program, object orientation may be used to satisfy the need to support a fully dynamic system that allows any number of bodies to be added or deleted at any time during the runtime of the program.
+
+\paragraph{}
+The benefit of object orientation is that objects can be defined as a structure where access to certain elements is controlled, requiring methods to change attributes allowing validation to be done on objects themselves, objects that are similar to each other can inherit a common base to minimise repetition of code.
+
+\paragraph{}
+The basic structure of this program would require
 
 \subsection{Limitations}
 \paragraph{}

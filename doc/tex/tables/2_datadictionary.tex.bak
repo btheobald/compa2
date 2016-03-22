@@ -9,7 +9,7 @@
 \hline
 Mass of Body & Double & The mass of a particular body, every body will have mass. Defined as an objects reluctance to move, allows for calculation of forces, acceleration and potentially collisions. \\
 \hline
-Size of Body & Double & The graphical size of an object, could be used for calculation of collisions. \\
+Radius of Body & Double & The graphical size of an object, could be used for calculation of collisions. \\
 \hline
 Force between Bodies & Double & Direct calculation for force between two bodies. calculated for every body to every other body. (Vector) \\
 \hline

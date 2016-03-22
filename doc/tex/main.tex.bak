@@ -30,7 +30,7 @@
 %% Setup Footer
 \pagestyle{scrheadings}
 \lofoot{Byron Theobald}
-\cofoot{4277 - 19235}
+\cofoot{CA: 4772 - CE: 19235}
 \rofoot{\thepage{}}
 
 %% Setup Default Code Listing Layout
@@ -64,11 +64,8 @@
 \import{sections/}{analysis_root.tex}
 \pagebreak
 
-\section{Prototyping}
-\import{sections/}{prototyping_root.tex}
-\pagebreak
-
 \section{Design}
+\import{sections/}{prototyping_root.tex}
 \import{sections/}{design_root.tex}
 \pagebreak
 
