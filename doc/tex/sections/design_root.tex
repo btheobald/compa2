@@ -373,7 +373,7 @@ Trace tables will also be used in a limited capacity, because of the complexity 
 \pagebreak
 \subsection{Testing Plan}
 \paragraph{}
-I have decided to split the testing plan into three main sections, System, containing basic black box tests that relate to the way memory is managed by the program, using Valgrind MemCheck in order to ensure that my code is not creating large memory leaks. As well as this, Valgrind Helgrind will be used to check that data locks are correctly implemented and data is not being accessed concurrently.
+I have decided to split the testing plan into three main sections, System, containing basic black box tests that relate to the way memory is managed by the program, using Valgrind Memcheck in order to ensure that my code is not creating large memory leaks. As well as this, Valgrind Helgrind will be used to check that data locks are correctly implemented and data is not being accessed concurrently.
 
 \paragraph{}
 Interface testing concerns the use of the interface of the program, using basic white box testing to check that the mouse coordinates are being correctly converted from the window coordinates and that bodies can be selected by the user. The features in the UI interface library are also tested. The loss of rendering precision at the extents of single floating point precision is also showcased.
@@ -381,14 +381,267 @@ Interface testing concerns the use of the interface of the program, using basic 
 \paragraph{}
 Simulation testing contains basic tests that should behave in very predictable ways allowing the checking of the implemented simulation algorithm, including a very basic trace table. Collision is also tested in a isolated fashion. The basic limitations that have been placed on the simulation, relating to the 'Laws of Physics' and will delete bodies that break the set limits.
 
+The simulation tests also contain a basic benchmark test which will profile the performance of the simulation compared to the number of bodies used.
+
+\pagebreak
 \subsubsection{Test Scenarios}
 \paragraph{}
 In order to speed up the testing of the program, some basic test scenarios have been defined in order to provide a known system that can be loaded into the application during testing in order to speed up the testing process, reducing the need to manually load the scenario every time.
-
+\vspace{12pt}
 \begin{enumerate}
-\item 
+\item \textbf{(Ref: TS1)} Single Body with no velocity.
+  \begin{itemize}
+  \item Should stay completely stationary.
+  \item \textbf{IDT:} 0.1 (Simulation Delta Time)
+  \item \textbf{UGC:} 0.1 (Gravitational Constant)
+  \item \textbf{BC:} 1 (Body Count)
+    \begin{itemize}
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} 0 \textbf{Y:} 0, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \end{itemize}
+  \end{itemize}
+
+\vspace{12pt}  
+\item \textbf{(Ref: TS2)} Two body orbital system, orbital velocity.
+  \begin{itemize}
+  \item Outer body has the velocity required for a circular orbit around the central body.
+  \item This is calculated using $v_{circular}=\sqrt{\frac{G(M+m)}{r}}$.
+  \item Orbital period can be found using $T=\sqrt{\frac{4\pi^2r^3}{Gm}}$.
+  \item It should take $628.3$ seconds or $6283$ Iterations to complete one orbit. ($T/IDT$)
+  \item \textbf{IDT:} 0.1
+  \item \textbf{UGC:} 0.1
+  \item \textbf{BC:} 2
+    \begin{itemize}
+    \item \textbf{Mass:} 1000, \textbf{Radius:} 10, \textbf{Pos X:} 0 \textbf{Y:} 0, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \item \textbf{Mass:} 0.1, \textbf{Radius:} 1, \textbf{Pos X:} 100 \textbf{Y:} 0, \textbf{Vel X:} 0 \textbf{Y:} 1.00005
+    \end{itemize}
+  \end{itemize}
+  
+\vspace{12pt}  
+\item \textbf{(Ref: TS3)} Two body collision test, no gravity.
+  \begin{itemize}
+  \item Both bodies start with velocity which will lead to a collision.
+  \item Gravitational constant is 0 to keep the velocity constant.
+  \item Bodies merge according to $p=mv$, $m_n=m_1+m_2$, $v_n=(p_1+p_2)/m_n$.
+  \item New radius is calculated by adding together circular areas $\pi r^2$.
+  \item \textbf{IDT:} 0.1
+  \item \textbf{UGC:} 0.0
+  \item \textbf{BC:} 2
+    \begin{itemize}
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} -10 \textbf{Y:} 0, \textbf{Vel X:} 1 \textbf{Y:} 0
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} 10 \textbf{Y:} 0, \textbf{Vel X:} -1 \textbf{Y:} 0
+    \end{itemize}
+  \end{itemize}
+  
+\vspace{12pt}  
+\item \textbf{(Ref: TS4)} Defines a superstructure.
+  \begin{itemize}
+  \item Starts the simulation with a superstructure, variable body count.
+  \item Relies on a separate variable to set body count.
+  \item \textbf{IDT:} 0.1
+  \item \textbf{UGC:} 0.1
+  \item \textbf{BC:} Variable
+    \begin{itemize}
+    \item \textbf{Superstructure}
+      \begin{itemize}
+      \item \textbf{Bodies:} Variable
+      \item \textbf{Central Mass:} $\num{1e5}$
+      \item \textbf{Outer Mass:} 0.1
+      \item \textbf{Central Radius:} 10
+      \item \textbf{Outer Radius:} 0.1
+      \item \textbf{Central Pos X:} 0
+      \item \textbf{Central Pos Y:} 0
+      \item \textbf{Central Vel X:} 0
+      \item \textbf{Central Vel Y:} 0
+      \item \textbf{Central Spacing:} 50
+      \item \textbf{System Radius:} 1000
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+  
+\vspace{12pt}
+\item \textbf{(Ref: TS5)} Body travels beyond simulation limits.
+  \begin{itemize}
+  \item Should be destroyed once beyond simulation bounds.
+  \item \textbf{IDT:} 0.1 (Simulation Delta Time)
+  \item \textbf{UGC:} 0.1 (Gravitational Constant)
+  \item \textbf{BC:} 1 (Body Count)
+    \begin{itemize}
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} $\num{9.999e15}$ \textbf{Y:} 0, \textbf{Vel X:} $\num{1e8}$ \textbf{Y:} 0
+    \end{itemize}
+  \end{itemize}
+  
+\vspace{12pt}
+\item \textbf{(Ref: TS6)} Body travelling faster than the speed of light.
+  \begin{itemize}
+  \item Should be destroyed on iteration.
+  \item \textbf{IDT:} 0.1
+  \item \textbf{UGC:} 0.1 
+  \item \textbf{BC:} 1
+    \begin{itemize}
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} 0 \textbf{Y:} 0, \textbf{Vel X:} $\num{3.00e8}$ \textbf{Y:} 0
+    \end{itemize}
+  \end{itemize}  
+  
+\pagebreak
+\item \textbf{(Ref: TS7)} Grid of bodies for testing coordinate mapping and rendering precision.
+  \begin{itemize}
+  \item All bodies are fixed, velocity is ignored and not calculated.
+  \item Bodies in center are positioned at 10 and 100 positions respectively.
+  \item To the right of the system exists 4 bodies spaced an order of magnitude apart in order to show the loss of rendering precision.
+  \item \textbf{IDT:} 0.1
+  \item \textbf{UGC:} 0.1 
+  \item \textbf{BC:} 20
+    \begin{itemize}
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} 10 \textbf{Y:} 0
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} -10 \textbf{Y:} 0
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} 0 \textbf{Y:} 10
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} 0 \textbf{Y:} -10
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} -10 \textbf{Y:} -10
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} 10 \textbf{Y:} -10
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} -10 \textbf{Y:} 10
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} 10 \textbf{Y:} 10
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} 100 \textbf{Y:} 0
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} -100 \textbf{Y:} 0
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} 0 \textbf{Y:} 100
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} 0 \textbf{Y:} -100
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} -100 \textbf{Y:} -100
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} 100 \textbf{Y:} -100
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} -100 \textbf{Y:} 100
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} 100 \textbf{Y:} 100
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} $\num{1e5}$ \textbf{Y:} 0
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} $\num{1e6}$ \textbf{Y:} 0
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} $\num{1e7}$ \textbf{Y:} 0
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 1, \textbf{Pos X:} $\num{1e8}$ \textbf{Y:} 0
+    \end{itemize}
+  \end{itemize}
+  
+  
+\pagebreak
+\item \textbf{(Ref: TS8)} Three body system, Sun - Planet - Moon.
+  \begin{itemize}
+  \item An outer body orbits a massive central body.
+  \item Another body orbits the outer body.
+  \item \textbf{IDT:} 0.1
+  \item \textbf{UGC:} 0.1 
+  \item \textbf{BC:} 3
+    \begin{itemize}
+    \item \textbf{Mass:} 200, \textbf{Radius:} 5, \textbf{Pos X:} 0 \textbf{Y:} 0, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \item \textbf{Mass:} 1, \textbf{Radius:} 0.5, \textbf{Pos X:} 20 \textbf{Y:} 0, \textbf{Vel X:} 0 \textbf{Y:} 1.00005
+    \item \textbf{Mass:} 0.001, \textbf{Radius:} 0.1, \textbf{Pos X:} 20 \textbf{Y:} 1, \textbf{Vel X:} 0.316 \textbf{Y:} 1.00005
+    \end{itemize}
+  \end{itemize}
+  
+\vspace{12pt}
+\item \textbf{(Ref: TS9)} Simple two body system.
+  \begin{itemize}
+  \item This system is simple enough to be easy to create a trace table for.
+  \item The central body is fixed, making it much faster to run calculations.
+  \item A large time-step is used in order to make the numbers easier to handle.
+  \item \textbf{IDT:} 2
+  \item \textbf{UGC:} 0.1 
+  \item \textbf{BC:} 2
+    \begin{itemize}
+    \item \textbf{Mass:} 99, \textbf{Radius:} 1, \textbf{Pos X:} 0 \textbf{Y:} 0, \textbf{Fixed}
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} 10 \textbf{Y:} 0, \textbf{Vel X:} 0 \textbf{Y:} 1
+    \end{itemize}
+  \end{itemize}  
+  
+\pagebreak  
+\item \textbf{(Ref: TS10)} Defines a simple two body system using a superstructure.
+  \begin{itemize}
+  \item Creates a superstructure with the generation of a single body constrained to 100.
+  \item \textbf{IDT:} 0.1
+  \item \textbf{UGC:} 0.1
+  \item \textbf{BC:} 2
+    \begin{itemize}
+    \item \textbf{Superstructure}
+      \begin{itemize}
+      \item \textbf{Bodies:} 1
+      \item \textbf{Central Mass:} $\num{1e5}$
+      \item \textbf{Outer Mass:} 0.1
+      \item \textbf{Central Radius:} 10
+      \item \textbf{Outer Radius:} 0.1
+      \item \textbf{Central Pos X:} 0
+      \item \textbf{Central Pos Y:} 0
+      \item \textbf{Central Vel X:} 0
+      \item \textbf{Central Vel Y:} 0
+      \item \textbf{Central Spacing:} 100.0
+      \item \textbf{System Radius:} 100.001
+      \end{itemize}
+    \end{itemize}
+  \end{itemize}
+  
+\vspace{12pt}  
+\item (Ref: TS11) Stable three body system.
+  \begin{itemize}
+  \item This system is a three-body system which remains stable. (Unless perturbed.)
+  \item The outer bodies have velocity such that they precess around each other.
+  \item Their presence applies an equal force to both sides of the central body, thus balancing to 0.
+  \item Any change will send the system into chaotic motion.
+  \item \textbf{IDT:} 0.01
+  \item \textbf{UGC:} 0.1 
+  \item \textbf{BC:} 3
+    \begin{itemize}
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} 0 \textbf{Y:} 0, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} 10 \textbf{Y:} 0, \textbf{Vel X:} 0 \textbf{Y:} 0.11
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} -10 \textbf{Y:} 0, \textbf{Vel X:} 0 \textbf{Y:} -0.11
+    \end{itemize}
+  \end{itemize}
 \end{enumerate}
 
+\pagebreak
 \subsubsection{System Tests}
+\vspace{12pt}
+\begin{enumerate}
+\item \textbf{(Ref: SYS1)} Initial Memory Leak Check
+\item \textbf{(Ref: SYS2)} Memory Leak Delete All Bodies Check
+\item \textbf{(Ref: SYS3)} Memory Leak Add Body Check
+\item \textbf{(Ref: SYS4)} Memory Leak Delete, Add, Delete Body
+\item \textbf{(Ref: SYS5)} Program Exits after Sim Thread Exits
+\item \textbf{(Ref: SYS6)} No Concurrent Access to Shared Data
+\end{enumerate}
+
 \subsubsection{Interface Tests}
+\vspace{12pt}
+\begin{enumerate}
+\item \textbf{(Ref: GUI1)} Mouse to World Coordinates
+\item \textbf{(Ref: GUI2)} Mouse to World Coordinates (Panning)
+\item \textbf{(Ref: GUI3)} Mouse to World Coordinates (Zooming)
+\item \textbf{(Ref: GUI4)} Mouse to World Coordinates (Pan+Zoom)
+\item \textbf{(Ref: GUI5)} Mouse to World Coordinates (Extreme)
+\item \textbf{(Ref: GUI6)} Body Add (GUI)
+\item \textbf{(Ref: GUI7)} Body Add (Mouse)
+\item \textbf{(Ref: GUI8)} Body Delete (GUI)
+\item \textbf{(Ref: GUI9)} Body Over-Delete 
+\item \textbf{(Ref: GUI10)} Delete All Bodies 
+\item \textbf{(Ref: GUI11)} Superstructure Creation Dialogue
+\item \textbf{(Ref: GUI12)} Superstructure Creation
+\item \textbf{(Ref: GUI13)} Superstructure Orbital Velocity
+\item \textbf{(Ref: GUI14)} Body Modify Value (Accepted)
+\item \textbf{(Ref: GUI15)} Body Modify Value (Erroneous)
+\item \textbf{(Ref: GUI16)} IPF Change
+\item \textbf{(Ref: GUI17)} Loss of Rendering Precision
+\end{enumerate}
+
 \subsubsection{Simulation Tests}
+\vspace{12pt}
+\begin{enumerate}
+\item \textbf{(Ref: SIM1)} Stationary Body
+\item \textbf{(Ref: SIM2)} Two-Body Force Check (B1)
+\item \textbf{(Ref: SIM3)} Two-Body Force Check (B2)
+\item \textbf{(Ref: SIM4)} Circular Orbit Check (Complete)
+\item \textbf{(Ref: SIM5)} Circular Orbit Check (Distance)
+\item \textbf{(Ref: SIM6)} Two-Body Collision Test (Deletion/Creation)
+\item \textbf{(Ref: SIM7)} Two-Body Collision Test (Mass)
+\item \textbf{(Ref: SIM8)} Two-Body Collision Test (Velocity)
+\item \textbf{(Ref: SIM9)} Two-Body Collision Test (Radius)
+\item \textbf{(Ref: SIM10)} High Body Count Benchmark
+\item \textbf{(Ref: SIM11)} Simulation Bounds Exit
+\item \textbf{(Ref: SIM12)} Simulation Max Speed
+\item \textbf{(Ref: SIM13)} Simulation Trace Table (Two-Body)
+\item \textbf{(Ref: SIM14)} Simulation Sun Planet Moon Test
+\item \textbf{(Ref: SIM15)} Three Body Stability
+\item \textbf{(Ref: SIM16)} Three Body Chaos
+\item \textbf{(Ref: SIM17)} Colour Mixing
+\item \textbf{(Ref: SIM18)} Force Calculation Loop
+\end{enumerate}
