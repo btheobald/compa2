@@ -351,6 +351,12 @@ As mentioned previously, the circular bodies cannot be drawn as true circles, bu
 \paragraph{}
 Another feature is that it is possible to drag and drop save files into the program from any directory rather than having the file inside the save file directory and typing in its name.
 
+\paragraph{}
+What this leads to is a very flexible, interactive interface, both the user input and output is combined and is completely interactive, user inputs make quick and very visible changes without necessarily needing to confirm the change, instead they can make changes, look at the result it gives and then unpaused to continue the simulation with the modifications made.
+
+\paragraph{}
+Due to the inherent complexity in this interface, it may be important to include a inbuilt help system in the program, giving a basic description of how to interact with the program, providing a very quick reference for first time users.
+
 \pagebreak
 \subsection{Testing Strategy}
 Throughout both the implementation and testing stage there should be a range of different testing carried out to ensure that the program is functioning correctly, due to the complexity and 'locked-modular' construction of the multi-threaded program, it is somewhat difficult to test certain portions of the code using white-box testing, this means that a large proportion of the tests will be done using black-box testing.
@@ -363,3 +369,26 @@ White-box testing will be used on several algorithms, such as the force calculat
 
 \paragraph{}
 Trace tables will also be used in a limited capacity, because of the complexity of the system and the time it would take to do these calculations by hand a very simple scenario should be used where only the outer body is moving, even with this, the total movement of the body will be quite low over a small number of iterations.
+
+\pagebreak
+\subsection{Testing Plan}
+\paragraph{}
+I have decided to split the testing plan into three main sections, System, containing basic black box tests that relate to the way memory is managed by the program, using Valgrind MemCheck in order to ensure that my code is not creating large memory leaks. As well as this, Valgrind Helgrind will be used to check that data locks are correctly implemented and data is not being accessed concurrently.
+
+\paragraph{}
+Interface testing concerns the use of the interface of the program, using basic white box testing to check that the mouse coordinates are being correctly converted from the window coordinates and that bodies can be selected by the user. The features in the UI interface library are also tested. The loss of rendering precision at the extents of single floating point precision is also showcased.
+
+\paragraph{}
+Simulation testing contains basic tests that should behave in very predictable ways allowing the checking of the implemented simulation algorithm, including a very basic trace table. Collision is also tested in a isolated fashion. The basic limitations that have been placed on the simulation, relating to the 'Laws of Physics' and will delete bodies that break the set limits.
+
+\subsubsection{Test Scenarios}
+\paragraph{}
+In order to speed up the testing of the program, some basic test scenarios have been defined in order to provide a known system that can be loaded into the application during testing in order to speed up the testing process, reducing the need to manually load the scenario every time.
+
+\begin{enumerate}
+\item 
+\end{enumerate}
+
+\subsubsection{System Tests}
+\subsubsection{Interface Tests}
+\subsubsection{Simulation Tests}
