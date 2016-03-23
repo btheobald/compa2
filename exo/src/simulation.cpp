@@ -54,8 +54,14 @@ void simulation::calcAllAcceleration(void) {
     for(unsigned int y = x+1; y < bodies.size(); y++) {
       // Same body relationships do not occur
       calcAcceleration(bodies[x], bodies[y]);
+      #ifdef PRINTAC
+        std::cerr << x << "-" << y << ", ";
+      #endif
     }
   }
+  #ifdef PRINTAC
+    std::cerr << std::endl;
+  #endif
 }
 
 void simulation::calcAllCollisions(void) {
