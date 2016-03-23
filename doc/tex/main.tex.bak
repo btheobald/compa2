@@ -29,9 +29,9 @@
 
 %% Setup Footer
 \pagestyle{scrheadings}
-\lofoot{Byron Theobald}
-\cofoot{CA: 4772 - CE: 19235}
-\rofoot{\thepage{}}
+\lofoot{Byron Theobald - 4772}
+\cofoot{\thepage{}}
+\rofoot{Northgate High School - 19235}
 
 %% Setup Default Code Listing Layout
 \lstset{ 
