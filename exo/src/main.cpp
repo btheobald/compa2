@@ -241,6 +241,14 @@ void setupDefaultScenario(render* renderAP, shared* sharedAP) {
     renderAP->addBody(new body(1, 1, 10, 0, 0, 0.11));
     renderAP->addBody(new body(1, 1, -10, 0, 0, -0.11));
   #endif
+  #ifdef TS12
+    renderAP->addBody(new body(1, 1, 10, 2, 0, 0));
+    renderAP->addBody(new body(1, 1, -4, 4, 0, 0));
+    renderAP->addBody(new body(1, 1, -18, 16, 0, 0));
+    renderAP->addBody(new body(1, 1, -8, -12, 0, 0));
+    renderAP->addBody(new body(1, 1, 6, -13, 0, 0));
+    renderAP->addBody(new body(1, 1, 8, 11, 0, 0));
+  #endif
   // Update shared area
   sharedAP->updateControl(renderAP->getControl());
   sharedAP->updateBodies(renderAP->getBodies());

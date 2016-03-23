@@ -15,7 +15,7 @@ double simulation::getComponentDistance(body* bA, body* bB, int xy) {
 
 double simulation::getVectorDistance(double p_dX, double p_dY) {
   // Pythagoras - a^2 + b^2 = c^2
-  return std::sqrt(std::abs(p_dX*p_dX) + std::abs(p_dY*p_dY));
+  return std::sqrt((p_dX*p_dX) + (p_dY*p_dY));
 }
 
 void simulation::resetAllAcceleration(void) {
@@ -38,6 +38,10 @@ void simulation::calcAcceleration(body* bA, body* bB) {
   double fX = fP * dX;
   double fY = fP * dY;
 
+  #ifdef PRINTFORCE
+    std::cerr << "X: "<< fX << " Y: " << fY << std::endl;
+  #endif
+
   // a=F/m - Set acceleration to bodies
   // Body A
   bA->aX +=  fX / bA->m;
@@ -52,16 +56,13 @@ void simulation::calcAllAcceleration(void) {
   for(unsigned int x = 0; x < bodies.size(); x++) {
     // Evaluate bottom left of calculation matrix
     for(unsigned int y = x+1; y < bodies.size(); y++) {
+      #ifdef PRINTAC
+        std::cerr << x << "-" << y << std::endl;
+      #endif
       // Same body relationships do not occur
       calcAcceleration(bodies[x], bodies[y]);
-      #ifdef PRINTAC
-        std::cerr << x << "-" << y << ", ";
-      #endif
     }
   }
-  #ifdef PRINTAC
-    std::cerr << std::endl;
-  #endif
 }
 
 void simulation::calcAllCollisions(void) {
