@@ -201,19 +201,20 @@ In order to speed up the testing of the program, some basic test scenarios have 
     \end{itemize}
   \end{itemize}
   
-\item (Ref: TS12) Stable three body system.
+\pagebreak 
+\item (Ref: TS12) Many Body System
   \begin{itemize}
-  \item This system is a three-body system which remains stable. (Unless perturbed.)
-  \item The outer bodies have velocity such that they precess around each other.
-  \item Their presence applies an equal force to both sides of the central body, thus balancing to 0.
-  \item Any change will send the system into chaotic motion.
-  \item \textbf{IDT:} 0.1
-  \item \textbf{UGC:} 10 
-  \item \textbf{BC:} 3
+  \item This system contains several bodies which will very clearly show the interactions occurring correctly between every body.
+  \item \textbf{IDT:} 0.01
+  \item \textbf{UGC:} 10
+  \item \textbf{BC:} 6
     \begin{itemize}
-    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} 0 \textbf{Y:} 0, \textbf{Vel X:} 0 \textbf{Y:} 0
-    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} 10 \textbf{Y:} 0, \textbf{Vel X:} 0 \textbf{Y:} 0.11
-    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} -10 \textbf{Y:} 0, \textbf{Vel X:} 0 \textbf{Y:} -0.11
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} 10 \textbf{Y:} 2, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} -4 \textbf{Y:} 4, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} -18 \textbf{Y:} 16, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} -8 \textbf{Y:} -12, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} 6 \textbf{Y:} -13, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} 8 \textbf{Y:} 11, \textbf{Vel X:} 0 \textbf{Y:} 0
     \end{itemize}
   \end{itemize}
 \end{enumerate}

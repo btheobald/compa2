@@ -388,16 +388,24 @@ The simulation tests also contain a basic benchmark test which will profile the 
 \import{sections/design/}{testscenarios.tex}
 
 \pagebreak
-\subsubsection{System Tests}
 \vspace{12pt}
-\begin{enumerate}
-\item \textbf{(Ref: SYS1)} Initial Memory Leak Check
-\item \textbf{(Ref: SYS2)} Memory Leak Delete All Bodies Check
-\item \textbf{(Ref: SYS3)} Memory Leak Add Body Check
-\item \textbf{(Ref: SYS4)} Memory Leak Delete, Add, Delete Body
-\item \textbf{(Ref: SYS5)} Program Exits after Sim Thread Exits
-\item \textbf{(Ref: SYS6)} No Concurrent Access to Shared Data
-\end{enumerate}
+\begin{sidewaystable}
+\subsubsection{System Tests}
+\centering
+\scriptsize
+\def\arraystretch{1.5}
+\begin{tabular}{|M{0.8cm}|P{3cm}|P{5cm}|P{3cm}|P{3cm}|P{5cm}|}
+\hline 
+\textbf{Ref} & \textbf{Name} & \textbf{Description} & \textbf{Data Set} & \textbf{Data Type} & \textbf{Expected Result} \\ \hline
+SYS1 & Initial Memory Leak Check & Run through valgrind, exit, check that own code is not leaking. & Default & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
+SYS2 & Memory Leak Delete All Bodies Check & Run through valgrind, pause, delete all bodies, exit, check that own code is not leaking. & Default, User Input & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
+SYS3 & Memory Leak Add Body Check & Run through valgrind, add a body, unpause, exit, check that own code is not leaking. & Default, User Input & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
+SYS4 & Memory Leak Delete, Add, Delete Body & Run through valgrind, pause, delete central body, add new body, unpause, pause again and delete body, exit. & Default, User Input & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
+SYS5 & Program Exits after Sim Thread Exits & When the application is closed, the simulation thread will exit before the program terminates. & Default, User Input & Typical & Program does not hang on exit. Use cerr stream used to check. \\ \hline
+SYS6 & No Concurrent Access to Shared Data & Run in Helgrind, check that access is locking correctly. & Default & Typical & No errors that indicate simultaneous access. \\
+\hline
+\end{tabular}
+\end{sidewaystable}
 
 \subsubsection{Interface Tests}
 \vspace{12pt}
