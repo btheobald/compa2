@@ -168,7 +168,7 @@ While this would work as detached simulation engine without a rendering counterp
 When taking this into account, standard float has only 7 digits of precision, meaning that when representing the orbit of Pluto, you only end up with a precision in the range of $1000 km$ which is a considerable distance on a smaller scale, it also makes things like rendering an accurate circle of smaller radius somewhat difficult, especially when you consider that the radius of Pluto is only $1186 km$. (The circle drawing algorithm discussed later on will end up drawing a square.)
 
 \paragraph{}
-While this would be an issue for rendering full circles at close up distances, it will still be possible to render singular points, $GL\_POINTS$ will always render, regardless of how small the body itself it, and is far more tolerant to the loss in precision, because of this, the limit for distance will be set at $\num{1e15} (m)$
+While this would be an issue for rendering full circles at close up distances, it will still be possible to render singular points, $GL\_POINTS$ will always render, regardless of how small the body itself it, and is far more tolerant to the loss in precision, because of this, the limit for distance will be set at $\num{1e15}m$ (Larger bodies will still be viewable as circular objects at the extents)
 
 \paragraph{}
 Other more definite limitations include mass, which cannot be 0 or negative, while hypothetically possible, this would result in complications and odd behaviour in the simulation, something that is best to avoid. It makes little sense to implement any maximum for mass, as on a stellar scale, masses are extremely variable due to composition, type and size of bodies. (A good example of this are black holes, these are relatively small in size but super-massive.)
@@ -270,12 +270,12 @@ The object/class structure for this program is used primarily as the Thread-Loca
 The sharedStage class will contain storage variables similar to the scenario class, however no active management must be carried out in the shared area, which is why it does not inherit the scenario class as it contains functions that allow for the creation or deletion of bodies, scenarios private variables will be 'protected' which allows them to be accessed by the sub-scenario classes that inherit the scenario class.
 
 \paragraph{}
-The preliminary classes have been written in the C++ syntax style as this enables me to display them with syntax highlighting, small modifications will likely be made during implementation.
+The preliminary classes have been written in the C++ syntax style as this enables me to display them with syntax highlighting, small modifications will likely be made during implementation. Having the classes written in a C++ style syntax will also allow me to quickly implement these sections into actual code.
 
 \pagebreak
 \subsubsection{body}
 \texttt{\lstinputlisting{design/body.hpp}} 
-
+Interface 
 \pagebreak
 \subsubsection{scenario}
 \texttt{\lstinputlisting{design/scenario.hpp}}
@@ -383,71 +383,6 @@ Simulation testing contains basic tests that should behave in very predictable w
 
 The simulation tests also contain a basic benchmark test which will profile the performance of the simulation compared to the number of bodies used.
 
-\pagebreak
 \subsubsection{Test Scenarios}
 \import{sections/design/}{testscenarios.tex}
-
-\pagebreak
-\vspace{12pt}
-\begin{sidewaystable}
-\subsubsection{System Tests}
-\centering
-\scriptsize
-\def\arraystretch{1.5}
-\begin{tabular}{|M{0.8cm}|P{3cm}|P{5cm}|P{3cm}|P{3cm}|P{5cm}|}
-\hline 
-\textbf{Ref} & \textbf{Name} & \textbf{Description} & \textbf{Data Set} & \textbf{Data Type} & \textbf{Expected Result} \\ \hline
-SYS1 & Initial Memory Leak Check & Run through valgrind, exit, check that own code is not leaking. & Default & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
-SYS2 & Memory Leak Delete All Bodies Check & Run through valgrind, pause, delete all bodies, exit, check that own code is not leaking. & Default, User Input & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
-SYS3 & Memory Leak Add Body Check & Run through valgrind, add a body, unpause, exit, check that own code is not leaking. & Default, User Input & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
-SYS4 & Memory Leak Delete, Add, Delete Body & Run through valgrind, pause, delete central body, add new body, unpause, pause again and delete body, exit. & Default, User Input & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
-SYS5 & Program Exits after Sim Thread Exits & When the application is closed, the simulation thread will exit before the program terminates. & Default, User Input & Typical & Program does not hang on exit. Use cerr stream used to check. \\ \hline
-SYS6 & No Concurrent Access to Shared Data & Run in Helgrind, check that access is locking correctly. & Default & Typical & No errors that indicate simultaneous access. \\
-\hline
-\end{tabular}
-\end{sidewaystable}
-
-\subsubsection{Interface Tests}
-\vspace{12pt}
-\begin{enumerate}
-\item \textbf{(Ref: GUI1)} Mouse to World Coordinates
-\item \textbf{(Ref: GUI2)} Mouse to World Coordinates (Panning)
-\item \textbf{(Ref: GUI3)} Mouse to World Coordinates (Zooming)
-\item \textbf{(Ref: GUI4)} Mouse to World Coordinates (Pan+Zoom)
-\item \textbf{(Ref: GUI5)} Mouse to World Coordinates (Extreme)
-\item \textbf{(Ref: GUI6)} Body Add (GUI)
-\item \textbf{(Ref: GUI7)} Body Add (Mouse)
-\item \textbf{(Ref: GUI8)} Body Delete (GUI)
-\item \textbf{(Ref: GUI9)} Body Over-Delete 
-\item \textbf{(Ref: GUI10)} Delete All Bodies 
-\item \textbf{(Ref: GUI11)} Superstructure Creation Dialogue
-\item \textbf{(Ref: GUI12)} Superstructure Creation
-\item \textbf{(Ref: GUI13)} Superstructure Orbital Velocity
-\item \textbf{(Ref: GUI14)} Body Modify Value (Accepted)
-\item \textbf{(Ref: GUI15)} Body Modify Value (Erroneous)
-\item \textbf{(Ref: GUI16)} IPF Change
-\item \textbf{(Ref: GUI17)} Loss of Rendering Precision
-\end{enumerate}
-
-\subsubsection{Simulation Tests}
-\vspace{12pt}
-\begin{enumerate}
-\item \textbf{(Ref: SIM1)} Stationary Body
-\item \textbf{(Ref: SIM2)} Two-Body Force Check (B1)
-\item \textbf{(Ref: SIM3)} Two-Body Force Check (B2)
-\item \textbf{(Ref: SIM4)} Circular Orbit Check (Complete)
-\item \textbf{(Ref: SIM5)} Circular Orbit Check (Distance)
-\item \textbf{(Ref: SIM6)} Two-Body Collision Test (Deletion/Creation)
-\item \textbf{(Ref: SIM7)} Two-Body Collision Test (Mass)
-\item \textbf{(Ref: SIM8)} Two-Body Collision Test (Velocity)
-\item \textbf{(Ref: SIM9)} Two-Body Collision Test (Radius)
-\item \textbf{(Ref: SIM10)} High Body Count Benchmark
-\item \textbf{(Ref: SIM11)} Simulation Bounds Exit
-\item \textbf{(Ref: SIM12)} Simulation Max Speed
-\item \textbf{(Ref: SIM13)} Simulation Trace Table (Two-Body)
-\item \textbf{(Ref: SIM14)} Simulation Sun Planet Moon Test
-\item \textbf{(Ref: SIM15)} Three Body Stability
-\item \textbf{(Ref: SIM16)} Three Body Chaos
-\item \textbf{(Ref: SIM17)} Colour Mixing
-\item \textbf{(Ref: SIM18)} Force Calculation Loop
-\end{enumerate}
+\import{sections/design/}{testtables.tex}

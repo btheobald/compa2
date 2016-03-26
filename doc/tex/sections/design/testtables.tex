@@ -1,0 +1,100 @@
+\vspace{12pt}
+\begin{sidewaystable}
+\subsubsection{System Tests}
+\centering
+\def\arraystretch{1.5}
+\begin{tabular}{|M{1cm}|P{3cm}|P{5cm}|P{3cm}|P{2cm}|P{4cm}|}
+\hline 
+\textbf{Ref} & \textbf{Name} & \textbf{Description} & \textbf{Data Set} & \textbf{Data Type} & \textbf{Expected Result} \\ \hline
+SYS1 & Initial Memory Leak Check & Run through valgrind, exit, check that own code is not leaking. & Default & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
+SYS2 & Memory Leak Delete All Bodies Check & Run through valgrind, pause, delete all bodies, exit, check that own code is not leaking. & Default, User Input & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
+SYS3 & Memory Leak Add Body Check & Run through valgrind, add a body, unpause, exit, check that own code is not leaking. & Default, User Input & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
+SYS4 & Memory Leak Delete, Add, Delete Body & Run through valgrind, pause, delete central body, add new body, unpause, pause again and delete body, exit. & Default, User Input & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
+SYS5 & Program Exits after Sim Thread Exits & When the application is closed, the simulation thread will exit before the program terminates. & Default, User Input & Typical & Program does not hang on exit. Use cerr stream used to check. \\ \hline
+SYS6 & No Concurrent Access to Shared Data & Run in Helgrind, check that access is locking correctly. & Default & Typical & No errors that indicate simultaneous access. \\
+\hline
+\end{tabular}
+\end{sidewaystable}
+
+\vspace{12pt}
+\begin{sidewaystable}
+\subsubsection{Interface Tests}
+\centering
+\scriptsize
+\def\arraystretch{1.5}
+\begin{tabular}{|M{0.8cm}|P{3cm}|P{7.5cm}|P{2cm}|P{1.5cm}|P{4cm}|}
+\hline 
+\textbf{Ref} & \textbf{Name} & \textbf{Description} & \textbf{Data Set} & \textbf{Data Type} & \textbf{Expected Result} \\ \hline
+GUI1 & Mouse to World Coordinates & Using TS7, move the mouse pointer onto all of the points, they should map exactly to their positions in world space. & TS7, Mouse Input & Typical & Every Point Maps to its correct position. \\ \hline
+GUI2 & Mouse to World Coordinates (Panning) & Using TS7, Pan the camera around to other positions, move the mouse pointer onto several of the points, they should map exactly to their positions in world space. & TS7, Mouse Input & Typical & Every point maps to its correct position. \\ \hline
+GUI3 & Mouse to World Coordinates (Zooming) & Using TS7, Zoom the camera in, move the mouse pointer onto several of the points, they should map exactly to their positions in world space. Repeat for zoom out. & TS7, Mouse Input & Typical & Every point maps to its correct position. \\ \hline
+GUI4 & Mouse to World Coordinates (Pan+Zoom) & Using TS7, Zoom the camera in and pan to other positions, move the mouse pointer onto several points, they should map exactly to their positions in world space. Repeat for zoom out. & TS7, Mouse Input & Typical & Every point maps to its correct position. \\ \hline
+GUI5 & Mouse to World Coordinates (Extreme) & Using TS7, Pan the camera to the right, there is a large body at 100000 on the X Axis, check that the mapping is still correct. & TS7, Mouse Input & Typical & Every point maps to its correct position. \\ \hline
+GUI6 & Body Add (GUI) & If the user presses the 'New Body' button on the body UI and the simulation is paused, a body will be added at 0, 0, with mass of 1, radius of 1 and zero velocity. & Mouse Input & Typical & Body at 0, 0, becomes default selected. \\ \hline
+GUI7 & Body Add (Mouse) & If the user presses the right mouse button when the simulation is paused, a body will be added at that location with mass 1, radius of 1 and zero velocity. & Mouse Input, Right Click & Typical & World coordinates of the mouse are already populated into body position. \\ \hline
+GUI8 & Body Delete (GUI) & If the user presses the 'Delete Body' button when the simulation is paused, the currently selected body will be completely deleted from the simulation. & TS4 & Typical & Body count is reduced by one, correct body has been deleted. \\ \hline
+GUI9 & Body Over-Delete & If the user presses the 'Delete Body' button when no bodies exists in the simulation, the program does not crash. (Only when paused) & Empty Scenario & Extreme & Body count remains at 0, program still runs \\ \hline
+GUI10 & Delete All Bodies & If the user presses the 'Delete All Bodies' button when the simulation is paused, all bodies will be removed from the simulation. & TS4 & Typical & Body count becomes 0. \\ \hline
+GUI11 & Superstructure Creation Dialogue & If the user unminimises it, a superstructure creation window will appear allowing the creation of a large number of organised bodies. & Mouse Input & Typical & Window opens, default values present\\
+\hline
+\end{tabular}
+\end{sidewaystable}
+\begin{sidewaystable}
+\caption{Interface Tests Continued}
+\centering
+\scriptsize
+\def\arraystretch{1.5}
+\begin{tabular}{|M{0.8cm}|P{3cm}|P{7.5cm}|P{2cm}|P{1.5cm}|P{4cm}|}
+\hline 
+\textbf{Ref} & \textbf{Name} & \textbf{Description} & \textbf{Data Set} & \textbf{Data Type} & \textbf{Expected Result} \\ \hline
+GUI12 & Superstructure Creation & If the user presses the 'create' button on the superstructure creation window a superstructure is added to the simulation. & - (Use default values) & Typical & Expected shape should be based on the parameters that are described in test scenario. \\ \hline
+GUI13 & Superstructure Orbital Velocity & If the user presses the 'create' button on the superstructure creation window a superstructure is added to the simulation. (Start Paused) & - & Typical & All bodies in the superstructure have the correct velocity and orbit the central body. (Circular Orbit)\\ \hline
+GUI14 & Body Modify Value (Accepted) & Modify an attribute of a body while the simulation is paused, then unpause the simulation. Eg: Position & 0, 10, 1E3, 152 & Typical & The change persists when unpaused.\\ \hline
+GUI15 & Body Modify Value (Erroneous) & Modify an attribute of a body while the simulation is paused, then unpause the simulation. Eg: Position & 1E18, ABC, -1E17, asdfseaq & Erroneous & The body value does not change.\\ \hline
+GUI16 & IPF Change & Change Iterations Per Frame to check that the correct number are being carried out & 1, 2, 5, 32 & Typical & Correct number of iterations displayed on cerr stream.\\ \hline
+GUI17 & Loss of Rendering Precision & Using TS7, Zoom out and pan the camera to the right, there are multiple bodies stretching far out, each an order of magnitude apart, observe the loss in precision in single precision floating point. (At each body) & TS7 & Benchmark & The final body will not be visible at max zoom level.\\
+\hline
+\end{tabular}
+\end{sidewaystable} 
+ 
+\vspace{12pt}
+\begin{sidewaystable}
+\subsubsection{Simulation Tests}
+\centering
+\scriptsize
+\def\arraystretch{1.5}
+\begin{tabular}{|M{0.8cm}|P{3cm}|P{7.5cm}|P{2cm}|P{1.5cm}|P{4cm}|}
+\hline 
+\textbf{Ref} & \textbf{Name} & \textbf{Description} & \textbf{Data Set} & \textbf{Data Type} & \textbf{Expected Result} \\ \hline
+SIM1 & Stationary Body & Using TS1, simulate for 10 itterations, body should remain stationary. & TS1 & Typical & $\pm0.0$ (XY Position) \\ \hline
+SIM2 & Two-Body Force Check (B1) & Using TS2, read value calculated force value on X on smaller body and check that it is correct (Single ITR) ($F=ma$) & TS2 & Typical & 0.001 Newtons \\ \hline
+SIM3 & Two-Body Force Check (B2) & Using TS2, read value calculated force value on X on larger body and check that it is correct (Single ITR) ($F=ma$) & TS2 & Typical & 0.001 Newtons \\ \hline
+SIM4 & Circular Orbit Check (Complete) & Using TS2, Simulate for 6283 Iterations, one full orbit should be completed, compare start position to end position & TS2 & Typical (Deviation) & $\pm1.0$ (XY Position) \\ \hline
+SIM5 & Circular Orbit Check (Distance) & Using TS2, Simulate for 6283 Iterations, one full orbit should be completed, check vector distance between two bodies, should remain constant within deviation over simulation. & TS2 & Typical (Deviation) & $\pm1.0$ \\ \hline
+SIM6 & Two-Body Collision Test (Deletion/Creation) & Using TS3, Simulate to test collision of two bodies, Check Old Body Deleted and New Body Created. (No acceleration due to gravity) & TS3 & Typical & Body Count = 1 \\ \hline
+SIM7 & Two-Body Collision Test (Mass) & Using TS3, Simulate to test collision of two bodies, Check mass of new body is equal to combined mass of previous bodies. (And velocity changes accordingly) & TS3 $[10,1]$, $[20,100]$, $[1000,1000]$ & Typical & Dependant on input \\ \hline
+SIM8 & Two-Body Collision Test (Velocity) & Start up the simulation, (paused), initial acceleration on the central body should be balanced. (0) & TS3, $[1,1]$, $[1,2]$, $[-150,150]$ & Typical & Dependant on input \\ \hline
+SIM9 & Two-Body Collision Test (Radius) & Using TS3, Simulate to test collision of two bodies, Check that the radius of the new body conforms to $\pi r^2 + \pi r^2$ (Adding the areas) & TS3, $[1, 10]$, $[2, 10]$, $[5, 5]$ & Typical & Dependant on input \\ \hline
+SIM10 & High Body Count Benchmark & Using TS4, Simulate the interaction of a range of bodies and report how many iterations are completed within 20 seconds. (Remove Synchronisation, Collisions Off) (Time 20s and pause) & TS4 (Test 10, 20, 40, 80 in decades upto 10000) & Benchmark & Should Not Crash \\ \hline
+SIM11 & Simulation Bounds Exit & Using TS5, Simulate a body on course to exit the simulation bounds, body should be deleted. & TS5 & Extreme & Body Count = 0 \\ \hline
+\end{tabular}
+\end{sidewaystable}
+\begin{sidewaystable}
+\caption{Simulation Tests Continued}
+\centering
+\scriptsize
+\def\arraystretch{1.5}
+\begin{tabular}{|M{0.8cm}|P{3cm}|P{7.5cm}|P{2cm}|P{1.5cm}|P{4cm}|}
+\hline 
+\textbf{Ref} & \textbf{Name} & \textbf{Description} & \textbf{Data Set} & \textbf{Data Type} & \textbf{Expected Result} \\ \hline
+SIM12 & Simulation Max Speed & Using TS6, Attempt to populate body storage with a body that has a velocity higher than the speed of light. & TS6 & Erroneous & Body Count = 0 \\ \hline
+SIM13 & Simulation Trace Table (Two-Body) & Run through algorithm using manual method, compare simulation results. (8 iterations) & TS9 & Typical & Results should match \\ \hline
+SIM14 & Simulation Sun Planet Moon Test & Run simulation scenario, moon should orbit planet, planet should orbit sun. & TS8 & Typical & - \\ \hline
+SIM15 & Three Body Stability & Start up the simulation, (paused), initial acceleration on the central body should be balanced. (0) & TS11 & Typical & Acceleration on central should be 0, 0.\\ \hline
+SIM16 & Three Body Chaos & Pause the simulation, add small velocity to central body on x, system will collapse into chaos. & TS11 & Typical & Simulation becomes chaotic \\ \hline
+SIM17 & Colour Mixing & Run a simulation using a large number of bodies, such as three super structures that are three different colours. & - & Typical & Colours will mix together correctly (Weighted Averaging) \\ \hline
+SIM18 & Force Calculation Loop & Run the simulation through a single iteration to show which forces are calculated. & TS11 & Typical & 0-1, 0-2, 1-2 \\ \hline
+SIM19 & Force Calculation Loop Trace Table & Calculate the forces for the initial state of objects for each relationship. & TS12 & Typical & Results should match \\ 
+\hline
+\end{tabular}
+\end{sidewaystable}
