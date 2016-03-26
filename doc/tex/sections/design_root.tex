@@ -121,6 +121,9 @@ Unfortunately it is not possible to have assign callback functions to class-memb
 \paragraph{}
 While the rendering and interface will be mostly programmed using callbacks and procedural programming, however the simulation; due to its nature of distinct bodies or objects, is extremely well suited to an object orientated method of programming.
 
+\pagebreak
+\subsubsection{Design Data Dictionary}
+\import{sections/design/}{desdatadictionary.tex}
 
 \pagebreak
 \subsubsection{Program Flowchart}
@@ -348,6 +351,13 @@ All of the windows will be slightly transparent, but will be able to be closed u
 \paragraph{}
 As mentioned previously, the circular bodies cannot be drawn as true circles, but instead must be drawn as a polygon, this will potentially cause objects to have very visible edges, it may be worthwhile to implement an algorithm that dynamically adjusts the number of vertices in the circle based on its radius in order to keep it visually smooth as an extension.
 
+\begin{wrapfigure}{r}{0.45\textwidth}
+  \centering
+  \includegraphics[width=0.35\textwidth]{img/atb.PNG}
+  \caption{Example of AntTweakBar}
+  \vspace{-50pt}
+\end{wrapfigure}
+
 \paragraph{}
 Another feature is that it is possible to drag and drop save files into the program from any directory rather than having the file inside the save file directory and typing in its name.
 
@@ -382,7 +392,7 @@ Interface testing concerns the use of the interface of the program, using basic 
 Simulation testing contains basic tests that should behave in very predictable ways allowing the checking of the implemented simulation algorithm, including a very basic trace table. Collision is also tested in a isolated fashion. The basic limitations that have been placed on the simulation, relating to the 'Laws of Physics' and will delete bodies that break the set limits.
 
 The simulation tests also contain a basic benchmark test which will profile the performance of the simulation compared to the number of bodies used.
-
+\pagebreak
 \subsubsection{Test Scenarios}
 \import{sections/design/}{testscenarios.tex}
 \import{sections/design/}{testtables.tex}
