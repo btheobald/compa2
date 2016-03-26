@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.3.22)  26 MAR 2016 22:47
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.3.22)  26 MAR 2016 23:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1105,13 +1105,13 @@ nput line 233.
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
 (Font)              scaled to size 7.19995pt on input line 233.
 (./sections/design/savtemp.tex) [51] (./sections/design/savtempex.tex) [52]
-[53] (./sections/design/algorithms.tex
-Underfull \hbox (badness 10000) in paragraph at lines 26--28
+[53] (./sections/design/algorithms.tex [54]
+Underfull \hbox (badness 10000) in paragraph at lines 35--37
 
  []
 
-[54]
-Underfull \hbox (badness 10000) in paragraph at lines 63--64
+
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
 
  []
 
@@ -1120,82 +1120,82 @@ Underfull \hbox (badness 10000) in paragraph at lines 63--64
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.73 \paragraph
-               {Algorithm 4: Integration of New Position}]
-Underfull \hbox (badness 10000) in paragraph at lines 83--84
+l.73 
+     ] [56]
+Underfull \hbox (badness 10000) in paragraph at lines 92--93
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 85--86
+Underfull \hbox (badness 10000) in paragraph at lines 94--95
 
  []
 
-[56] [57]
-Underfull \hbox (badness 10000) in paragraph at lines 123--124
+[57] [58]
+Underfull \hbox (badness 10000) in paragraph at lines 132--133
 
  []
 
-[58] [59]) [60] (./sections/design/pseudocode.tex
+[59] [60]) [61] (./sections/design/pseudocode.tex
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 7.
- [61]) [62] [63]
-<img/did.png, id=1071, 339.669pt x 543.9522pt>
+ [62]) [63] [64]
+<img/did.png, id=1076, 339.669pt x 543.9522pt>
 File: img/did.png Graphic file (type png)
  <use img/did.png>
 Package pdftex.def Info: img/did.png used on input line 266.
 (pdftex.def)             Requested size: 358.50612pt x 574.13806pt.
- [64]
+ [65]
 
-LaTeX Warning: Text page 65 contains only floats.
+LaTeX Warning: Text page 66 contains only floats.
 
-[65pdfTeX warning (ext4): destination with the same identifier (name{figure.13}
+[66pdfTeX warning (ext4): destination with the same identifier (name{figure.13}
 ) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.279 \subsubsection
                     {body} <./img/did.png (PNG copy)>]
-(./sections/design/body.hpp) [66] (./sections/design/scenario.hpp) [67]
-(./sections/design/simTLC.hpp) (./sections/design/rdrTLC.hpp) [68] [69]
-(./sections/design/sharedStage.hpp) [70]
-<img/framerate.png, id=1271, 319.9152pt x 80.2197pt>
+(./sections/design/body.hpp) [67] (./sections/design/scenario.hpp) [68]
+(./sections/design/simTLC.hpp) (./sections/design/rdrTLC.hpp) [69] [70]
+(./sections/design/sharedStage.hpp) [71]
+<img/framerate.png, id=1276, 319.9152pt x 80.2197pt>
 File: img/framerate.png Graphic file (type png)
  <use img/framerate.png>
 Package pdftex.def Info: img/framerate.png used on input line 329.
 (pdftex.def)             Requested size: 224.06548pt x 56.18645pt.
 
-[71pdfTeX warning (ext4): destination with the same identifier (name{figure.14}
+[72pdfTeX warning (ext4): destination with the same identifier (name{figure.14}
 ) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.338 
-       <./img/framerate.png>] <img/uiex.png, id=1282, 369.0588pt x 254.3904pt>
+       <./img/framerate.png>] <img/uiex.png, id=1287, 369.0588pt x 254.3904pt>
 File: img/uiex.png Graphic file (type png)
 
 <use img/uiex.png>
 Package pdftex.def Info: img/uiex.png used on input line 341.
 (pdftex.def)             Requested size: 448.13095pt x 308.91573pt.
- [72pdfTeX warning (ext4): destination with the same identifier (name{figure.15
+ [73pdfTeX warning (ext4): destination with the same identifier (name{figure.15
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.350 
-       <./img/uiex.png>] <img/atb.PNG, id=1291, 182.93344pt x 391.4625pt>
+       <./img/uiex.png>] <img/atb.PNG, id=1297, 182.93344pt x 391.4625pt>
 File: img/atb.PNG Graphic file (type png)
 
 <use img/atb.PNG>
 Package pdftex.def Info: img/atb.PNG used on input line 356.
 (pdftex.def)             Requested size: 156.84856pt x 335.65962pt.
- [73pdfTeX warning (ext4): destination with the same identifier (name{figure.16
+ [74pdfTeX warning (ext4): destination with the same identifier (name{figure.16
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.371 \subsection
-                 {Testing Strategy} <./img/atb.PNG>] [74] [75]
+                 {Testing Strategy} <./img/atb.PNG>] [75] [76]
 (./sections/design/testscenarios.tex
 Overfull \hbox (2.69879pt too wide) in paragraph at lines 22--23
 []\T1/cmr/m/n/12 It should take $\OT1/cmr/m/n/12 628\OML/cmm/m/it/12 :\OT1/cmr/
@@ -1203,7 +1203,7 @@ m/n/12 3$ \T1/cmr/m/n/12 sec-onds or $\OT1/cmr/m/n/12 6283$ \T1/cmr/m/n/12 It-e
 r-a-tions to com-plete one or-bit. ($\OML/cmm/m/it/12 T=IDT$\T1/cmr/m/n/12 ) 
  []
 
-[76] [77] [78] [79] [80]) (./sections/design/testtables.tex
+[77] [78] [79] [80] [81]) (./sections/design/testtables.tex
 Overfull \hbox (1.82755pt too wide) in paragraph at lines 37--37
  []|\T1/cmr/m/n/8 GUI10| 
  []
@@ -1293,21 +1293,21 @@ Overfull \hbox (1.29851pt too wide) in paragraph at lines 97--97
  []|\T1/cmr/m/n/8 SIM19| 
  []
 
-)) [81] [82] [83] [84pdfTeX warning (ext4): destination with the same identifie
+)) [82] [83] [84] [85pdfTeX warning (ext4): destination with the same identifie
 r (name{table.7}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.72 
-     ] [85] [86pdfTeX warning (ext4): destination with the same identifier (nam
+     ] [86] [87pdfTeX warning (ext4): destination with the same identifier (nam
 e{table.8}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.72 
-     ] (./sections/impl_root.tex) [87] [88] (./sections/manual_root.tex)
-[89] (./sections/eval_root.tex) [90] (./sections/codelist_root.tex
-(./sections/../../../proto/02/main.cpp [91]) [92]
+     ] (./sections/impl_root.tex) [88] [89] (./sections/manual_root.tex)
+[90] (./sections/eval_root.tex) [91] (./sections/codelist_root.tex
+(./sections/../../../proto/02/main.cpp [92]) [93]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 6.
@@ -1320,7 +1320,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 6.
 
-(./sections/../../../proto/eulerenergy/main.cpp [93]) [94]
+(./sections/../../../proto/eulerenergy/main.cpp [94]) [95]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 10.
@@ -1333,59 +1333,59 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 10.
 
-(./sections/../../../proto/lpfrg01/main.cpp [95])) [96]
-(./sections/appendix_root.tex (./sections/appendix/dialogue.tex [97] [98]
-<img/still.png, id=1671, 2107.875pt x 2007.5pt>
+(./sections/../../../proto/lpfrg01/main.cpp [96])) [97]
+(./sections/appendix_root.tex (./sections/appendix/dialogue.tex [98] [99]
+<img/still.png, id=1676, 2107.875pt x 2007.5pt>
 File: img/still.png Graphic file (type png)
  <use img/still.png>
 Package pdftex.def Info: img/still.png used on input line 106.
 (pdftex.def)             Requested size: 268.8813pt x 256.05241pt.
- [99]
-[100pdfTeX warning (ext4): destination with the same identifier (name{figure.17
+ [100]
+[101pdfTeX warning (ext4): destination with the same identifier (name{figure.17
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.111 \hrule
              <./img/still.png>]
-<img/pEcho.png, id=1681, 694.595pt x 374.39874pt>
+<img/pEcho.png, id=1686, 694.595pt x 374.39874pt>
 File: img/pEcho.png Graphic file (type png)
  <use img/pEcho.png>
 Package pdftex.def Info: img/pEcho.png used on input line 121.
 (pdftex.def)             Requested size: 403.31511pt x 217.40279pt.
 
-<img/superstructure.png, id=1682, 748.7975pt x 568.1225pt>
+<img/superstructure.png, id=1687, 748.7975pt x 568.1225pt>
 File: img/superstructure.png Graphic file (type png)
 
 <use img/superstructure.png>
 Package pdftex.def Info: img/superstructure.png used on input line 144.
 (pdftex.def)             Requested size: 403.31511pt x 306.00137pt.
- [101pdfTeX warning (ext4): destination with the same identifier (name{figure.1
+ [102pdfTeX warning (ext4): destination with the same identifier (name{figure.1
 8}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.153 
-       <./img/pEcho.png>] [102pdfTeX warning (ext4): destination with the same 
+       <./img/pEcho.png>] [103pdfTeX warning (ext4): destination with the same 
 identifier (name{figure.19}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.160 
-       <./img/superstructure.png>])) [103] (./bib.tex
+       <./img/superstructure.png>])) [104] (./bib.tex
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5.
- [104]
+ [105]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 5.
  (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 5.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 5218279D645151B7325D8B4FC5135747;5595.
+(rerunfilecheck)             Checksum: CBD68712321CCFF1A35B0B65B9EAD654;5595.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 5.
  ) ) 
 Here is how much of TeX's memory you used:
- 22062 strings out of 494910
- 401405 string characters out of 6179836
+ 22064 strings out of 494910
+ 401425 string characters out of 6179836
  656235 words of memory out of 5000000
  24026 multiletter control sequences out of 15000+600000
  26932 words of font info for 68 fonts, out of 8000000 for 9000
@@ -1419,10 +1419,10 @@ s/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb>
-Output written on main.pdf (104 pages, 1983646 bytes).
+Output written on main.pdf (105 pages, 1985837 bytes).
 PDF statistics:
- 2693 PDF objects out of 2984 (max. 8388607)
- 1840 compressed objects within 19 object streams
- 974 named destinations out of 1000 (max. 500000)
+ 2698 PDF objects out of 2984 (max. 8388607)
+ 1844 compressed objects within 19 object streams
+ 976 named destinations out of 1000 (max. 500000)
  726 words of extra memory for PDF output out of 10000 (max. 10000000)
 

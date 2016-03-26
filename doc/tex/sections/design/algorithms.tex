@@ -4,6 +4,15 @@ This equation can be used to calculate the gravitational force exerted by two ma
 
 $$\begin{bmatrix} F_x \\ F_y \end{bmatrix} = \frac{Gm_1m_2}{r^3} \begin{bmatrix} r_x \\ r_y \end{bmatrix}$$
 
+\paragraph{}
+The proof for this equation is fairly straightforward, by equating the original full equation including the trigonometric component finding to the vector equation.
+
+$$F_x=\frac{GmM}{r^2}\cos\left(\tan^{-1}\left(\frac{\hat{y}}{\hat{x}}\right)\right) \hspace{25pt} F_x=\frac{GmM}{r^3}\hat{x} \hspace{25pt} : GmM = 1$$ 
+\vspace{10pt}
+$$F_x=\frac{1}{r^2}\cos\left(\tan^{-1}\left(\frac{\hat{y}}{\hat{x}}\right)\right) \hspace{25pt} F_x=\frac{1}{r^3}\hat{x} \hspace{25pt} : r=\sqrt{\hat{x}^2+\hat{y}^2}$$ 
+\vspace{10pt}
+$$F_x=\frac{1}{(\sqrt{\hat{x}^2+\hat{y}^2})^2}\cos\left(\tan^{-1}\left(\frac{\hat{y}}{\hat{x}}\right)\right) = F_x=\frac{1}{(\sqrt{\hat{x}^2+\hat{y}^2})^3}\hat{x} \hspace{25pt} : \frac{1}{x^2} \div \frac{1}{x^3}  = x$$
+
 Required Parameters:
 \begin{itemize}
 \item Gravitational Constant ($G$)
