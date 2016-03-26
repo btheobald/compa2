@@ -587,19 +587,44 @@ In order to speed up the testing of the program, some basic test scenarios have 
     \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} -10 \textbf{Y:} 0, \textbf{Vel X:} 0 \textbf{Y:} -0.11
     \end{itemize}
   \end{itemize}
+  
+\pagebreak 
+\item (Ref: TS12) Many Body System
+  \begin{itemize}
+  \item This system contains several bodies which will very clearly show the interactions occurring correctly between every body.
+  \item \textbf{IDT:} 0.01
+  \item \textbf{UGC:} 10
+  \item \textbf{BC:} 6
+    \begin{itemize}
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} 10 \textbf{Y:} 2, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} -4 \textbf{Y:} 4, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} -18 \textbf{Y:} 16, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} -8 \textbf{Y:} -12, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} 6 \textbf{Y:} -13, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \item \textbf{Mass:} 1, \textbf{Radius:} 1, \textbf{Pos X:} 8 \textbf{Y:} 11, \textbf{Vel X:} 0 \textbf{Y:} 0
+    \end{itemize}
+  \end{itemize}
 \end{enumerate}
 
 \pagebreak
-\subsubsection{System Tests}
 \vspace{12pt}
-\begin{enumerate}
-\item \textbf{(Ref: SYS1)} Initial Memory Leak Check
-\item \textbf{(Ref: SYS2)} Memory Leak Delete All Bodies Check
-\item \textbf{(Ref: SYS3)} Memory Leak Add Body Check
-\item \textbf{(Ref: SYS4)} Memory Leak Delete, Add, Delete Body
-\item \textbf{(Ref: SYS5)} Program Exits after Sim Thread Exits
-\item \textbf{(Ref: SYS6)} No Concurrent Access to Shared Data
-\end{enumerate}
+\begin{sidewaystable}
+\subsubsection{System Tests}
+\centering
+\scriptsize
+\def\arraystretch{1.5}
+\begin{tabular}{|M{0.8cm}|P{3cm}|P{5cm}|P{3cm}|P{3cm}|P{5cm}|}
+\hline 
+\textbf{Ref} & \textbf{Name} & \textbf{Description} & \textbf{Data Set} & \textbf{Data Type} & \textbf{Expected Result} \\ \hline
+SYS1 & Initial Memory Leak Check & Run through valgrind, exit, check that own code is not leaking. & Default & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
+SYS2 & Memory Leak Delete All Bodies Check & Run through valgrind, pause, delete all bodies, exit, check that own code is not leaking. & Default, User Input & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
+SYS3 & Memory Leak Add Body Check & Run through valgrind, add a body, unpause, exit, check that own code is not leaking. & Default, User Input & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
+SYS4 & Memory Leak Delete, Add, Delete Body & Run through valgrind, pause, delete central body, add new body, unpause, pause again and delete body, exit. & Default, User Input & Typical & 72 Bytes are always 'definitely lost' in GLFW, Related to keyboard in Linux. \\ \hline
+SYS5 & Program Exits after Sim Thread Exits & When the application is closed, the simulation thread will exit before the program terminates. & Default, User Input & Typical & Program does not hang on exit. Use cerr stream used to check. \\ \hline
+SYS6 & No Concurrent Access to Shared Data & Run in Helgrind, check that access is locking correctly. & Default & Typical & No errors that indicate simultaneous access. \\
+\hline
+\end{tabular}
+\end{sidewaystable}
 
 \subsubsection{Interface Tests}
 \vspace{12pt}
