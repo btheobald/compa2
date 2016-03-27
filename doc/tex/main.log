@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.3.22)  26 MAR 2016 23:22
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.3.22)  27 MAR 2016 17:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -898,25 +898,25 @@ ble.3}) has been already used, duplicate ignored
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.131 
-      ] <img/csl0.png, id=521, 590.205pt x 136.5903pt>
+      ] <img/csl0.png, id=536, 590.205pt x 136.5903pt>
 File: img/csl0.png Graphic file (type png)
  <use img/csl0.png>
 Package pdftex.def Info: img/csl0.png used on input line 136.
 (pdftex.def)             Requested size: 448.13095pt x 103.71173pt.
 
-<img/csl1.png, id=523, 530.4618pt x 196.3335pt>
+<img/csl1.png, id=538, 530.4618pt x 196.3335pt>
 File: img/csl1.png Graphic file (type png)
  <use img/csl1.png>
 Package pdftex.def Info: img/csl1.png used on input line 142.
 (pdftex.def)             Requested size: 448.13095pt x 165.86568pt.
 
-<img/nsl0.png, id=524, 472.8867pt x 171.7617pt>
+<img/nsl0.png, id=539, 472.8867pt x 171.7617pt>
 File: img/nsl0.png Graphic file (type png)
  <use img/nsl0.png>
 Package pdftex.def Info: img/nsl0.png used on input line 148.
 (pdftex.def)             Requested size: 448.13095pt x 162.77168pt.
 
-<img/nsl1.png, id=525, 662.475pt x 500.8311pt>
+<img/nsl1.png, id=540, 662.475pt x 500.8311pt>
 File: img/nsl1.png Graphic file (type png)
  <use img/nsl1.png>
 Package pdftex.def Info: img/nsl1.png used on input line 154.
@@ -946,7 +946,7 @@ n already used, duplicate ignored
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.161 
-       <./img/nsl1.png>] <img/aid.png, id=542, 319.6743pt x 83.1105pt>
+       <./img/nsl1.png>] <img/aid.png, id=557, 319.6743pt x 83.1105pt>
 File: img/aid.png Graphic file (type png)
 
 <use img/aid.png>
@@ -969,14 +969,14 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 6.
  [21] [22] [23]
 [24] [25]) [26] [27] [28]) [29] (./sections/prototyping_root.tex
-<img/notworking0.png, id=647, 542.77782pt x 515.67656pt>
+<img/notworking0.png, id=662, 542.77782pt x 515.67656pt>
 File: img/notworking0.png Graphic file (type png)
 
 <use img/notworking0.png>
 Package pdftex.def Info: img/notworking0.png used on input line 23.
 (pdftex.def)             Requested size: 201.65755pt x 191.59206pt.
  [30]
-<img/notworking1amp.png, id=658, 310.15875pt x 469.755pt>
+<img/notworking1amp.png, id=673, 310.15875pt x 469.755pt>
 File: img/notworking1amp.png Graphic file (type png)
 
 <use img/notworking1amp.png>
@@ -990,7 +990,7 @@ Package pdftex.def Info: img/notworking1amp.png used on input line 48.
 l.54 A
       s the body orbits, its height increases dramatically, and mainly on th...
  <./img/notworking0.png (PNG copy)>]
-<img/orbitbad.png, id=671, 113.4639pt x 76.3653pt>
+<img/orbitbad.png, id=686, 113.4639pt x 76.3653pt>
 File: img/orbitbad.png Graphic file (type png)
  <use img/orbitbad.png>
 Package pdftex.def Info: img/orbitbad.png used on input line 61.
@@ -1009,7 +1009,7 @@ l.68
                                                   \fi \fi 
 l.68 
       <./img/notworking1amp.png> <./img/orbitbad.png>]
-<img/leapfrog.png, id=683, 157.3077pt x 33.0033pt>
+<img/leapfrog.png, id=698, 157.3077pt x 33.0033pt>
 File: img/leapfrog.png Graphic file (type png)
  <use img/leapfrog.png>
 Package pdftex.def Info: img/leapfrog.png used on input line 75.
@@ -1052,8 +1052,13 @@ File: t1fvm.fd 2004/09/07 scalable font definitions for T1/fvm.
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
 (Font)              scaled to size 10.79993pt on input line 112.
  [41]
-(./sections/design/desdatadictionary.tex [42]
-Overfull \vbox (23.78072pt too high) has occurred while \output is active []
+(./sections/design/desdatadictionary.tex
+Underfull \hbox (badness 2495) in paragraph at lines 35--35
+[]|\T1/cmr/m/n/10 Pi is the ra-tio of a cir-cle's cir-cum-fer-ence to
+ []
+
+[42]
+Overfull \vbox (15.09663pt too high) has occurred while \output is active []
 
 
 [43pdfTeX warning (ext4): destination with the same identifier (name{table.5}) 
@@ -1061,30 +1066,22 @@ has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.23 
-     ]
-Underfull \hbox (badness 2495) in paragraph at lines 36--36
-[]|\T1/cmr/m/n/10 Pi is the ra-tio of a cir-cle's cir-cum-fer-ence to
- []
-
-
-Overfull \vbox (15.09663pt too high) has occurred while \output is active []
-
-
-[44pdfTeX warning (ext4): destination with the same identifier (name{table.6}) 
-has been already used, duplicate ignored
+l.43 
+     ]) [44pdfTeX warning (ext4): destination with the same identifier (name{ta
+ble.6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.44 
-     ]) <img/flowchart.png, id=781, 412.6617pt x 370.986pt>
+l.129 \subsubsection
+                    {Program Flowchart}]
+<img/flowchart.png, id=797, 412.6617pt x 370.986pt>
 File: img/flowchart.png Graphic file (type png)
-
-<use img/flowchart.png>
+ <use img/flowchart.png>
 Package pdftex.def Info: img/flowchart.png used on input line 132.
 (pdftex.def)             Requested size: 448.13095pt x 402.87225pt.
- [45pdfTeX warning (ext4): destination with the same identifier (name{figure.11
-}) has been already used, duplicate ignored
+
+[45pdfTeX warning (ext4): destination with the same identifier (name{figure.11}
+) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
@@ -1105,13 +1102,13 @@ nput line 233.
 LaTeX Font Info:    Font shape `T1/fvm/m/n' will be
 (Font)              scaled to size 7.19995pt on input line 233.
 (./sections/design/savtemp.tex) [51] (./sections/design/savtempex.tex) [52]
-[53] (./sections/design/algorithms.tex [54]
-Underfull \hbox (badness 10000) in paragraph at lines 35--37
+[53] (./sections/design/algorithms.tex
+Underfull \hbox (badness 10000) in paragraph at lines 21--22
 
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 72--73
+[54]
+Underfull \hbox (badness 10000) in paragraph at lines 41--43
 
  []
 
@@ -1121,18 +1118,23 @@ Underfull \hbox (badness 10000) in paragraph at lines 72--73
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.73 
-     ] [56]
-Underfull \hbox (badness 10000) in paragraph at lines 92--93
+     ]
+Underfull \hbox (badness 10000) in paragraph at lines 78--79
+
+ []
+
+[56]
+Underfull \hbox (badness 10000) in paragraph at lines 98--99
 
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 94--95
+Underfull \hbox (badness 10000) in paragraph at lines 100--101
 
  []
 
 [57] [58]
-Underfull \hbox (badness 10000) in paragraph at lines 132--133
+Underfull \hbox (badness 10000) in paragraph at lines 138--139
 
  []
 
@@ -1140,7 +1142,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 132--133
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 7.
  [62]) [63] [64]
-<img/did.png, id=1076, 339.669pt x 543.9522pt>
+<img/did.png, id=1092, 339.669pt x 543.9522pt>
 File: img/did.png Graphic file (type png)
  <use img/did.png>
 Package pdftex.def Info: img/did.png used on input line 266.
@@ -1159,7 +1161,7 @@ l.279 \subsubsection
 (./sections/design/body.hpp) [67] (./sections/design/scenario.hpp) [68]
 (./sections/design/simTLC.hpp) (./sections/design/rdrTLC.hpp) [69] [70]
 (./sections/design/sharedStage.hpp) [71]
-<img/framerate.png, id=1276, 319.9152pt x 80.2197pt>
+<img/framerate.png, id=1292, 319.9152pt x 80.2197pt>
 File: img/framerate.png Graphic file (type png)
  <use img/framerate.png>
 Package pdftex.def Info: img/framerate.png used on input line 329.
@@ -1171,7 +1173,7 @@ Package pdftex.def Info: img/framerate.png used on input line 329.
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.338 
-       <./img/framerate.png>] <img/uiex.png, id=1287, 369.0588pt x 254.3904pt>
+       <./img/framerate.png>] <img/uiex.png, id=1303, 369.0588pt x 254.3904pt>
 File: img/uiex.png Graphic file (type png)
 
 <use img/uiex.png>
@@ -1183,7 +1185,7 @@ Package pdftex.def Info: img/uiex.png used on input line 341.
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.350 
-       <./img/uiex.png>] <img/atb.PNG, id=1297, 182.93344pt x 391.4625pt>
+       <./img/uiex.png>] <img/atb.PNG, id=1313, 182.93344pt x 391.4625pt>
 File: img/atb.PNG Graphic file (type png)
 
 <use img/atb.PNG>
@@ -1305,9 +1307,10 @@ e{table.8}) has been already used, duplicate ignored
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.72 
-     ] (./sections/impl_root.tex) [88] [89] (./sections/manual_root.tex)
-[90] (./sections/eval_root.tex) [91] (./sections/codelist_root.tex
-(./sections/../../../proto/02/main.cpp [92]) [93]
+     ] (./sections/impl_root.tex [88] [89]) [90] [91]
+(./sections/manual_root.tex) [92] (./sections/eval_root.tex) [93]
+(./sections/codelist_root.tex (./sections/../../../proto/02/main.cpp [94])
+[95]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 6.
@@ -1320,7 +1323,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 6.
 
-(./sections/../../../proto/eulerenergy/main.cpp [94]) [95]
+(./sections/../../../proto/eulerenergy/main.cpp [96]) [97]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 10.
@@ -1333,61 +1336,68 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 10.
 
-(./sections/../../../proto/lpfrg01/main.cpp [96])) [97]
-(./sections/appendix_root.tex (./sections/appendix/dialogue.tex [98] [99]
-<img/still.png, id=1676, 2107.875pt x 2007.5pt>
+(./sections/../../../proto/lpfrg01/main.cpp [98])) [99]
+(./sections/appendix_root.tex (./sections/appendix/dialogue.tex [100] [101]
+<img/still.png, id=1715, 2107.875pt x 2007.5pt>
 File: img/still.png Graphic file (type png)
  <use img/still.png>
 Package pdftex.def Info: img/still.png used on input line 106.
 (pdftex.def)             Requested size: 268.8813pt x 256.05241pt.
- [100]
-[101pdfTeX warning (ext4): destination with the same identifier (name{figure.17
+ [102]
+[103pdfTeX warning (ext4): destination with the same identifier (name{figure.17
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.111 \hrule
              <./img/still.png>]
-<img/pEcho.png, id=1686, 694.595pt x 374.39874pt>
+<img/pEcho.png, id=1726, 694.595pt x 374.39874pt>
 File: img/pEcho.png Graphic file (type png)
  <use img/pEcho.png>
 Package pdftex.def Info: img/pEcho.png used on input line 121.
 (pdftex.def)             Requested size: 403.31511pt x 217.40279pt.
 
-<img/superstructure.png, id=1687, 748.7975pt x 568.1225pt>
+<img/superstructure.png, id=1727, 748.7975pt x 568.1225pt>
 File: img/superstructure.png Graphic file (type png)
 
 <use img/superstructure.png>
 Package pdftex.def Info: img/superstructure.png used on input line 144.
 (pdftex.def)             Requested size: 403.31511pt x 306.00137pt.
- [102pdfTeX warning (ext4): destination with the same identifier (name{figure.1
+ [104pdfTeX warning (ext4): destination with the same identifier (name{figure.1
 8}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.153 
-       <./img/pEcho.png>] [103pdfTeX warning (ext4): destination with the same 
+       <./img/pEcho.png>] [105pdfTeX warning (ext4): destination with the same 
 identifier (name{figure.19}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.160 
-       <./img/superstructure.png>])) [104] (./bib.tex
+       <./img/superstructure.png>])) [106] (./bib.tex
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5.
- [105]
+ [107]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 5.
  (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 5.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5.
-Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: CBD68712321CCFF1A35B0B65B9EAD654;5595.
+
+
+Package rerunfilecheck Warning: File `main.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `main.out':
+(rerunfilecheck)             Before: A00D9743309BADDC16D349AFC2162923;5821
+(rerunfilecheck)             After:  D29937407794D41D2D265EA8A8981672;5897.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 5.
  ) ) 
 Here is how much of TeX's memory you used:
- 22064 strings out of 494910
- 401425 string characters out of 6179836
+ 22088 strings out of 494910
+ 401750 string characters out of 6179836
  656235 words of memory out of 5000000
- 24026 multiletter control sequences out of 15000+600000
+ 24029 multiletter control sequences out of 15000+600000
  26932 words of font info for 68 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  43i,18n,58p,10376b,2088s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1419,10 +1429,10 @@ s/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb>
-Output written on main.pdf (105 pages, 1985837 bytes).
+Output written on main.pdf (107 pages, 1995378 bytes).
 PDF statistics:
- 2698 PDF objects out of 2984 (max. 8388607)
- 1844 compressed objects within 19 object streams
- 976 named destinations out of 1000 (max. 500000)
- 726 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 2742 PDF objects out of 2984 (max. 8388607)
+ 1885 compressed objects within 19 object streams
+ 997 named destinations out of 1000 (max. 500000)
+ 750 words of extra memory for PDF output out of 10000 (max. 10000000)
 

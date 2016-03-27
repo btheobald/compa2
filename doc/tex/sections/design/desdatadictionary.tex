@@ -1,5 +1,4 @@
 \begin{table}[H]
-\caption{Design Data Dictionary}
 \centering
 \footnotesize
 \def\arraystretch{1.5}
@@ -12,7 +11,7 @@ Position ($r$) & Double$\times2$ (16 B) & The position in world space of a parti
 Velocity ($v$) & Double$\times2$ (16 B) & The velocity of any object or system in the simulation, change in unit position per unit time. Used in simulation. (XY) \\ \hline
 Acceleration ($a$) & Double$\times2$ (16 B) & The instantaneous acceleration acting on a body, change in unit position per unit time per unit time, 2nd derivative or rate of change, calculated using $a=F/m$. (XY) \\ \hline
 Force ($F$) & Double$\times2$ (16 B) & The instantaneous force acting on a body, calculated as the relationship between two bodies and summed on individual components (XY), calculated using $\frac{-GMm}{r^3}\hat{r}_{xy}$ \\ \hline
-Fixed & Bool (1 B) & This variable will control if a body is simulated in terms of movement, if it is fixed, its neither its position or velocity will update. \\ \hline
+Fixed & Boolean (1 B) & This variable will control if a body is simulated in terms of movement, if it is fixed, its neither its position or velocity will update. \\ \hline
 Colour & Float$\times3$ (12 B) & This is a array of 3 floating point variables that describes the colour RGB of an object, the American spelling may be used for continuity with libraries. \\ \hline
 Body & Object (93 B) & This object structure represents a body, it has mass, radius, position, velocity and can be acted on by force which translates to acceleration, size estimate is 93 Bytes. \\ \hline
 Vector & C++ Container & \textit{Vector} is a data structure provided by the C++ STL (Standard Template Library), it acts as a dynamically resizing array, items can be deleted or added and the vector will resize, it can be accessed like a normal array. \\ \hline
@@ -37,9 +36,22 @@ Pi ($\pi$)& Constant & Pi is the ratio of a circle's circumference to its diamet
 $$F=\frac{GmM}{r^2}$$ & Equation & Newtons Law of Gravitation, states that particles attract every other particle with a force that is directly proportional to the product of masses but inversely proportional to the square of the distance between them. Meaning this equation gives the force that two particles will exert on each other due to gravity. \\ \hline
 $$F=\frac{GmM}{r^3}\hat{r}_{xy}$$ & Equation & This equation is the vector form of the previous, $\hat{r}_{xy}$ is the component distance for the axis the force is being calculated on. The force that is calculated applies to both bodies. \\ \hline
 $$F=ma=\frac{\Delta p}{\Delta t}$$ & Equation & This equation describes newtons second law, which states that force is equal to the rate of change of momentum. Rearrange to $a=\frac{F}{m}$ to calculate acceleration due to force. \\ \hline
+$$r=\sqrt{\hat{x}^2+\hat{y}^2}$$ & Equation & This equation is Pythagoras theorem, it is used for finding a side to a right angle triangle when two sides are known. Used for calculating total distance between bodies. \\ \hline
 $$p=mv$$ & Equation & This equation relates mass and velocity and momentum. Momentum will be conserved in collisions as a vector quantity, and thus can be calculated on the X and Y components. \\ \hline
-$$A=\pi{r^2}$$ & Equation & This equation is used for calculating the area of a circle, used for adding together areas of bodies during collisions. \\ \hline
 \end{tabular}
 \end{table} 
 
-\pagebreak
+\begin{table}[H]
+\caption{Design Data Dictionary Cont.}
+\centering
+\footnotesize
+\def\arraystretch{1.5}
+\begin{tabular}{|M{3cm}|M{3cm}|m{8cm}|}
+\hline 
+\textbf{Data Name} & \textbf{Data Type} & \textbf{Description} \\ \hline
+$$A=\pi{r^2}$$ & Equation & This equation is used for calculating the area of a circle, used for adding together areas of bodies during collisions. \\ \hline
+Thread & Abstract & A thread is a model which allows for concurrent execution of program code. This program will run with the interface and simulation on separate threads in order to stay responsive under complex simulations. \\ \hline
+Matrix & Abstract & Effectively a 2D array, modelling graph theory, describing the relationships present between every single body. Will be used for the calculation and storage of forces in each iteration. \\ \hline
+Mutex & C++ STL Object & A mutex or mutual exclusion object is a object which is used in preventing simultaneous access to data, if multiple threads are accessing data that locks a mutex object, the second thread will pause until the mutex is unlocked by the first thread. \\ \hline
+\end{tabular}
+\end{table} 

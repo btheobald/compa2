@@ -1,0 +1,53 @@
+\subsection{Design Changes}
+Some major changes were made to the specified design during a full rewrite of the code, this was mainly done to improve the readability and simplicity of the code, as well as making some large changes to the underlying structure of the code and the way that memory was managed. (Including object structure and the inclusion of polymorphism.)
+
+\paragraph{}
+The main force calculation algorithms were also modified to be much more efficient in terms of the extremely high memory usage. The end result was a definite performance improvement as well as lower memory usage.
+
+\subsubsection{Program Structure Changes}
+One of the largest changes that was made to the function of the program was to the body storage vectors, while previously they stored the actual body object, they now store only the pointer to a body object.
+
+\paragraph{}
+Bodies are now allocated to the vectors using dynamic memory allocation in order to prevent the objects from being deleted when they go out of scope, the disadvantage of this is that care must be taken to ensure that memory is freed correctly to prevent large memory leaks.
+
+\paragraph{}
+All control variables are now stored in an independent data structure, which is much simpler to keep track of from a code point of view, as all variables can be passed around in one go, leading to much tidier code. The type is defined in the scenario base class interface file but is independent of the scenario class itself. (The type is used in the scenario class.)
+
+\paragraph{}
+The scenario base class is now inherited by three subclasses; render, simulation, and shared, the base class contains virtual methods for passing the control and body pointer vector in and out of the individual objects, ensuring that a constant syntax is kept throughout the program for this management.
+
+\paragraph{}
+Because pointers are used in the body structure, copies must be made of the physical objects for render, simulation and shared, this is handled by the update methods themselves, the old objects are correctly freed from memory and new ones are dynamically allocated.
+
+\paragraph{}
+The methods are declared in the base class as virtual, the defaults will be inherited and used as is in the render and simulation classes, but they are overridden in the shared class to include mutex locking code, this prevents simultaneous access to the data through the shared object, ensuring data integrity and the correct operation of the program.
+
+\paragraph{}
+Some functions are present to allow quick access to variables inside the control structure, Paused and Exit status, these functions are also declared as virtual to allow them to be overridden in the shared class with similar mutex locking code.
+
+\paragraph{}
+In the shared class, because it now inherits the common scenario class it only contains a single buffer for control and body storage, once again simplifying the management of data flow. The mutex locks have also been greatly simplified, now only having a mutex for the body pointer storage and one for control.
+
+\subsubsection{Algorithm Changes}
+Algorithms that were modified where the calculation and summation of all forces, in essence, these algorithms are now combined into a single function, however the previous code focused around the use of a dynamic 2D vector matrix. The disadvantage of this is that the memory requirement is extremely high compared to what is required for the bodies themselves. 
+
+\paragraph{}
+The matrix was used for the storage of the X and Y forces for every single body relationship until they could be added together to get the final force on the bodies, the matrix had a type of double, meaning 8 bytes per item, with 1000 bodies, this represents 8MB of allocated memory, while bodies would only account for 280kB. (10000 bodies would use 800MB just for force storage!)
+
+\paragraph{}
+While in the grand scheme of things, these amounts of memory are not going to make a dent in the system memory itself, I mainly made this change on principle that I wanted to design a system that would be easily scalable for any future changes that may make performance such that a large number of bodies is feasible to use. (Such as CUDA GPGPU Acceleration, 100000 bodies has an acceptable level of performance on a high end GPU using the brute force method. If the matrix was used, 80GB of memory would be needed for the force matrix.)
+
+\paragraph{}
+The replacement of this method makes two major changes, first it removes any actual storage of the final force from the body object entirely, instead, the force is calculated for both bodies in a iterative for loop, acceleration is calculated for each body and added directly to the acceleration, all bodies are calculated and the acceleration is added on top for each relationship.
+
+\paragraph{}
+This results in an increase in performance mainly due to having fewer steps to the algorithm, a similar level of performance that was achieved at 1000 bodies on the previous code is now possible with 2000 bodies on the new code, which is a significant improvement.
+
+\paragraph{}
+Other than these changes, the code is fairly similar, some items have been moved around in order to reduce the overall number of source files present in the program.
+
+\subsubsection{Time Constraints}
+The main reason that the project was rewritten from scratch was to improve the readability and maintainability of the code, as well as making it easier to implement some critical features (adding and deleting bodies), which were causing crashes in the previous code.
+
+\paragraph{}
+Unfortunately due to this, time had to be taken away that would of been spent on certain features was taken up by this task. Features such as scenario saving and loading, are not present in the final code as time was used up.

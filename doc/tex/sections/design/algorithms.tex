@@ -2,22 +2,28 @@
 \paragraph{Algorithm 1: Force Calculation Between Two Bodies}
 This equation can be used to calculate the gravitational force exerted by two masses on x and y components without the need to use the trigonometric functions.
 
-$$\begin{bmatrix} F_x \\ F_y \end{bmatrix} = \frac{Gm_1m_2}{r^3} \begin{bmatrix} r_x \\ r_y \end{bmatrix}$$
+$$\begin{bmatrix} F_x \\ F_y \end{bmatrix} = \frac{GmM}{r^3} \begin{bmatrix} r_x \\ r_y \end{bmatrix}$$
 
 \paragraph{}
 The proof for this equation is fairly straightforward, by equating the original full equation including the trigonometric component finding to the vector equation.
 
-$$F_x=\frac{GmM}{r^2}\cos\left(\tan^{-1}\left(\frac{\hat{y}}{\hat{x}}\right)\right) \hspace{25pt} F_x=\frac{GmM}{r^3}\hat{x} \hspace{25pt} : GmM = 1$$ 
+$$F_x=\frac{GmM}{r^2}\cos\theta \hspace{25pt} F_x=\frac{GmM}{r^3}\hat{x} \hspace{25pt} : GmM = 1 $$ 
 \vspace{10pt}
-$$F_x=\frac{1}{r^2}\cos\left(\tan^{-1}\left(\frac{\hat{y}}{\hat{x}}\right)\right) \hspace{25pt} F_x=\frac{1}{r^3}\hat{x} \hspace{25pt} : r=\sqrt{\hat{x}^2+\hat{y}^2}$$ 
+$$F_x=\frac{1}{r^2}\cos\theta \hspace{25pt} F_x=\frac{1}{r^3}\hat{x} \hspace{25pt} : r=\sqrt{\hat{x}^2+\hat{y}^2}$$ 
 \vspace{10pt}
-$$F_x=\frac{1}{(\sqrt{\hat{x}^2+\hat{y}^2})^2}\cos\left(\tan^{-1}\left(\frac{\hat{y}}{\hat{x}}\right)\right) = F_x=\frac{1}{(\sqrt{\hat{x}^2+\hat{y}^2})^3}\hat{x} \hspace{25pt} : \frac{1}{x^2} \div \frac{1}{x^3}  = x$$
+$$F_x=\frac{1}{(\sqrt{\hat{x}^2+\hat{y}^2})^2}\cos\theta = F_x=\frac{1}{(\sqrt{\hat{x}^2+\hat{y}^2})^3}\hat{x} \hspace{25pt} : \frac{1}{x^2} \div \frac{1}{x^3}  = x$$
+\vspace{10pt}
+$$\sqrt{\hat{x}^2+\hat{y}^2}\cos\theta=\hat{x} \hspace{25pt} : \cos\theta=\frac{adj}{hyp} \hspace{25pt} adj=\hat{x} \hspace{25pt} hyp=\sqrt{\hat{x}^2+\hat{y}^2}$$
+\vspace{10pt}
+$$\sqrt{\hat{x}^2+\hat{y}^2}\frac{\hat{x}}{\sqrt{\hat{x}^2+\hat{y}^2}}=\hat{x} \rightarrow \hat{x} = \hat{x}$$
+
+\paragraph{}
+The benefit of not requiring the use of the trigonometric functions is that the management of signs is a lot simpler, as well as a reduced computational requirement and much simpler code, this algorithm is also much easier to use for 3D, as the forces can just be calculated on the z axis based on z distance. \\
 
 Required Parameters:
 \begin{itemize}
 \item Gravitational Constant ($G$)
-\item Mass of Body 1 ($M_1$)
-\item Mass of Body 2 ($M_2$)
+\item Mass of Bodies ($m$ $M$)
 \item Distance Between Bodies ($r$, $r_x$ and $r_y$)
 \end{itemize}
 

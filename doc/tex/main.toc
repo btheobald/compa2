@@ -41,7 +41,7 @@
 \contentsline {subsection}{\numberline {2.4}Libraries}{38}{subsection.2.4}
 \contentsline {subsection}{\numberline {2.5}Structure}{40}{subsection.2.5}
 \contentsline {subsubsection}{\numberline {2.5.1}Overall System Design}{40}{subsubsection.2.5.1}
-\contentsline {subsubsection}{\numberline {2.5.2}Design Data Dictionary}{43}{subsubsection.2.5.2}
+\contentsline {subsubsection}{\numberline {2.5.2}Design Data Dictionary}{42}{subsubsection.2.5.2}
 \contentsline {subsubsection}{\numberline {2.5.3}Program Flowchart}{45}{subsubsection.2.5.3}
 \contentsline {subsubsection}{\numberline {2.5.4}Data Range and Validation}{46}{subsubsection.2.5.4}
 \contentsline {subsubsection}{\numberline {2.5.5}Data Security and Integrity}{49}{subsubsection.2.5.5}
@@ -49,18 +49,18 @@
 \contentsline {subsection}{\numberline {2.6}Algorithms}{54}{subsection.2.6}
 \contentsline {subsubsection}{\numberline {2.6.1}Simulation}{54}{subsubsection.2.6.1}
 \contentsline {paragraph}{\nonumberline Algorithm 1: Force Calculation Between Two Bodies}{54}{section*.142}
-\contentsline {paragraph}{\nonumberline Algorithm 2: Calculation of all Forces}{54}{section*.144}
-\contentsline {paragraph}{\nonumberline Algorithm 3: Summation of Forces on Bodies}{55}{section*.148}
-\contentsline {paragraph}{\nonumberline Algorithm 4: Integration of New Position}{57}{section*.152}
-\contentsline {paragraph}{\nonumberline Algorithm 5: Body Collision Detection and Calculation}{57}{section*.156}
+\contentsline {paragraph}{\nonumberline Algorithm 2: Calculation of all Forces}{55}{section*.145}
+\contentsline {paragraph}{\nonumberline Algorithm 3: Summation of Forces on Bodies}{55}{section*.149}
+\contentsline {paragraph}{\nonumberline Algorithm 4: Integration of New Position}{57}{section*.153}
+\contentsline {paragraph}{\nonumberline Algorithm 5: Body Collision Detection and Calculation}{57}{section*.157}
 \contentsline {subsubsection}{\numberline {2.6.2}Graphics}{59}{subsubsection.2.6.2}
-\contentsline {paragraph}{\nonumberline Algorithm 6: Circle Drawing}{59}{section*.159}
+\contentsline {paragraph}{\nonumberline Algorithm 6: Circle Drawing}{59}{section*.160}
 \contentsline {subsubsection}{\numberline {2.6.3}Interface}{60}{subsubsection.2.6.3}
-\contentsline {paragraph}{\nonumberline Algorithm 7: Body Selection}{60}{section*.162}
-\contentsline {paragraph}{\nonumberline Algorithm 8: Pan and Zoom}{60}{section*.165}
-\contentsline {paragraph}{\nonumberline Algorithm 9: Scenario Saving and Loading}{60}{section*.168}
+\contentsline {paragraph}{\nonumberline Algorithm 7: Body Selection}{60}{section*.163}
+\contentsline {paragraph}{\nonumberline Algorithm 8: Pan and Zoom}{60}{section*.166}
+\contentsline {paragraph}{\nonumberline Algorithm 9: Scenario Saving and Loading}{60}{section*.169}
 \contentsline {subsubsection}{\numberline {2.6.4}Management}{61}{subsubsection.2.6.4}
-\contentsline {paragraph}{\nonumberline Algorithm 10: Thread Synchronisation and Shared Data Management}{61}{section*.171}
+\contentsline {paragraph}{\nonumberline Algorithm 10: Thread Synchronisation and Shared Data Management}{61}{section*.172}
 \contentsline {subsection}{\numberline {2.7}Pseudocode}{62}{subsection.2.7}
 \contentsline {subsection}{\numberline {2.8}OO Data Structure}{65}{subsection.2.8}
 \contentsline {subsubsection}{\numberline {2.8.1}body}{67}{subsubsection.2.8.1}
@@ -78,14 +78,18 @@
 \contentsline {subsubsection}{\numberline {2.11.3}Interface Tests}{84}{subsubsection.2.11.3}
 \contentsline {subsubsection}{\numberline {2.11.4}Simulation Tests}{86}{subsubsection.2.11.4}
 \contentsline {section}{\numberline {3}Implementation}{88}{section.3}
-\contentsline {section}{\numberline {4}Testing}{89}{section.4}
-\contentsline {section}{\numberline {5}Manual}{90}{section.5}
-\contentsline {section}{\numberline {6}Evaluation}{91}{section.6}
-\contentsline {section}{\numberline {7}Code Listing}{92}{section.7}
-\contentsline {subsection}{\numberline {7.1}Early Prototypes}{92}{subsection.7.1}
-\contentsline {subsubsection}{\numberline {7.1.1}Euler (Trig)}{92}{subsubsection.7.1.1}
-\contentsline {subsubsection}{\numberline {7.1.2}Euler (Vector) with $\Delta {} E$}{94}{subsubsection.7.1.2}
-\contentsline {subsubsection}{\numberline {7.1.3}Leapfrog (Vector) with $\Delta {} E$}{96}{subsubsection.7.1.3}
-\contentsline {section}{Appendices}{98}{section*.201}
-\contentsline {subsection}{\numberline {A}Dialogue}{98}{subsection.Alph0.1}
-\contentsline {section}{References}{105}{figure.19}
+\contentsline {subsection}{\numberline {3.1}Design Changes}{88}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Program Structure Changes}{88}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Algorithm Changes}{89}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.3}Time Constraints}{90}{subsubsection.3.1.3}
+\contentsline {section}{\numberline {4}Testing}{91}{section.4}
+\contentsline {section}{\numberline {5}Manual}{92}{section.5}
+\contentsline {section}{\numberline {6}Evaluation}{93}{section.6}
+\contentsline {section}{\numberline {7}Code Listing}{94}{section.7}
+\contentsline {subsection}{\numberline {7.1}Early Prototypes}{94}{subsection.7.1}
+\contentsline {subsubsection}{\numberline {7.1.1}Euler (Trig)}{94}{subsubsection.7.1.1}
+\contentsline {subsubsection}{\numberline {7.1.2}Euler (Vector) with $\Delta {} E$}{96}{subsubsection.7.1.2}
+\contentsline {subsubsection}{\numberline {7.1.3}Leapfrog (Vector) with $\Delta {} E$}{98}{subsubsection.7.1.3}
+\contentsline {section}{Appendices}{100}{section*.216}
+\contentsline {subsection}{\numberline {A}Dialogue}{100}{subsection.Alph0.1}
+\contentsline {section}{References}{107}{figure.19}
