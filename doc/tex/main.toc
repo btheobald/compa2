@@ -73,41 +73,42 @@
 \contentsline {subsubsection}{\numberline {2.9.2}Mock Interface}{73}{subsubsection.2.9.2}
 \contentsline {subsection}{\numberline {2.10}Testing Strategy}{75}{subsection.2.10}
 \contentsline {subsection}{\numberline {2.11}Testing Plan}{76}{subsection.2.11}
-\contentsline {subsubsection}{\numberline {2.11.1}Test Scenarios}{77}{subsubsection.2.11.1}
-\contentsline {subsubsection}{\numberline {2.11.2}System Tests}{83}{subsubsection.2.11.2}
-\contentsline {subsubsection}{\numberline {2.11.3}Interface Tests}{84}{subsubsection.2.11.3}
-\contentsline {subsubsection}{\numberline {2.11.4}Simulation Tests}{86}{subsubsection.2.11.4}
-\contentsline {section}{\numberline {3}Implementation}{88}{section.3}
-\contentsline {subsection}{\numberline {3.1}Design Changes}{88}{subsection.3.1}
-\contentsline {subsubsection}{\numberline {3.1.1}Program Structure Changes}{88}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.2}Algorithm Changes}{89}{subsubsection.3.1.2}
-\contentsline {subsubsection}{\numberline {3.1.3}Time Constraints}{90}{subsubsection.3.1.3}
-\contentsline {subsection}{\numberline {3.2}Object Orientation Changes}{90}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Object Inheritance Diagram}{91}{subsubsection.3.2.1}
-\contentsline {subsection}{\numberline {3.3}Flowchart Revision}{93}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Code Listing}{94}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}main.cpp - Root Implementation}{94}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {3.4.2}body.hpp - Interface}{101}{subsubsection.3.4.2}
-\contentsline {subsubsection}{\numberline {3.4.3}body.cpp - Implementation}{102}{subsubsection.3.4.3}
-\contentsline {subsubsection}{\numberline {3.4.4}scenario.hpp - Interface}{104}{subsubsection.3.4.4}
-\contentsline {subsubsection}{\numberline {3.4.5}scenario.cpp - Implementation}{105}{subsubsection.3.4.5}
-\contentsline {subsubsection}{\numberline {3.4.6}render.hpp - Interface}{106}{subsubsection.3.4.6}
-\contentsline {subsubsection}{\numberline {3.4.7}render.cpp - Implementation}{107}{subsubsection.3.4.7}
-\contentsline {subsubsection}{\numberline {3.4.8}simulation.hpp - Interface}{110}{subsubsection.3.4.8}
-\contentsline {subsubsection}{\numberline {3.4.9}simulation.cpp - Implementation}{111}{subsubsection.3.4.9}
-\contentsline {subsubsection}{\numberline {3.4.10}shared.hpp - Interface}{115}{subsubsection.3.4.10}
-\contentsline {subsubsection}{\numberline {3.4.11}shared.cpp - Implementation}{116}{subsubsection.3.4.11}
-\contentsline {subsubsection}{\numberline {3.4.12}ui.hpp - Interface}{118}{subsubsection.3.4.12}
-\contentsline {subsubsection}{\numberline {3.4.13}ui.cpp - Implementation}{119}{subsubsection.3.4.13}
-\contentsline {subsubsection}{\numberline {3.4.14}Final Interface}{128}{subsubsection.3.4.14}
-\contentsline {section}{\numberline {4}Testing}{130}{section.4}
-\contentsline {section}{\numberline {5}Manual}{131}{section.5}
-\contentsline {section}{\numberline {6}Evaluation}{132}{section.6}
-\contentsline {section}{\numberline {7}Other Code}{133}{section.7}
-\contentsline {subsection}{\numberline {7.1}Early Prototypes}{133}{subsection.7.1}
-\contentsline {subsubsection}{\numberline {7.1.1}Euler (Trig)}{133}{subsubsection.7.1.1}
-\contentsline {subsubsection}{\numberline {7.1.2}Euler (Vector) with $\Delta {} E$}{135}{subsubsection.7.1.2}
-\contentsline {subsubsection}{\numberline {7.1.3}Leapfrog (Vector) with $\Delta {} E$}{137}{subsubsection.7.1.3}
-\contentsline {section}{Appendices}{139}{section*.221}
-\contentsline {subsection}{\numberline {A}Dialogue}{139}{subsection.Alph0.1}
-\contentsline {section}{References}{146}{figure.25}
+\contentsline {section}{\numberline {3}Implementation}{77}{section.3}
+\contentsline {subsection}{\numberline {3.1}Design Changes}{77}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Program Structure Changes}{77}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Algorithm Changes}{78}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.3}Time Constraints}{79}{subsubsection.3.1.3}
+\contentsline {subsection}{\numberline {3.2}Object Orientation Changes}{79}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Object Inheritance Diagram}{80}{subsubsection.3.2.1}
+\contentsline {subsection}{\numberline {3.3}Flowchart Revision}{82}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Code Listing}{83}{subsection.3.4}
+\contentsline {subsubsection}{\numberline {3.4.1}main.cpp - Root Implementation}{83}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {3.4.2}body.hpp - Interface}{90}{subsubsection.3.4.2}
+\contentsline {subsubsection}{\numberline {3.4.3}body.cpp - Implementation}{91}{subsubsection.3.4.3}
+\contentsline {subsubsection}{\numberline {3.4.4}scenario.hpp - Interface}{93}{subsubsection.3.4.4}
+\contentsline {subsubsection}{\numberline {3.4.5}scenario.cpp - Implementation}{94}{subsubsection.3.4.5}
+\contentsline {subsubsection}{\numberline {3.4.6}render.hpp - Interface}{95}{subsubsection.3.4.6}
+\contentsline {subsubsection}{\numberline {3.4.7}render.cpp - Implementation}{96}{subsubsection.3.4.7}
+\contentsline {subsubsection}{\numberline {3.4.8}simulation.hpp - Interface}{99}{subsubsection.3.4.8}
+\contentsline {subsubsection}{\numberline {3.4.9}simulation.cpp - Implementation}{100}{subsubsection.3.4.9}
+\contentsline {subsubsection}{\numberline {3.4.10}shared.hpp - Interface}{104}{subsubsection.3.4.10}
+\contentsline {subsubsection}{\numberline {3.4.11}shared.cpp - Implementation}{105}{subsubsection.3.4.11}
+\contentsline {subsubsection}{\numberline {3.4.12}ui.hpp - Interface}{107}{subsubsection.3.4.12}
+\contentsline {subsubsection}{\numberline {3.4.13}ui.cpp - Implementation}{108}{subsubsection.3.4.13}
+\contentsline {subsubsection}{\numberline {3.4.14}Final Interface}{117}{subsubsection.3.4.14}
+\contentsline {section}{\numberline {4}Testing}{120}{section.4}
+\contentsline {subsection}{\numberline {4.1}Test Scenarios}{120}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}System Tests}{126}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Interface Tests}{127}{subsubsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.3}Simulation Tests}{129}{subsubsection.4.1.3}
+\contentsline {subsection}{\numberline {4.2}Compile Flags}{131}{subsection.4.2}
+\contentsline {section}{\numberline {5}Manual}{133}{section.5}
+\contentsline {section}{\numberline {6}Evaluation}{134}{section.6}
+\contentsline {section}{\numberline {7}Other Code}{135}{section.7}
+\contentsline {subsection}{\numberline {7.1}Early Prototypes}{135}{subsection.7.1}
+\contentsline {subsubsection}{\numberline {7.1.1}Euler (Trig)}{135}{subsubsection.7.1.1}
+\contentsline {subsubsection}{\numberline {7.1.2}Euler (Vector) with $\Delta {} E$}{137}{subsubsection.7.1.2}
+\contentsline {subsubsection}{\numberline {7.1.3}Leapfrog (Vector) with $\Delta {} E$}{139}{subsubsection.7.1.3}
+\contentsline {section}{Appendices}{141}{section*.225}
+\contentsline {subsection}{\numberline {A}Dialogue}{141}{subsection.Alph0.1}
+\contentsline {section}{References}{148}{figure.25}

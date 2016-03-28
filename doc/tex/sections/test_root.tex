@@ -1,0 +1,43 @@
+\subsection{Test Scenarios}
+\import{sections/design/}{testscenarios.tex}
+\import{sections/design/}{testtables.tex}
+\pagebreak
+\subsection{Compile Flags}
+While there was not enough time remaining to implement any for of automated program testing mode into the program, I decided to make use of compile time flags to make running certain tests easier to run or simply possible to run. Such as selecting the particular test scenario, changing initial state or modifying the operation of the system.
+
+\paragraph{}
+These compile flags can be used by compiling the program with the makefile, calling with:
+
+\begin{lstlisting}[language=bash]
+  make -j12 CS="-DDEFAULT -DSIMITRS=10"
+\end{lstlisting}
+
+\paragraph{}
+The \textit{-j12} argument enables parallel compilation, which compiles separate source files at the same time in order to decrease the total time taken to compile the program, in this case it allows for 12 concurrent jobs, this is excessive for the number of files compiled in this program, but it should be set to the number of available concurrent threads on the system the application is being compiled on.
+
+\paragraph{}
+Because of the way that the makefile has been written, files that have had no change to their source code will not recompile if the object files still exist, this speeds up the compile time by only compiling the files that need to be recompiled. \\
+Because of this however, \textit{make clean} must be run first in order to delete the current executable and all existing object code files before the changes to the compile flags take effect.
+
+\paragraph{}
+The following is a list of all of the currently implemented flags that can be defined at compile time to modify the function of the program for testing.\\
+\begin{itemize}
+\footnotesize
+\item \textbf{DEFAULT} - Sets the default start-up scenario.
+\item \textbf{TS1} - 12 - Sets the start-up scenario to one of the predefined test scenarios.
+\item \textbf{SIMITRS} - Sets a limit to the number of iterations that the simulation will run for. (This does require the program to force close as the simulation thread exits early.)
+\item \textbf{SIPF} - Causes an 'i' to be printed to the cout stream on every iteration, not just rendered frames. Newline is printed when frame is sent to shared.
+\item \textbf{SCI} - Prints the current iteration since program launch when it is paused.
+\item \textbf{PRINTV} - Prints the XY velocity of all bodies every iteration.
+\item \textbf{PRINTV} - Prints the XY position of all bodies every iteration.
+\item \textbf{PRINTAC} - Prints A and B being calculated in the acceleration calculation. (Relationships being calculated)
+\item \textbf{PRINTFORCE} - Prints the result of the force calculated for each relationship. 
+\item \textbf{PRINTMXY} - Print current mouse XY coordinates. (Window coordinates)
+\item \textbf{PRINTMACT} - Print current mouse XY coordinates on mouse click. (World coordinates)
+\item \textbf{EXITNOTE} - Prints notifications for simulation thread exit and main thread exit.
+\item \textbf{NOSYNC} - Removes thread synchronisation, allows for the simulation to run much faster than simulation, can cause issues.
+\item \textbf{C\_UGC} - Custom gravitational constant.
+\item \textbf{C\_IDT} - Custom iteration delta time.
+\item \textbf{C\_PAUSED} - Custom paused switch.
+\item \textbf{C\_COLLIDE} - Custom collision switch.
+\end{itemize}

@@ -273,10 +273,10 @@ void startup(shared* sharedAP) {
   bool initCalc = true;
   int iCount = 0;
 
-  #ifdef SP
+  #ifdef SIMITRS
     while((!simAP->getExit()) & (iCount < SIMITRS)) {
   #endif
-  #ifndef SP
+  #ifndef SIMITRS
   while(!simAP->getExit())     {
   #endif
 
