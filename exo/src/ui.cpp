@@ -307,7 +307,7 @@ void setupSimGUI(render* renderAP) {
   TwDefine(" 'Simulation' refresh=0.01");
 
   // Control
-  TwAddVarRW(simGUI, "ugcvar", TW_TYPE_DOUBLE,  &renderAP->pControl.UGC,        " min=1E-12  max=10   step=0.01  precision=12   label='Gravitational Constant'  group=Control ");
+  TwAddVarRW(simGUI, "ugcvar", TW_TYPE_DOUBLE,  &renderAP->pControl.UGC,        " min=0 max=10   step=0.01  precision=12   label='Gravitational Constant'  group=Control ");
   TwAddVarRW(simGUI, "idtvar", TW_TYPE_DOUBLE,  &renderAP->pControl.IDT,        " max=-1E15  max=1E15  step=0.01  precision=12  label='Itteration Delta Time'   group=Control ");
   TwAddVarRW(simGUI, "collid", TW_TYPE_BOOLCPP, &renderAP->pControl.collide,    " true=On      false=Off                       label='Simulate Collisions'     group=Control ");
   // Runtime
