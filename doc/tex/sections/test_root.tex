@@ -178,23 +178,74 @@ At each test point, the simulation was allowed to run for 20s and the number of 
 \begin{table}[h]
 \footnotesize
 \centering
+\caption{Simulation Benchmark - Iterations in 20s}
 \def\arraystretch{1.5}
-\begin{tabular}{|c|c|c|c|c|c|c|c|c|} \hline
-Bodies & $i_1$ & $i_2$ & $i_3$ & $i_4$ & $i_5$ & $i_6$ & $i_{mean}$ & $i_{1s}$ \\ \hline
-    11 & 13300000 & 13600000 & 13400000 & 13400000 & 13600000 & 13000000 & 13433333 &\\ \hline
-    21 &  4890000 &  4830000 &  4870000 &  4800000 &  4880000 &  4790000 &  4843333 &\\ \hline
-    41 &	1500000	&  1490000 &	1500000 &  1500000 &	1490000 &  1500000 &  1496667 &\\ \hline
-    81 &   426000 &   419000 &   419000 &   417000 &   423000 &   417000 &   420167 &\\ \hline
-   101 &   271000 &   278000 &   278000 &   272000 &   275000 &   274000 &   274667 &\\ \hline
-   201 &    72100 &    71800 &    72000 &    71800 &    71800 &    72100 &    71933 &\\ \hline
-   401 &    18400 &    18300 &    18500	&    18700 &    18500 &    18400 &    18467 &\\ \hline
-   801 &     4650	&     4690 &     4640 &   	4650 &     4650 &    	4690 &     4662 &\\ \hline
-  1001 &     3021	&     3000 &     2980 &   	2970 &     3030 &   	3000 &     3000 &\\ \hline
-  2001 &      756	&      751 &	    752 &	     750 &	    748 &	     743 &      750 &\\ \hline
-  4001 &      190 &	     188 &	    187 &      188 &	    187 &    	 186 &      188 &\\ \hline
-  8001 &       47 &	      46 &       47 &	      46 &       46 &	      47 &       47 &\\ \hline
- 10001 &       30 &	      29 &       29 &	      30 &       30 &	      29 &       30 &\\ \hline
-
-
+\begin{tabular}{|c|c|c|c|c|c|c|c|} \hline
+Bodies & $i_1$ & $i_2$ & $i_3$ & $i_4$ & $i_5$ & $i_6$ & $i_{mean}$\\ \hline
+    11 & 13300000 & 13600000 & 13400000 & 13400000 & 13600000 & 13000000 & \textbf{13433333} \\ \hline
+    21 &	4890000	&  4830000 &	4870000 &  4800000 &	4880000 &	 4790000 &	\textbf{4843333} \\ \hline
+    41 &	1500000	&  1490000 &	1500000 &  1500000 &	1490000 &  1500000 &  \textbf{1496667} \\ \hline
+    81 &   426000 &   419000 &   419000 &   417000 &   423000 &   417000 &   \textbf{420167} \\ \hline
+   101 &   271000 &   278000 &   278000 &   272000 &   275000 &   274000 &   \textbf{274667} \\ \hline
+   201 &    72100 &    71800 &    72000 &    71800 &    71800 &    72100 &    \textbf{71933} \\ \hline
+   401 &    18400 &    18300 &    18500	&    18700 &    18500 &    18400 &    \textbf{18467} \\ \hline
+   801 &     4650	&     4690 &     4640 &   	4650 &     4650 &    	4690 &     \textbf{4662} \\ \hline
+  1001 &     3021	&     3000 &     2980 &   	2970 &     3030 &   	3000 &     \textbf{3000} \\ \hline
+  2001 &      756	&      751 &	    752 &	     750 &	    748 &	     743 &      \textbf{750} \\ \hline
+  4001 &      190 &	     188 &	    187 &      188 &	    187 &    	 186 &      \textbf{188} \\ \hline
+  8001 &       47 &	      46 &       47 &	      46 &       46 &	      47 &       \textbf{47} \\ \hline
+ 10001 &       30 &	      29 &       29 &	      30 &       30 &	      29 &       \textbf{30} \\ \hline
 \end{tabular}
 \end{table}
+
+\pagebreak
+
+\begin{wraptable}{l}{5.5cm}
+\footnotesize
+\centering
+\caption{Per Second}
+\def\arraystretch{1.5}
+\begin{tabular}{|c|c|c|} \hline
+Bodies & $i_{1s}$ & $T_i$\\ \hline
+    11 & \textbf{670000}   & $\SI{1}{\micro\second}$    \\ \hline
+    21 & \textbf{240000}   & $\SI{4}{\micro\second}$   \\ \hline
+    41 &  \textbf{75000}   & $\SI{13}{\micro\second}$  \\ \hline
+    81 &  \textbf{21000}   & $\SI{47}{\micro\second}$  \\ \hline
+   101 &  \textbf{14000}   & $\SI{71}{\micro\second}$  \\ \hline
+   201 &   \textbf{3600}   & $\SI{280}{\micro\second}$ \\ \hline
+   401 &    \textbf{920}   & $\SI{1}{\milli\second}$   \\ \hline
+   801 &    \textbf{230}   & $\SI{4}{\milli\second}$   \\ \hline
+  1001 &    \textbf{150}   & $\SI{7}{\milli\second}$   \\ \hline
+  2001 &     \textbf{38}   & $\SI{27}{\milli\second}$  \\ \hline
+  4001 &      \textbf{9.4} & $\SI{110}{\milli\second}$ \\ \hline
+  8001 &      \textbf{2.3} & $\SI{440}{\milli\second}$ \\ \hline
+ 10001 &      \textbf{1.5} & $\SI{670}{\milli\second}$ \\ \hline
+\end{tabular}
+\vspace{-40pt}
+\end{wraptable}
+
+\paragraph{}
+By processing this data and getting the reciprocal of the number of iterations in a second, the total time per iteration can be found, the figures in this table have been rounded for clarity.
+
+\paragraph{}
+With this data graphs can be created to better represent the performance of the simulation and allow for approximation of performance at other body counts, based on said graphs the simulation will remain at 60 frames per second till around 1400 bodies, below this body count the simulation is limited by the frame-rate of the renderer
+
+\paragraph{}
+With the second graph, looking at the time per iteration over number of bodies reveals a non-conformity to a straight exponential increase in the time taken for computation, this may be affected by many factors outside my programming and may be down to the design of the particular hardware or architecture, even at a silicon level.
+
+\paragraph{}
+With that said, this benchmark was only carried out on a single, relatively high performance PC, so these numbers will likely be different for different hardware, I have been developing the application between this PC and another low performance laptop, and while performing the benchmark again for the other computer would take a considerable amount of time, the performance is extremely similar on that computer, with the smoothness cut-off being at around 1200 bodies.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=0.9\textwidth]{img/testingEvidence/perfgraph.png}
+  \caption{Iterations/Second Over Body Count (Logarithmic)}
+\end{figure}
+
+\begin{figure}[!h]
+  \centering
+  \includegraphics[width=0.9\textwidth]{img/testingEvidence/perftesttpi.png}
+  \caption{Time/Iteration Over Body Count}
+\end{figure}
+
+\pagebreak

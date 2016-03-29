@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.3.22)  29 MAR 2016 10:05
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.3.22)  29 MAR 2016 21:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1425,9 +1425,64 @@ Underfull \hbox (badness 10000) in paragraph at lines 176--177
 
  []
 
-) [136] (./sections/manual_root.tex) [137] (./sections/eval_root.tex) [138]
-(./sections/codelist_root.tex (./sections/../../../proto/02/main.cpp [139])
-[140]
+[136pdfTeX warning (ext4): destination with the same identifier (name{table.9})
+ has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.202 
+      ]
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 210.
+
+ (/usr/share/texlive/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+<img/testingEvidence/perfgraph.png, id=3262, 383.93437pt x 255.95625pt>
+File: img/testingEvidence/perfgraph.png Graphic file (type png)
+
+<use img/testingEvidence/perfgraph.png>
+Package pdftex.def Info: img/testingEvidence/perfgraph.png used on input line 2
+41.
+(pdftex.def)             Requested size: 403.31511pt x 268.89476pt.
+
+<img/testingEvidence/perftesttpi.png, id=3263, 400.49625pt x 255.95625pt>
+File: img/testingEvidence/perftesttpi.png Graphic file (type png)
+
+<use img/testingEvidence/perftesttpi.png>
+Package pdftex.def Info: img/testingEvidence/perftesttpi.png used on input line
+ 247.
+(pdftex.def)             Requested size: 403.31511pt x 257.7717pt.
+
+
+LaTeX Warning: `!h' float specifier changed to `!ht'.
+
+) [137pdfTeX warning (ext4): destination with the same identifier (name{table.1
+0}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.78 \import{sections/}{test_root.tex}
+                                      ]
+
+LaTeX Warning: Text page 138 contains only floats.
+
+[138pdfTeX warning (ext4): destination with the same identifier (name{figure.23
+}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.78 \import{sections/}{test_root.tex}
+                                      pdfTeX warning (ext4): destination with t
+he same identifier (name{figure.24}) has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.78 \import{sections/}{test_root.tex}
+                                       <./img/testingEvidence/perfgraph.png (PN
+G copy)> <./img/testingEvidence/perftesttpi.png (PNG copy)>]
+(./sections/manual_root.tex) [139] (./sections/eval_root.tex) [140]
+(./sections/codelist_root.tex (./sections/../../../proto/02/main.cpp [141])
+[142]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 6.
@@ -1440,7 +1495,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 6.
 
-(./sections/../../../proto/eulerenergy/main.cpp [141]) [142]
+(./sections/../../../proto/eulerenergy/main.cpp [143]) [144]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 10.
@@ -1453,96 +1508,97 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 10.
 
-(./sections/../../../proto/lpfrg01/main.cpp [143])) [144]
-(./sections/appendix_root.tex (./sections/appendix/dialogue.tex [145] [146]
-<img/still.png, id=3543, 2107.875pt x 2007.5pt>
+(./sections/../../../proto/lpfrg01/main.cpp [145])) [146]
+(./sections/appendix_root.tex (./sections/appendix/dialogue.tex [147] [148]
+<img/still.png, id=3562, 2107.875pt x 2007.5pt>
 File: img/still.png Graphic file (type png)
  <use img/still.png>
 Package pdftex.def Info: img/still.png used on input line 106.
 (pdftex.def)             Requested size: 268.8813pt x 256.05241pt.
- [147]
-[148pdfTeX warning (ext4): destination with the same identifier (name{figure.23
+ [149]
+[150pdfTeX warning (ext4): destination with the same identifier (name{figure.25
 }) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.111 \hrule
              <./img/still.png>]
-<img/pEcho.png, id=3553, 694.595pt x 374.39874pt>
+<img/pEcho.png, id=3572, 694.595pt x 374.39874pt>
 File: img/pEcho.png Graphic file (type png)
  <use img/pEcho.png>
 Package pdftex.def Info: img/pEcho.png used on input line 121.
 (pdftex.def)             Requested size: 403.31511pt x 217.40279pt.
 
-<img/superstructure.png, id=3554, 748.7975pt x 568.1225pt>
+<img/superstructure.png, id=3573, 748.7975pt x 568.1225pt>
 File: img/superstructure.png Graphic file (type png)
 
 <use img/superstructure.png>
 Package pdftex.def Info: img/superstructure.png used on input line 144.
 (pdftex.def)             Requested size: 403.31511pt x 306.00137pt.
- [149pdfTeX warning (ext4): destination with the same identifier (name{figure.2
-4}) has been already used, duplicate ignored
+ [151pdfTeX warning (ext4): destination with the same identifier (name{figure.2
+6}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.153 
-       <./img/pEcho.png>] [150pdfTeX warning (ext4): destination with the same 
-identifier (name{figure.25}) has been already used, duplicate ignored
+       <./img/pEcho.png>] [152pdfTeX warning (ext4): destination with the same 
+identifier (name{figure.27}) has been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.160 
-       <./img/superstructure.png>])) [151] (./bib.tex
+       <./img/superstructure.png>])) [153] (./bib.tex
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 5.
- [152]
+ [154]
 Package atveryend Info: Empty hook `AfterLastShipout' on input line 5.
  (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 5.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 9138914C6ED206BE892BBB7441E20A63;8192.
+(rerunfilecheck)             Checksum: A4C64AD76AF4D1997A10E243FB55DE0A;8192.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 5.
  ) ) 
 Here is how much of TeX's memory you used:
- 24555 strings out of 494910
- 440880 string characters out of 6179836
+ 24608 strings out of 494910
+ 442345 string characters out of 6179836
  858998 words of memory out of 5000000
- 24910 multiletter control sequences out of 15000+600000
- 26932 words of font info for 68 fonts, out of 8000000 for 9000
+ 24944 multiletter control sequences out of 15000+600000
+ 27945 words of font info for 71 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  43i,18n,58p,10376b,2160s stack positions out of 5000i,500n,10000p,200000b,80000s
  </home/bct/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1095.600pk> </home/b
-ct/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx0800.600pk> </home/bct/.texmf-var
-/fonts/pk/ljfour/jknappen/ec/ecrm0600.600pk> </home/bct/.texmf-var/fonts/pk/ljf
-our/jknappen/ec/ecti1000.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/b
-ase/8r.enc} </home/bct/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> <
-/home/bct/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/bct/.te
-xmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/bct/.texmf-var/fonts
-/pk/ljfour/jknappen/ec/ecsl1200.600pk> </home/bct/.texmf-var/fonts/pk/ljfour/jk
-nappen/ec/ecrm1000.600pk> </home/bct/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecb
-x1000.600pk> </home/bct/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> 
-</home/bct/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/bct/.t
-exmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1728.600pk> </home/bct/.texmf-var/font
-s/pk/ljfour/jknappen/ec/ecbx1440.600pk> </home/bct/.texmf-var/fonts/pk/ljfour/j
-knappen/ec/ecbx2488.600pk> </home/bct/.texmf-var/fonts/pk/ljfour/jknappen/ec/ec
-bx1728.600pk></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex
-10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr
-/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/
-texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive
-/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-
-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fo
-nts/type1/public/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type
-1/public/amsfonts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public
-/amsfonts/cm/cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfont
-s/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
-y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
-></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/
-share/texlive/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb>
-Output written on main.pdf (152 pages, 2613446 bytes).
+ct/.texmf-var/fonts/pk/ljfour/jknappen/ec/tcrm1000.600pk> </home/bct/.texmf-var
+/fonts/pk/ljfour/jknappen/ec/ecbx0800.600pk> </home/bct/.texmf-var/fonts/pk/ljf
+our/jknappen/ec/ecrm0600.600pk> </home/bct/.texmf-var/fonts/pk/ljfour/jknappen/
+ec/ecti1000.600pk>{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc} <
+/home/bct/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0700.600pk> </home/bct/.te
+xmf-var/fonts/pk/ljfour/jknappen/ec/ecti1200.600pk> </home/bct/.texmf-var/fonts
+/pk/ljfour/jknappen/ec/ecbx1200.600pk> </home/bct/.texmf-var/fonts/pk/ljfour/jk
+nappen/ec/ecsl1200.600pk> </home/bct/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecr
+m1000.600pk> </home/bct/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1000.600pk> 
+</home/bct/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecrm0800.600pk> </home/bct/.t
+exmf-var/fonts/pk/ljfour/jknappen/ec/ecrm1200.600pk> </home/bct/.texmf-var/font
+s/pk/ljfour/jknappen/ec/ecrm1728.600pk> </home/bct/.texmf-var/fonts/pk/ljfour/j
+knappen/ec/ecbx1440.600pk> </home/bct/.texmf-var/fonts/pk/ljfour/jknappen/ec/ec
+bx2488.600pk> </home/bct/.texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk>
+</usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/
+share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/share/texliv
+e/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi7.pfb></usr/share/texlive/texmf
+-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texlive/texmf-dist/f
+onts/type1/public/amsfonts/cm/cmr10.pfb></usr/share/texlive/texmf-dist/fonts/ty
+pe1/public/amsfonts/cm/cmr12.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
+lic/amsfonts/cm/cmr5.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsf
+onts/cm/cmr6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmr7.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb
+></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr
+/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/share/
+texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive
+/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb>
+Output written on main.pdf (154 pages, 2656343 bytes).
 PDF statistics:
- 4900 PDF objects out of 5155 (max. 8388607)
- 3954 compressed objects within 40 object streams
- 2534 named destinations out of 2984 (max. 500000)
- 1028 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 4924 PDF objects out of 5155 (max. 8388607)
+ 3973 compressed objects within 40 object streams
+ 2544 named destinations out of 2984 (max. 500000)
+ 1038 words of extra memory for PDF output out of 10000 (max. 10000000)
 

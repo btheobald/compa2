@@ -1,16 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <TexmakerSession quickmode="3">
-    <document bookmark2="0" bookmark3="0" master="false" bookmark1="0" line="170" hasfocus="true" file="/home/bct/repo/compa2/doc/tex/sections/analysis_root.tex"/>
-    <document bookmark2="0" bookmark3="0" master="false" bookmark1="0" line="93" hasfocus="false" file="/home/bct/repo/compa2/doc/tex/sections/prototyping_root.tex"/>
-    <document bookmark2="0" bookmark3="0" master="true" bookmark1="0" line="68" hasfocus="false" file="/home/bct/repo/compa2/doc/tex/main.tex"/>
-    <document bookmark2="0" bookmark3="0" master="false" bookmark1="0" line="11" hasfocus="false" file="/home/bct/repo/compa2/doc/tex/sections/codelist_root.tex"/>
-    <document bookmark2="0" bookmark3="0" master="false" bookmark1="0" line="4" hasfocus="false" file="/home/bct/repo/compa2/doc/tex/bib.tex"/>
-    <document bookmark2="0" bookmark3="0" master="false" bookmark1="0" line="195" hasfocus="false" file="/home/bct/repo/compa2/doc/tex/sections/design_root.tex"/>
-    <document bookmark2="0" bookmark3="0" master="false" bookmark1="0" line="106" hasfocus="false" file="/home/bct/repo/compa2/doc/tex/sections/design/algorithms.tex"/>
-    <document bookmark2="0" bookmark3="0" master="false" bookmark1="0" line="49" hasfocus="false" file="/home/bct/repo/compa2/doc/tex/sections/appendix/dialogue.tex"/>
-    <document bookmark2="0" bookmark3="0" master="false" bookmark1="0" line="8" hasfocus="false" file="/home/bct/repo/compa2/doc/tex/sections/design/pseudocode.tex"/>
-    <document bookmark2="0" bookmark3="0" master="false" bookmark1="0" line="0" hasfocus="false" file="/home/bct/repo/compa2/doc/tex/sections/appendix_root.tex"/>
-    <document bookmark2="0" bookmark3="0" master="false" bookmark1="0" line="53" hasfocus="false" file="/home/bct/repo/compa2/doc/tex/tables/2_datadictionary.tex"/>
-    <document bookmark2="0" bookmark3="0" master="false" bookmark1="0" line="0" hasfocus="false" file="/home/bct/repo/compa2/doc/tex/tables/1_datasrcdest.tex"/>
-    <document bookmark2="0" bookmark3="0" master="false" bookmark1="0" line="27" hasfocus="false" file="/home/bct/repo/compa2/doc/tex/sections/analysis/objectives.tex"/>
+    <document bookmark2="0" bookmark3="0" line="94" file="/home/bct/repo/compa2/doc/tex/main.tex" bookmark1="0" hasfocus="false" master="true"/>
+    <document bookmark2="0" bookmark3="0" line="93" file="/home/bct/repo/compa2/doc/tex/sections/prototyping_root.tex" bookmark1="0" hasfocus="false" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="11" file="/home/bct/repo/compa2/doc/tex/sections/codelist_root.tex" bookmark1="0" hasfocus="false" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="4" file="/home/bct/repo/compa2/doc/tex/bib.tex" bookmark1="0" hasfocus="false" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="390" file="/home/bct/repo/compa2/doc/tex/sections/design_root.tex" bookmark1="0" hasfocus="false" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="8" file="/home/bct/repo/compa2/doc/tex/sections/design/pseudocode.tex" bookmark1="0" hasfocus="false" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="0" file="/home/bct/repo/compa2/doc/tex/tables/1_datasrcdest.tex" bookmark1="0" hasfocus="false" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="0" file="/home/bct/repo/compa2/doc/tex/sections/appendix_root.tex" bookmark1="0" hasfocus="false" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="106" file="/home/bct/repo/compa2/doc/tex/sections/design/algorithms.tex" bookmark1="0" hasfocus="false" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="49" file="/home/bct/repo/compa2/doc/tex/sections/appendix/dialogue.tex" bookmark1="0" hasfocus="false" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="157" file="/home/bct/repo/compa2/doc/tex/sections/impl_root.tex" bookmark1="0" hasfocus="false" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="53" file="/home/bct/repo/compa2/doc/tex/tables/2_datadictionary.tex" bookmark1="0" hasfocus="false" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="27" file="/home/bct/repo/compa2/doc/tex/sections/analysis/objectives.tex" bookmark1="0" hasfocus="false" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="34" file="/home/bct/repo/compa2/doc/tex/sections/analysis_root.tex" bookmark1="0" hasfocus="false" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="223" file="/home/bct/repo/compa2/doc/tex/sections/test_root.tex" bookmark1="0" hasfocus="true" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="32" file="/home/bct/repo/compa2/doc/tex/sections/design/testtables.tex" bookmark1="0" hasfocus="false" master="false"/>
+    <document bookmark2="0" bookmark3="0" line="207" file="/home/bct/repo/compa2/doc/tex/sections/design/testscenarios.tex" bookmark1="0" hasfocus="false" master="false"/>
 </TexmakerSession>

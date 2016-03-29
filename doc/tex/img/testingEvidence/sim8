@@ -1,0 +1,21 @@
+default: 2, -1 (m1=1, m2=1)
+p=mv
+2*1=2, -1*1=-1
+mv+mv=mv
+p=1, m1+m2=2
+v=1/2=0.5 PASS
+
+alt:
+-   -1,   1, v=0 PASS (m=2)
+-    1,   2, v=1.5 PASS (m=2)
+- -150, 150, FAIL
+
+At high velocity, the bodies do not registser a collision, and end up traveling through each other, this is affected by both the time step of the simulation and the radius of the bodies. A lower time step means that the simulation is less likely to intergrate the bodies past each other and an increased radius means that the gap needs to be greater in order to skip a collision.
+
+(This is a use case issue, not a programming issue)
+
+If the simulation is performed at a lower timestep, the test passes.
+
+- -150, 150, (dt=0.05) v=0 PASS (m=2)
+
+Videos en-sim8fail, en-sim8failfar show this occuring, using a slightly modified scenario to make this more visible, en-sim8fix shows fixing this issue by using a smaller timestep.
