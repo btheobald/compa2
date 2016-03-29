@@ -1,8 +1,0 @@
-Body is orbiting with a radius of 55.4825
-It has a velocity in Y of -4.2453
-
-It has a mass of 0.1
-It is orbiting a mass of 10000
-The gravitational constant is 0.1
-
-Sqrt((0.1x(10000+0.1))/55.4825) = 4.2455, within acceptable parameters.
