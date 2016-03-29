@@ -173,4 +173,28 @@ The solution to this is to either increase the radius of the objects or decrease
 \subsubsection{SIM10}
 SIM10 was a quantitative benchmark to examine the performance of the simulation and observe the increase in computational time compared to the number of bodies.
 \paragraph{}
-At each test point, the simulation was allowed to run for 20s and the number of iterations carried out was recorded, 6 repeats were carried out for each test point to improve the accuracy of the results.
+At each test point, the simulation was allowed to run for 20s and the number of iterations carried out was recorded, 6 repeats were carried out for each test point to provide a better average.\\
+
+\begin{table}[h]
+\footnotesize
+\centering
+\def\arraystretch{1.5}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|} \hline
+Bodies & $i_1$ & $i_2$ & $i_3$ & $i_4$ & $i_5$ & $i_6$ & $i_{mean}$ & $i_{1s}$ \\ \hline
+    11 & 13300000 & 13600000 & 13400000 & 13400000 & 13600000 & 13000000 & 13433333 &\\ \hline
+    21 &  4890000 &  4830000 &  4870000 &  4800000 &  4880000 &  4790000 &  4843333 &\\ \hline
+    41 &	1500000	&  1490000 &	1500000 &  1500000 &	1490000 &  1500000 &  1496667 &\\ \hline
+    81 &   426000 &   419000 &   419000 &   417000 &   423000 &   417000 &   420167 &\\ \hline
+   101 &   271000 &   278000 &   278000 &   272000 &   275000 &   274000 &   274667 &\\ \hline
+   201 &    72100 &    71800 &    72000 &    71800 &    71800 &    72100 &    71933 &\\ \hline
+   401 &    18400 &    18300 &    18500	&    18700 &    18500 &    18400 &    18467 &\\ \hline
+   801 &     4650	&     4690 &     4640 &   	4650 &     4650 &    	4690 &     4662 &\\ \hline
+  1001 &     3021	&     3000 &     2980 &   	2970 &     3030 &   	3000 &     3000 &\\ \hline
+  2001 &      756	&      751 &	    752 &	     750 &	    748 &	     743 &      750 &\\ \hline
+  4001 &      190 &	     188 &	    187 &      188 &	    187 &    	 186 &      188 &\\ \hline
+  8001 &       47 &	      46 &       47 &	      46 &       46 &	      47 &       47 &\\ \hline
+ 10001 &       30 &	      29 &       29 &	      30 &       30 &	      29 &       30 &\\ \hline
+
+
+\end{tabular}
+\end{table}

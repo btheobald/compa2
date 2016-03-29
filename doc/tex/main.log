@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.3.22)  28 MAR 2016 23:19
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2016.3.22)  29 MAR 2016 10:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -898,25 +898,25 @@ ble.3}) has been already used, duplicate ignored
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.131 
-      ] <img/csl0.png, id=682, 590.205pt x 136.5903pt>
+      ] <img/csl0.png, id=692, 590.205pt x 136.5903pt>
 File: img/csl0.png Graphic file (type png)
  <use img/csl0.png>
 Package pdftex.def Info: img/csl0.png used on input line 136.
 (pdftex.def)             Requested size: 448.13095pt x 103.71173pt.
 
-<img/csl1.png, id=684, 530.4618pt x 196.3335pt>
+<img/csl1.png, id=694, 530.4618pt x 196.3335pt>
 File: img/csl1.png Graphic file (type png)
  <use img/csl1.png>
 Package pdftex.def Info: img/csl1.png used on input line 142.
 (pdftex.def)             Requested size: 448.13095pt x 165.86568pt.
 
-<img/nsl0.png, id=685, 472.8867pt x 171.7617pt>
+<img/nsl0.png, id=695, 472.8867pt x 171.7617pt>
 File: img/nsl0.png Graphic file (type png)
  <use img/nsl0.png>
 Package pdftex.def Info: img/nsl0.png used on input line 148.
 (pdftex.def)             Requested size: 448.13095pt x 162.77168pt.
 
-<img/nsl1.png, id=686, 662.475pt x 500.8311pt>
+<img/nsl1.png, id=696, 662.475pt x 500.8311pt>
 File: img/nsl1.png Graphic file (type png)
  <use img/nsl1.png>
 Package pdftex.def Info: img/nsl1.png used on input line 154.
@@ -946,7 +946,7 @@ n already used, duplicate ignored
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.161 
-       <./img/nsl1.png>] <img/aid.png, id=703, 319.6743pt x 83.1105pt>
+       <./img/nsl1.png>] <img/aid.png, id=713, 319.6743pt x 83.1105pt>
 File: img/aid.png Graphic file (type png)
 
 <use img/aid.png>
@@ -969,14 +969,14 @@ LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 6.
  [21] [22] [23]
 [24] [25]) [26] [27] [28]) [29] (./sections/prototyping_root.tex
-<img/notworking0.png, id=808, 542.77782pt x 515.67656pt>
+<img/notworking0.png, id=818, 542.77782pt x 515.67656pt>
 File: img/notworking0.png Graphic file (type png)
 
 <use img/notworking0.png>
 Package pdftex.def Info: img/notworking0.png used on input line 23.
 (pdftex.def)             Requested size: 201.65755pt x 191.59206pt.
  [30]
-<img/notworking1amp.png, id=819, 310.15875pt x 469.755pt>
+<img/notworking1amp.png, id=829, 310.15875pt x 469.755pt>
 File: img/notworking1amp.png Graphic file (type png)
 
 <use img/notworking1amp.png>
@@ -990,7 +990,7 @@ Package pdftex.def Info: img/notworking1amp.png used on input line 48.
 l.54 A
       s the body orbits, its height increases dramatically, and mainly on th...
  <./img/notworking0.png (PNG copy)>]
-<img/orbitbad.png, id=832, 113.4639pt x 76.3653pt>
+<img/orbitbad.png, id=842, 113.4639pt x 76.3653pt>
 File: img/orbitbad.png Graphic file (type png)
  <use img/orbitbad.png>
 Package pdftex.def Info: img/orbitbad.png used on input line 61.
@@ -1009,7 +1009,7 @@ l.68
                                                   \fi \fi 
 l.68 
       <./img/notworking1amp.png> <./img/orbitbad.png>]
-<img/leapfrog.png, id=844, 157.3077pt x 33.0033pt>
+<img/leapfrog.png, id=854, 157.3077pt x 33.0033pt>
 File: img/leapfrog.png Graphic file (type png)
  <use img/leapfrog.png>
 Package pdftex.def Info: img/leapfrog.png used on input line 75.
@@ -1074,7 +1074,7 @@ ble.6}) has been already used, duplicate ignored
                                                   \fi \fi 
 l.129 \subsubsection
                     {Program Flowchart}]
-<img/flowchart.png, id=943, 412.6617pt x 370.986pt>
+<img/flowchart.png, id=953, 412.6617pt x 370.986pt>
 File: img/flowchart.png Graphic file (type png)
  <use img/flowchart.png>
 Package pdftex.def Info: img/flowchart.png used on input line 132.
@@ -1142,7 +1142,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 138--139
 Package hyperref Info: bookmark level for unknown algorithm defaults to 0 on in
 put line 7.
  [62]) [63] [64]
-<img/did.png, id=1238, 339.669pt x 543.9522pt>
+<img/did.png, id=1248, 339.669pt x 543.9522pt>
 File: img/did.png Graphic file (type png)
  <use img/did.png>
 Package pdftex.def Info: img/did.png used on input line 266.
@@ -1161,7 +1161,7 @@ l.279 \subsubsection
 (./sections/design/body.hpp) [67] (./sections/design/scenario.hpp) [68]
 (./sections/design/simTLC.hpp) (./sections/design/rdrTLC.hpp) [69] [70]
 (./sections/design/sharedStage.hpp) [71]
-<img/framerate.png, id=1438, 319.9152pt x 80.2197pt>
+<img/framerate.png, id=1448, 319.9152pt x 80.2197pt>
 File: img/framerate.png Graphic file (type png)
  <use img/framerate.png>
 Package pdftex.def Info: img/framerate.png used on input line 329.
@@ -1173,7 +1173,7 @@ Package pdftex.def Info: img/framerate.png used on input line 329.
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.338 
-       <./img/framerate.png>] <img/uiex.png, id=1449, 369.0588pt x 254.3904pt>
+       <./img/framerate.png>] <img/uiex.png, id=1459, 369.0588pt x 254.3904pt>
 File: img/uiex.png Graphic file (type png)
 
 <use img/uiex.png>
@@ -1185,7 +1185,7 @@ Package pdftex.def Info: img/uiex.png used on input line 341.
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
 l.350 
-       <./img/uiex.png>] <img/atb.PNG, id=1459, 182.93344pt x 391.4625pt>
+       <./img/uiex.png>] <img/atb.PNG, id=1469, 182.93344pt x 391.4625pt>
 File: img/atb.PNG Graphic file (type png)
 
 <use img/atb.PNG>
@@ -1199,7 +1199,7 @@ Package pdftex.def Info: img/atb.PNG used on input line 356.
 l.371 \subsection
                  {Testing Strategy} <./img/atb.PNG>] [75]) [76]
 (./sections/impl_root.tex [77] [78] [79]
-<img/didredo.png, id=1511, 388.3308pt x 361.35pt>
+<img/didredo.png, id=1522, 388.3308pt x 361.35pt>
 File: img/didredo.png Graphic file (type png)
  <use img/didredo.png>
 Package pdftex.def Info: img/didredo.png used on input line 63.
@@ -1212,7 +1212,7 @@ Package pdftex.def Info: img/didredo.png used on input line 63.
                                                   \fi \fi 
 l.72 
       <./img/didredo.png (PNG copy)>] [81]
-<sections/../img/flowchartNew.png, id=1527, 422.0568pt x 393.1488pt>
+<sections/../img/flowchartNew.png, id=1537, 422.0568pt x 393.1488pt>
 File: sections/../img/flowchartNew.png Graphic file (type png)
 
 <use sections/../img/flowchartNew.png>
@@ -1240,7 +1240,7 @@ l.93 \subsection
 (./sections/../../../exo/include/ui.hpp) [107]
 (./sections/../../../exo/src/ui.cpp [108] [109] [110] [111] [112] [113]
 [114] [115])
-<sections/../img/finalInterface.png, id=3102, 1543.7675pt x 901.3675pt>
+<sections/../img/finalInterface.png, id=3112, 1543.7675pt x 901.3675pt>
 File: sections/../img/finalInterface.png Graphic file (type png)
 
 <use sections/../img/finalInterface.png>
@@ -1254,21 +1254,21 @@ gure.19}) has been already used, duplicate ignored
                                                   \fi \fi 
 l.138 
        <./sections/../img/finalInterface.png>]
-<sections/../img/simUI.png, id=3137, 304.13625pt x 183.68625pt>
+<sections/../img/simUI.png, id=3147, 304.13625pt x 183.68625pt>
 File: sections/../img/simUI.png Graphic file (type png)
 
 <use sections/../img/simUI.png>
 Package pdftex.def Info: sections/../img/simUI.png used on input line 141.
 (pdftex.def)             Requested size: 212.8939pt x 128.57947pt.
 
-<sections/../img/bodyUI.png, id=3138, 303.1325pt x 404.51125pt>
+<sections/../img/bodyUI.png, id=3148, 303.1325pt x 404.51125pt>
 File: sections/../img/bodyUI.png Graphic file (type png)
 
 <use sections/../img/bodyUI.png>
 Package pdftex.def Info: sections/../img/bodyUI.png used on input line 147.
 (pdftex.def)             Requested size: 181.8809pt x 242.70862pt.
 
-<sections/../img/superstructureUI.png, id=3139, 305.14pt x 314.17375pt>
+<sections/../img/superstructureUI.png, id=3149, 305.14pt x 314.17375pt>
 File: sections/../img/superstructureUI.png Graphic file (type png)
 
 <use sections/../img/superstructureUI.png>
@@ -1420,9 +1420,14 @@ Underfull \hbox (badness 10000) in paragraph at lines 21--22
 
 LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
 (Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 24.
-[131] [132] [133] [134] [135]) [136] (./sections/manual_root.tex) [137]
-(./sections/eval_root.tex) [138] (./sections/codelist_root.tex
-(./sections/../../../proto/02/main.cpp [139]) [140]
+[131] [132] [133] [134] [135]
+Underfull \hbox (badness 10000) in paragraph at lines 176--177
+
+ []
+
+) [136] (./sections/manual_root.tex) [137] (./sections/eval_root.tex) [138]
+(./sections/codelist_root.tex (./sections/../../../proto/02/main.cpp [139])
+[140]
 
 Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 (hyperref)                removing `math shift' on input line 6.
@@ -1450,7 +1455,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 (./sections/../../../proto/lpfrg01/main.cpp [143])) [144]
 (./sections/appendix_root.tex (./sections/appendix/dialogue.tex [145] [146]
-<img/still.png, id=3534, 2107.875pt x 2007.5pt>
+<img/still.png, id=3543, 2107.875pt x 2007.5pt>
 File: img/still.png Graphic file (type png)
  <use img/still.png>
 Package pdftex.def Info: img/still.png used on input line 106.
@@ -1463,13 +1468,13 @@ Package pdftex.def Info: img/still.png used on input line 106.
                                                   \fi \fi 
 l.111 \hrule
              <./img/still.png>]
-<img/pEcho.png, id=3544, 694.595pt x 374.39874pt>
+<img/pEcho.png, id=3553, 694.595pt x 374.39874pt>
 File: img/pEcho.png Graphic file (type png)
  <use img/pEcho.png>
 Package pdftex.def Info: img/pEcho.png used on input line 121.
 (pdftex.def)             Requested size: 403.31511pt x 217.40279pt.
 
-<img/superstructure.png, id=3545, 748.7975pt x 568.1225pt>
+<img/superstructure.png, id=3554, 748.7975pt x 568.1225pt>
 File: img/superstructure.png Graphic file (type png)
 
 <use img/superstructure.png>
@@ -1494,22 +1499,15 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 5.
  (./main.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 5.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 5.
-
-
-Package rerunfilecheck Warning: File `main.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `main.out':
-(rerunfilecheck)             Before: 96099CD79B61FAF9948A42805595760F;8061
-(rerunfilecheck)             After:  4CCB97A6CD8CDCD6D28BA5A88E2E8308;8126.
+Package rerunfilecheck Info: File `main.out' has not changed.
+(rerunfilecheck)             Checksum: 9138914C6ED206BE892BBB7441E20A63;8192.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 5.
  ) ) 
 Here is how much of TeX's memory you used:
- 24552 strings out of 494910
- 440826 string characters out of 6179836
+ 24555 strings out of 494910
+ 440880 string characters out of 6179836
  858998 words of memory out of 5000000
- 24908 multiletter control sequences out of 15000+600000
+ 24910 multiletter control sequences out of 15000+600000
  26932 words of font info for 68 fonts, out of 8000000 for 9000
  36 hyphenation exceptions out of 8191
  43i,18n,58p,10376b,2160s stack positions out of 5000i,500n,10000p,200000b,80000s
@@ -1541,10 +1539,10 @@ s/cm/cmr8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cms
 y10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb
 ></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/
 share/texlive/texmf-dist/fonts/type1/public/bera/fvmr8a.pfb>
-Output written on main.pdf (152 pages, 2609535 bytes).
+Output written on main.pdf (152 pages, 2613446 bytes).
 PDF statistics:
- 4891 PDF objects out of 5155 (max. 8388607)
- 3945 compressed objects within 40 object streams
- 2533 named destinations out of 2984 (max. 500000)
- 1012 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 4900 PDF objects out of 5155 (max. 8388607)
+ 3954 compressed objects within 40 object streams
+ 2534 named destinations out of 2984 (max. 500000)
+ 1028 words of extra memory for PDF output out of 10000 (max. 10000000)
 
