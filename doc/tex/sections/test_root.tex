@@ -207,19 +207,19 @@ Bodies & $i_1$ & $i_2$ & $i_3$ & $i_4$ & $i_5$ & $i_6$ & $i_{mean}$\\ \hline
 \def\arraystretch{1.5}
 \begin{tabular}{|c|c|c|} \hline
 Bodies & $i_{1s}$ & $T_i$\\ \hline
-    11 & \textbf{670000}   & $\SI{1}{\micro\second}$    \\ \hline
-    21 & \textbf{240000}   & $\SI{4}{\micro\second}$   \\ \hline
-    41 &  \textbf{75000}   & $\SI{13}{\micro\second}$  \\ \hline
-    81 &  \textbf{21000}   & $\SI{47}{\micro\second}$  \\ \hline
-   101 &  \textbf{14000}   & $\SI{71}{\micro\second}$  \\ \hline
-   201 &   \textbf{3600}   & $\SI{280}{\micro\second}$ \\ \hline
-   401 &    \textbf{920}   & $\SI{1}{\milli\second}$   \\ \hline
-   801 &    \textbf{230}   & $\SI{4}{\milli\second}$   \\ \hline
-  1001 &    \textbf{150}   & $\SI{7}{\milli\second}$   \\ \hline
-  2001 &     \textbf{38}   & $\SI{27}{\milli\second}$  \\ \hline
-  4001 &      \textbf{9.4} & $\SI{110}{\milli\second}$ \\ \hline
-  8001 &      \textbf{2.3} & $\SI{440}{\milli\second}$ \\ \hline
- 10001 &      \textbf{1.5} & $\SI{670}{\milli\second}$ \\ \hline
+    11 & 670000   & \SI{  1}{\micro\second}  \\ \hline
+    21 & 240000   & \SI{  4}{\micro\second}  \\ \hline
+    41 &  75000   & \SI{ 13}{\micro\second}  \\ \hline
+    81 &  21000   & \SI{ 47}{\micro\second}  \\ \hline
+   101 &  14000   & \SI{ 71}{\micro\second}  \\ \hline
+   201 &   3600   & \SI{280}{\micro\second}  \\ \hline
+   401 &    920   & \SI{  1}{\milli\second}  \\ \hline
+   801 &    230   & \SI{  4}{\milli\second}  \\ \hline
+  1001 &    150   & \SI{  7}{\milli\second}  \\ \hline
+  2001 &     38   & \SI{ 27}{\milli\second}  \\ \hline
+  4001 &      9.4 & \SI{110}{\milli\second}  \\ \hline
+  8001 &      2.3 & \SI{440}{\milli\second}  \\ \hline
+ 10001 &      1.5 & \SI{670}{\milli\second}  \\ \hline
 \end{tabular}
 \vspace{-40pt}
 \end{wraptable}
@@ -228,24 +228,77 @@ Bodies & $i_{1s}$ & $T_i$\\ \hline
 By processing this data and getting the reciprocal of the number of iterations in a second, the total time per iteration can be found, the figures in this table have been rounded for clarity.
 
 \paragraph{}
-With this data graphs can be created to better represent the performance of the simulation and allow for approximation of performance at other body counts, based on said graphs the simulation will remain at 60 frames per second till around 1400 bodies, below this body count the simulation is limited by the frame-rate of the renderer
+With this data graphs can be created to better represent the performance of the simulation and allow for approximation of performance at other body counts, based on said graphs the simulation will remain at 60 frames per second till around 1200 bodies, below this body count the simulation is limited by the frame-rate of the renderer
 
 \paragraph{}
-With the second graph, looking at the time per iteration over number of bodies reveals a non-conformity to a straight exponential increase in the time taken for computation, this may be affected by many factors outside my programming and may be down to the design of the particular hardware or architecture, even at a silicon level.
+With that said, this benchmark was only carried out on a single, relatively high performance PC, so these numbers will likely be different for different hardware, I have been developing the application between this PC and another low performance laptop, and while performing the benchmark again for the other computer would take a considerable amount of time, the performance is extremely similar on that computer, with the smoothness cut-off being at around 1200 bodies, seemingly fitting the benchmark results on the more powerful computer, this is likely due to the fact that the algorithm maybe does not make best use of the hardware, as most improvements to hardware have been in the form of higher core counts, which does not effect this program.
 
 \paragraph{}
-With that said, this benchmark was only carried out on a single, relatively high performance PC, so these numbers will likely be different for different hardware, I have been developing the application between this PC and another low performance laptop, and while performing the benchmark again for the other computer would take a considerable amount of time, the performance is extremely similar on that computer, with the smoothness cut-off being at around 1200 bodies.
+This laptop is a similar specification to many of the computers that are used in the school, and acts as an adequate example for the usability of the program on the school computers. For nearly all applications, the performance provided by this simulation is far above being adequate.
+
+\paragraph{}
+One event of note is that with collisions enabled in the simulation, the body count of the simulation will reduce over time, when doing this the simulation has a big jump in the smoothness at a certain number, this can be seen occurring in a provided video (en-sim10c.mp4) when the body count drops below about 1250, the effect is slight, but definitely noticeable.
 
 \begin{figure}[ht]
   \centering
-  \includegraphics[width=0.9\textwidth]{img/testingEvidence/perfgraph.png}
+  \includegraphics[width=0.9\textwidth]{img/testingEvidence/perfgraph1.png}
   \caption{Iterations/Second Over Body Count (Logarithmic)}
 \end{figure}
 
 \begin{figure}[!h]
   \centering
-  \includegraphics[width=0.9\textwidth]{img/testingEvidence/perftesttpi.png}
+  \includegraphics[width=0.9\textwidth]{img/testingEvidence/perfgraph2.png}
   \caption{Time/Iteration Over Body Count}
 \end{figure}
 
 \pagebreak
+
+\subsubsection{SIM13}
+SIM13 is a trace table based test which compares the results of the simulation between the intended algorithm being hand traced, in particular this trace table will compare results for the velocity and position of a single body.
+
+\paragraph{}
+The simulation in question contains two bodies, however in order to make the calculations more manageable one of the bodies is fixed, constantly residing at 0,0. A large time step of 2 (unit time) is specified, this allows for a quarter of an orbit to be completed in a single iteration, meaning that the change in numbers between iterations is of a manageable size and does not require a large number of significant figures to be kept.
+
+\begin{table}[h]
+\footnotesize
+\centering
+\caption{Manual Trace Table - 8 Iterations}
+\def\arraystretch{1.5}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|} \hline
+Iteration & State    &   $p_x$ &  $p_y$ &  $v_x$ &  $v_y$ &  $a_x$ &  $a_y$ &  $r$   \\ \hline
+0 & $Init$           &  10.000 &	0.000 &	 0.000 &	1.000 &	-0.100 &  0.000 & 10.000 \\ \hline
+1 & $v\frac{1}{2}1$	 &  10.000 &  0.000 &	-0.100 &	1.000 &	-0.100 &  0.000 &        \\ \hline
+  & $r$	             &   9.800 &	2.000	& -0.100 & 	1.000	&		     &        &        \\ \hline
+  & $a$	             &   9.800 &	2.000 &	-0.100 &	1.000 &	-0.098 & -0.020 &	10.002 \\ \hline
+  & $v\frac{1}{2}2$	 &   9.800 &	2.000 &	-0.198 &	0.980 &	-0.098 & -0.020	&        \\ \hline
+2 & $v\frac{1}{2}1$	 &   9.800 &	2.000 &	-0.296 &	0.960 &	-0.098 & -0.020	&        \\ \hline
+  & $r$	             &   9.208 &	3.920 &	-0.296 &	0.960	&		     &        &        \\ \hline
+  & $a$	             &   9.208 &	3.920 &	-0.296 &	0.960 &	-0.092 & -0.039 &	10.008 \\ \hline
+  & $v\frac{1}{2}2$  &	 9.208 &	3.920 &	-0.388 &	0.921 &	-0.092 & -0.039	&        \\ \hline
+3 & $v\frac{1}{2}1$  &	 9.208 &	3.920	& -0.480 &	0.882 &	-0.092 & -0.039 &	       \\ \hline
+  & $r$              & 	 8.249 &	5.684	& -0.480 &	0.882 &			   &        &        \\ \hline
+  & $a$              &	 8.249 &	5.684	& -0.480 &	0.882	& -0.082 & -0.057	& 10.017 \\ \hline
+  & $v\frac{1}{2}2$  &	 8.249 &	5.684	& -0.562 &	0.825	& -0.082 & -0.057	&        \\ \hline
+4 & $v\frac{1}{2}1$  &	 8.249 &	5.684	& -0.644 &	0.769	& -0.082 & -0.057	&        \\ \hline
+  & $r$	             &   6.962 &	7.221	& -0.644 &	0.769	&		     &        &        \\ \hline
+  & $a$              &   6.962 &	7.221	& -0.644 &	0.769	& -0.069 & -0.072 &	10.030 \\ \hline
+  & $v\frac{1}{2}2$  &	 6.962 &	7.221 &	-0.713 &	0.697 &	-0.069 & -0.072	&        \\ \hline
+5 & $v\frac{1}{2}1$  &	 6.962 &	7.221 &	-0.782 &	0.626 &	-0.069 & -0.072	&        \\ \hline
+  & $r$	             &   5.398 &	8.472	& -0.782 &	0.626	&		     &        &        \\ \hline
+  & $a$	             &   5.398 &	8.472	& -0.782 & 	0.626	& -0.053 & -0.084 &	10.046 \\ \hline
+  & $v\frac{1}{2}2$  &	 5.398 &	8.472	& -0.835 &	0.542	& -0.053 & -0.084	&        \\ \hline
+6 & $v\frac{1}{2}1$	 &   5.398 &	8.472	& -0.888 &	0.458	& -0.053 & -0.084	&        \\ \hline
+  & $r$	             &   3.622 &	9.389	& -0.888 &	0.458	&		     &        &        \\ \hline
+  & $a$	             &   3.622 &	9.389	& -0.888 &	0.458	& -0.036 & -0.092	& 10.064 \\ \hline
+  & $v\frac{1}{2}2$  &	 3.622 & 	9.389	& -0.924 &	0.366	& -0.036 & -0.092	&        \\ \hline
+7 & $v\frac{1}{2}1$  &	 3.622 &	9.389	& -0.959 &	0.274	& -0.036 & -0.092	&        \\ \hline
+  & $r$	             &   1.703 &	9.938	& -0.959 &	0.274	& 		   &        &        \\ \hline
+  & $a$	             &   1.703 &	9.938	& -0.959 &	0.274	& -0.017 & -0.097 &	10.083 \\ \hline
+  & $v\frac{1}{2}2$  &	 1.703 &	9.938	& -0.976 &	0.177	& -0.017 & -0.097	&        \\ \hline
+8 & $v\frac{1}{2}1$  &	 1.703 &	9.938	& -0.992 &	0.080	& -0.017 & -0.097	&        \\ \hline
+  & $r$	             &  -0.282 & 10.098	& -0.992 &	0.080	&		     &        &        \\ \hline
+  &	$a$              &  -0.282 & 10.098	& -0.992 &	0.080	&  0.003 & -0.098 &	10.102 \\ \hline
+  & $v\frac{1}{2}2$  &	-0.282 & 10.098	& -0.990 & -0.018	&  0.003 & -0.098	&        \\ \hline
+\end{tabular}
+\vspace{-40pt}
+\end{table}

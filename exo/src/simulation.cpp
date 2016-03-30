@@ -15,7 +15,7 @@ double simulation::getComponentDistance(body* bA, body* bB, int xy) {
 
 double simulation::getVectorDistance(double p_dX, double p_dY) {
   // Pythagoras - a^2 + b^2 = c^2
-  return std::sqrt((p_dX*p_dX) + (p_dY*p_dY));
+  return std::sqrt((std::pow(p_dX,2)) + (std::pow(p_dY,2)));
 }
 
 void simulation::resetAllAcceleration(void) {
@@ -33,7 +33,7 @@ void simulation::calcAcceleration(body* bA, body* bB) {
   double dV = getVectorDistance(dX, dY);
 
   // F=GmM/(r^3) - Pre-component force
-  double fP = -(lControl.UGC * bA->m * bB->m) / (dV*dV*dV);
+  double fP = -(lControl.UGC * bA->m * bB->m) / std::pow(dV,3);
   // Component Forces
   double fX = fP * dX;
   double fY = fP * dY;

@@ -12,107 +12,108 @@
 \contentsline {subsection}{\numberline {1.4}Data Management}{10}{subsection.1.4}
 \contentsline {subsubsection}{\numberline {1.4.1}Data Sources and Destinations}{10}{subsubsection.1.4.1}
 \contentsline {subsubsection}{\numberline {1.4.2}Data Volumes}{10}{subsubsection.1.4.2}
-\contentsline {subsubsection}{\numberline {1.4.3}Data Dictionary}{12}{subsubsection.1.4.3}
-\contentsline {subsubsection}{\numberline {1.4.4}Data Flow Diagrams}{15}{subsubsection.1.4.4}
-\contentsline {subsection}{\numberline {1.5}Object Orientation}{17}{subsection.1.5}
-\contentsline {subsection}{\numberline {1.6}Limitations}{18}{subsection.1.6}
-\contentsline {subsection}{\numberline {1.7}Objectives}{18}{subsection.1.7}
-\contentsline {subsubsection}{\numberline {1.7.1}System}{18}{subsubsection.1.7.1}
-\contentsline {subsubsection}{\numberline {1.7.2}Processing}{19}{subsubsection.1.7.2}
-\contentsline {subsubsection}{\numberline {1.7.3}User}{19}{subsubsection.1.7.3}
-\contentsline {subsection}{\numberline {1.8}User Dialogue}{20}{subsection.1.8}
-\contentsline {subsection}{\numberline {1.9}Potential Solutions}{21}{subsection.1.9}
-\contentsline {subsubsection}{\numberline {1.9.1}C++, OpenGL, GLFW}{21}{subsubsection.1.9.1}
-\contentsline {subsubsection}{\numberline {1.9.2}Pascal, Graph, Forms}{23}{subsubsection.1.9.2}
-\contentsline {subsubsection}{\numberline {1.9.3}C++, OpenGL, SFML}{25}{subsubsection.1.9.3}
-\contentsline {subsubsection}{\numberline {1.9.4}Conclusion}{26}{subsubsection.1.9.4}
-\contentsline {subsection}{\numberline {1.10}Management and Tools}{27}{subsection.1.10}
-\contentsline {subsubsection}{\numberline {1.10.1}Linux and Development Environment}{27}{subsubsection.1.10.1}
-\contentsline {subsubsection}{\numberline {1.10.2}Git - Version Control}{27}{subsubsection.1.10.2}
-\contentsline {subsubsection}{\numberline {1.10.3}GDB - Debugging}{28}{subsubsection.1.10.3}
-\contentsline {subsubsection}{\numberline {1.10.4}Valgrind - Profiling and Memory Analysis}{28}{subsubsection.1.10.4}
-\contentsline {paragraph}{\nonumberline Included Tools}{28}{section*.61}
-\contentsline {section}{\numberline {2}Design}{30}{section.2}
-\contentsline {subsection}{\numberline {2.1}Simulation Efficiency}{30}{subsection.2.1}
-\contentsline {subsection}{\numberline {2.2}Simulation Prototyping}{31}{subsection.2.2}
-\contentsline {subsubsection}{\numberline {2.2.1}Leapfrog Intergration}{33}{subsubsection.2.2.1}
-\contentsline {subsubsection}{\numberline {2.2.2}Vector Equations}{33}{subsubsection.2.2.2}
-\contentsline {subsection}{\numberline {2.3}Threading}{35}{subsection.2.3}
-\contentsline {subsection}{\numberline {2.4}Libraries}{38}{subsection.2.4}
-\contentsline {subsection}{\numberline {2.5}Structure}{40}{subsection.2.5}
-\contentsline {subsubsection}{\numberline {2.5.1}Overall System Design}{40}{subsubsection.2.5.1}
-\contentsline {subsubsection}{\numberline {2.5.2}Design Data Dictionary}{42}{subsubsection.2.5.2}
-\contentsline {subsubsection}{\numberline {2.5.3}Program Flowchart}{45}{subsubsection.2.5.3}
-\contentsline {subsubsection}{\numberline {2.5.4}Data Range and Validation}{46}{subsubsection.2.5.4}
-\contentsline {subsubsection}{\numberline {2.5.5}Data Security and Integrity}{49}{subsubsection.2.5.5}
-\contentsline {subsubsection}{\numberline {2.5.6}Data Record Structure}{50}{subsubsection.2.5.6}
-\contentsline {subsection}{\numberline {2.6}Algorithms}{54}{subsection.2.6}
-\contentsline {subsubsection}{\numberline {2.6.1}Simulation}{54}{subsubsection.2.6.1}
-\contentsline {paragraph}{\nonumberline Algorithm 1: Force Calculation Between Two Bodies}{54}{section*.142}
-\contentsline {paragraph}{\nonumberline Algorithm 2: Calculation of all Forces}{55}{section*.145}
-\contentsline {paragraph}{\nonumberline Algorithm 3: Summation of Forces on Bodies}{55}{section*.149}
-\contentsline {paragraph}{\nonumberline Algorithm 4: Integration of New Position}{57}{section*.153}
-\contentsline {paragraph}{\nonumberline Algorithm 5: Body Collision Detection and Calculation}{57}{section*.157}
-\contentsline {subsubsection}{\numberline {2.6.2}Graphics}{59}{subsubsection.2.6.2}
-\contentsline {paragraph}{\nonumberline Algorithm 6: Circle Drawing}{59}{section*.160}
-\contentsline {subsubsection}{\numberline {2.6.3}Interface}{60}{subsubsection.2.6.3}
-\contentsline {paragraph}{\nonumberline Algorithm 7: Body Selection}{60}{section*.163}
-\contentsline {paragraph}{\nonumberline Algorithm 8: Pan and Zoom}{60}{section*.166}
-\contentsline {paragraph}{\nonumberline Algorithm 9: Scenario Saving and Loading}{60}{section*.169}
-\contentsline {subsubsection}{\numberline {2.6.4}Management}{61}{subsubsection.2.6.4}
-\contentsline {paragraph}{\nonumberline Algorithm 10: Thread Synchronisation and Shared Data Management}{61}{section*.172}
-\contentsline {subsection}{\numberline {2.7}Pseudocode}{62}{subsection.2.7}
-\contentsline {subsection}{\numberline {2.8}OO Data Structure}{65}{subsection.2.8}
-\contentsline {subsubsection}{\numberline {2.8.1}body}{67}{subsubsection.2.8.1}
-\contentsline {subsubsection}{\numberline {2.8.2}scenario}{68}{subsubsection.2.8.2}
-\contentsline {subsubsection}{\numberline {2.8.3}simTLC}{69}{subsubsection.2.8.3}
-\contentsline {subsubsection}{\numberline {2.8.4}rdrTLC}{69}{subsubsection.2.8.4}
-\contentsline {subsubsection}{\numberline {2.8.5}sharedStage}{71}{subsubsection.2.8.5}
-\contentsline {subsection}{\numberline {2.9}Human-Computer Interaction}{72}{subsection.2.9}
-\contentsline {subsubsection}{\numberline {2.9.1}Frame Rate}{72}{subsubsection.2.9.1}
-\contentsline {subsubsection}{\numberline {2.9.2}Mock Interface}{73}{subsubsection.2.9.2}
-\contentsline {subsection}{\numberline {2.10}Testing Strategy}{75}{subsection.2.10}
-\contentsline {subsection}{\numberline {2.11}Testing Plan}{76}{subsection.2.11}
-\contentsline {section}{\numberline {3}Implementation}{77}{section.3}
-\contentsline {subsection}{\numberline {3.1}Design Changes}{77}{subsection.3.1}
-\contentsline {subsubsection}{\numberline {3.1.1}Program Structure Changes}{77}{subsubsection.3.1.1}
-\contentsline {subsubsection}{\numberline {3.1.2}Algorithm Changes}{78}{subsubsection.3.1.2}
-\contentsline {subsubsection}{\numberline {3.1.3}Time Constraints}{79}{subsubsection.3.1.3}
-\contentsline {subsection}{\numberline {3.2}Object Orientation Changes}{79}{subsection.3.2}
-\contentsline {subsubsection}{\numberline {3.2.1}Object Inheritance Diagram}{80}{subsubsection.3.2.1}
-\contentsline {subsection}{\numberline {3.3}Flowchart Revision}{82}{subsection.3.3}
-\contentsline {subsection}{\numberline {3.4}Code Listing}{83}{subsection.3.4}
-\contentsline {subsubsection}{\numberline {3.4.1}main.cpp - Root Implementation}{83}{subsubsection.3.4.1}
-\contentsline {subsubsection}{\numberline {3.4.2}body.hpp - Interface}{90}{subsubsection.3.4.2}
-\contentsline {subsubsection}{\numberline {3.4.3}body.cpp - Implementation}{91}{subsubsection.3.4.3}
-\contentsline {subsubsection}{\numberline {3.4.4}scenario.hpp - Interface}{93}{subsubsection.3.4.4}
-\contentsline {subsubsection}{\numberline {3.4.5}scenario.cpp - Implementation}{94}{subsubsection.3.4.5}
-\contentsline {subsubsection}{\numberline {3.4.6}render.hpp - Interface}{95}{subsubsection.3.4.6}
-\contentsline {subsubsection}{\numberline {3.4.7}render.cpp - Implementation}{96}{subsubsection.3.4.7}
-\contentsline {subsubsection}{\numberline {3.4.8}simulation.hpp - Interface}{99}{subsubsection.3.4.8}
-\contentsline {subsubsection}{\numberline {3.4.9}simulation.cpp - Implementation}{100}{subsubsection.3.4.9}
-\contentsline {subsubsection}{\numberline {3.4.10}shared.hpp - Interface}{104}{subsubsection.3.4.10}
-\contentsline {subsubsection}{\numberline {3.4.11}shared.cpp - Implementation}{105}{subsubsection.3.4.11}
-\contentsline {subsubsection}{\numberline {3.4.12}ui.hpp - Interface}{107}{subsubsection.3.4.12}
-\contentsline {subsubsection}{\numberline {3.4.13}ui.cpp - Implementation}{108}{subsubsection.3.4.13}
-\contentsline {subsubsection}{\numberline {3.4.14}Final Interface}{117}{subsubsection.3.4.14}
-\contentsline {section}{\numberline {4}Testing}{120}{section.4}
-\contentsline {subsection}{\numberline {4.1}Test Scenarios}{120}{subsection.4.1}
-\contentsline {subsubsection}{\numberline {4.1.1}System Tests}{126}{subsubsection.4.1.1}
-\contentsline {subsubsection}{\numberline {4.1.2}Interface Tests}{127}{subsubsection.4.1.2}
-\contentsline {subsubsection}{\numberline {4.1.3}Simulation Tests}{129}{subsubsection.4.1.3}
-\contentsline {subsection}{\numberline {4.2}Compile Flags}{131}{subsection.4.2}
-\contentsline {subsubsection}{\numberline {4.2.1}System Tests}{132}{subsubsection.4.2.1}
-\contentsline {subsubsection}{\numberline {4.2.2}Interface Tests}{132}{subsubsection.4.2.2}
-\contentsline {subsubsection}{\numberline {4.2.3}Simulation Tests}{133}{subsubsection.4.2.3}
-\contentsline {subsection}{\numberline {4.3}Test Results}{134}{subsection.4.3}
-\contentsline {subsubsection}{\numberline {4.3.1}System Tests}{134}{subsubsection.4.3.1}
-\contentsline {subsubsection}{\numberline {4.3.2}Interface Tests}{134}{subsubsection.4.3.2}
-\contentsline {subsubsection}{\numberline {4.3.3}Simulation Tests}{134}{subsubsection.4.3.3}
-\contentsline {subsection}{\numberline {4.4}Test Notes}{135}{subsection.4.4}
-\contentsline {subsubsection}{\numberline {4.4.1}SYS1}{135}{subsubsection.4.4.1}
-\contentsline {subsubsection}{\numberline {4.4.2}SIM8}{135}{subsubsection.4.4.2}
-\contentsline {subsubsection}{\numberline {4.4.3}SIM10}{136}{subsubsection.4.4.3}
+\contentsline {subsubsection}{\numberline {1.4.3}Data Dictionary}{11}{subsubsection.1.4.3}
+\contentsline {subsubsection}{\numberline {1.4.4}Data Flow Diagrams}{14}{subsubsection.1.4.4}
+\contentsline {subsection}{\numberline {1.5}Object Orientation}{16}{subsection.1.5}
+\contentsline {subsection}{\numberline {1.6}Limitations}{17}{subsection.1.6}
+\contentsline {subsection}{\numberline {1.7}Objectives}{17}{subsection.1.7}
+\contentsline {subsubsection}{\numberline {1.7.1}System}{17}{subsubsection.1.7.1}
+\contentsline {subsubsection}{\numberline {1.7.2}Processing}{18}{subsubsection.1.7.2}
+\contentsline {subsubsection}{\numberline {1.7.3}User}{18}{subsubsection.1.7.3}
+\contentsline {subsection}{\numberline {1.8}User Dialogue}{19}{subsection.1.8}
+\contentsline {subsection}{\numberline {1.9}Potential Solutions}{20}{subsection.1.9}
+\contentsline {subsubsection}{\numberline {1.9.1}C++, OpenGL, GLFW}{20}{subsubsection.1.9.1}
+\contentsline {subsubsection}{\numberline {1.9.2}Pascal, Graph, Forms}{22}{subsubsection.1.9.2}
+\contentsline {subsubsection}{\numberline {1.9.3}C++, OpenGL, SFML}{24}{subsubsection.1.9.3}
+\contentsline {subsubsection}{\numberline {1.9.4}Conclusion}{25}{subsubsection.1.9.4}
+\contentsline {subsection}{\numberline {1.10}Management and Tools}{26}{subsection.1.10}
+\contentsline {subsubsection}{\numberline {1.10.1}Linux and Development Environment}{26}{subsubsection.1.10.1}
+\contentsline {subsubsection}{\numberline {1.10.2}Git - Version Control}{26}{subsubsection.1.10.2}
+\contentsline {subsubsection}{\numberline {1.10.3}GDB - Debugging}{27}{subsubsection.1.10.3}
+\contentsline {subsubsection}{\numberline {1.10.4}Valgrind - Profiling and Memory Analysis}{27}{subsubsection.1.10.4}
+\contentsline {paragraph}{\nonumberline Included Tools}{27}{section*.61}
+\contentsline {section}{\numberline {2}Design}{29}{section.2}
+\contentsline {subsection}{\numberline {2.1}Simulation Efficiency}{29}{subsection.2.1}
+\contentsline {subsection}{\numberline {2.2}Simulation Prototyping}{30}{subsection.2.2}
+\contentsline {subsubsection}{\numberline {2.2.1}Leapfrog Intergration}{32}{subsubsection.2.2.1}
+\contentsline {subsubsection}{\numberline {2.2.2}Vector Equations}{32}{subsubsection.2.2.2}
+\contentsline {subsection}{\numberline {2.3}Threading}{34}{subsection.2.3}
+\contentsline {subsection}{\numberline {2.4}Libraries}{37}{subsection.2.4}
+\contentsline {subsection}{\numberline {2.5}Structure}{39}{subsection.2.5}
+\contentsline {subsubsection}{\numberline {2.5.1}Overall System Design}{39}{subsubsection.2.5.1}
+\contentsline {subsubsection}{\numberline {2.5.2}Design Data Dictionary}{41}{subsubsection.2.5.2}
+\contentsline {subsubsection}{\numberline {2.5.3}Program Flowchart}{44}{subsubsection.2.5.3}
+\contentsline {subsubsection}{\numberline {2.5.4}Data Range and Validation}{45}{subsubsection.2.5.4}
+\contentsline {subsubsection}{\numberline {2.5.5}Data Security and Integrity}{48}{subsubsection.2.5.5}
+\contentsline {subsubsection}{\numberline {2.5.6}Data Record Structure}{49}{subsubsection.2.5.6}
+\contentsline {subsection}{\numberline {2.6}Algorithms}{53}{subsection.2.6}
+\contentsline {subsubsection}{\numberline {2.6.1}Simulation}{53}{subsubsection.2.6.1}
+\contentsline {paragraph}{\nonumberline Algorithm 1: Force Calculation Between Two Bodies}{53}{section*.142}
+\contentsline {paragraph}{\nonumberline Algorithm 2: Calculation of all Forces}{54}{section*.145}
+\contentsline {paragraph}{\nonumberline Algorithm 3: Summation of Forces on Bodies}{54}{section*.149}
+\contentsline {paragraph}{\nonumberline Algorithm 4: Integration of New Position}{56}{section*.153}
+\contentsline {paragraph}{\nonumberline Algorithm 5: Body Collision Detection and Calculation}{56}{section*.157}
+\contentsline {subsubsection}{\numberline {2.6.2}Graphics}{58}{subsubsection.2.6.2}
+\contentsline {paragraph}{\nonumberline Algorithm 6: Circle Drawing}{58}{section*.160}
+\contentsline {subsubsection}{\numberline {2.6.3}Interface}{59}{subsubsection.2.6.3}
+\contentsline {paragraph}{\nonumberline Algorithm 7: Body Selection}{59}{section*.163}
+\contentsline {paragraph}{\nonumberline Algorithm 8: Pan and Zoom}{59}{section*.166}
+\contentsline {paragraph}{\nonumberline Algorithm 9: Scenario Saving and Loading}{59}{section*.169}
+\contentsline {subsubsection}{\numberline {2.6.4}Management}{60}{subsubsection.2.6.4}
+\contentsline {paragraph}{\nonumberline Algorithm 10: Thread Synchronisation and Shared Data Management}{60}{section*.172}
+\contentsline {subsection}{\numberline {2.7}Pseudocode}{61}{subsection.2.7}
+\contentsline {subsection}{\numberline {2.8}OO Data Structure}{64}{subsection.2.8}
+\contentsline {subsubsection}{\numberline {2.8.1}body}{66}{subsubsection.2.8.1}
+\contentsline {subsubsection}{\numberline {2.8.2}scenario}{67}{subsubsection.2.8.2}
+\contentsline {subsubsection}{\numberline {2.8.3}simTLC}{68}{subsubsection.2.8.3}
+\contentsline {subsubsection}{\numberline {2.8.4}rdrTLC}{68}{subsubsection.2.8.4}
+\contentsline {subsubsection}{\numberline {2.8.5}sharedStage}{70}{subsubsection.2.8.5}
+\contentsline {subsection}{\numberline {2.9}Human-Computer Interaction}{71}{subsection.2.9}
+\contentsline {subsubsection}{\numberline {2.9.1}Frame Rate}{71}{subsubsection.2.9.1}
+\contentsline {subsubsection}{\numberline {2.9.2}Mock Interface}{72}{subsubsection.2.9.2}
+\contentsline {subsection}{\numberline {2.10}Testing Strategy}{74}{subsection.2.10}
+\contentsline {subsection}{\numberline {2.11}Testing Plan}{75}{subsection.2.11}
+\contentsline {section}{\numberline {3}Implementation}{76}{section.3}
+\contentsline {subsection}{\numberline {3.1}Design Changes}{76}{subsection.3.1}
+\contentsline {subsubsection}{\numberline {3.1.1}Program Structure Changes}{76}{subsubsection.3.1.1}
+\contentsline {subsubsection}{\numberline {3.1.2}Algorithm Changes}{77}{subsubsection.3.1.2}
+\contentsline {subsubsection}{\numberline {3.1.3}Time Constraints}{78}{subsubsection.3.1.3}
+\contentsline {subsection}{\numberline {3.2}Object Orientation Changes}{78}{subsection.3.2}
+\contentsline {subsubsection}{\numberline {3.2.1}Object Inheritance Diagram}{79}{subsubsection.3.2.1}
+\contentsline {subsection}{\numberline {3.3}Flowchart Revision}{81}{subsection.3.3}
+\contentsline {subsection}{\numberline {3.4}Code Listing}{82}{subsection.3.4}
+\contentsline {subsubsection}{\numberline {3.4.1}main.cpp - Root Implementation}{82}{subsubsection.3.4.1}
+\contentsline {subsubsection}{\numberline {3.4.2}body.hpp - Interface}{89}{subsubsection.3.4.2}
+\contentsline {subsubsection}{\numberline {3.4.3}body.cpp - Implementation}{90}{subsubsection.3.4.3}
+\contentsline {subsubsection}{\numberline {3.4.4}scenario.hpp - Interface}{92}{subsubsection.3.4.4}
+\contentsline {subsubsection}{\numberline {3.4.5}scenario.cpp - Implementation}{93}{subsubsection.3.4.5}
+\contentsline {subsubsection}{\numberline {3.4.6}render.hpp - Interface}{94}{subsubsection.3.4.6}
+\contentsline {subsubsection}{\numberline {3.4.7}render.cpp - Implementation}{95}{subsubsection.3.4.7}
+\contentsline {subsubsection}{\numberline {3.4.8}simulation.hpp - Interface}{98}{subsubsection.3.4.8}
+\contentsline {subsubsection}{\numberline {3.4.9}simulation.cpp - Implementation}{99}{subsubsection.3.4.9}
+\contentsline {subsubsection}{\numberline {3.4.10}shared.hpp - Interface}{103}{subsubsection.3.4.10}
+\contentsline {subsubsection}{\numberline {3.4.11}shared.cpp - Implementation}{104}{subsubsection.3.4.11}
+\contentsline {subsubsection}{\numberline {3.4.12}ui.hpp - Interface}{106}{subsubsection.3.4.12}
+\contentsline {subsubsection}{\numberline {3.4.13}ui.cpp - Implementation}{107}{subsubsection.3.4.13}
+\contentsline {subsubsection}{\numberline {3.4.14}Final Interface}{116}{subsubsection.3.4.14}
+\contentsline {section}{\numberline {4}Testing}{119}{section.4}
+\contentsline {subsection}{\numberline {4.1}Test Scenarios}{119}{subsection.4.1}
+\contentsline {subsubsection}{\numberline {4.1.1}System Tests}{125}{subsubsection.4.1.1}
+\contentsline {subsubsection}{\numberline {4.1.2}Interface Tests}{126}{subsubsection.4.1.2}
+\contentsline {subsubsection}{\numberline {4.1.3}Simulation Tests}{128}{subsubsection.4.1.3}
+\contentsline {subsection}{\numberline {4.2}Compile Flags}{130}{subsection.4.2}
+\contentsline {subsubsection}{\numberline {4.2.1}System Tests}{131}{subsubsection.4.2.1}
+\contentsline {subsubsection}{\numberline {4.2.2}Interface Tests}{131}{subsubsection.4.2.2}
+\contentsline {subsubsection}{\numberline {4.2.3}Simulation Tests}{132}{subsubsection.4.2.3}
+\contentsline {subsection}{\numberline {4.3}Test Results}{133}{subsection.4.3}
+\contentsline {subsubsection}{\numberline {4.3.1}System Tests}{133}{subsubsection.4.3.1}
+\contentsline {subsubsection}{\numberline {4.3.2}Interface Tests}{133}{subsubsection.4.3.2}
+\contentsline {subsubsection}{\numberline {4.3.3}Simulation Tests}{133}{subsubsection.4.3.3}
+\contentsline {subsection}{\numberline {4.4}Test Notes}{134}{subsection.4.4}
+\contentsline {subsubsection}{\numberline {4.4.1}SYS1}{134}{subsubsection.4.4.1}
+\contentsline {subsubsection}{\numberline {4.4.2}SIM8}{134}{subsubsection.4.4.2}
+\contentsline {subsubsection}{\numberline {4.4.3}SIM10}{135}{subsubsection.4.4.3}
+\contentsline {subsubsection}{\numberline {4.4.4}SIM13}{138}{subsubsection.4.4.4}
 \contentsline {section}{\numberline {5}Manual}{139}{section.5}
 \contentsline {section}{\numberline {6}Evaluation}{140}{section.6}
 \contentsline {section}{\numberline {7}Other Code}{141}{section.7}
@@ -120,6 +121,6 @@
 \contentsline {subsubsection}{\numberline {7.1.1}Euler (Trig)}{141}{subsubsection.7.1.1}
 \contentsline {subsubsection}{\numberline {7.1.2}Euler (Vector) with $\Delta {} E$}{143}{subsubsection.7.1.2}
 \contentsline {subsubsection}{\numberline {7.1.3}Leapfrog (Vector) with $\Delta {} E$}{145}{subsubsection.7.1.3}
-\contentsline {section}{Appendices}{147}{section*.234}
+\contentsline {section}{Appendices}{147}{section*.236}
 \contentsline {subsection}{\numberline {A}Dialogue}{147}{subsection.Alph0.1}
 \contentsline {section}{References}{154}{figure.27}
