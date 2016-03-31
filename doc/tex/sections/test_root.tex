@@ -259,11 +259,20 @@ SIM13 is a trace table based test which compares the results of the simulation b
 \paragraph{}
 The simulation in question contains two bodies, however in order to make the calculations more manageable one of the bodies is fixed, constantly residing at 0,0. A large time step of 2 (unit time) is specified, this allows for a quarter of an orbit to be completed in a single iteration, meaning that the change in numbers between iterations is of a manageable size and does not require a large number of significant figures to be kept.
 
-\begin{table}[h]
+\paragraph{}
+The data calculated in the manual trace table and the program output can be found on the following pages. Comparing the two tables, the results match exactly when comparing the algorithm to a hand-run results.
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.8\textwidth]{img/testingEvidence/tracetable.png}
+  \caption{Trace Table \& Program Output (Position)}
+\end{figure}
+
+\begin{table}[H]
 \footnotesize
 \centering
 \caption{Manual Trace Table - 8 Iterations}
-\def\arraystretch{1.5}
+\def\arraystretch{1.4}
 \begin{tabular}{|c|c|c|c|c|c|c|c|c|} \hline
 Iteration & State    &   $p_x$ &  $p_y$ &  $v_x$ &  $v_y$ &  $a_x$ &  $a_y$ &  $r$   \\ \hline
 0 & $Init$           &  10.000 &	0.000 &	 0.000 &	1.000 &	-0.100 &  0.000 & 10.000 \\ \hline
@@ -302,3 +311,246 @@ Iteration & State    &   $p_x$ &  $p_y$ &  $v_x$ &  $v_y$ &  $a_x$ &  $a_y$ &  $
 \end{tabular}
 \vspace{-40pt}
 \end{table}
+
+\pagebreak
+
+\begin{table}[H]
+\footnotesize
+\centering
+\caption{Program Output - 8 Iterations}
+\def\arraystretch{1.5}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|} \hline
+Iteration & State    &   $p_x$ &  $p_y$ &  $v_x$ &  $v_y$ \\ \hline
+0 & $Init$           &  10.000 &	0.000 &	 0.000 &	1.000 \\ \hline
+1 & $v\frac{1}{2}1$	 &  10.000 &  0.000 &	-0.100 &	1.000 \\ \hline
+  & $r$	             &   9.800 &	2.000	&  -     & 		    \\ \hline
+  & $v\frac{1}{2}2$	 &   -     &	-     &	-0.198 &	0.980 \\ \hline
+2 & $v\frac{1}{2}1$	 &   -     &	-     &	-0.296 &	0.960 \\ \hline
+  & $r$	             &   9.208 &	3.920 &	 -     &	-    	\\ \hline
+  & $v\frac{1}{2}2$  &	 -     &	-     &	-0.388 &	0.921 \\ \hline
+3 & $v\frac{1}{2}1$  &	 -     &	-    	& -0.480 &	0.882 \\ \hline
+  & $r$              & 	 8.249 &	5.684	&  -     &	-     \\ \hline
+  & $v\frac{1}{2}2$  &	 -     &	-    	& -0.562 &	0.825	\\ \hline
+4 & $v\frac{1}{2}1$  &	 -     &	-    	& -0.644 &	0.769	\\ \hline
+  & $r$	             &   6.962 &	7.221	&  -     &	-    	\\ \hline
+  & $v\frac{1}{2}2$  &	 -     &	-     &	-0.713 &	0.697 \\ \hline
+5 & $v\frac{1}{2}1$  &	 -     &	-     &	-0.782 &	0.626 \\ \hline
+  & $r$	             &   5.398 &	8.472	&  -     &	-    	\\ \hline
+  & $v\frac{1}{2}2$  &	 -     &	-    	& -0.835 &	0.542	\\ \hline
+6 & $v\frac{1}{2}1$	 &   -     &	-    	& -0.888 &	0.458	\\ \hline
+  & $r$	             &   3.622 &	9.389	&  -     &	-    	\\ \hline
+  & $v\frac{1}{2}2$  &	 -     & 	-    	& -0.924 &	0.366	\\ \hline
+7 & $v\frac{1}{2}1$  &	 -     &	-    	& -0.959 &	0.274	\\ \hline
+  & $r$	             &   1.703 &	9.938	&  -     &	-    	\\ \hline
+  & $v\frac{1}{2}2$  &	 -     &	-    	& -0.976 &	0.177	\\ \hline
+8 & $v\frac{1}{2}1$  &	 -     &	-    	& -0.992 &	0.080	\\ \hline
+  & $r$	             &  -0.282 & 10.098	&  -     &	-    	\\ \hline
+  & $v\frac{1}{2}2$  &	 -     &  -    	& -0.990 & -0.018	\\ \hline
+\end{tabular}
+\vspace{-40pt}
+\end{table}
+
+\pagebreak
+
+\subsubsection{SIM19}
+SIM19 is another trace table based test where the algorithm for the calculation of every force acting on each pair of bodies is compared to the results given by the simulation. This algorithm is the main algorithm that was changed from the initial design documentation, relying solely on a offset double for loop to calculate the relationships between every body in the simulation, yet miss out the calculations which are unnecessary. (Highlighted by the initial use of a matrix like algorithm.)
+
+\paragraph{}
+Comparing the outputs, the trace tables show the same final results for each force and all of the forces intended to be calculated were calculated.
+
+\begin{table}[H]
+\footnotesize
+\centering
+\caption{Trace Table - 6 Bodies}
+\def\arraystretch{1.5}
+\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|c|} \hline
+$x$ & $y$ & $p_{xA}$ & $p_{yA}$ & $p_{xB}$ & $p_{yB}$ & $r_x$ & $r_y$ & $r$ & $F_x$ & $F_y$ \\ \hline
+0	& 1 &	 10 &   2 &	 -4 &	  4 &	 14 &	 -2 &	14.14 &	\textbf{-0.0495} & \textbf{ 0.0071} \\ \hline
+0	& 2	&  10	&   2 & -18 &	 16	&  28 &	-14	& 31.30	& \textbf{-0.0091} & \textbf{ 0.0046} \\ \hline
+0	& 3	&  10	&   2 &  -8 &	-12	&  18	&  14	& 22.80	& \textbf{-0.0152} & \textbf{-0.0118} \\ \hline
+0	& 4	&  10	&   2 &   6 & -13	&   4	&  15	& 15.52	& \textbf{-0.0107} & \textbf{-0.0401} \\ \hline
+0	& 5	&  10	&   2 &   8 &  11	&   2	&  -9	&  9.22	& \textbf{-0.0255} & \textbf{ 0.1148} \\ \hline
+1	& 2	&  -4	&   4 &	-18 &	 16	&  14	& -12	& 18.44	& \textbf{-0.0223} & \textbf{ 0.0191} \\ \hline
+1	& 3	&  -4	&   4 &  -8 &	-12	&   4	&  16	& 16.49	& \textbf{-0.0089} & \textbf{-0.0357} \\ \hline
+1	& 4	&  -4	&   4 &   6 &	-13	& -10	&  17	& 19.72	& \textbf{ 0.0130} & \textbf{-0.0222} \\ \hline
+1	& 5	&  -4	&   4 &	  8 &  11	& -12	&  -7	& 13.89	& \textbf{ 0.0448} & \textbf{ 0.0261} \\ \hline
+2	& 3	& -18	&  16	&  -8 &	-12	& -10	&  28	& 29.73	& \textbf{ 0.0038} & \textbf{-0.0107} \\ \hline
+2	& 4	& -18	&  16	&   6 & -13	& -24	&  29	& 37.64	& \textbf{ 0.0045} & \textbf{-0.0054} \\ \hline
+2	& 5	& -18	&  16	&   8 &  11	& -26	&   5	& 26.48	& \textbf{ 0.0140} & \textbf{-0.0027} \\ \hline
+3	& 4	&  -8	& -12	&   6 & -13	& -14	&   1	& 14.04	& \textbf{ 0.0506} & \textbf{-0.0036} \\ \hline
+3	& 5	&  -8	& -12	&   8 &  11	& -16	& -23	& 28.02	& \textbf{ 0.0073} & \textbf{ 0.0105} \\ \hline
+4	& 5	&   6	& -13 &	  8 &  11 &	 -2	& -24	& 24.08 &	\textbf{ 0.0014} & \textbf{ 0.0172} \\ \hline
+\end{tabular}
+\vspace{-40pt}
+\end{table}
+
+\pagebreak
+
+\begin{table}[H]
+\footnotesize
+\centering
+\caption{Program Output - 6 Bodies}
+\def\arraystretch{1.5}
+\begin{tabular}{|c|c|c|c|} \hline
+$x$ & $y$ & $F_x$ & $F_y$ \\ \hline
+0 & 1	&	\textbf{-0.0495} & \textbf{ 0.0071} \\ \hline
+0 & 2	&	\textbf{-0.0091} & \textbf{ 0.0046} \\ \hline
+0 & 3	&	\textbf{-0.0152} & \textbf{-0.0118} \\ \hline
+0 & 4	&	\textbf{-0.0107} & \textbf{-0.0401} \\ \hline
+0 & 5	&	\textbf{-0.0255} & \textbf{ 0.1148} \\ \hline
+1 & 2	&	\textbf{-0.0223} & \textbf{ 0.0191} \\ \hline
+1 & 3	&	\textbf{-0.0089} & \textbf{-0.0357} \\ \hline
+1 & 4	& \textbf{ 0.0130} & \textbf{-0.0222} \\ \hline
+1 & 5	&	\textbf{ 0.0448} & \textbf{ 0.0261} \\ \hline
+2 & 3	&	\textbf{ 0.0038} & \textbf{-0.0107} \\ \hline
+2 & 4	&	\textbf{ 0.0045} & \textbf{-0.0054} \\ \hline
+2 & 5	&	\textbf{ 0.0140} & \textbf{-0.0027} \\ \hline
+3 & 4	&	\textbf{ 0.0506} & \textbf{-0.0036} \\ \hline
+3 & 5	&	\textbf{ 0.0073} & \textbf{ 0.0105} \\ \hline
+4 & 5	&	\textbf{ 0.0014} & \textbf{ 0.0172} \\ \hline
+\end{tabular}
+\end{table}
+
+\subsection{Videos}
+Some evidence of testing has been provided in the form of video in order to make the results of certain tests clearer, as it would be difficult to adequately provide the change in information in a still image. The video evidence was for simulation tests only. (See provided CD) The following tests have video evidence provided.
+
+\begin{itemize}
+\item SIM4
+\item SIM6
+\item SIM8 - Video of Failure
+\item SIM10 - Modified scenario, collisions on to show frame-rate variance.
+\item SIM11
+\item SIM12
+\item SIM14
+\item SIM15
+\item SIM16
+\item SIM17
+\end{itemize}
+
+\subsection{Screenshots and Logs}
+\subsubsection{System Tests}
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=0.9\textwidth]{img/testingEvidence/sys1rdcrash.png}
+  \caption{SYS1 - Valgrind Fail}
+\end{figure}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/testingEvidence/glfwleak.png}
+  \caption{SYS1 - GLFW Leak Details}
+\end{figure}
+\paragraph{}
+The 72 Byte leak appears to be related to code in the GLFW library, as it is memory allocated by the \textit{glfwInit} function when the program starts up. The reference also pertains to the Linux display manager \textit{X11}, which could mean that this leak is Linux specific, extra testing should be carried out when the application is ported to a Windows system.
+
+\pagebreak
+
+\lstinputlisting[language={}, title=SYS1 - Valgrind Log]{img/testingEvidence/sys1.log}
+
+\lstinputlisting[language={}, title=SYS2 - Valgrind Log]{img/testingEvidence/sys2.log}
+
+\pagebreak
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{img/testingEvidence/sys2_0.png}
+  \caption{SYS2 - Initial}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.85\textwidth]{img/testingEvidence/sys2_1.png}
+  \caption{SYS2 - After Delete (Remaining numbers due to Valgrind issue.)}
+\end{figure}
+
+\pagebreak
+
+\lstinputlisting[language={}, title=SYS3 - Valgrind Log]{img/testingEvidence/sys3.log}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/testingEvidence/sys3_0.png}
+  \caption{SYS3 - Initial}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/testingEvidence/sys3_1.png}
+  \caption{SYS3 - After Placement}
+\end{figure}
+
+\lstinputlisting[language={}, title=SYS4 - Valgrind Log]{img/testingEvidence/sys4.log}
+
+\pagebreak
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/testingEvidence/sys4_0.png}
+  \caption{SYS4 - Initial}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/testingEvidence/sys4_1.png}
+  \caption{SYS4 - After Delete}
+\end{figure}
+
+\pagebreak
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.5\textwidth]{img/testingEvidence/sys5.png}
+  \caption{SYS5 - Exit Synchronisation}
+\end{figure}
+
+\lstinputlisting[language={}, title=SYS6 - Helgrind Log]{img/testingEvidence/sys6.log}
+
+\paragraph{}
+The errors in this log seem to pertain to the \textit{control\_variable}, which is an C++ STL class type which is used in the shared class, I believe these errors pertain to the variable not having an associated mutex lock until the simulation thread has correctly started, as the errors do not occur during runtime.
+
+\pagebreak
+
+\subsubsection{Interface Tests}
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/testingEvidence/gui1_0.png}
+  \caption{GUI1 - [10,-10]}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/testingEvidence/gui1_1.png}
+  \caption{GUI1 - [-100,100]}
+\end{figure}
+
+\pagebreak
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/testingEvidence/gui1_2.png}
+  \caption{GUI1 - [-10,-10]}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/testingEvidence/gui2_0.png}
+  \caption{GUI2 - [-100,100] with upper left pan.}
+\end{figure}
+
+\pagebreak
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/testingEvidence/gui2_1.png}
+  \caption{GUI1 - [-100,100] with lower left pan.}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=\textwidth]{img/testingEvidence/gui2_2.png}
+  \caption{GUI2 - [-100,100] with central right pan.
+\end{figure}
+
+\pagebreak
+
+\pagebreak
+\subsubsection{Simulation Tests}
