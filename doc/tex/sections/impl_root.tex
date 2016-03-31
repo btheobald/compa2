@@ -47,6 +47,33 @@ This results in an increase in performance mainly due to having fewer steps to t
 \paragraph{}
 Other than these changes, the code is fairly similar, some items have been moved around in order to reduce the overall number of source files present in the program.
 
+\setcounter{algorithm}{1}
+
+\begin{algorithm}[H]
+\caption{Calculation of Acceleration}
+\begin{algorithmic}[1]
+\FOR{$Body_A \leftarrow 1$ \TO Bodies} 
+  \FOR{$Body_B \leftarrow (Body_A+1)$ \TO Bodies}
+    \STATE $d_x \leftarrow ComponentDistance_x$
+    \STATE $d_y \leftarrow ComponentDistance_y$
+    \STATE $d_v \leftarrow VectorDistance(x,y)$
+    \STATE  
+    \STATE $F_p \leftarrow -(UGC \times bodyA_m \times bodyB_m) / {d_v}^3$
+    \STATE $F_x \leftarrow F_p \times d_x$
+    \STATE $F_y \leftarrow F_p \times d_y$
+    \STATE
+    \STATE $bodyA_{ax}~+\leftarrow F_x/bodyA_m$
+    \STATE $bodyA_{ay}~+\leftarrow F_y/bodyA_m$
+    \STATE
+    \STATE $bodyB_{ax}~+\leftarrow -F_x/bodyB_m$
+    \STATE $bodyB_{ay}~+\leftarrow -F_y/bodyB_m$
+  \ENDFOR
+\ENDFOR
+\end{algorithmic}
+\end{algorithm}
+
+\pagebreak
+
 \subsubsection{Time Constraints}
 The main reason that the project was rewritten from scratch was to improve the readability and maintainability of the code, as well as making it easier to implement some critical features (adding and deleting bodies), which were causing crashes in the previous code.
 

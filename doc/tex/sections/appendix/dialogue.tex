@@ -93,6 +93,14 @@ So far the simulation portion is mostly complete, aside for the implementation o
 
 I have modified the simulation interface to allow it to be completely dynamic, meaning that it is much easier to define as many bodies as necessary in the code. While I have not tested the limits of this, aside from the memory and performance requirements there is no reason why there should be any limit to the number of bodies. (Part of my test plan revolves around benchmarking the performance of large numbers of bodies, up to 64. Back of the envelope calculations suggest that at this number, each frame would take more than 250ms to compute, this is a severe reduction in performance but you are unlikely to need to use more than a few bodies.)
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=0.6\textwidth]{img/still.png}
+  \caption{Three Body Sun-Planet-Moon System}
+\end{figure}
+
+\pagebreak
+
 I have also nearly completed the interface to link together the multi-threaded nature of the program, allowing data to seamlessly be transferred between the renderer and the simulation, there is still some parts that need to be added, such as getting new changes made by the user sent to the simulation, ignoring any previously stored simulation data, user changes must take priority.
 
 The next major task is to implement the renderer, this involves some understanding of matrix operations due to the nature of OpenGL programming, however I do not expect this to be a major issue as it is mostly abstracted.
@@ -101,13 +109,7 @@ After the renderer is implemented I will then focus on the UI and other utilitie
 
 Attached is an animation of the raw simulation output showing a model sun-planet-moon system
 
-\begin{figure}[H]
-  \centering
-  \includegraphics[width=0.6\textwidth]{img/still.png}
-  \caption{Three Body Sun-Planet-Moon System}
-\end{figure}
-
-\pagebreak
+\vspace{8pt}
 \hrule
 
 TO: Mr Snowden
@@ -125,6 +127,7 @@ Here is a preview:
 Performance is looking extremely promising, will test with a very large number of bodies once I am able to create a distribution system.
 
 \vspace{8pt}
+\pagebreak
 \hrule
 
 TO: Byron
@@ -145,6 +148,7 @@ Prototype testing of the simulation showed that it can still support a massive a
   \caption{~1000 Body Superstructure}
 \end{figure}
 
+\pagebreak
 I had a few discussions with Mr Snowden about the potential applications of having large numbers of bodies, I agreed to implement the ability for the user to generate these superstructures; similar to the one shown below, through the interface. 
 
 This could allow the software to be used to simulate a very low body count galaxy collision.
