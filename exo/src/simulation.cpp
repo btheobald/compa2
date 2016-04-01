@@ -68,12 +68,12 @@ void simulation::calcAllAcceleration(void) {
 void simulation::calcAllCollisions(void) {
   for (unsigned int bA = 0; bA < bodies.size(); bA++) {
     for (unsigned int bB = bA+1; bB < bodies.size(); bB++) {
-      double xDist = getComponentDistance(bodies[bA], bodies[bB], 0);
-      double yDist = getComponentDistance(bodies[bA], bodies[bB], 1);
-      double vDist = getVectorDistance(xDist, yDist);
+      double dX = getComponentDistance(bodies[bA], bodies[bB], 0);
+      double dY = getComponentDistance(bodies[bA], bodies[bB], 1);
+      double dV = getVectorDistance(xDist, yDist);
 
       // TODO: Implement this as an overloaded operator?
-      if(bodies[bA]->r+bodies[bB]->r > vDist) {
+      if(bodies[bA]->r+bodies[bB]->r > dV) {
         // Body A Becomes New Body
         // Add Together Areas
         bodies[bA]->r = sqrt(pow(bodies[bA]->r,2)+pow(bodies[bB]->r,2));

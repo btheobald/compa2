@@ -96,8 +96,7 @@ void moveCamera(GLFWwindow* window, double cursorX, double cursorY){
 }
 
 void zoomCamera(double change){
-  double changeFactor = scaleFactor/5;
-  scaleFactor += change*changeFactor;
+  scaleFactor += change*scaleFactor/5;;
   if(scaleFactor < 1E-20) {
     scaleFactor = 1E-20;
   }
