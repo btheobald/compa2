@@ -254,43 +254,51 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {67}{\ignorespaces SIM18 - Force calculation loop is correct.}}{170}{figure.67}}
 \@writefile{lof}{\contentsline {figure}{\numberline {68}{\ignorespaces SIM19 - All forces calculated correctly.}}{170}{figure.68}}
 \@writefile{toc}{\contentsline {section}{\numberline {5}Maintenance}{171}{section.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}System Description}{171}{subsection.5.1}}
-\newlabel{RF7}{173}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Function Listing}{173}{subsection.5.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Main}{173}{subsubsection.5.2.1}}
-\newlabel{RF8}{174}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Body}{174}{subsubsection.5.2.2}}
-\newlabel{RF9}{175}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.3}Scenario}{175}{subsubsection.5.2.3}}
-\newlabel{RF10}{176}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.4}Render}{176}{subsubsection.5.2.4}}
-\newlabel{RF11}{177}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.5}Simulation}{177}{subsubsection.5.2.5}}
-\newlabel{RF12}{178}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.6}Shared}{178}{subsubsection.5.2.6}}
-\newlabel{RF13}{179}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.7}UI}{179}{subsubsection.5.2.7}}
-\newlabel{RF14}{180}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Variable Listing}{182}{subsection.5.3}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Manual}{185}{section.6}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Evaluation}{186}{section.7}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Other Code}{187}{section.8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Early Prototypes}{187}{subsection.8.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.1.1}Euler (Trig)}{187}{subsubsection.8.1.1}}
-\@writefile{lol}{\contentsline {lstlisting}{../../../proto/02/main.cpp}{187}{lstlisting.-27}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.1.2}Euler (Vector) with $\Delta {} E$}{189}{subsubsection.8.1.2}}
-\@writefile{lol}{\contentsline {lstlisting}{../../../proto/eulerenergy/main.cpp}{189}{lstlisting.-28}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.1.3}Leapfrog (Vector) with $\Delta {} E$}{191}{subsubsection.8.1.3}}
-\@writefile{lol}{\contentsline {lstlisting}{../../../proto/lpfrg01/main.cpp}{191}{lstlisting.-29}}
-\@writefile{toc}{\contentsline {section}{Appendices}{193}{section*.246}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Initial Documentation}{193}{subsection.Alph0.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {A.1}Initial Specification}{193}{subsubsection.Alph0.1.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {A.2}Initial Observation}{194}{subsubsection.Alph0.1.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Dialogue}{195}{subsection.Alph0.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {69}{\ignorespaces Three Body Sun-Planet-Moon System}}{197}{figure.69}}
-\@writefile{lof}{\contentsline {figure}{\numberline {70}{\ignorespaces N-Body Graphics Test}}{198}{figure.70}}
-\@writefile{lof}{\contentsline {figure}{\numberline {71}{\ignorespaces \nobreakspace  {}1000 Body Superstructure}}{199}{figure.71}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}System Overview}{171}{subsection.5.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Algorithm Design}{174}{subsection.5.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Calculation of All Acceleration Relationships}{174}{subsubsection.5.2.1}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Pseudocode}{174}{section*.255}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Leapfrog Integration}{175}{subsubsection.5.2.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.3}Mutex Locks on Shared Data}{175}{subsubsection.5.2.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.4}Calculate Collisions}{175}{subsubsection.5.2.4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.5}Creation of Superstructure}{175}{subsubsection.5.2.5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.6}Update UI / Update Body}{175}{subsubsection.5.2.6}}
+\newlabel{RF7}{176}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Function Listing}{176}{subsection.5.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Main}{176}{subsubsection.5.3.1}}
+\newlabel{RF8}{177}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.2}Body}{177}{subsubsection.5.3.2}}
+\newlabel{RF9}{178}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.3}Scenario}{178}{subsubsection.5.3.3}}
+\newlabel{RF10}{179}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.4}Render}{179}{subsubsection.5.3.4}}
+\newlabel{RF11}{180}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.5}Simulation}{180}{subsubsection.5.3.5}}
+\newlabel{RF12}{181}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.6}Shared}{181}{subsubsection.5.3.6}}
+\newlabel{RF13}{182}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.7}UI}{182}{subsubsection.5.3.7}}
+\newlabel{RF14}{183}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Variable Listing}{185}{subsection.5.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Manual}{188}{section.6}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Evaluation}{189}{section.7}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Other Code}{190}{section.8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Early Prototypes}{190}{subsection.8.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.1.1}Euler (Trig)}{190}{subsubsection.8.1.1}}
+\@writefile{lol}{\contentsline {lstlisting}{../../../proto/02/main.cpp}{190}{lstlisting.-28}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.1.2}Euler (Vector) with $\Delta {} E$}{192}{subsubsection.8.1.2}}
+\@writefile{lol}{\contentsline {lstlisting}{../../../proto/eulerenergy/main.cpp}{192}{lstlisting.-29}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.1.3}Leapfrog (Vector) with $\Delta {} E$}{194}{subsubsection.8.1.3}}
+\@writefile{lol}{\contentsline {lstlisting}{../../../proto/lpfrg01/main.cpp}{194}{lstlisting.-30}}
+\@writefile{toc}{\contentsline {section}{Appendices}{196}{section*.257}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Initial Documentation}{196}{subsection.Alph0.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {A.1}Initial Specification}{196}{subsubsection.Alph0.1.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {A.2}Initial Observation}{197}{subsubsection.Alph0.1.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Dialogue}{198}{subsection.Alph0.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {69}{\ignorespaces Three Body Sun-Planet-Moon System}}{200}{figure.69}}
+\@writefile{lof}{\contentsline {figure}{\numberline {70}{\ignorespaces N-Body Graphics Test}}{201}{figure.70}}
+\@writefile{lof}{\contentsline {figure}{\numberline {71}{\ignorespaces \nobreakspace  {}1000 Body Superstructure}}{202}{figure.71}}
 \bibcite{circle}{1}
 \bibcite{leapfrog}{2}
-\@writefile{toc}{\contentsline {section}{References}{202}{figure.71}}
+\@writefile{toc}{\contentsline {section}{References}{205}{figure.71}}
 \global\@altsecnumformattrue
