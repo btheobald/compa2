@@ -73,7 +73,7 @@ void simulation::calcAllCollisions(void) {
       double dV = getVectorDistance(xDist, yDist);
 
       // TODO: Implement this as an overloaded operator?
-      if(bodies[bA]->r+bodies[bB]->r > dV) {
+      if(dV < bodies[bA]->r+bodies[bB]->r) {
         // Body A Becomes New Body
         // Add Together Areas
         bodies[bA]->r = sqrt(pow(bodies[bA]->r,2)+pow(bodies[bB]->r,2));
