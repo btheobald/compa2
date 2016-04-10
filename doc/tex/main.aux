@@ -16,6 +16,11 @@
 \gdef\HyperFirstAtBeginDocument#1{#1}
 \providecommand\HyField@AuxAddToFields[1]{}
 \providecommand\HyField@AuxAddToCoFields[2]{}
+\bibcite{circle}{1}
+\bibcite{leapfrog}{2}
+\bibcite{glfw}{3}
+\bibcite{glfwdoc}{4}
+\bibcite{atb}{5}
 \@writefile{toc}{\contentsline {section}{\numberline {1}Analysis}{6}{section.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {1.1}Background}{6}{subsection.1.1}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {1.1.1}Project Objective}{6}{subsubsection.1.1.1}}
@@ -57,7 +62,7 @@
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {1.10.2}Git - Version Control}{28}{subsubsection.1.10.2}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {1.10.3}GDB - Debugging}{29}{subsubsection.1.10.3}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {1.10.4}Valgrind - Profiling and Memory Analysis}{29}{subsubsection.1.10.4}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Included Tools}{29}{section*.66}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Included Tools}{29}{section*.67}}
 \@writefile{toc}{\contentsline {section}{\numberline {2}Design}{31}{section.2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Simulation Efficiency}{31}{subsection.2.1}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2}Simulation Prototyping}{32}{subsection.2.2}}
@@ -87,22 +92,22 @@
 \@writefile{lol}{\contentsline {lstlisting}{design/savtempex.tex}{53}{lstlisting.-2}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.6}Algorithms}{55}{subsection.2.6}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.1}Simulation}{55}{subsubsection.2.6.1}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 1: Force Calculation Between Two Bodies}{55}{section*.147}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 2: Calculation of all Forces}{56}{section*.150}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 1: Force Calculation Between Two Bodies}{55}{section*.148}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 2: Calculation of all Forces}{56}{section*.151}}
 \@writefile{lof}{\contentsline {figure}{\numberline {12}{\ignorespaces Example Force Matrix Representation (Body Count = 5)}}{56}{figure.12}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 3: Summation of Forces on Bodies}{56}{section*.154}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 3: Summation of Forces on Bodies}{56}{section*.155}}
 \citation{leapfrog}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 4: Integration of New Position}{58}{section*.158}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 5: Body Collision Detection and Calculation}{58}{section*.162}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 4: Integration of New Position}{58}{section*.159}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 5: Body Collision Detection and Calculation}{58}{section*.163}}
 \citation{circle}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.2}Graphics}{60}{subsubsection.2.6.2}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 6: Circle Drawing}{60}{section*.165}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 6: Circle Drawing}{60}{section*.166}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.3}Interface}{61}{subsubsection.2.6.3}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 7: Body Selection}{61}{section*.168}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 8: Pan and Zoom}{61}{section*.171}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 9: Scenario Saving and Loading}{61}{section*.174}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 7: Body Selection}{61}{section*.169}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 8: Pan and Zoom}{61}{section*.172}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 9: Scenario Saving and Loading}{61}{section*.175}}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {2.6.4}Management}{62}{subsubsection.2.6.4}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 10: Thread Synchronisation and Shared Data Management}{62}{section*.177}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Algorithm 10: Thread Synchronisation and Shared Data Management}{62}{section*.178}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.7}Pseudocode}{63}{subsection.2.7}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Calculation of All Forces}}{63}{algorithm.2}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {3}{\ignorespaces Summation of All Forces}}{63}{algorithm.3}}
@@ -127,197 +132,194 @@
 \@writefile{lof}{\contentsline {figure}{\numberline {15}{\ignorespaces Initial UI Mockup}}{74}{figure.15}}
 \@writefile{lof}{\contentsline {figure}{\numberline {16}{\ignorespaces Example of AntTweakBar}}{75}{figure.16}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.10}Testing Strategy}{76}{subsection.2.10}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.11}Testing Plan}{77}{subsection.2.11}}
-\@writefile{toc}{\contentsline {section}{\numberline {3}Implementation}{78}{section.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Design Changes}{78}{subsection.3.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Program Structure Changes}{78}{subsubsection.3.1.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.2}Algorithm Changes}{79}{subsubsection.3.1.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Implementation}{77}{section.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Design Changes}{77}{subsection.3.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.1}Program Structure Changes}{77}{subsubsection.3.1.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Interface Changes}{78}{subsection.3.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Algorithm Changes}{79}{subsection.3.3}}
 \@writefile{loa}{\contentsline {algorithm}{\numberline {2}{\ignorespaces Calculation of Acceleration}}{80}{algorithm.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.1.3}Time Constraints}{81}{subsubsection.3.1.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Object Orientation Changes}{81}{subsection.3.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.2.1}Object Inheritance Diagram}{82}{subsubsection.3.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Time Constraints}{81}{subsection.3.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.5}Object Orientation Changes}{81}{subsection.3.5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.5.1}Object Inheritance Diagram}{82}{subsubsection.3.5.1}}
 \@writefile{lof}{\contentsline {figure}{\numberline {17}{\ignorespaces Improved Object Inheritance Diagram}}{82}{figure.17}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Flowchart Revision}{84}{subsection.3.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.6}Flowchart Revision}{84}{subsection.3.6}}
 \@writefile{lof}{\contentsline {figure}{\numberline {18}{\ignorespaces Improved Flowchart}}{84}{figure.18}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {3.4}Code Listing}{85}{subsection.3.4}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.1}main.cpp - Root Implementation}{85}{subsubsection.3.4.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.7}Code Listing}{85}{subsection.3.7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.1}main.cpp - Root Implementation}{85}{subsubsection.3.7.1}}
 \@writefile{lol}{\contentsline {lstlisting}{../../../exo/src/main.cpp}{85}{lstlisting.-8}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.2}body.hpp - Interface}{92}{subsubsection.3.4.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.2}body.hpp - Interface}{92}{subsubsection.3.7.2}}
 \@writefile{lol}{\contentsline {lstlisting}{../../../exo/include/body.hpp}{92}{lstlisting.-9}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.3}body.cpp - Implementation}{93}{subsubsection.3.4.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.3}body.cpp - Implementation}{93}{subsubsection.3.7.3}}
 \@writefile{lol}{\contentsline {lstlisting}{../../../exo/src/body.cpp}{93}{lstlisting.-10}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.4}scenario.hpp - Interface}{95}{subsubsection.3.4.4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.4}scenario.hpp - Interface}{95}{subsubsection.3.7.4}}
 \@writefile{lol}{\contentsline {lstlisting}{../../../exo/include/scenario.hpp}{95}{lstlisting.-11}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.5}scenario.cpp - Implementation}{96}{subsubsection.3.4.5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.5}scenario.cpp - Implementation}{96}{subsubsection.3.7.5}}
 \@writefile{lol}{\contentsline {lstlisting}{../../../exo/src/scenario.cpp}{96}{lstlisting.-12}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.6}render.hpp - Interface}{97}{subsubsection.3.4.6}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.6}render.hpp - Interface}{97}{subsubsection.3.7.6}}
 \@writefile{lol}{\contentsline {lstlisting}{../../../exo/include/render.hpp}{97}{lstlisting.-13}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.7}render.cpp - Implementation}{98}{subsubsection.3.4.7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.7}render.cpp - Implementation}{98}{subsubsection.3.7.7}}
 \@writefile{lol}{\contentsline {lstlisting}{../../../exo/src/render.cpp}{98}{lstlisting.-14}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.8}simulation.hpp - Interface}{101}{subsubsection.3.4.8}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.8}simulation.hpp - Interface}{101}{subsubsection.3.7.8}}
 \@writefile{lol}{\contentsline {lstlisting}{../../../exo/include/simulation.hpp}{101}{lstlisting.-15}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.9}simulation.cpp - Implementation}{102}{subsubsection.3.4.9}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.9}simulation.cpp - Implementation}{102}{subsubsection.3.7.9}}
 \@writefile{lol}{\contentsline {lstlisting}{../../../exo/src/simulation.cpp}{102}{lstlisting.-16}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.10}shared.hpp - Interface}{106}{subsubsection.3.4.10}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.10}shared.hpp - Interface}{106}{subsubsection.3.7.10}}
 \@writefile{lol}{\contentsline {lstlisting}{../../../exo/include/shared.hpp}{106}{lstlisting.-17}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.11}shared.cpp - Implementation}{107}{subsubsection.3.4.11}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.11}shared.cpp - Implementation}{107}{subsubsection.3.7.11}}
 \@writefile{lol}{\contentsline {lstlisting}{../../../exo/src/shared.cpp}{107}{lstlisting.-18}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.12}ui.hpp - Interface}{109}{subsubsection.3.4.12}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.12}ui.hpp - Interface}{109}{subsubsection.3.7.12}}
 \@writefile{lol}{\contentsline {lstlisting}{../../../exo/include/ui.hpp}{109}{lstlisting.-19}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.13}ui.cpp - Implementation}{110}{subsubsection.3.4.13}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.13}ui.cpp - Implementation}{110}{subsubsection.3.7.13}}
 \@writefile{lol}{\contentsline {lstlisting}{../../../exo/src/ui.cpp}{110}{lstlisting.-20}}
-\newlabel{RF1}{119}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.4.14}Final Interface}{119}{subsubsection.3.4.14}}
-\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Full View of Complete Interface}}{119}{figure.19}}
-\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Simulation Control UI}}{120}{figure.20}}
-\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Body Control UI}}{120}{figure.21}}
-\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Superstructure Creation UI}}{121}{figure.22}}
-\@writefile{toc}{\contentsline {section}{\numberline {4}Testing}{122}{section.4}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Test Scenarios}{122}{subsection.4.1}}
-\newlabel{RF2}{128}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.1}System Tests}{128}{subsubsection.4.1.1}}
-\newlabel{RF3}{129}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.2}Interface Tests}{129}{subsubsection.4.1.2}}
-\newlabel{RF4}{130}
-\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Interface Tests Continued}}{130}{table.7}}
-\newlabel{RF5}{131}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.1.3}Simulation Tests}{131}{subsubsection.4.1.3}}
-\newlabel{RF6}{132}
-\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Simulation Tests Continued}}{132}{table.8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Compile Flags}{133}{subsection.4.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}System Tests}{134}{subsubsection.4.2.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Interface Tests}{134}{subsubsection.4.2.2}}
+\newlabel{RF1}{121}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {3.7.14}Final Interface}{121}{subsubsection.3.7.14}}
+\@writefile{lof}{\contentsline {figure}{\numberline {19}{\ignorespaces Full View of Complete Interface}}{121}{figure.19}}
+\@writefile{lof}{\contentsline {figure}{\numberline {20}{\ignorespaces Simulation Control UI}}{122}{figure.20}}
+\@writefile{lof}{\contentsline {figure}{\numberline {21}{\ignorespaces Body Control UI}}{122}{figure.21}}
+\@writefile{lof}{\contentsline {figure}{\numberline {22}{\ignorespaces Body Control UI When Not Paused}}{123}{figure.22}}
+\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Superstructure Creation UI}}{123}{figure.23}}
+\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Error when attempting to modify scenario when not paused.}}{123}{figure.24}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Testing}{124}{section.4}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Testing Plan}{125}{subsection.4.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Test Scenarios}{126}{subsection.4.2}}
+\newlabel{RF2}{132}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.1}System Tests}{132}{subsubsection.4.2.1}}
+\newlabel{RF3}{133}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.2}Interface Tests}{133}{subsubsection.4.2.2}}
+\newlabel{RF4}{134}
+\@writefile{lot}{\contentsline {table}{\numberline {7}{\ignorespaces Interface Tests Continued}}{134}{table.7}}
+\newlabel{RF5}{135}
 \@writefile{toc}{\contentsline {subsubsection}{\numberline {4.2.3}Simulation Tests}{135}{subsubsection.4.2.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Test Results}{136}{subsection.4.3}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}System Tests}{136}{subsubsection.4.3.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}Interface Tests}{136}{subsubsection.4.3.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.3}Simulation Tests}{136}{subsubsection.4.3.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Test Notes}{137}{subsection.4.4}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.1}SYS1}{137}{subsubsection.4.4.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.2}SIM8}{137}{subsubsection.4.4.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.3}SIM10}{138}{subsubsection.4.4.3}}
-\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Simulation Benchmark - Iterations in 20s}}{138}{table.9}}
-\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Per Second}}{139}{table.10}}
-\@writefile{lof}{\contentsline {figure}{\numberline {23}{\ignorespaces Iterations/Second Over Body Count (Logarithmic)}}{140}{figure.23}}
-\@writefile{lof}{\contentsline {figure}{\numberline {24}{\ignorespaces Time/Iteration Over Body Count}}{140}{figure.24}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.4}SIM13}{141}{subsubsection.4.4.4}}
-\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Trace Table \& Program Output (Position)}}{141}{figure.25}}
-\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Manual Trace Table - 8 Iterations}}{142}{table.11}}
-\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Program Output - 8 Iterations}}{143}{table.12}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.5}SIM19}{144}{subsubsection.4.4.5}}
-\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces Trace Table - 6 Bodies}}{144}{table.13}}
-\@writefile{lot}{\contentsline {table}{\numberline {14}{\ignorespaces Program Output - 6 Bodies}}{145}{table.14}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Videos}{145}{subsection.4.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Screenshots and Logs}{146}{subsection.4.6}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.6.1}System Tests}{146}{subsubsection.4.6.1}}
-\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces SYS1 - Valgrind Fail}}{146}{figure.26}}
-\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces SYS1 - GLFW Leak Details}}{147}{figure.27}}
-\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces SYS2 - Initial}}{149}{figure.28}}
-\@writefile{lof}{\contentsline {figure}{\numberline {29}{\ignorespaces SYS2 - After Delete (Remaining numbers due to Valgrind issue.)}}{149}{figure.29}}
-\@writefile{lof}{\contentsline {figure}{\numberline {30}{\ignorespaces SYS3 - Initial}}{150}{figure.30}}
-\@writefile{lof}{\contentsline {figure}{\numberline {31}{\ignorespaces SYS3 - After Placement}}{151}{figure.31}}
-\@writefile{lof}{\contentsline {figure}{\numberline {32}{\ignorespaces SYS4 - Initial}}{152}{figure.32}}
-\@writefile{lof}{\contentsline {figure}{\numberline {33}{\ignorespaces SYS4 - After Delete}}{152}{figure.33}}
-\@writefile{lof}{\contentsline {figure}{\numberline {34}{\ignorespaces SYS5 - Exit Synchronisation}}{153}{figure.34}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.6.2}Interface Tests}{155}{subsubsection.4.6.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {35}{\ignorespaces GUI1 - [10,-10]}}{155}{figure.35}}
-\@writefile{lof}{\contentsline {figure}{\numberline {36}{\ignorespaces GUI1 - [-100,100]}}{155}{figure.36}}
-\@writefile{lof}{\contentsline {figure}{\numberline {37}{\ignorespaces GUI1 - [-10,-10]}}{156}{figure.37}}
-\@writefile{lof}{\contentsline {figure}{\numberline {38}{\ignorespaces GUI2 - [-100,100] with upper left pan.}}{156}{figure.38}}
-\@writefile{lof}{\contentsline {figure}{\numberline {39}{\ignorespaces GUI1 - [-100,100] with lower left pan.}}{157}{figure.39}}
-\@writefile{lof}{\contentsline {figure}{\numberline {40}{\ignorespaces GUI2 - [-100,100] with central right pan.}}{157}{figure.40}}
-\@writefile{lof}{\contentsline {figure}{\numberline {41}{\ignorespaces GUI3 - [-10,-10] with zoom in.}}{158}{figure.41}}
-\@writefile{lof}{\contentsline {figure}{\numberline {42}{\ignorespaces GUI3 - [100,100] with zoom in.}}{158}{figure.42}}
-\@writefile{lof}{\contentsline {figure}{\numberline {43}{\ignorespaces GUI3 - [-100,100] with zoom in.}}{159}{figure.43}}
-\@writefile{lof}{\contentsline {figure}{\numberline {44}{\ignorespaces GUI3 - [100,100] with zoom out.}}{159}{figure.44}}
-\@writefile{lof}{\contentsline {figure}{\numberline {45}{\ignorespaces GUI4 - [-10,-10] with zoom in and lower left pan.}}{160}{figure.45}}
-\@writefile{lof}{\contentsline {figure}{\numberline {46}{\ignorespaces GUI5 - [1E5,0] Extreme selection.}}{160}{figure.46}}
-\@writefile{lof}{\contentsline {figure}{\numberline {47}{\ignorespaces GUI6 - Body Add. (GUI)}}{161}{figure.47}}
-\@writefile{lof}{\contentsline {figure}{\numberline {48}{\ignorespaces GUI7 - Body Add. (Mouse)}}{161}{figure.48}}
-\@writefile{lof}{\contentsline {figure}{\numberline {49}{\ignorespaces GUI8 - Body Delete.}}{162}{figure.49}}
-\@writefile{lof}{\contentsline {figure}{\numberline {50}{\ignorespaces GUI11 - Opened Superstructure Creation Window.}}{162}{figure.50}}
-\@writefile{lof}{\contentsline {figure}{\numberline {51}{\ignorespaces GUI12 - Superstructure Created.}}{163}{figure.51}}
-\@writefile{lof}{\contentsline {figure}{\numberline {52}{\ignorespaces GUI13 - Superstructure Body Orbital Velocity.}}{163}{figure.52}}
-\@writefile{lof}{\contentsline {figure}{\numberline {53}{\ignorespaces GUI14 - Initial State.}}{164}{figure.53}}
-\@writefile{lof}{\contentsline {figure}{\numberline {54}{\ignorespaces GUI14 - Body Position Changed.}}{164}{figure.54}}
-\@writefile{lof}{\contentsline {figure}{\numberline {55}{\ignorespaces GUI14 - Body Position Changed.}}{165}{figure.55}}
-\@writefile{lof}{\contentsline {figure}{\numberline {56}{\ignorespaces GUI15 - Erroneous AntTweakBar Value.}}{165}{figure.56}}
-\@writefile{lof}{\contentsline {figure}{\numberline {57}{\ignorespaces GUI15 - Erroneous AntTweakBar Value Not Accepted.}}{165}{figure.57}}
-\@writefile{lof}{\contentsline {figure}{\numberline {58}{\ignorespaces GUI16 - 32 Iterations per Frame.}}{166}{figure.58}}
-\@writefile{lof}{\contentsline {figure}{\numberline {59}{\ignorespaces GUI17 - Body at 1E5.}}{167}{figure.59}}
-\@writefile{lof}{\contentsline {figure}{\numberline {60}{\ignorespaces GUI17 - Body at 1E6.}}{167}{figure.60}}
-\@writefile{lof}{\contentsline {figure}{\numberline {61}{\ignorespaces GUI17 - Body at 1E7.}}{168}{figure.61}}
-\@writefile{lof}{\contentsline {figure}{\numberline {62}{\ignorespaces GUI17 - Body at 1E8.}}{168}{figure.62}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.6.3}Simulation Tests}{169}{subsubsection.4.6.3}}
-\@writefile{lof}{\contentsline {figure}{\numberline {63}{\ignorespaces SIM1 - Body Remains Still.}}{169}{figure.63}}
-\@writefile{lof}{\contentsline {figure}{\numberline {64}{\ignorespaces SIM2 - Acceleration on central body = 1E-6.}}{169}{figure.64}}
-\@writefile{lof}{\contentsline {figure}{\numberline {65}{\ignorespaces SIM3 - Acceleration on outer body = 1E-2.}}{170}{figure.65}}
-\@writefile{lof}{\contentsline {figure}{\numberline {66}{\ignorespaces SIM7+9 - Radius and Mass}}{170}{figure.66}}
-\@writefile{lof}{\contentsline {figure}{\numberline {67}{\ignorespaces SIM18 - Force calculation loop is correct.}}{171}{figure.67}}
-\@writefile{lof}{\contentsline {figure}{\numberline {68}{\ignorespaces SIM19 - All forces calculated correctly.}}{171}{figure.68}}
-\@writefile{toc}{\contentsline {section}{\numberline {5}Maintenance}{172}{section.5}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}System Overview}{172}{subsection.5.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Algorithm Design}{175}{subsection.5.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Calculation of All Acceleration Relationships}{175}{subsubsection.5.2.1}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Pseudocode}{175}{section*.260}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Leapfrog Integration}{176}{subsubsection.5.2.2}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Pseudocode}{177}{section*.265}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.3}Mutex Locks on Shared Data}{178}{subsubsection.5.2.3}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Pseudocode}{179}{section*.272}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.4}Calculation of Collisions}{180}{subsubsection.5.2.4}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Pseudocode}{181}{section*.281}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.5}Creation of Superstructure}{182}{subsubsection.5.2.5}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Pseudocode}{182}{section*.285}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.6}Interface and Threading}{184}{subsubsection.5.2.6}}
-\@writefile{toc}{\contentsline {paragraph}{\nonumberline Flowchart}{185}{section*.291}}
-\newlabel{RF7}{187}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Function Listing}{187}{subsection.5.3}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Main}{187}{subsubsection.5.3.1}}
-\newlabel{RF8}{188}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.2}Body}{188}{subsubsection.5.3.2}}
-\newlabel{RF9}{189}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.3}Scenario}{189}{subsubsection.5.3.3}}
-\newlabel{RF10}{190}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.4}Render}{190}{subsubsection.5.3.4}}
-\newlabel{RF11}{191}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.5}Simulation}{191}{subsubsection.5.3.5}}
-\newlabel{RF12}{192}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.6}Shared}{192}{subsubsection.5.3.6}}
-\newlabel{RF13}{193}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.7}UI}{193}{subsubsection.5.3.7}}
-\newlabel{RF14}{194}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Variable Listing}{196}{subsection.5.4}}
-\@writefile{toc}{\contentsline {section}{\numberline {6}Manual}{199}{section.6}}
-\@writefile{toc}{\contentsline {section}{\numberline {7}Evaluation}{200}{section.7}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Evaluation of Objectives}{200}{subsection.7.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.1.1}System}{200}{subsubsection.7.1.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.1.2}Processing}{200}{subsubsection.7.1.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.1.3}User}{201}{subsubsection.7.1.3}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}User Feedback}{203}{subsection.7.2}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.1}Analysis of Feedback}{203}{subsubsection.7.2.1}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Possible Extensions}{205}{subsection.7.3}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.1}UI}{205}{subsubsection.7.3.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.2}Simulation}{206}{subsubsection.7.3.2}}
-\@writefile{toc}{\contentsline {section}{\numberline {8}Other Code}{208}{section.8}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Early Prototypes}{208}{subsection.8.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.1.1}Euler (Trig)}{208}{subsubsection.8.1.1}}
-\@writefile{lol}{\contentsline {lstlisting}{../../../proto/02/main.cpp}{208}{lstlisting.-34}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.1.2}Euler (Vector) with $\Delta {} E$}{210}{subsubsection.8.1.2}}
-\@writefile{lol}{\contentsline {lstlisting}{../../../proto/eulerenergy/main.cpp}{210}{lstlisting.-35}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.1.3}Leapfrog (Vector) with $\Delta {} E$}{212}{subsubsection.8.1.3}}
-\@writefile{lol}{\contentsline {lstlisting}{../../../proto/lpfrg01/main.cpp}{212}{lstlisting.-36}}
-\@writefile{toc}{\contentsline {section}{Appendices}{214}{section*.328}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {A}Initial Documentation}{214}{subsection.Alph0.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {A.1}Initial Specification}{214}{subsubsection.Alph0.1.1}}
-\@writefile{toc}{\contentsline {subsubsection}{\numberline {A.2}Initial Observation}{215}{subsubsection.Alph0.1.2}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {B}Dialogue}{216}{subsection.Alph0.2}}
-\@writefile{lof}{\contentsline {figure}{\numberline {69}{\ignorespaces Three Body Sun-Planet-Moon System}}{218}{figure.69}}
-\@writefile{lof}{\contentsline {figure}{\numberline {70}{\ignorespaces N-Body Graphics Test}}{219}{figure.70}}
-\@writefile{lof}{\contentsline {figure}{\numberline {71}{\ignorespaces \nobreakspace  {}1000 Body Superstructure}}{220}{figure.71}}
-\bibcite{circle}{1}
-\bibcite{leapfrog}{2}
-\bibcite{glfw}{3}
-\bibcite{glfwdoc}{4}
-\bibcite{atb}{5}
-\@writefile{toc}{\contentsline {section}{References}{223}{figure.71}}
+\newlabel{RF6}{136}
+\@writefile{lot}{\contentsline {table}{\numberline {8}{\ignorespaces Simulation Tests Continued}}{136}{table.8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.3}Compile Flags}{137}{subsection.4.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.1}System Tests}{138}{subsubsection.4.3.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.2}Interface Tests}{138}{subsubsection.4.3.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.3.3}Simulation Tests}{139}{subsubsection.4.3.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.4}Test Results}{140}{subsection.4.4}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.1}System Tests}{140}{subsubsection.4.4.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.2}Interface Tests}{140}{subsubsection.4.4.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.4.3}Simulation Tests}{140}{subsubsection.4.4.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.5}Test Notes}{141}{subsection.4.5}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.5.1}SYS1}{141}{subsubsection.4.5.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.5.2}SIM8}{141}{subsubsection.4.5.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.5.3}SIM10}{142}{subsubsection.4.5.3}}
+\@writefile{lot}{\contentsline {table}{\numberline {9}{\ignorespaces Simulation Benchmark - Iterations in 20s}}{142}{table.9}}
+\@writefile{lot}{\contentsline {table}{\numberline {10}{\ignorespaces Per Second}}{143}{table.10}}
+\@writefile{lof}{\contentsline {figure}{\numberline {25}{\ignorespaces Iterations/Second Over Body Count (Logarithmic)}}{144}{figure.25}}
+\@writefile{lof}{\contentsline {figure}{\numberline {26}{\ignorespaces Time/Iteration Over Body Count}}{144}{figure.26}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.5.4}SIM13}{145}{subsubsection.4.5.4}}
+\@writefile{lof}{\contentsline {figure}{\numberline {27}{\ignorespaces Trace Table \& Program Output (Position)}}{145}{figure.27}}
+\@writefile{lot}{\contentsline {table}{\numberline {11}{\ignorespaces Manual Trace Table - 8 Iterations}}{146}{table.11}}
+\@writefile{lot}{\contentsline {table}{\numberline {12}{\ignorespaces Program Output - 8 Iterations}}{147}{table.12}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.5.5}SIM19}{148}{subsubsection.4.5.5}}
+\@writefile{lot}{\contentsline {table}{\numberline {13}{\ignorespaces Trace Table - 6 Bodies}}{148}{table.13}}
+\@writefile{lot}{\contentsline {table}{\numberline {14}{\ignorespaces Program Output - 6 Bodies}}{149}{table.14}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.6}Videos}{149}{subsection.4.6}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.7}Screenshots and Logs}{150}{subsection.4.7}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.1}System Tests}{150}{subsubsection.4.7.1}}
+\@writefile{lof}{\contentsline {figure}{\numberline {28}{\ignorespaces SYS1 - Valgrind Fail}}{150}{figure.28}}
+\@writefile{lof}{\contentsline {figure}{\numberline {29}{\ignorespaces SYS1 - GLFW Leak Details}}{151}{figure.29}}
+\@writefile{lof}{\contentsline {figure}{\numberline {30}{\ignorespaces SYS2 - Initial}}{153}{figure.30}}
+\@writefile{lof}{\contentsline {figure}{\numberline {31}{\ignorespaces SYS2 - After Delete (Remaining numbers due to Valgrind issue.)}}{153}{figure.31}}
+\@writefile{lof}{\contentsline {figure}{\numberline {32}{\ignorespaces SYS3 - Initial}}{154}{figure.32}}
+\@writefile{lof}{\contentsline {figure}{\numberline {33}{\ignorespaces SYS3 - After Placement}}{155}{figure.33}}
+\@writefile{lof}{\contentsline {figure}{\numberline {34}{\ignorespaces SYS4 - Initial}}{156}{figure.34}}
+\@writefile{lof}{\contentsline {figure}{\numberline {35}{\ignorespaces SYS4 - After Delete}}{156}{figure.35}}
+\@writefile{lof}{\contentsline {figure}{\numberline {36}{\ignorespaces SYS5 - Exit Synchronisation}}{157}{figure.36}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.2}Interface Tests}{159}{subsubsection.4.7.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {37}{\ignorespaces GUI1 - [10,-10]}}{159}{figure.37}}
+\@writefile{lof}{\contentsline {figure}{\numberline {38}{\ignorespaces GUI1 - [-100,100]}}{159}{figure.38}}
+\@writefile{lof}{\contentsline {figure}{\numberline {39}{\ignorespaces GUI1 - [-10,-10]}}{160}{figure.39}}
+\@writefile{lof}{\contentsline {figure}{\numberline {40}{\ignorespaces GUI2 - [-100,100] with upper left pan.}}{160}{figure.40}}
+\@writefile{lof}{\contentsline {figure}{\numberline {41}{\ignorespaces GUI1 - [-100,100] with lower left pan.}}{161}{figure.41}}
+\@writefile{lof}{\contentsline {figure}{\numberline {42}{\ignorespaces GUI2 - [-100,100] with central right pan.}}{161}{figure.42}}
+\@writefile{lof}{\contentsline {figure}{\numberline {43}{\ignorespaces GUI3 - [-10,-10] with zoom in.}}{162}{figure.43}}
+\@writefile{lof}{\contentsline {figure}{\numberline {44}{\ignorespaces GUI3 - [100,100] with zoom in.}}{162}{figure.44}}
+\@writefile{lof}{\contentsline {figure}{\numberline {45}{\ignorespaces GUI3 - [-100,100] with zoom in.}}{163}{figure.45}}
+\@writefile{lof}{\contentsline {figure}{\numberline {46}{\ignorespaces GUI3 - [100,100] with zoom out.}}{163}{figure.46}}
+\@writefile{lof}{\contentsline {figure}{\numberline {47}{\ignorespaces GUI4 - [-10,-10] with zoom in and lower left pan.}}{164}{figure.47}}
+\@writefile{lof}{\contentsline {figure}{\numberline {48}{\ignorespaces GUI5 - [1E5,0] Extreme selection.}}{164}{figure.48}}
+\@writefile{lof}{\contentsline {figure}{\numberline {49}{\ignorespaces GUI6 - Body Add. (GUI)}}{165}{figure.49}}
+\@writefile{lof}{\contentsline {figure}{\numberline {50}{\ignorespaces GUI7 - Body Add. (Mouse)}}{165}{figure.50}}
+\@writefile{lof}{\contentsline {figure}{\numberline {51}{\ignorespaces GUI8 - Body Delete.}}{166}{figure.51}}
+\@writefile{lof}{\contentsline {figure}{\numberline {52}{\ignorespaces GUI11 - Opened Superstructure Creation Window.}}{166}{figure.52}}
+\@writefile{lof}{\contentsline {figure}{\numberline {53}{\ignorespaces GUI12 - Superstructure Created.}}{167}{figure.53}}
+\@writefile{lof}{\contentsline {figure}{\numberline {54}{\ignorespaces GUI13 - Superstructure Body Orbital Velocity.}}{167}{figure.54}}
+\@writefile{lof}{\contentsline {figure}{\numberline {55}{\ignorespaces GUI14 - Initial State.}}{168}{figure.55}}
+\@writefile{lof}{\contentsline {figure}{\numberline {56}{\ignorespaces GUI14 - Body Position Changed.}}{168}{figure.56}}
+\@writefile{lof}{\contentsline {figure}{\numberline {57}{\ignorespaces GUI14 - Body Position Changed.}}{169}{figure.57}}
+\@writefile{lof}{\contentsline {figure}{\numberline {58}{\ignorespaces GUI15 - Erroneous AntTweakBar Value.}}{169}{figure.58}}
+\@writefile{lof}{\contentsline {figure}{\numberline {59}{\ignorespaces GUI15 - Erroneous AntTweakBar Value Not Accepted.}}{169}{figure.59}}
+\@writefile{lof}{\contentsline {figure}{\numberline {60}{\ignorespaces GUI16 - 32 Iterations per Frame.}}{170}{figure.60}}
+\@writefile{lof}{\contentsline {figure}{\numberline {61}{\ignorespaces GUI17 - Body at 1E5.}}{171}{figure.61}}
+\@writefile{lof}{\contentsline {figure}{\numberline {62}{\ignorespaces GUI17 - Body at 1E6.}}{171}{figure.62}}
+\@writefile{lof}{\contentsline {figure}{\numberline {63}{\ignorespaces GUI17 - Body at 1E7.}}{172}{figure.63}}
+\@writefile{lof}{\contentsline {figure}{\numberline {64}{\ignorespaces GUI17 - Body at 1E8.}}{172}{figure.64}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {4.7.3}Simulation Tests}{173}{subsubsection.4.7.3}}
+\@writefile{lof}{\contentsline {figure}{\numberline {65}{\ignorespaces SIM1 - Body Remains Still.}}{173}{figure.65}}
+\@writefile{lof}{\contentsline {figure}{\numberline {66}{\ignorespaces SIM2 - Acceleration on central body = 1E-6.}}{173}{figure.66}}
+\@writefile{lof}{\contentsline {figure}{\numberline {67}{\ignorespaces SIM3 - Acceleration on outer body = 1E-2.}}{174}{figure.67}}
+\@writefile{lof}{\contentsline {figure}{\numberline {68}{\ignorespaces SIM7+9 - Radius and Mass}}{174}{figure.68}}
+\@writefile{lof}{\contentsline {figure}{\numberline {69}{\ignorespaces SIM18 - Force calculation loop is correct.}}{175}{figure.69}}
+\@writefile{lof}{\contentsline {figure}{\numberline {70}{\ignorespaces SIM19 - All forces calculated correctly.}}{175}{figure.70}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Maintenance}{176}{section.5}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}System Overview}{176}{subsection.5.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}Algorithm Design}{179}{subsection.5.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.1}Calculation of All Acceleration Relationships}{179}{subsubsection.5.2.1}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Pseudocode}{179}{section*.265}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.2}Leapfrog Integration}{180}{subsubsection.5.2.2}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Pseudocode}{181}{section*.270}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.3}Mutex Locks on Shared Data}{182}{subsubsection.5.2.3}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Pseudocode}{183}{section*.277}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.4}Calculation of Collisions}{184}{subsubsection.5.2.4}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Pseudocode}{185}{section*.286}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.5}Creation of Superstructure}{186}{subsubsection.5.2.5}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Pseudocode}{186}{section*.290}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.2.6}Interface and Threading}{188}{subsubsection.5.2.6}}
+\@writefile{toc}{\contentsline {paragraph}{\nonumberline Flowchart}{189}{section*.296}}
+\newlabel{RF7}{191}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3}Function Listing}{191}{subsection.5.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.1}Main}{191}{subsubsection.5.3.1}}
+\newlabel{RF8}{192}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.2}Body}{192}{subsubsection.5.3.2}}
+\newlabel{RF9}{193}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.3}Scenario}{193}{subsubsection.5.3.3}}
+\newlabel{RF10}{194}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.4}Render}{194}{subsubsection.5.3.4}}
+\newlabel{RF11}{195}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.5}Simulation}{195}{subsubsection.5.3.5}}
+\newlabel{RF12}{196}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.6}Shared}{196}{subsubsection.5.3.6}}
+\newlabel{RF13}{197}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {5.3.7}UI}{197}{subsubsection.5.3.7}}
+\newlabel{RF14}{198}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.4}Variable Listing}{200}{subsection.5.4}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Manual}{203}{section.6}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Evaluation}{204}{section.7}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Evaluation of Objectives}{204}{subsection.7.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.1.1}System}{204}{subsubsection.7.1.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.1.2}Processing}{204}{subsubsection.7.1.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.1.3}User}{205}{subsubsection.7.1.3}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}User Feedback}{207}{subsection.7.2}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.2.1}Analysis of Feedback}{207}{subsubsection.7.2.1}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.3}Possible Extensions}{209}{subsection.7.3}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.1}UI}{209}{subsubsection.7.3.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {7.3.2}Simulation}{210}{subsubsection.7.3.2}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Other Code}{212}{section.8}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {8.1}Early Prototypes}{212}{subsection.8.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.1.1}Euler (Trig)}{212}{subsubsection.8.1.1}}
+\@writefile{lol}{\contentsline {lstlisting}{../../../proto/02/main.cpp}{212}{lstlisting.-34}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.1.2}Euler (Vector) with $\Delta {} E$}{214}{subsubsection.8.1.2}}
+\@writefile{lol}{\contentsline {lstlisting}{../../../proto/eulerenergy/main.cpp}{214}{lstlisting.-35}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {8.1.3}Leapfrog (Vector) with $\Delta {} E$}{216}{subsubsection.8.1.3}}
+\@writefile{lol}{\contentsline {lstlisting}{../../../proto/lpfrg01/main.cpp}{216}{lstlisting.-36}}
+\@writefile{toc}{\contentsline {section}{Appendices}{218}{section*.333}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {A}Initial Documentation}{218}{subsection.Alph0.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {A.1}Initial Specification}{218}{subsubsection.Alph0.1.1}}
+\@writefile{toc}{\contentsline {subsubsection}{\numberline {A.2}Initial Observation}{219}{subsubsection.Alph0.1.2}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {B}Dialogue}{220}{subsection.Alph0.2}}
+\@writefile{lof}{\contentsline {figure}{\numberline {71}{\ignorespaces Three Body Sun-Planet-Moon System}}{222}{figure.71}}
+\@writefile{lof}{\contentsline {figure}{\numberline {72}{\ignorespaces N-Body Graphics Test}}{223}{figure.72}}
+\@writefile{lof}{\contentsline {figure}{\numberline {73}{\ignorespaces \nobreakspace  {}1000 Body Superstructure}}{224}{figure.73}}
 \global\@altsecnumformattrue

@@ -29,7 +29,21 @@ Some functions are present to allow quick access to variables inside the control
 \paragraph{}
 In the shared class, because it now inherits the common scenario class it only contains a single buffer for control and body storage, once again simplifying the management of data flow. The mutex locks have also been greatly simplified, now only having a mutex for the body pointer storage and one for control.
 
-\subsubsection{Algorithm Changes}
+\subsection{Interface Changes}
+\textit{Note: This was a last minute addition to satisfy a requirement in the user manual, as a result testing has not been carried out in the testing section itself, \textbf{however video evidence has been provided. (en-uierr.mp4)} The functions and variables are also not present in the maintenance section however a functional description is provided here.}
+\paragraph{}
+Small changes were made to make the UI slightly clearer and more intuitive to first time users, a basic error message is given whenever the user tries to perform an action that would modify the scenario if the simulation was paused, explaining that the scenario must be paused in order to make a change to the scenario.
+
+\paragraph{}
+This change only applies to buttons that call a function, causing the system to check if the scenario is paused and if not, display the error message. Using the system put in place it is possible to make the error message display any string passed to the \textit{errorCreate} function.
+
+\paragraph{}
+The \textit{errorCreate} is provided as a 'private' (Not OO, but not defined in header file.) function in ui.cpp. This function simply sets the 'error' tweak bar to visible and sets the passed string to a global variable in ui.cpp, AntTweakBar will then display the error message on the next draw call as a tweak bar. The tweak bar also contains a button which when pressed, runs a function which sets the error tweak bar to not visible. (Only one error window displays at once.)
+
+\paragraph{}
+Because of a limitation in the AntTweakBar library, it would be extremely impractical to implement this system into every single variable capable of modifying a variable while the simulation is running. Separate set and get functions have to be created for every single variable and this was not a particularly good use of time. Instead, the system now sets the variables in the body tweak bar to read only when the simulation is running, preventing the user from attempting to modify these variables. (As well as making that relatively clear.)
+
+\subsection{Algorithm Changes}
 Algorithms that were modified where the calculation and summation of all forces, in essence, these algorithms are now combined into a single function, however the previous code focused around the use of a dynamic 2D vector matrix. The disadvantage of this is that the memory requirement is extremely high compared to what is required for the bodies themselves. 
 
 \paragraph{}
@@ -74,7 +88,7 @@ Other than these changes, the code is fairly similar, some items have been moved
 
 \pagebreak
 
-\subsubsection{Time Constraints}
+\subsection{Time Constraints}
 The main reason that the project was rewritten from scratch was to improve the readability and maintainability of the code, as well as making it easier to implement some critical features (adding and deleting bodies), which were causing crashes in the previous code.
 
 \paragraph{}
@@ -175,10 +189,22 @@ The flowchart has also underwent minor changes to better represent the new syste
   \caption{Body Control UI}
 \end{figure}
 
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.6]{../img/ro.png} 
+  \caption{Body Control UI When Not Paused}
+\end{figure}
+
 \begin{figure}[ht]
   \centering
   \includegraphics[scale=0.7]{../img/superstructureUI.png} 
   \caption{Superstructure Creation UI}
+\end{figure}
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[scale=0.6]{../img/error.png} 
+  \caption{Error when attempting to modify scenario when not paused.}
 \end{figure}
 }
 

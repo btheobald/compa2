@@ -15,7 +15,6 @@ TwBar* bodyGUI;
 TwBar* ssGUI;
 
 TwBar* errorGUI;
-bool errorOpen = true;
 std::string errorMessage = "Entered Value for UGC is out of range.";
 
 // Active Body
@@ -230,6 +229,7 @@ void setCallbacks(GLFWwindow* window) {
 
   // Resize Window
   glfwSetWindowSizeCallback(window, windowResizeCallback);
+}
 }
 
 void pausedManage(render* renderAP) {
@@ -469,6 +469,28 @@ void setupGUI(GLFWwindow* window, render* renderAP) {
 
   // Set Globals
   TwDefine(" GLOBAL contained=true ");
+void setCallbacks(GLFWwindow* window) {
+  // Send GLFW Input Events to AntTweakBar
+  glfwSetCursorPosCallback(window, cursorPosCallback);
+  glfwSetMouseButtonCallback(window, mouseButtonCallback);
+  glfwSetScrollCallback(window, mouseScrollCallback);
+  glfwSetKeyCallback(window, keyboardKeyCallback);
+  glfwSetCharCallback(window, keyboardCharCallback);
+
+  // Resize Window
+  glfwSetWindowSizeCallback(window, windowResizeCallback);
+}
+void setCallbacks(GLFWwindow* window) {
+  // Send GLFW Input Events to AntTweakBar
+  glfwSetCursorPosCallback(window, cursorPosCallback);
+  glfwSetMouseButtonCallback(window, mouseButtonCallback);
+  glfwSetScrollCallback(window, mouseScrollCallback);
+  glfwSetKeyCallback(window, keyboardKeyCallback);
+  glfwSetCharCallback(window, keyboardCharCallback);
+
+  // Resize Window
+  glfwSetWindowSizeCallback(window, windowResizeCallback);
+}
   TwDefine(" GLOBAL fontresizable=false ");
   TwDefine(" GLOBAL fontstyle=default ");
   TwDefine(" GLOBAL buttonalign=center");

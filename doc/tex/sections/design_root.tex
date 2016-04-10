@@ -379,17 +379,3 @@ White-box testing will be used on several algorithms, such as the force calculat
 
 \paragraph{}
 Trace tables will also be used in a limited capacity, because of the complexity of the system and the time it would take to do these calculations by hand a very simple scenario should be used where only the outer body is moving, even with this, the total movement of the body will be quite low over a small number of iterations.
-
-\pagebreak
-\subsection{Testing Plan}
-\paragraph{}
-I have decided to split the testing plan into three main sections, System, containing basic black box tests that relate to the way memory is managed by the program, using Valgrind Memcheck in order to ensure that my code is not creating large memory leaks. As well as this, Valgrind Helgrind will be used to check that data locks are correctly implemented and data is not being accessed concurrently.
-
-\paragraph{}
-Interface testing concerns the use of the interface of the program, using basic white box testing to check that the mouse coordinates are being correctly converted from the window coordinates and that bodies can be selected by the user. The features in the UI interface library are also tested. The loss of rendering precision at the extents of single floating point precision is also showcased.
-
-\paragraph{}
-Simulation testing contains basic tests that should behave in very predictable ways allowing the checking of the implemented simulation algorithm, including a very basic trace table. Collision is also tested in a isolated fashion. The basic limitations that have been placed on the simulation, relating to the 'Laws of Physics' and will delete bodies that break the set limits.
-
-The simulation tests also contain a basic benchmark test which will profile the performance of the simulation compared to the number of bodies used. The test scenarios are defined in the testing section alongside the test table containing the tests that will be carried out and a basic description.
-\pagebreak
