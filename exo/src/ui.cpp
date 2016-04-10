@@ -14,6 +14,10 @@ TwBar* simGUI;
 TwBar* bodyGUI;
 TwBar* ssGUI;
 
+TwBar* errorGUI;
+bool errorOpen = true;
+std::string errorMessage = "Entered Value for UGC is out of range.";
+
 // Active Body
 body* activeBody;
 int activeID;
@@ -41,6 +45,11 @@ struct ss {
   double radius = 200;
   float color[3] = { 1.0f, 1.0f, 1.0f };
 } ss;
+
+void errorCreate(std::string message) {
+  TwDefine(" 'Error' visible=true");
+  errorMessage = message;
+}
 
 // Applys camera transform and scale
 void applyCamera(void) {
@@ -223,11 +232,37 @@ void setCallbacks(GLFWwindow* window) {
   glfwSetWindowSizeCallback(window, windowResizeCallback);
 }
 
+void pausedManage(render* renderAP) {
+  if(renderAP->pControl.paused) {
+    TwDefine(" Body/bdmass readonly=false ");
+    TwDefine(" Body/bdradi readonly=false ");
+    TwDefine(" Body/bdfixd readonly=false ");
+    TwDefine(" Body/bdcolr readonly=false ");
+
+    TwDefine(" Body/bdposx readonly=false ");
+    TwDefine(" Body/bdposy readonly=false ");
+    TwDefine(" Body/bdvelx readonly=false ");
+    TwDefine(" Body/bdvely readonly=false ");
+  } else {
+    TwDefine(" Body/bdmass readonly=true ");
+    TwDefine(" Body/bdradi readonly=true ");
+    TwDefine(" Body/bdfixd readonly=true ");
+    TwDefine(" Body/bdcolr readonly=true ");
+
+    TwDefine(" Body/bdposx readonly=true ");
+    TwDefine(" Body/bdposy readonly=true ");
+    TwDefine(" Body/bdvelx readonly=true ");
+    TwDefine(" Body/bdvely readonly=true ");
+  }
+}
+
 void updateUI(render* renderAP) {
   // Update Body Count
   bodyCount = renderAP->pBodies.size();
 
   if(activeID >= bodyCount) activeID = bodyCount-1;
+
+  pausedManage(renderAP);
 
   if(bodyCount != 0) {
     // Free memory used by previous
@@ -244,6 +279,9 @@ void updateUI(render* renderAP) {
 }
 
 void updateBody(render* renderAP) {
+
+  pausedManage(renderAP);
+
   if(bodyCount != 0) {
     renderAP->updateBody(activeBody, activeID);
   }
@@ -251,16 +289,19 @@ void updateBody(render* renderAP) {
 
 // AntTweakBar functions
 void TW_CALL deleteBodyButton(void *cData) {
+  // Retrieve pointer from clientData container.
+  render *renderContainer = static_cast<render*>(cData);
   // Only delete body if there are bodies to delete
   if(bodyCount != 0) {
-    // Retrieve pointer from clientData container.
-    render *renderContainer = static_cast<render*>(cData);
     // Call Delete of selected body
     renderContainer->delBody(activeID);
     // Reduce Active ID
     if(activeID != 0) activeID--;
     // Update render container to next or null body.
     updateUI(renderContainer);
+  }
+  if (!(renderContainer->pControl.paused)) {
+    errorCreate("Must be paused to modify scenario.");
   }
 }
 
@@ -271,6 +312,10 @@ void TW_CALL deleteAllBodiesButton(void *cData) {
   renderContainer->deleteAllBodies();
   // Update render container to populate initial null body.
   updateUI(renderContainer);
+
+  if (!(renderContainer->pControl.paused)) {
+    errorCreate("Must be paused to modify scenario.");
+  }
 }
 
 void TW_CALL newBodyButton(void *cData) {
@@ -282,6 +327,10 @@ void TW_CALL newBodyButton(void *cData) {
   activeID = renderContainer->pBodies.size()-1;
   // Update UI to update body count.
   updateUI(renderContainer);
+
+  if (!(renderContainer->pControl.paused)) {
+    errorCreate("Must be paused to modify scenario.");
+  }
 }
 
 void TW_CALL newSuperStructureButton(void *cData) {
@@ -291,6 +340,10 @@ void TW_CALL newSuperStructureButton(void *cData) {
   renderContainer->createSuperstructure(ss.bodies, ss.cMass, ss.oMass, ss.cRadius, ss.oRadius, ss.cPX, ss.cPY, ss.cVX, ss.cVY, ss.spacing, ss.radius, ss.color);
   // Update UI to update body count.
   updateUI(renderContainer);
+
+  if (!(renderContainer->pControl.paused)) {
+    errorCreate("Must be paused to modify scenario.");
+  }
 }
 
 void setupSimGUI(render* renderAP) {
@@ -383,6 +436,25 @@ void setupSuperStructGUI(render* renderAP) {
   TwAddButton(ssGUI,"cssbt", newSuperStructureButton, renderAP, " label='Create Superstructure'");
 }
 
+void TW_CALL errorHide(void* clientData) {
+  TwDefine(" 'Error' visible=false");
+}
+
+void setupError() {
+  TwDefine(" 'Error' color='255 255 255' alpha=150 text=dark");
+  TwDefine(" 'Error' size='350 70'");
+  TwDefine(" 'Error' position='500 400'");
+  TwDefine(" 'Error' valueswidth=250 ");
+  TwDefine(" 'Error' buttonalign=left");
+  TwDefine(" 'Error' visible=false");
+  TwDefine(" 'Error' iconifiable=false");
+  TwDefine(" 'Error' movable=false");
+  TwDefine(" 'Error' resizable=false");
+  TwDefine(" 'Error' alwaystop=true");
+  TwAddVarRO(errorGUI, "errormsg", TW_TYPE_STDSTRING, &errorMessage, " label=' '");
+  TwAddButton(errorGUI, "accept", errorHide, NULL, " label='Dismiss'");
+}
+
 void setupGUI(GLFWwindow* window, render* renderAP) {
   // Set global render pointer
   g_RenderAP = renderAP;
@@ -395,17 +467,19 @@ void setupGUI(GLFWwindow* window, render* renderAP) {
   TwInit(TW_OPENGL, NULL);
   TwWindowSize(wX, wY);
 
-  // Setup GUIs
-  simGUI = TwNewBar("Simulation");
-  bodyGUI = TwNewBar("Body");
-  ssGUI = TwNewBar("Superstructure");
-  setupSimGUI(renderAP);
-  setupBodyGUI(renderAP);
-  setupSuperStructGUI(renderAP);
-
   // Set Globals
   TwDefine(" GLOBAL contained=true ");
   TwDefine(" GLOBAL fontresizable=false ");
   TwDefine(" GLOBAL fontstyle=default ");
   TwDefine(" GLOBAL buttonalign=center");
+
+  // Setup GUIs
+  simGUI = TwNewBar("Simulation");
+  bodyGUI = TwNewBar("Body");
+  ssGUI = TwNewBar("Superstructure");
+  errorGUI = TwNewBar("Error");
+  setupSimGUI(renderAP);
+  setupBodyGUI(renderAP);
+  setupSuperStructGUI(renderAP);
+  setupError();
 }
