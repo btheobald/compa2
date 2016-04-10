@@ -2,7 +2,7 @@
 #include "ui.hpp"
 // External library includes
 #include <AntTweakBar.h>  // AntTweakBar
-//#include <GL/glu.h>       // GLU
+#include <GL/glu.h>       // GLU
 // Standard library includes
 #include <iostream>
 
@@ -134,7 +134,7 @@ void getCoord(GLFWwindow* window, double &aX, double &aY) {
   GLdouble ignoreZ;
 
   // Project mouse to world
-  //gluUnProject(mX, mY, 0, modelview, projection, viewport, &aX, &aY, &ignoreZ);
+  gluUnProject(mX, mY, 0, modelview, projection, viewport, &aX, &aY, &ignoreZ);
 
   #ifdef PRINTMACT
     std::cerr << "mAX: " << aX << " mAY: " << aY << std::endl;
@@ -232,11 +232,37 @@ void setCallbacks(GLFWwindow* window) {
   glfwSetWindowSizeCallback(window, windowResizeCallback);
 }
 
+void pausedManage(render* renderAP) {
+  if(renderAP->pControl.paused) {
+    TwDefine(" Body/bdmass readonly=false ");
+    TwDefine(" Body/bdradi readonly=false ");
+    TwDefine(" Body/bdfixd readonly=false ");
+    TwDefine(" Body/bdcolr readonly=false ");
+
+    TwDefine(" Body/bdposx readonly=false ");
+    TwDefine(" Body/bdposy readonly=false ");
+    TwDefine(" Body/bdvelx readonly=false ");
+    TwDefine(" Body/bdvely readonly=false ");
+  } else {
+    TwDefine(" Body/bdmass readonly=true ");
+    TwDefine(" Body/bdradi readonly=true ");
+    TwDefine(" Body/bdfixd readonly=true ");
+    TwDefine(" Body/bdcolr readonly=true ");
+
+    TwDefine(" Body/bdposx readonly=true ");
+    TwDefine(" Body/bdposy readonly=true ");
+    TwDefine(" Body/bdvelx readonly=true ");
+    TwDefine(" Body/bdvely readonly=true ");
+  }
+}
+
 void updateUI(render* renderAP) {
   // Update Body Count
   bodyCount = renderAP->pBodies.size();
 
   if(activeID >= bodyCount) activeID = bodyCount-1;
+
+  pausedManage(renderAP);
 
   if(bodyCount != 0) {
     // Free memory used by previous
@@ -253,6 +279,9 @@ void updateUI(render* renderAP) {
 }
 
 void updateBody(render* renderAP) {
+
+  pausedManage(renderAP);
+
   if(bodyCount != 0) {
     renderAP->updateBody(activeBody, activeID);
   }
@@ -311,6 +340,10 @@ void TW_CALL newSuperStructureButton(void *cData) {
   renderContainer->createSuperstructure(ss.bodies, ss.cMass, ss.oMass, ss.cRadius, ss.oRadius, ss.cPX, ss.cPY, ss.cVX, ss.cVY, ss.spacing, ss.radius, ss.color);
   // Update UI to update body count.
   updateUI(renderContainer);
+
+  if (!(renderContainer->pControl.paused)) {
+    errorCreate("Must be paused to modify scenario.");
+  }
 }
 
 void setupSimGUI(render* renderAP) {
@@ -409,10 +442,15 @@ void TW_CALL errorHide(void* clientData) {
 
 void setupError() {
   TwDefine(" 'Error' color='255 255 255' alpha=150 text=dark");
-  TwDefine(" 'Error' size='350 50'");
+  TwDefine(" 'Error' size='350 70'");
+  TwDefine(" 'Error' position='500 400'");
   TwDefine(" 'Error' valueswidth=250 ");
   TwDefine(" 'Error' buttonalign=left");
   TwDefine(" 'Error' visible=false");
+  TwDefine(" 'Error' iconifiable=false");
+  TwDefine(" 'Error' movable=false");
+  TwDefine(" 'Error' resizable=false");
+  TwDefine(" 'Error' alwaystop=true");
   TwAddVarRO(errorGUI, "errormsg", TW_TYPE_STDSTRING, &errorMessage, " label=' '");
   TwAddButton(errorGUI, "accept", errorHide, NULL, " label='Dismiss'");
 }
