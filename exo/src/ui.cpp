@@ -2,7 +2,7 @@
 #include "ui.hpp"
 // External library includes
 #include <AntTweakBar.h>  // AntTweakBar
-#include <GL/glu.h>       // GLU
+//#include <GL/glu.h>       // GLU
 // Standard library includes
 #include <iostream>
 
@@ -13,6 +13,10 @@ render* g_RenderAP;
 TwBar* simGUI;
 TwBar* bodyGUI;
 TwBar* ssGUI;
+
+TwBar* errorGUI;
+bool errorOpen = true;
+std::string errorMessage = "Entered Value for UGC is out of range.";
 
 // Active Body
 body* activeBody;
@@ -41,6 +45,11 @@ struct ss {
   double radius = 200;
   float color[3] = { 1.0f, 1.0f, 1.0f };
 } ss;
+
+void errorCreate(std::string message) {
+  TwDefine(" 'Error' visible=true");
+  errorMessage = message;
+}
 
 // Applys camera transform and scale
 void applyCamera(void) {
@@ -125,7 +134,7 @@ void getCoord(GLFWwindow* window, double &aX, double &aY) {
   GLdouble ignoreZ;
 
   // Project mouse to world
-  gluUnProject(mX, mY, 0, modelview, projection, viewport, &aX, &aY, &ignoreZ);
+  //gluUnProject(mX, mY, 0, modelview, projection, viewport, &aX, &aY, &ignoreZ);
 
   #ifdef PRINTMACT
     std::cerr << "mAX: " << aX << " mAY: " << aY << std::endl;
@@ -251,16 +260,19 @@ void updateBody(render* renderAP) {
 
 // AntTweakBar functions
 void TW_CALL deleteBodyButton(void *cData) {
+  // Retrieve pointer from clientData container.
+  render *renderContainer = static_cast<render*>(cData);
   // Only delete body if there are bodies to delete
   if(bodyCount != 0) {
-    // Retrieve pointer from clientData container.
-    render *renderContainer = static_cast<render*>(cData);
     // Call Delete of selected body
     renderContainer->delBody(activeID);
     // Reduce Active ID
     if(activeID != 0) activeID--;
     // Update render container to next or null body.
     updateUI(renderContainer);
+  }
+  if (!(renderContainer->pControl.paused)) {
+    errorCreate("Must be paused to modify scenario.");
   }
 }
 
@@ -271,6 +283,10 @@ void TW_CALL deleteAllBodiesButton(void *cData) {
   renderContainer->deleteAllBodies();
   // Update render container to populate initial null body.
   updateUI(renderContainer);
+
+  if (!(renderContainer->pControl.paused)) {
+    errorCreate("Must be paused to modify scenario.");
+  }
 }
 
 void TW_CALL newBodyButton(void *cData) {
@@ -282,6 +298,10 @@ void TW_CALL newBodyButton(void *cData) {
   activeID = renderContainer->pBodies.size()-1;
   // Update UI to update body count.
   updateUI(renderContainer);
+
+  if (!(renderContainer->pControl.paused)) {
+    errorCreate("Must be paused to modify scenario.");
+  }
 }
 
 void TW_CALL newSuperStructureButton(void *cData) {
@@ -383,6 +403,20 @@ void setupSuperStructGUI(render* renderAP) {
   TwAddButton(ssGUI,"cssbt", newSuperStructureButton, renderAP, " label='Create Superstructure'");
 }
 
+void TW_CALL errorHide(void* clientData) {
+  TwDefine(" 'Error' visible=false");
+}
+
+void setupError() {
+  TwDefine(" 'Error' color='255 255 255' alpha=150 text=dark");
+  TwDefine(" 'Error' size='350 50'");
+  TwDefine(" 'Error' valueswidth=250 ");
+  TwDefine(" 'Error' buttonalign=left");
+  TwDefine(" 'Error' visible=false");
+  TwAddVarRO(errorGUI, "errormsg", TW_TYPE_STDSTRING, &errorMessage, " label=' '");
+  TwAddButton(errorGUI, "accept", errorHide, NULL, " label='Dismiss'");
+}
+
 void setupGUI(GLFWwindow* window, render* renderAP) {
   // Set global render pointer
   g_RenderAP = renderAP;
@@ -395,17 +429,19 @@ void setupGUI(GLFWwindow* window, render* renderAP) {
   TwInit(TW_OPENGL, NULL);
   TwWindowSize(wX, wY);
 
-  // Setup GUIs
-  simGUI = TwNewBar("Simulation");
-  bodyGUI = TwNewBar("Body");
-  ssGUI = TwNewBar("Superstructure");
-  setupSimGUI(renderAP);
-  setupBodyGUI(renderAP);
-  setupSuperStructGUI(renderAP);
-
   // Set Globals
   TwDefine(" GLOBAL contained=true ");
   TwDefine(" GLOBAL fontresizable=false ");
   TwDefine(" GLOBAL fontstyle=default ");
   TwDefine(" GLOBAL buttonalign=center");
+
+  // Setup GUIs
+  simGUI = TwNewBar("Simulation");
+  bodyGUI = TwNewBar("Body");
+  ssGUI = TwNewBar("Superstructure");
+  errorGUI = TwNewBar("Error");
+  setupSimGUI(renderAP);
+  setupBodyGUI(renderAP);
+  setupSuperStructGUI(renderAP);
+  setupError();
 }
