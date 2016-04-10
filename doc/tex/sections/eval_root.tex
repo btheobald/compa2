@@ -1,0 +1,158 @@
+\subsection{Evaluation of Objectives}
+Not all of objectives originally set out for the program have been completed due to time-constraints on the programming and the need to rewrite the entire program from scratch.
+
+\subsubsection{System}
+The original target for performance was 60 frames per second with 500 bodies in the simulation when running on low end hardware, in fact the program is able to maintain this frame rate with closer to 1300 bodies, far more than I initially expected. The rendering does make use of very basic circular shapes so the main limitation here is the simulation computation.
+
+\paragraph{}
+As I am writing this, the application has currently not been built for Windows, because libraries have been used there is some complexity in setting up a build environment that is capable of building for 32-Bit Windows. All of the libraries are able to be built for 32-Bit Windows however. The Linux version that I currently have the build system set up is statically linking the libraries into the program, while this does increase the final size it means no external dependencies are required. (The compiled Linux binary is 1MB in size.)
+
+\paragraph{}
+During testing I had found that the simulation was still capable of basic past a distance of 1E22, however rendering was limited to rough point approximations at this point, the limitation was put in at 1E15, it is very unlikely a simulation of this size will be carried out, but this supports the full integer precision of double floating point. This scale allows for a full size simulation of the solar system to be entered into the program.
+
+\subsubsection{Processing}
+
+\paragraph{}
+The way that the forces are calculated still makes use of the originally intended calculation, however a vector form is now used, removing the use of the trigonometric functions from the simulation, this likely increased the final performance, however the full use of the trigonometric functions has not been tested as a comparison. (Because of difficulties with sign.)
+
+\paragraph{}
+Collisions are implemented in the form of perfectly inelastic collisions where momentum is completely conserved, the final method also adds together the area of the bodies and calculates a new position based on the weighted mean mass.
+
+\paragraph{}
+It turns out that the original limit on memory is extremely high, in order to reach 100MB, the program requires about 210000 bodies in the simulation, this is by far extremely unlikely to ever be reached. At this number of bodies, performance is not in anyway practical. (On the previous system with the force matrix, this limit would be reached by just 3500 bodies.)
+
+\paragraph{}
+The final program makes use of basic OpenGL in order to accelerate the rendering of the interactive GUI and scenario. The program is making use of relatively old OpenGL, meaning it should be supported even on old hardware. (Another reason for this is that new (3.0+) OpenGL requires a lot more custom code to be written even for basic rendering.)
+
+\paragraph{}
+The system was designed around the idea of separating the main rendering and interface from the simulation, this was achieved by running the simulation on a second thread, meaning that the simulation can be completely loaded down and the rendering thread will still be completely responsive to inputs.
+
+\paragraph{}
+The simulation remained 2D, however the actual computational complexity that would be required to simulate in 3D is actually not that much, and would just require an extra set of operations for the z axis. The main issue would be ensuring that the interface is usable.
+
+\subsubsection{User}
+The final interface is close to the original plan, the user is able to place down bodies using the mouse or by way of the GUI. The values in the GUI can be adjusted by the keyboard or the mouse through features of AntTweakBar.
+
+\paragraph{}
+One of the major omissions from the final program is the ability to save and load scenarios from a file. While the initial format was set in the design stage, time constraints meant that the feature could not be included.
+
+\paragraph{}
+The simple graphics that have been implemented mean that the simulations should be quite visible on a projector, by default colours are white and have good contrast against the black background, the user has the ability to change the colour of these as intended.
+
+\paragraph{}
+Due to the difficulty that would be associated with allowing the user to change properties of objects while the simulation is running, the simulation must be paused before the user can make any changes to the bodies. One of the contributing factors to this is the way that the GUI library works, requiring direct access to variables in order to modify them, as well as how the data is updated. (It is difficult to get signals out of the GUI library that a value has been changed.)
+
+\paragraph{}
+The one saving grace here is that the variables that are not changed constantly by the simulation and only update one way, control variables such as gravitational constant and delta time, are possible to change on the fly. They have a relatively large range to allow for many different scales to be simulated, including real-scale.
+
+\pagebreak
+
+\subsection{User Feedback}
+The final version of the program was demoed to Mr Snowden using the currently working Linux version. A small amount of feedback was given by email. \\
+\hrule
+\begin{small}
+{\parskip=10pt 
+
+Hi Byron,
+
+Thanks for demoing your program.
+
+A great piece of work - well done!
+ 
+If I were to be very picky, here's some feedback:
+
+1) Excellent UI - powerful and very customisable, but not immediately intuitive
+
+2) User needs a "quick start" guide if they are to be swiftly shown the power of the simulation - e.g. a library of exemplar starting point, such as a binary system, 2 colliding galaxies, etc.
+
+3) Ideally, all parameters might be toggled with a "slider" and could be altered whilst the simulation was running.
+
+4) An "undo" button would be very helpful (difficult to implement, I imagine)
+
+5) The ability to pan/zoom whilst the simulation is running is very powerful and useful.
+ 
+Hope this helps,
+
+Best wishes,
+
+SDS \\
+}
+\hrule
+\end{small}
+\subsubsection{Analysis of Feedback}
+To start with, I will note that throughout this project, Mr Snowden has been incredibly positive about the project and the direction that it has gone in, I provided occasional updates to the progress of the project, evidence of which can be found in Appendix B.
+
+\paragraph{}
+On the feedback given here, I would agree that the UI does require some explanation, there is a basic description of its used in the user manual. (Not provided at time of getting feedback.) In my opinion after using AntTweakBar, as a developer I feel that the UI is quite clunky. I would probably err against using this library in the future, especially as the library has seen no active development since 2013.
+
+\paragraph{}
+There are some potential alternative routes that could be taken for the development of a much cleaner UI, both in terms of user presentation but also making programming easier, this is discussed in the possible extensions section.
+
+\paragraph{}
+The idea of having a quick start system inbuilt is something that I had intended on implementing, however the time was not available to do so. AntTweakBar has a utility which would allow the user to open up a help window which can be made to contain custom help text. This could serve as a basic quick start guide for the program.
+
+\paragraph{}
+I also feel that it would be useful to make use of the tool tip functionality that AntTweakBar allows for, putting text at the bottom of the Tweak Bar whenever a particular input box is moused over, this could provide a small amount of extra insight into the particular usage of a particular attribute, such as its minimum and maximum values.
+
+\paragraph{}
+Having a library of predefined scenarios is also something that could have some use, in essence it is fairly similar to the initial plan of having a system that allowed the storage and loading of scenarios from files. However in this case Mr Snowden is referring to having a window containing some predefined scenarios that can be selected.
+
+\paragraph{}
+This is a feature that would not take much to implement, as most of the ground work for this is already in place and while there is no ability currently to provide a preview of the simulation that will be loaded. It would be straightforward to have a button automatically clear the current scenario and then load in a hard coded simulation. This is not a particularly elegant approach but it would serve as a basic feature.
+
+\paragraph{}
+This feature ties in well to the potential need to investigate a GUI library that allows more custom features and could potentially allow for a small preview of the scenario to be displayed, either by reading in the scenario and actually producing a true representation or by an image file loaded in, the first is far more complex but has a lot more flexibility and extensibility.
+
+\paragraph{}
+Having an alternate form of adjusting the variables inbuilt into the GUI is something that could provide a more intuitive interface. Currently the AntTweakBar library does provide a 'roto-slider' which is a circular style slider which adjusts the value when the user rotates their mouse around a circle, however this is hidden and requires the user to click and hold on a small circle to activate it.
+
+\paragraph{}
+Having a linear slider next to values which allows a 'variable' joystick style drag where the speed at which the attribute changes is related to how far the slider is from the center, returning to the center when released.
+
+\paragraph{}
+Also of note is the idea of allowing adjustment of the scenario while it is running, while this would be possible, in the current UI, this would be quite difficult to achieve because it is difficult to get a trigger of when the variable actually changes.
+
+\paragraph{}
+An undo button is an interesting idea for a feature, and not something that I had initially considered. However in my time during the testing of the project, I agree that this would be a very useful feature to implement into the program and would save a lot of time should the user make a mistake. The main issue with including a feature such as this is figuring out where to 'save' the states. Saving the last user action might seem to be the most logical action. Keeping an extra set of data in memory would not be something that is to difficult to implement. (Having more than one undo states could start to pose more of a challenge, however it could be implemented using a stack.)
+
+\subsection{Possible Extensions}
+\subsubsection{UI}
+As mentioned several times in the previous section, I feel strongly that the user interface requires a complete overhaul, starting from scratch using a completely different library. The issue comes in that it needs to be rendered inside the OpenGL context, something that reduces the amount of options somewhat.
+
+\paragraph{}
+Several alternatives do exist such as CEGUI (Crazy Eddie's GUI), which is an extremely flexible custom GUI library that allows for fully custom skins, it uses QT5 as a back-end (A very comprehensive and widely used standard GUI library), meaning that the GUI itself is described in an XML style format.
+This also means that there is an graphical editor available for the design of the particular GUI. (CEED) The potential issue with this library is that there is a lot of work to actually do to get a basic UI working.
+
+\paragraph{}
+The benefit of this library it is written in C++, meaning that it does seem to make full use of the object-orientated language, something that could lead to implementing the library a lot easier.
+
+\paragraph{}
+Another more lightweight option may be NanoGUI, this is a very recently released library that is similar in design to AntTweakBar, but seems far more polished and could present a much simpler and more familiar interface to the user. Further investigation would need to be carried out before deciding on any particular library.
+
+\paragraph{}
+If a complete change in direction was made, one potential option would be to make use of a library like QT5, this is a GUI library that makes use of the normal window system of the current operating system, having a traditional fixed user interface with menus and boxes outside the normal OpenGL user interface could potentially allow for a much cleaner and more organised user interface, as well as giving a clearer view of the rendered display.
+
+\subsubsection{Simulation}
+\paragraph{}
+Throughout this project I have made repeated reference to the importance and potential that is available in modern processors in the form of concurrent execution or parallel computing. The idea that multiple tasks can be carried out at the same time in order to compute more in a given amount of time. Theoretically, on a CPU that supports 4 concurrent executing threads, it should be possible to double the number of bodies and get a similar amount of performance out of the simulation. However this is a best case scenario and would require major changes to the algorithms being used.
+
+\paragraph{}
+During one point early in the project, I created a separate branch of code in which I tried to produce a multi-threaded simulation system. I found that I was only able to get a very small increase in performance and it seemed as though there was a large decrease in the stability of the simulation. These issues are likely related to incorrect programming of the system.
+
+\paragraph{}
+On a CPU, the benefits to be gained from multi-threading of the simulation are relatively limited, even on a machine supporting 12 threads, the 2000 bodies cap only rises to approximately 7000 bodies. While it is not something that could really apply to this project due to the hardware cost of such a system, I find the investigation of CUDA/OpenCL or GPU Computing to be quite an interesting route to take.
+
+\paragraph{}
+The main reason for this is that GPUs have core counts in the magnitude of 1000s, an example n-body simulator running on a current generation top end graphics card is capable of running a brute force 3D simulation of over 100000 bodies at 15 fps. The power also comes when the ability to use multiple graphics processors in tandem to further increase computational ability.
+
+\paragraph{}
+The difficulty comes in splitting up the bodies to be able to evenly distribute them, as well an managing separate memory stores, as an external GPU has its own separate bank of very high bandwidth memory. GPUs are optimised for doing a large amount of very simple calculations. Code that runs on a GPU must be written in a way that allows the exact same code to be run on every single GPU core, forcing a very different style of programming.
+
+\paragraph{}
+Another potential algorithms that doesn't apply itself all that well to this project is the Barnes Hut algorithm, this has been mentioned previously as something that can greatly reduce the computational complexity of very large simulations, albeit at added cost to memory. It reduces the time order complexity from $O(n^2)$ to $O(nlogn)$.
+
+\paragraph{}
+The algorithm works by dividing space up into a quadtree, similar in essence to a binary tree but each not has potential for 4 more nodes as opposed to 2, allowing space to be divided up into squares. Each node can contain a single body, if more than one body ends up getting added to the same square it divides up that space into more sections until each body is contained in its own square.
+
+\paragraph{}
+The management of the quadtree does add some overhead, particularly when it comes to memory costs, it also only really makes sense for very large simulations, which are unlikely to need to be used in this case.

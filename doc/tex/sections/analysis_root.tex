@@ -1,6 +1,9 @@
 \subsection{Background}
 \paragraph{} 
-Mr Snowden is a Physics Teacher at Northgate High School, teaching the subject at levels from KS3 to A-Level, there are also several other teachers in the department. During lessons, there are some times where it can be useful to the students to be able to see a model of the subject that they are learning about, while the majority of subjects that are taught have a range of models available, both real and software models. However one of the subjects where models are quite limited is in orbital mechanics and circular motion, with most being just simple animations and not a fully interactive or real-time simulation. The main disadvantage of this is that the students are not able to easily see how different modifications to a system will affect the outcome, something that can help to improve the understanding of a particular topic in some scenarios.
+Mr Snowden is a Physics Teacher at Northgate High School, teaching the subject at levels from KS3 to A-Level, there are also several other teachers in the department. During lessons, there are some times where it can be useful to the students to be able to see a model of the subject that they are learning about, while the majority of subjects that are taught have a range of models available, both real and software models.
+
+\paragraph{} 
+However one of the subjects where models are quite limited is in orbital mechanics and circular motion, with most being just simple animations and not a fully interactive or real-time simulation. The main disadvantage of this is that the students are not able to easily see how different modifications to a system will affect the outcome, something that can help to improve the understanding of a particular topic in some scenarios.
 
 \subsubsection{Project Objective}
 \paragraph{}
@@ -8,8 +11,9 @@ Mr Snowden requires a teaching tool that can provide a graphical sandbox to crea
 
 \subsubsection{Prospective Users}
 \paragraph{}
-While Mr Snowden is intended to be the primary user, other teachers could also have access to the tool as it could be put on the shared network drive, making the tool easy to access and used as a teaching aid in lessons, the tool will also be accessed by students, allowing the tool to be used as a revision resource for individual students on the school computers or at home. Because of this special attention should be paid to make sure that the program is as compatible as possible 
+While Mr Snowden is intended to be the primary user, other teachers could also have access to the tool as it could be put on the shared network drive, making the tool easy to access and used as a teaching aid in lessons, the tool will also be accessed by students, allowing the tool to be used as a revision resource for individual students on the school computers or at home. Because of this special attention should be paid to make sure that the program is as compatible as possible. 
 
+\paragraph{}
 Because the users of the program are teachers and students (most likely A-Level) a good amount of technical knowledge in the field can be presumed, the tool will be used as a teaching aide, so it is not a requirement to explain the Physics in the program itself. It will be clear to anybody that studies Physics to a basic level what all the adjustment factors are.
 
 \subsection{Current System}
@@ -28,10 +32,15 @@ By having a application that has a very basic visual style, it will be a lot eas
 
 \subsection{Requirements and Processes}
 \paragraph{}
-The interface must be intuitive and self-explanatory in order to ensure that it is easy for teachers to understand, meaning that keyboard short-cuts should be ones that are commonly used in software (Such as $Ctrl-S$ for save) and any buttons should be clearly labelled. It must also be able to run well on the school computers, most of which are running on low end hardware (Dual-Core HT Intel i3 / Quad-Core Intel i5, ~2-4GB RAM) using a 32-Bit Windows operating system, as this is what all computers in the school are running for internal compatibility reasons. This applies a limit of 4GB to the total system RAM but a maximum per program usage of 2GB, meaning that the program will need to handle memory efficiently and potentially have a limit on the number of bodies (In the range of 1000s) to avoid using too much memory and causing the system to crash, a sensible limit would be 100MB. The number of bodies that this would support can be estimated however actual memory usage will likely be higher due to graphics library overhead, meaning that memory profiling should be used. The program must not require installation on the system or any secondary redistributes to be installed containing dynamic libraries.
+The interface must be intuitive and self-explanatory in order to ensure that it is easy for teachers to understand, meaning that keyboard short-cuts should be ones that are commonly used in software (Such as $Ctrl-S$ for save) and any buttons should be clearly labelled. It must also be able to run well on the school computers, most of which are running on low end hardware (Dual-Core HT Intel i3 / Quad-Core Intel i5, ~2-4GB RAM) using a 32-Bit Windows operating system, as this is what all computers in the school are running for internal compatibility reasons. 
 
+\paragraph{}
+This applies a limit of 4GB to the total system RAM but a maximum per program usage of 2GB, meaning that the program will need to handle memory efficiently and potentially have a limit on the number of bodies (In the range of 1000s) to avoid using too much memory and causing the system to crash, a sensible limit would be 100MB. The number of bodies that this would support can be estimated however actual memory usage will likely be higher due to graphics library overhead, meaning that memory profiling should be used. The program must not require installation on the system or any secondary redistributes to be installed containing dynamic libraries.
+
+\paragraph{}
 What is not needed is a 3D simulation system, as only a simplistic 2D model needs to be explained to students. The use of 3D would require an extremely complex user interface and processing in order to implement in a usable fashion.
 
+\paragraph{}
 Initially, the system will not be handling massive numbers of bodies, at most it will be handling around 1000 bodies at maximum, however no limits should be placed on the number of bodies it is possible to use, as performance will vary depending on the particular hardware the program is run on. Practically, most demonstrations will only make use of two or three bodies.
 
 \subsubsection{Graphics Processing}
@@ -188,9 +197,9 @@ The system being used is as mentioned previously something of a brute force meth
 \subsection{Objectives}
 \import{sections/analysis/}{objectives.tex}
 
-\subsection{User Dialogue}
+\subsection{User Communication}
 \paragraph{}
-Email correspondence with the user can be found in Appendix A.
+Original specification documentation can be found in Appendix A, Email correspondence with the user can be found in Appendix B.
 
 \pagebreak
 \subsection{Potential Solutions}

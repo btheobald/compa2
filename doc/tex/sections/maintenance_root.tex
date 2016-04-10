@@ -347,7 +347,7 @@ void render::createSuperstructure(int p_soBodies, double p_cMass, double p_oMass
 
 \pagebreak
 
-\subsubsection{Update UI / Update Body}
+\subsubsection{Interface and Threading}
 The interface was one of the more difficult pieces of code to get working as intended due to the mismatch of different programming styles and the need to maintain multiple sources of data that would be affecting the render. In order to get around the issue a compromise was made in the form of requiring the simulation to be paused before the user is able to make any change to the simulation.
 
 \paragraph{}
@@ -365,6 +365,90 @@ When the simulation is paused, updateBody is called instead of updateUI, this fu
 \paragraph{}
 When the simulation is paused, updates are sent from the render scenario to the shared scenario, which the simulation takes while it is paused. When the simulation is not paused, it sends updates the shared area that the render scenario takes.
 
+\pagebreak
+
+\paragraph{Flowchart}
+A flowchart has been provided for this algorithm rather than pseudocode.
+\begin{figure}[h]
+  \centering  
+  \includegraphics[width=\textwidth]{img/updateflow.png}
+\end{figure}
+
+\paragraph{}
+Code provided contains the main loop and the simulation thread loop.
+\begin{lstlisting}[language=c++]
+// Main Runtime Loop
+while(!glfwWindowShouldClose(window)) {
+  // Clear screen before drawing
+  glClear(GL_COLOR_BUFFER_BIT);
+
+  sharedAP->updateControl(renderAP->getControl());
+
+  if(renderAP->getPaused()) {
+    updateBody(renderAP); // Update body storage from interface
+    // Send update to shared
+    sharedAP->updateBodies(renderAP->getBodies());
+  } else {
+    updateUI(renderAP); // Update interface from body store
+    // Get update from shared
+    renderAP->updateBodies(sharedAP->getBodies());
+  }
+
+  // Wake sim thread
+  sharedAP->simWait.notify_all();
+
+  // Render scene
+  renderAP->drawScene();
+
+  // Apply camera transform and scale
+  applyCamera();
+
+  // Draw GUI
+  TwDraw();
+
+  // Display is double buffered to prevent screen tearing
+  // Swap display buffers
+  glfwSwapBuffers(window);
+  // Poll and process events
+  glfwPollEvents();
+}
+\end{lstlisting}
+
+\begin{lstlisting}[language=c++]
+// Simulation Thread Loop
+while(!simAP->getExit()) {
+  // Wait for data change - Thread Sync
+  std::unique_lock<std::mutex> uniqueSimWaitMTX(simWaitMTX);
+  sharedAP->simWait.wait(uniqueSimWaitMTX);
+
+  // Update local control structure
+  simAP->updateControl(sharedAP->getControl());
+
+  if(!simAP->getPaused()) {
+    if(initCalc) {
+      // Do initial calculations.
+      simAP->initialCalc();
+      initCalc = false;
+    }
+    for(int iter = 0; iter < simAP->getIPF(); iter++) {
+      // Do itteration
+      simAP->iteration();
+
+      // Break out of ipf loop if paused or exit.
+      if(sharedAP->getPaused() | sharedAP->getExit()) break;
+    }
+
+    // Update shared bodies
+    sharedAP->updateBodies(simAP->getBodies());
+    
+  } else {
+    // Get from shared if paused
+    simAP->updateBodies(sharedAP->getBodies());
+    // Request recalculation of initial calculations once unpaused.
+    initCalc = true;
+  }
+}
+\end{lstlisting}
 
 
 \begin{sidewaysfigure}

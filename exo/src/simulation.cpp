@@ -70,7 +70,7 @@ void simulation::calcAllCollisions(void) {
     for (unsigned int bB = bA+1; bB < bodies.size(); bB++) {
       double dX = getComponentDistance(bodies[bA], bodies[bB], 0);
       double dY = getComponentDistance(bodies[bA], bodies[bB], 1);
-      double dV = getVectorDistance(xDist, yDist);
+      double dV = getVectorDistance(dX, dY);
 
       // TODO: Implement this as an overloaded operator?
       if(dV < bodies[bA]->r+bodies[bB]->r) {

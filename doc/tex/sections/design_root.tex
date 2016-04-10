@@ -63,13 +63,13 @@ Because of the low amount of bodies that are likely to be used in this simulatio
 Libraries will be a critical part of the programming and code structure for this project, both third party and self-programmed.
 
 \paragraph{}
-The first and most obvious library is GLFW, a minimal wrapper that allows for the creation of OpenGL contexts which can be used to render graphics. It also provides easy access to inputs from keyboard and mouse. The benefit of this library is that is provides an extremely lightweight abstraction layer for doing all of these things across different OS platforms, making it far easier to port code from one platform to another.
+The first and most obvious library is GLFW \cite{glfw}, a minimal wrapper that allows for the creation of OpenGL contexts which can be used to render graphics. It also provides easy access to inputs from keyboard and mouse. The benefit of this library is that is provides an extremely lightweight abstraction layer for doing all of these things across different OS platforms, making it far easier to port code from one platform to another.
 
 \paragraph{}
 The main reason for this is that setting up windows for displaying OpenGL contexts can be somewhat involved when it comes to writing operating system specific code, not something that is particularly necessary in this application. The library also provides full access to keyboard and mouse inputs which are critical to the operation of the program and are another feature that would normally require a large amount of somewhat messy operating system specific code, making porting to different target systems somewhat difficult.
 
 \paragraph{}
-Another library that will be used is AntTweakBar, this library provides a quick and simple to use utility for exposing certain variables and information to the user through a variety of control methods such as buttons and sliders for setting variables to particular values. It also provides a good way of displaying textual information to the user such as a basic help screen.
+Another library that will be used is AntTweakBar \cite{atb}, this library provides a quick and simple to use utility for exposing certain variables and information to the user through a variety of control methods such as buttons and sliders for setting variables to particular values. It also provides a good way of displaying textual information to the user such as a basic help screen.
 
 \paragraph{}
 The C and C++ standard libraries will also be used in this program; these contain functions that allow the use of input and output streams as well as some higher level features such as string handling, threading and vectors, the main two here are threading and vectors. The threading library provides an object orientated implementation for threads, while vector provides an object orientated implementation of a dynamic collection, or array that can change size during program runtime. The benefit of using the standard template libraries is that they have been optimized over a long period of time by the maintainers of the particular compiler, in this case GCC, which is open source and has thousands of contributors.
