@@ -1,7 +1,7 @@
 # Project Name
 NAME = dire
 # Compiler
-CC = clang
+CC = gcc
 TARGET = $(NAME).out
 
 # Linker
@@ -22,7 +22,7 @@ LIBS  =
 DB    = gdb
 DBOPT =
 # Compiler Flags
-CFLAGS = -Wall -Werror -I$(INCLUDE_DIR) -g -Ofast
+CFLAGS = -Wall -Werror -I$(INCLUDE_DIR) -g -Ofast -std=c99
 # Linker Flags
 LFLAGS = -Wall $(LIBS)
 
