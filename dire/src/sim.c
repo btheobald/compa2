@@ -79,7 +79,7 @@ void itteration(body** bodyArray, int cbc, float gc, float dt) {
   for(int x = 0; x < cbc; x++) {
     for(int y = x; y < cbc; y++) {
       // Check to calculate acceleration for bodies
-      if(x != y) {6
+      if(x != y) {
         calculateAcceleration(gc, bodyArray[x], bodyArray[y]);
       }
     }
